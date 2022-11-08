@@ -1,16 +1,18 @@
+import { lazy } from 'react';
+import { Routes, Route } from "react-router-dom";
+
+const AsyncHeader = lazy(() => import('../Header/Header'));
+const AsyncMainPage = lazy(() => import('../../pages/MainPage'))
+const NotFound = lazy(() => import('../../pages/NotFound'))
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+
+    <Routes>
+      <Route path='/' element={<AsyncHeader />} />
+      <Route index element={<AsyncMainPage />} />
+      
+      <Route path='*' element={<NotFound/>} />  
+    </Routes>
   );
 };
