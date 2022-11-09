@@ -46,10 +46,12 @@ export const ROUTES = {
     //   value one of (sell,for-free,lost-found)
     getNoticesByCategory: '/notices/:value',
     //   GET
-    getNoticeById: '/notices/:id',
-    //   GET
-    getNoticesLostFound: '/notices/:lost-found',
-    //   GET
     getNoticeById: '/notices/one/:id',
+    //   POST
+    createNotice: '/notices',
+    //   PATCH
+    addNotice: '/notices/:id',
+    // GET
+    getNoticesOwn: '/owner/own',
   },
 };
