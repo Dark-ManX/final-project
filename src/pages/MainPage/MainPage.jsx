@@ -1,13 +1,12 @@
-import { Friends } from "components/Friend/Friends";
-import { MainContainer } from "./MainPage.styled";
+import { Outlet } from "react-router-dom";
+import { Friends } from "pages/OurFriendsPage/OurFriendsPage";
 
 const MainPage = () => {
 
     return (
-        <MainContainer>
-            <Friends/>
-        </MainContainer>
-
+        <div>
+          <Outlet/>  
+        </div>
     )
 }
 

@@ -1,32 +1,33 @@
 @import 'normalize.css'; /* bring in normalize.css styles */
 
 :root {
-  --main-background: #F5F5F5;
+  --main-background: #FDF7F2;
   --buttons-color: #F59256;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', 'Inter',
+  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', 
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: #F5F5F5;
-  width: 320px;
+  background-color: var(--main-background);
+  max-width: 320px;
   padding: 0 20px;
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   body {
-    width: 768px;
+    max-width: 768px;
     padding: 0 32px;
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1280px) {
   body {
-    width: 1280px;
+    max-width: 1280px;
     padding: 0 16px;
   }
 }

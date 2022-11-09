@@ -1,12 +1,12 @@
-import { Container, FriendsThumb } from "./Friends.styled";
+import { Container, FriendsThumb, Title } from "./OurFriendsPage.styled";
 
-export const Friends = () => {
+const OurFriendsPage = () => {
     
     const arr = [{ title: 'ЛКП "ЛЕВ"', time: '8-19', adress: 'Grigorenka Street, 25', email: 'barbos@gmail.com', phone: '0664880480' }, { title: 'Барбос', time: '8-20', adress: 'Grigorenka Street, 3', email: 'barbos@gmail.com', phone: '4880480' }, { title: 'ЛКП "ЛЕВ"', time: '', adress: '', email: 'barbos@gmail.com', phone: '0664880480' }];
 
     return (
         <>
-            <h2>Our friends</h2>
+            <Title>Our friends</Title>
             <FriendsThumb>
             {arr.map(({title, time, adress, email, phone}) => (
                     <Container>
@@ -40,3 +40,5 @@ export const Friends = () => {
         </>
     )
 }
+
+export default OurFriendsPage;
