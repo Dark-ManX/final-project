@@ -21,3 +21,5 @@ const Modal = ({ children }) => {
         </ModalBackdrop>, modalRoot,
     );
 }
+
+export default Modal;
