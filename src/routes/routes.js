@@ -1,4 +1,6 @@
+
 export const ROUTES = {
+  BASE_URL:"https://team-api-blended2.herokuapp.com/",
   AUTH: {
     // POST
     create: '/register',
