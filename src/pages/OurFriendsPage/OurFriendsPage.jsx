@@ -1,4 +1,4 @@
-import { Container, FriendsThumb, Title } from "./OurFriendsPage.styled";
+import { Container, FriendsThumb, FirstThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => {
     
@@ -8,8 +8,14 @@ const OurFriendsPage = () => {
         <>
             <Title>Our friends</Title>
             <FriendsThumb>
-            {arr.map(({title, time, adress, email, phone}) => (
-                    <Container>
+            {arr.map(({img, title, time, adress, email, phone}) => (
+                <Container>
+                    
+                    <FirstThumb>
+                        <img src={img} alt={`${title} img`} />
+                    </FirstThumb>
+
+                    <div>
                         <h3>{title}</h3>
                         <ul>
                             <li>Time:
@@ -24,15 +30,17 @@ const OurFriendsPage = () => {
                             </li>
                             <li>Email:
                                 {
-                                    email ? (<span>{email}</span>) : (<span>----------</span>)
+                                    email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
                                 }
                             </li>
                             <li>Phone:
                                 {
-                                    phone ? (<span>{phone}</span>) : (<span>----------</span>)
+                                    phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
                                 }
                             </li>
                         </ul>
+
+                        </div>
                     </Container>
                 ))
                 }

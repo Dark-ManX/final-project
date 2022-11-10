@@ -1,10 +1,10 @@
-
+import OurFriendsPage from "pages/OurFriendsPage/OurFriendsPage"
 
 const MainPage = () => {
 
     return (
-        <div>
-
+      <div>
+          <OurFriendsPage/>
         </div>
     )
 }

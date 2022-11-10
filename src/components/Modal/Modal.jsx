@@ -13,13 +13,15 @@ const Modal = ({ children }) => {
         }
     }
 
-        return createPortal(
+    return createPortal(
         <ModalBackdrop>
             <ModalBody>
                 {children}
             </ModalBody>
         </ModalBackdrop>, modalRoot,
     );
+
+}
 
 export default Modal;
 
