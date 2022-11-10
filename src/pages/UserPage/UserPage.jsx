@@ -2,7 +2,7 @@ import { UserData } from 'components/UserData/UserData';
 import { Logout } from 'components/Logout/Logout';
 import { PetsData } from 'components/PetsData/PetsData';
 
-export const UserPage = () => {
+const UserPage = () => {
   return (
     <>
       <h2>My information:</h2>
@@ -16,3 +16,4 @@ export const UserPage = () => {
 };
 
 export default UserPage;
+
