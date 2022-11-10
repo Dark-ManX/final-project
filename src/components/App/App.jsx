@@ -1,8 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
-import MainPage from 'pages/MainPage/MainPage';
+import Header from 'components/Header/Header';
 
-const AsyncHeader = lazy(() => import('components/Header/Header'));
 const AsyncMainPage = lazy(() => import('pages/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
@@ -18,7 +17,7 @@ const App = () => {
 
     <Routes>
 
-      <Route path='/' element={<AsyncHeader />} >
+      <Route path='/' element={<Header />} >
       <Route index element={<AsyncMainPage />} />
 
         <Route path='news' element={<AsyncNewsPage />} />
