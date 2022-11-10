@@ -8,7 +8,8 @@ const OurFriendsPage = () => {
         <>
             <Title>Our friends</Title>
             <FriendsThumb>
-            {arr.map(({img, title, time, adress, email, phone}) => (
+
+              {arr.map(({img, title, time, adress, email, phone}) => (
                 <Container>
                     
                     <FirstThumb>
@@ -41,9 +42,10 @@ const OurFriendsPage = () => {
                         </ul>
 
                         </div>
+
                     </Container>
                 ))
-                }
+              }
             </FriendsThumb>
         </>
     )

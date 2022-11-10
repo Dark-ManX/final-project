@@ -20,8 +20,8 @@ const Modal = ({ children }) => {
             </ModalBody>
         </ModalBackdrop>, modalRoot,
     );
+}
 
 }
 
 export default Modal;
-
