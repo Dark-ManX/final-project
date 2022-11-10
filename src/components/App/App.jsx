@@ -16,6 +16,7 @@ const App = () => {
   return (
 
     <Routes>
+
       <Route path='/' element={<AsyncHeader />} >
       <Route index element={<AsyncMainPage />} />
 

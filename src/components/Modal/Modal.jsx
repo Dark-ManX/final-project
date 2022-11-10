@@ -13,7 +13,7 @@ const Modal = ({ children }) => {
         }
     }
 
-        return createPortal(
+    return createPortal(
         <ModalBackdrop>
             <ModalBody>
                 {children}
