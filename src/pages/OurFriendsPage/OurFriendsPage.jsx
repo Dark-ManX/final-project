@@ -8,31 +8,35 @@ const OurFriendsPage = () => {
         <>
             <Title>Our friends</Title>
             <FriendsThumb>
-            {arr.map(({title, time, adress, email, phone}) => (
+                {arr.map(({img, title, time, adress, email, phone}) => (
                     <Container>
-                        <h3>{title}</h3>
-                        <ul>
-                            <li>Time:
-                                {
-                                    time ? (<span>{time}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Adress:
-                                {
-                                    adress ? (<span>{adress}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Email:
-                                {
-                                    email ? (<span>{email}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Phone:
-                                {
-                                    phone ? (<span>{phone}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                        </ul>
+                        <div>{img}</div>
+                        <div>
+                            <h3>{title}</h3>
+                            <ul>
+                                <li>Time:
+                                    {
+                                        time ? (<span>{time}</span>) : (<span>----------</span>)
+                                    }
+                                </li>
+                                <li>Adress:
+                                    {
+                                        adress ? (<span>{adress}</span>) : (<span>----------</span>)
+                                    }
+                                </li>
+                                <li>Email:
+                                    {
+                                        email ? (<span>{email}</span>) : (<span>----------</span>)
+                                    }
+                                </li>
+                                <li>Phone:
+                                    {
+                                        phone ? (<span>{phone}</span>) : (<span>----------</span>)
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                        
                     </Container>
                 ))
                 }
