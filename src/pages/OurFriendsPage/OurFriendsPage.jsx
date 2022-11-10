@@ -1,4 +1,4 @@
-import { Container, FriendsThumb, Title } from "./OurFriendsPage.styled";
+import { Container, FriendsThumb, FirstThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => {
     
@@ -8,38 +8,44 @@ const OurFriendsPage = () => {
         <>
             <Title>Our friends</Title>
             <FriendsThumb>
-                {arr.map(({img, title, time, adress, email, phone}) => (
-                    <Container>
-                        <div>{img}</div>
-                        <div>
-                            <h3>{title}</h3>
-                            <ul>
-                                <li>Time:
-                                    {
-                                        time ? (<span>{time}</span>) : (<span>----------</span>)
-                                    }
-                                </li>
-                                <li>Adress:
-                                    {
-                                        adress ? (<span>{adress}</span>) : (<span>----------</span>)
-                                    }
-                                </li>
-                                <li>Email:
-                                    {
-                                        email ? (<span>{email}</span>) : (<span>----------</span>)
-                                    }
-                                </li>
-                                <li>Phone:
-                                    {
-                                        phone ? (<span>{phone}</span>) : (<span>----------</span>)
-                                    }
-                                </li>
-                            </ul>
+
+              {arr.map(({img, title, time, adress, email, phone}) => (
+                <Container>
+                    
+                    <FirstThumb>
+                        <img src={img} alt={`${title} img`} />
+                    </FirstThumb>
+
+                    <div>
+                        <h3>{title}</h3>
+                        <ul>
+                            <li>Time:
+                                {
+                                    time ? (<span>{time}</span>) : (<span>----------</span>)
+                                }
+                            </li>
+                            <li>Adress:
+                                {
+                                    adress ? (<span>{adress}</span>) : (<span>----------</span>)
+                                }
+                            </li>
+                            <li>Email:
+                                {
+                                    email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
+                                }
+                            </li>
+                            <li>Phone:
+                                {
+                                    phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
+                                }
+                            </li>
+                        </ul>
+
                         </div>
-                        
+
                     </Container>
                 ))
-                }
+              }
             </FriendsThumb>
         </>
     )
