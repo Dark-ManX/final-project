@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
-import MainPage from 'pages/MainPage/MainPage';
 
 const AsyncHeader = lazy(() => import('components/Header/Header'));
 const AsyncMainPage = lazy(() => import('pages/MainPage/MainPage'));
