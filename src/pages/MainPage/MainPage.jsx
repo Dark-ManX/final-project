@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 
 const MainPage = () => {
 
     return (
       <div>
-        <p>hello</p>
+        <p>Test message</p>
       </div>
     )
 }
