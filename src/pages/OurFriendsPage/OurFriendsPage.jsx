@@ -9,6 +9,7 @@ const OurFriendsPage = () => {
     return (
         <>
             <Title>Our friends</Title>
+            
             <FriendsThumb>
 
               {arr.map(({img, title, time, adress, email, phone}) => (
