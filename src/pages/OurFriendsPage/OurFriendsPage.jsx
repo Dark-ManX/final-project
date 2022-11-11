@@ -47,7 +47,8 @@ const OurFriendsPage = () => {
                       </div>  
                     </Container>
                 ))
-              }
+                }
+                
             </FriendsThumb>
         </>
     )
