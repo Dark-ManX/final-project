@@ -41,7 +41,7 @@ const OurFriendsPage = () => {
                             </li>
                         </ul>
 
-                        </div>
+                      </div>  
                     </Container>
                 ))
               }
