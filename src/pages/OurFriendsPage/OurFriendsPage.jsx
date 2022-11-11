@@ -42,7 +42,6 @@ const OurFriendsPage = () => {
                         </ul>
 
                         </div>
-
                     </Container>
                 ))
               }
