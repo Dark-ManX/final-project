@@ -1,4 +1,6 @@
+import shortid from 'shortid';
 import { Container, FriendsThumb, FirstThumb, Title } from "./OurFriendsPage.styled";
+
 
 const OurFriendsPage = () => {
     
@@ -10,7 +12,7 @@ const OurFriendsPage = () => {
             <FriendsThumb>
 
               {arr.map(({img, title, time, adress, email, phone}) => (
-                <Container>
+                <Container key={shortid.generate()}>
                     
                     <FirstThumb>
                         <img src={img} alt={`${title} img`} />
