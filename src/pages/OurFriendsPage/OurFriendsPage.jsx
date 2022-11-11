@@ -1,15 +1,25 @@
-import { Container, FriendsThumb, Title } from "./OurFriendsPage.styled";
+import shortid from 'shortid';
+import { Container, FriendsThumb, FirstThumb, Title } from "./OurFriendsPage.styled";
 
-const OurFriendsPage = () => {
+
+const OurFriendsPage = () => { 
     
     const arr = [{ title: 'ЛКП "ЛЕВ"', time: '8-19', adress: 'Grigorenka Street, 25', email: 'barbos@gmail.com', phone: '0664880480' }, { title: 'Барбос', time: '8-20', adress: 'Grigorenka Street, 3', email: 'barbos@gmail.com', phone: '4880480' }, { title: 'ЛКП "ЛЕВ"', time: '', adress: '', email: 'barbos@gmail.com', phone: '0664880480' }];
 
     return (
         <>
             <Title>Our friends</Title>
+            
             <FriendsThumb>
-            {arr.map(({title, time, adress, email, phone}) => (
-                    <Container>
+
+              {arr.map(({img, title, time, adress, email, phone}) => (
+                <Container key={shortid.generate()}>
+                    
+                    <FirstThumb>
+                        <img src={img} alt={`${title} img`} />
+                    </FirstThumb>
+
+                    <div>
                         <h3>{title}</h3>
                         <ul>
                             <li>Time:
@@ -24,18 +34,20 @@ const OurFriendsPage = () => {
                             </li>
                             <li>Email:
                                 {
-                                    email ? (<span>{email}</span>) : (<span>----------</span>)
+                                    email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
                                 }
                             </li>
                             <li>Phone:
                                 {
-                                    phone ? (<span>{phone}</span>) : (<span>----------</span>)
+                                    phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
                                 }
                             </li>
                         </ul>
+
+                      </div>  
                     </Container>
                 ))
-                }
+              }
             </FriendsThumb>
         </>
     )

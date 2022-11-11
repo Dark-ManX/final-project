@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+display: flex;
+column-gap: 12px;
 padding: 12px 4px;
 border-radius: 20px;
 background-color: white;
@@ -25,6 +27,10 @@ grid-row-gap: 12px;
 @media screen and (min-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
 }
+`
+
+export const FirstThumb = styled.div`
+width: 110px;
 `
 
 export const Title = styled.h2`

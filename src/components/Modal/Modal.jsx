@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalBackdrop, ModalBody } from "./Modal.styled";
 
@@ -13,7 +12,7 @@ const Modal = ({ children }) => {
         }
     }
 
-        return createPortal(
+    return createPortal(
         <ModalBackdrop>
             <ModalBody>
                 {children}

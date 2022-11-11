@@ -1,13 +1,12 @@
 import { Outlet } from "react-router-dom";
-import { Friends } from "pages/OurFriendsPage/OurFriendsPage";
 
 const MainPage = () => {
 
     return (
-        <div>
-          <Outlet/>  
-        </div>
+      <div>
+        <p>hello</p>
+      </div>
     )
 }
 
-export default MainPage
+export default MainPage;
