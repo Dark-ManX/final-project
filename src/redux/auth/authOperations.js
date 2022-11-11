@@ -12,9 +12,9 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('auth/register', async credentials => {
+const create = createAsyncThunk('/create', async credentials => {
   try {
-    const { data } = await axios.post('/register', credentials);
+    const { data } = await axios.post('auth/register', credentials);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -22,9 +22,10 @@ const register = createAsyncThunk('auth/register', async credentials => {
   }
 });
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
+// IS BEING EDITED
+const register = createAsyncThunk('/register', async credentials => {
   try {
-    const { data } = await axios.post('/login', credentials);
+    const { data } = await axios.post('auth/register/:id', credentials);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -32,34 +33,42 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
   }
 });
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logIn = createAsyncThunk('/login', async credentials => {
   try {
-    await axios.post('/logout');
+    const { data } = await axios.post('auth/login', credentials);
+    token.set(data.token);
+    return data;
+  } catch (error) {
+    // TODO: Добавить обработку ошибки error.message
+  }
+});
+
+const logOut = createAsyncThunk('/logout', async () => {
+  try {
+    await axios.post('auth/logout');
     token.unset();
   } catch (error) {
     // TODO: Добавить обработку ошибки error.message
   }
 });
-const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
 
-    if (persistedToken === null) {
-      /* console.log('Токена нет, уходим из fetchCurrentUser'); */
-      return thunkAPI.rejectWithValue();
-    }
+const updateInfoUser = createAsyncThunk('/refresh', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
 
-    token.set(persistedToken);
-    try {
-      const { data } = await axios.get('/current');
-      return data;
-    } catch (error) {
-      // TODO: Добавить обработку ошибки error.message
-    }
+  if (persistedToken === null) {
+    /* console.log('Токена нет, уходим из fetchCurrentUser'); */
+    return thunkAPI.rejectWithValue();
   }
-);
+
+  token.set(persistedToken);
+  try {
+    const { data } = await axios.get('/current');
+    return data;
+  } catch (error) {
+    // TODO: Добавить обработку ошибки error.message
+  }
+});
 
 const operations = {
   register,

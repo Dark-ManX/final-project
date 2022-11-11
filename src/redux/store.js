@@ -10,6 +10,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import authSlice from './auth/authSlice';
 
 const middlewareForLogger = [
   ...getDefaultMiddleware({
@@ -18,3 +20,27 @@ const middlewareForLogger = [
     },
   }),
 ];
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
+
+export const store = configureStore({
+  reducer: {
+    // pets: petsReducer,
+    auth: persistReducer(authPersistConfig, authSlice),
+  },
+  middlewareForLogger,
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware({ serializableCheck: false }),
+    /* logger, */
+  ],
+
+  devTools: process.env.NODE_ENV === 'development',
+});
+
+setupListeners(store.dispatch);
+
+export const persistor = persistStore(store);
