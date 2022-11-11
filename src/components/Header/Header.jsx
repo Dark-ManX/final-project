@@ -1,6 +1,6 @@
 import AuthNav from "components/AuthNav/AuthNav";
 import Navigation from "components/Navigation/Navigation";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 import { TiThMenu } from "react-icons/ti";
 import { RotatingLines } from 'react-loader-spinner';
 import { Outlet } from "react-router-dom";
