@@ -4,7 +4,7 @@ const MainPage = () => {
 
     return (
       <div>
-        <p>Test message</p>
+        <p>Test Message</p>
       </div>
     )
 }
