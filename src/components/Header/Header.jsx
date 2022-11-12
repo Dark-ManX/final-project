@@ -4,13 +4,16 @@ import { Suspense, useState } from "react";
 import { TiThMenu } from "react-icons/ti";
 import { RotatingLines } from 'react-loader-spinner';
 import { Outlet } from "react-router-dom";
+import { MainContainer } from "components/commonStyles/Container.styled";
+import Modal from "components/Modal/Modal";
+import AddPet from "components/ModalAddsPet/ModalAddsPet";
 import {
     AccentSpan,
     Button,
-    // MenuContainer,
+    MenuContainer,
     ModalContainer,
     Paragraph,
-    StyledHeader
+    StyledHeader,
 } from "./Header.styled";
 
 const Header = () => {
@@ -23,34 +26,27 @@ const Header = () => {
     }
 
     return (
+
         <>
-            <StyledHeader>
-                <ModalContainer>
-                    <Paragraph>pe<AccentSpan>t</AccentSpan>ly</Paragraph>
-                    <Button onClick={toggleUser}><TiThMenu /></Button>
-                </ModalContainer>
-                
-                <div className={`headerMenu ${user ? 'shown' : ''}`} >
-
-                    <AuthNav user={user} />
-
-                    <Navigation />
+            <MainContainer>
+                <StyledHeader>
+                    <ModalContainer>
+                        <Paragraph>pe<AccentSpan>t</AccentSpan>ly</Paragraph>
+                        <Button onClick={toggleUser}><TiThMenu /></Button>
+                    </ModalContainer>
                     
-                </div>
-            </StyledHeader>
-            
-            <Suspense fallback={
-                <RotatingLines
-                    strokeColor="grey"
-                    strokeWidth="5"
-                    animationDuration="0.75"
-                    width="96"
-                    visible={true}
-                />}>
-                <Outlet />
-            </Suspense>
-            
-        </>
+                    <MenuContainer className={`headerMenu ${user ? 'shown' : ''}`} >
+
+                        <AuthNav user={user} />
+
+                        <Navigation />
+                        
+                    </MenuContainer>
+                </StyledHeader>
+
+                {user && (<Modal children={<AddPet/>} />)}
+            </MainContainer>
+          </>  
     )
 };
 

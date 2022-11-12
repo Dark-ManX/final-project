@@ -30,8 +30,19 @@ border: none;
 background-color: transparent;
 `
 
-// export const MenuContainer = styled.div`
-// position: absolute;
-// top: 100%;
-// right: -100%;
-// `
+export const MenuContainer = styled.div`
+position: absolute;
+top: 100%;
+right: 0;
+width: 100%;
+height: 100vh;
+background-color: #FDF7F2;
+`
+
+export const MainContainer = styled.div`
+background-color: #FDF7F2;
+min-width: 320px;
+max-width: 320px;
+padding: 0 20px;
+margin: 0 auto;
+`

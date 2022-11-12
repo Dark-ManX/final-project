@@ -5,6 +5,7 @@ const Navigation = () => {
     const location = useLocation();
 
     return (
+        
         <nav className="navigation">
             <ul>
                 <li>
