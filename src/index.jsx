@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <PersistGate loading={'Loading...'} persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Final-project">
         <App />
       </BrowserRouter>
     </PersistGate>

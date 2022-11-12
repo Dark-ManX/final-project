@@ -1,18 +1,26 @@
 import { lazy } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
+import Registration from '../Registration/Registration';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations } from 'redux/auth';
+import { useEffect } from 'react';
 
-const AsyncHeader = lazy(() => import('../Header/Header'));
-const AsyncMainPage = lazy(() => import('../../pages/MainPage'))
-const NotFound = lazy(() => import('../../pages/NotFound'))
+// const AsyncHeader = lazy(() => import('../Header/Header'));
+// const AsyncMainPage = lazy(() => import('../../pages/MainPage'))
+// const NotFound = lazy(() => import('../../pages/NotFound'))
 
 export const App = () => {
-  return (
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authOperations.updateInfoUser());
+  }, [dispatch]);
 
+  return (
     <Routes>
-      <Route path='/' element={<AsyncHeader />} />
-      <Route index element={<AsyncMainPage />} />
-      
-      <Route path='*' element={<NotFound/>} />  
+      <Route path="/" element={<Registration />} />
+      {/* <Route index element={<AsyncMainPage />} /> */}
+
+      {/* <Route path='*' element={<NotFound/>} />   */}
     </Routes>
   );
 };

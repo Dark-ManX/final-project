@@ -12,18 +12,20 @@ const token = {
   },
 };
 
-const create = createAsyncThunk('/create', async credentials => {
-  try {
-    const { data } = await axios.post('auth/register', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    // TODO: Добавить обработку ошибки error.message
+const create = createAsyncThunk(
+  'auth/create',
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await axios.post('/register', credentials);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 // IS BEING EDITED
-const register = createAsyncThunk('/register', async credentials => {
+const register = createAsyncThunk('auth/register', async credentials => {
   try {
     const { data } = await axios.post('auth/register/:id', credentials);
     token.set(data.token);
@@ -71,10 +73,11 @@ const updateInfoUser = createAsyncThunk('/refresh', async (_, thunkAPI) => {
 });
 
 const operations = {
+  create,
   register,
   logIn,
   logOut,
-  fetchCurrentUser,
+  updateInfoUser,
 };
 
 export default operations;
