@@ -1,5 +1,8 @@
+import PropTypes from 'prop-types';
+
 export const UserDataItem = ({ user }) => {
   const { name, email, birthday, phone, city } = user;
+  console.log(user);
 
   return (
     <ul>
@@ -25,4 +28,14 @@ export const UserDataItem = ({ user }) => {
       </li>
     </ul>
   );
+};
+
+UserDataItem.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    birthday: PropTypes.string,
+    phone: PropTypes.string,
+    city: PropTypes.string,
+  }),
 };

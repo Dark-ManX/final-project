@@ -1,4 +1,6 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
+
 import { useState, useEffect } from 'react';
 
 import { UserDataItem } from 'components/UserDataItem/UserDataItem';
@@ -29,4 +31,11 @@ export const UserData = () => {
       <UserDataItem user={user} />
     </>
   );
+};
+
+UserDataItem.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    logo: PropTypes.string,
+  }),
 };

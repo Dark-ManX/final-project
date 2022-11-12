@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
+
 export const PetsList = ({ pets }) => {
+  console.log(pets);
   return (
     <ul>
       {pets.map(({ _id, photoPet, name, birth, breed, comments }) => {
@@ -17,4 +20,17 @@ export const PetsList = ({ pets }) => {
       })}
     </ul>
   );
+};
+
+PetsList.propTypes = {
+  pets: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      photoPet: PropTypes.string,
+      name: PropTypes.string,
+      birth: PropTypes.string,
+      breed: PropTypes.string,
+      comments: PropTypes.string,
+    })
+  ),
 };
