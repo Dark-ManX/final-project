@@ -1,16 +1,20 @@
-export const PetsList = () => {
+export const PetsList = ({ pets }) => {
   return (
     <ul>
-      <li>
-        <img src="" alt="" />
-        <button>Delete</button>
-        <div>
-          <p>Name:</p>
-          <p>Date of birth:</p>
-          <p>Breed:</p>
-          <p>Comments:</p>
-        </div>
-      </li>
+      {pets.map(({ _id, photoPet, name, birth, breed, comments }) => {
+        return (
+          <li key={_id}>
+            <img src={photoPet} alt={name} />
+            <button>Delete</button>
+            <div>
+              <p>Name:{name}</p>
+              <p>Date of birth:{birth}</p>
+              <p>Breed:{breed}</p>
+              <p>Comments:{comments}</p>
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 };
