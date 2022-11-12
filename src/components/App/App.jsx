@@ -12,8 +12,6 @@ const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
 const AsyncOurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
-const AsyncAuthForm = lazy(() => import('components/Modal/Modal'))
-
 
 const App = () => {
   return (

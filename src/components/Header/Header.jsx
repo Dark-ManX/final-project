@@ -1,19 +1,17 @@
 import AuthNav from "components/AuthNav/AuthNav";
-import Navigation from "components/Navigation/Navigation";
-import { Suspense, useState } from "react";
-import { TiThMenu } from "react-icons/ti";
-import { RotatingLines } from 'react-loader-spinner';
-import { Outlet } from "react-router-dom";
 import { MainContainer } from "components/commonStyles/Container.styled";
 import Modal from "components/Modal/Modal";
 import AddPet from "components/ModalAddsPet/ModalAddsPet";
+import Navigation from "components/Navigation/Navigation";
+import { useState } from "react";
+import { TiThMenu } from "react-icons/ti";
 import {
     AccentSpan,
     Button,
     MenuContainer,
     ModalContainer,
     Paragraph,
-    StyledHeader,
+    StyledHeader
 } from "./Header.styled";
 
 const Header = () => {
@@ -44,7 +42,6 @@ const Header = () => {
                     </MenuContainer>
                 </StyledHeader>
 
-                {user && (<Modal children={<AddPet/>} />)}
             </MainContainer>
           </>  
     )
