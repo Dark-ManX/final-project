@@ -52,8 +52,5 @@ export const AuthNavBlock = styled.div`
   display: flex;
   justify-content: center;
 `;
-// export const MenuContainer = styled.div`
-// position: absolute;
-// top: 100%;
-// right: -100%;
-// `
+
+

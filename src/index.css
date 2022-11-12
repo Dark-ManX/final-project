@@ -11,25 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   background-color: var(--main-background);
-  max-width: 320px;
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
-@media screen and (min-width: 768px) {
-  body {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  body {
-    max-width: 1280px;
-    padding: 0 16px;
-  }
 }
 
 code {
@@ -60,7 +42,6 @@ a {
 
 .headerMenu {
   visibility: hidden;
-  /* width: 0; */
   height: 100vh;
   transform: translate(100%, 0);
   transition: transform 250ms linear;
@@ -68,8 +49,7 @@ a {
 
 .shown {
   visibility: visible;
-  width: 100vw;
+  width: 100%;
   transform: translate(0, 0);
   transition: transform 250ms linear;
 }
-

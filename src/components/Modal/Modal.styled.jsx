@@ -16,7 +16,7 @@ left: 50%;
 transform: translate(-50%, -45vh);
 background-color: white;
 border-radius: 25px;
-padding: 0;
+padding: 40px;
 margin: 100px auto;
 overflow: hidden;
 `

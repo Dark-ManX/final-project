@@ -1,10 +1,17 @@
-import shortid from 'shortid';
-import { Container, FriendsThumb, FirstThumb, Title } from "./OurFriendsPage.styled";
+import { useState, useEffect } from 'react';
+import { Container, FriendsThumb, CardThumb, FriendTitle, FirstThumb, SecondThumb, Title, Image, Item } from "./OurFriendsPage.styled";
 
 
 const OurFriendsPage = () => { 
     
-    const arr = [{ title: 'ЛКП "ЛЕВ"', time: '8-19', adress: 'Grigorenka Street, 25', email: 'barbos@gmail.com', phone: '0664880480' }, { title: 'Барбос', time: '8-20', adress: 'Grigorenka Street, 3', email: 'barbos@gmail.com', phone: '4880480' }, { title: 'ЛКП "ЛЕВ"', time: '', adress: '', email: 'barbos@gmail.com', phone: '0664880480' }];
+    const [arr, setArr] = useState([]);
+
+    useEffect(() => {
+        fetch('https://team-api-blended2.herokuapp.com/friends').then(res => res.json()).then(({ data }) => {
+            console.log(data.friends)
+            setArr(data.friends)
+        }).catch(err => console.log(err.message))
+    }, [])
 
     return (
         <>
@@ -12,40 +19,45 @@ const OurFriendsPage = () => {
             
             <FriendsThumb>
 
-              {arr.map(({img, title, time, adress, email, phone}) => (
-                <Container key={shortid.generate()}>
-                    
-                    <FirstThumb>
-                        <img src={img} alt={`${title} img`} />
-                    </FirstThumb>
+                {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
+                  
+                    <Container key={_id}>
+                        <FriendTitle>{title}</FriendTitle>
 
-                    <div>
-                        <h3>{title}</h3>
-                        <ul>
-                            <li>Time:
-                                {
-                                    time ? (<span>{time}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Adress:
-                                {
-                                    adress ? (<span>{adress}</span>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Email:
-                                {
-                                    email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
-                                }
-                            </li>
-                            <li>Phone:
-                                {
-                                    phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
-                                }
-                            </li>
-                        </ul>
+                        <CardThumb>
+                            <FirstThumb>
+                                <Image src={imageUrl} alt={`${title} img`} />
+                            </FirstThumb>
 
-                      </div>  
+                            <SecondThumb>
+                                
+                                <ul>
+                                    <Item>Time:
+                                        {
+                                            time ? (<span>{time}</span>) : (<span>----------</span>)
+                                        }
+                                    </Item>
+                                    <Item>Adress:
+                                        {
+                                            address ? (<span>{address}</span>) : (<span>----------</span>)
+                                        }
+                                    </Item>
+                                    <Item>Email:
+                                        {
+                                            email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
+                                        }
+                                    </Item>
+                                    <Item>Phone:
+                                        {
+                                            phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
+                                        }
+                                    </Item>
+                                </ul>
+
+                            </SecondThumb>
+                        </CardThumb>    
                     </Container>
+                
                 ))
                 }
                 

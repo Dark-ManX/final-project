@@ -25,6 +25,7 @@ const Navigation = () => {
       </ul>
     </nav>
   );
+
 };
 
 export default Navigation;

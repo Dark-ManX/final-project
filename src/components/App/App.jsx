@@ -1,43 +1,39 @@
 import { lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
-import Header from 'components/Header/Header';
+import SharedLayout from 'pages/SharedLayout/SharedLayout';
 
-const AsyncMainPage = lazy(() => import('pages/MainPage/MainPage'));
+const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'))
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
-const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
-const AsyncNoticesCategoryList = lazy(() => import('components/NoticesCategoryList/NoticesCategoryList'));
+const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
+const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFoundNoticesPage'));
+const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));
+// const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
 const AsyncOurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 
-
 const App = () => {
   return (
 
     <Routes>
 
-      <Route path='/' element={<Header />} >
+      <Route path='/' element={<SharedLayout />} >
         <Route index element={<AsyncMainPage />} />
 
         <Route path='news' element={<AsyncNewsPage />} />
 
         <Route path='notices' element={<AsyncNoticesPage />}>
+          <Route path='sell' element={<AsyncSellNoticesPage />} />
+          <Route path='for-free' element={<AsyncLostFoundNoticesPage />} />
+          <Route path='lost-found' element={<AsyncForFreeNoticesPage />} />
           
-          <Route path='sell' element={<AsyncNoticesSearch />} />
+          <Route path='favorite' element={<AsyncNoticesPage />} />
           
-          <Route path='lost-found' element={<AsyncNoticesCategoryList />} />
-          
-          <Route path='for-free' element={<AsyncNoticesCategoryList />} />
-          
-          <Route path='favorite' element={<AsyncNoticesCategoryList />} />
-          
-          <Route path='own' element={<AsyncNoticesCategoryList />} />
+          <Route path='own' element={<AsyncNoticesPage />} />
         </Route>
-
-        <Route path='notices/:categoryName' element={<AsyncNoticesPage />} />
         
         <Route path='register' element={<AsyncRegisterPage />} />
 

@@ -15,6 +15,7 @@ import {
   AuthNavBlock,
 } from './Header.styled';
 
+
 const Header = () => {
   const [user, setUser] = useState(false);
 
@@ -46,22 +47,10 @@ const Header = () => {
           </div>
         </BlockAcc>
       </StyledHeader>
-
-      <Suspense
-        fallback={
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
-          />
-        }
-      >
-        <Outlet />
-      </Suspense>
+      
     </>
   );
+
 };
 
 export default Header;
