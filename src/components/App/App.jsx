@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
+import Modal from 'components/Modal/Modal';
+// import RegisterPage from 'pages/RegisterPage/RegisterPage';
 
 const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'))
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
@@ -35,7 +37,7 @@ const App = () => {
           <Route path='own' element={<AsyncNoticesPage />} />
         </Route>
         
-        <Route path='register' element={<AsyncRegisterPage />} />
+        <Route path='register' element={<Modal children={<AsyncRegisterPage />} />} />
 
         <Route path='login' element={<AsyncLoginPage />} />
         
