@@ -1,50 +1,56 @@
-import AuthNav from "components/AuthNav/AuthNav";
-import { MainContainer } from "components/commonStyles/Container.styled";
-import Modal from "components/Modal/Modal";
-import AddPet from "components/ModalAddsPet/ModalAddsPet";
-import Navigation from "components/Navigation/Navigation";
-import { useState } from "react";
-import { TiThMenu } from "react-icons/ti";
+import AuthNav from 'components/AuthNav/AuthNav';
+import Navigation from 'components/Navigation/Navigation';
+import { Suspense, useState } from 'react';
+import { TiThMenu } from 'react-icons/ti';
+import { RotatingLines } from 'react-loader-spinner';
+import { Outlet } from 'react-router-dom';
 import {
-    AccentSpan,
-    Button,
-    MenuContainer,
-    ModalContainer,
-    Paragraph,
-    StyledHeader
-} from "./Header.styled";
+  AccentSpan,
+  Button,
+  ModalContainer,
+  Paragraph,
+  StyledHeader,
+  BlockAcc,
+  Navigat,
+  AuthNavBlock,
+} from './Header.styled';
+
 
 const Header = () => {
-    
-    const [user, setUser] = useState(false)
+  const [user, setUser] = useState(false);
 
-    const toggleUser = () => {
-        
-        setUser(!user)
-    }
+  const toggleUser = () => {
+    setUser(!user);
+  };
 
-    return (
+  return (
+    <>
+      <StyledHeader>
+        <ModalContainer>
+          <Paragraph>
+            pe<AccentSpan>t</AccentSpan>ly
+          </Paragraph>
+          <Button onClick={toggleUser}>
+            <TiThMenu size={36} />
+          </Button>
+        </ModalContainer>
 
-        <>
-            <MainContainer>
-                <StyledHeader>
-                    <ModalContainer>
-                        <Paragraph>pe<AccentSpan>t</AccentSpan>ly</Paragraph>
-                        <Button onClick={toggleUser}><TiThMenu /></Button>
-                    </ModalContainer>
-                    
-                    <MenuContainer className={`headerMenu ${user && 'shown'}`} >
+        <BlockAcc>
+          <div className={`headerMenu ${user ? 'shown' : ''}`}>
+            <AuthNavBlock>
+              <AuthNav user={user} />
+            </AuthNavBlock>
 
-                        <AuthNav user={user} />
+            <Navigat>
+              <Navigation />
+            </Navigat>
+          </div>
+        </BlockAcc>
+      </StyledHeader>
+      
+    </>
+  );
 
-                        <Navigation />
-                        
-                    </MenuContainer>
-                </StyledHeader>
-
-            </MainContainer>
-          </>  
-    )
 };
 
 export default Header;
