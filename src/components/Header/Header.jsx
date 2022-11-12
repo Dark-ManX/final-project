@@ -33,7 +33,7 @@ const Header = () => {
                         <Button onClick={toggleUser}><TiThMenu /></Button>
                     </ModalContainer>
                     
-                    <MenuContainer className={`headerMenu ${user ? 'shown' : ''}`} >
+                    <MenuContainer className={`headerMenu ${user && 'shown'}`} >
 
                         <AuthNav user={user} />
 
