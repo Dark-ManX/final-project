@@ -12,6 +12,7 @@ const token = {
   },
 };
 
+// POST create: '/register',
 const create = createAsyncThunk(
   'auth/create',
   async (credentials, thunkAPI) => {
@@ -24,12 +25,12 @@ const create = createAsyncThunk(
   }
 );
 
-// IS BEING EDITED
+// PATCH register: '/register/:id',
 const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/register/:id', credentials);
+      const { data } = await axios.patch(`/register/id`, credentials);
       token.set(data.token);
       return data;
     } catch (error) {
@@ -37,7 +38,7 @@ const register = createAsyncThunk(
     }
   }
 );
-
+// POST  login: '/login',
 const logIn = createAsyncThunk('/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/login', credentials);
@@ -47,7 +48,7 @@ const logIn = createAsyncThunk('/login', async (credentials, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
-
+// GET logout: '/logout',
 const logOut = createAsyncThunk('/logout', async (credentials, thunkAPI) => {
   try {
     await axios.post('/logout');
@@ -57,7 +58,8 @@ const logOut = createAsyncThunk('/logout', async (credentials, thunkAPI) => {
   }
 });
 
-const updateInfoUser = createAsyncThunk('/refresh', async (_, thunkAPI) => {
+// GET current: '/current',
+const fetchCurrentUser = createAsyncThunk('/refresh', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
   const persistedToken = state.auth.token;
 
@@ -71,7 +73,7 @@ const updateInfoUser = createAsyncThunk('/refresh', async (_, thunkAPI) => {
     const { data } = await axios.get('/current');
     return data;
   } catch (error) {
-    // TODO: Добавить обработку ошибки error.message
+    return thunkAPI.rejectWithValue();
   }
 });
 
@@ -80,7 +82,7 @@ const operations = {
   register,
   logIn,
   logOut,
-  updateInfoUser,
+  fetchCurrentUser,
 };
 
 export default operations;

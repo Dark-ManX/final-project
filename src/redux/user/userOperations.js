@@ -1,22 +1,7 @@
 import axios from 'axios';
 
-import {
-  fetchRequest,
-  fetchSuccess,
-  fetchError,
-  addPetsRequest,
-  addPetsSuccess,
-  addPetsError,
-  deletePetsRequest,
-  deletePetsSuccess,
-  deletePetsError,
-  editPetsRequest,
-  editPetsSuccess,
-  editPetsError,
-} from './userActions';
-
 // GET @ /user
-const fetchUser = () => async dispatch => {
+const getUser = () => async dispatch => {
   dispatch(fetchRequest());
 
   try {
@@ -59,7 +44,7 @@ const addPets = createAsyncThunk('/userPets', async credentials => {
     } catch (error) {}
   }
 });
-// PATCH @ /delete pet
+// PATCH @ /add pet
 const changePets = createAsyncThunk('/pet', async () => {
   try {
     await axios.patch('/pets/:id');
@@ -72,3 +57,13 @@ const deletePets = createAsyncThunk('/pet', async () => {
     await axios.post('/pets/:id');
   } catch (error) {}
 });
+const operations = {
+  getUser,
+  updateUser,
+  getPets,
+  addPets,
+  changePets,
+  deletePets,
+};
+
+export default operations;

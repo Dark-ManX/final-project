@@ -13,10 +13,12 @@ const Registration = () => {
     switch (name) {
       case 'email':
         setEmail(value);
+        console.log(email);
         break;
 
       case 'password':
         setPassword(value);
+        console.log(password);
         break;
 
       default:
@@ -36,8 +38,20 @@ const Registration = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="input" placeholder="email" onChange={handleChange} />
-        <input type="input" placeholder="password" onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          value={email}
+          placeholder="email"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          placeholder="password"
+          onChange={handleChange}
+        />
         <button type="submit">Submit</button>
       </form>
     </>

@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Registration from '../Registration/Registration';
+import RegistrationDetails from 'components/RegistrationDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations } from 'redux/auth';
 import { useEffect } from 'react';
@@ -12,12 +13,12 @@ import { useEffect } from 'react';
 export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(authOperations.updateInfoUser());
+    dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
     <Routes>
-      <Route path="/" element={<Registration />} />
+      <Route path="/" element={<RegistrationDetails />} />
       {/* <Route index element={<AsyncMainPage />} /> */}
 
       {/* <Route path='*' element={<NotFound/>} />   */}

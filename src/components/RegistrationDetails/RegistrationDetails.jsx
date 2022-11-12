@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import authOperations from '../../redux/auth/authOperations';
 
-const Registration = () => {
+const RegistrationDetails = () => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
@@ -42,14 +42,24 @@ const Registration = () => {
   return (
     <>
       <form>
-        <input type="input" placeholder="Name" onChange={handleChange} />
         <input
-          type="input"
+          type="text"
+          name="name"
+          value={name}
+          placeholder="Name"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="city"
+          value={city}
           placeholder="City, region"
           onChange={handleChange}
         />
         <input
-          type="input"
+          type="text"
+          name="phone"
+          value={phone}
           placeholder="Mobile phone"
           onChange={handleChange}
         />
@@ -60,4 +70,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationDetails;

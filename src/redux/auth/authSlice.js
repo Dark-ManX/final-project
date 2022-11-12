@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './authOperations';
 
 const initialState = {
-  user: { email: null },
+  user: { email: null, name: null, city: null, phone: null },
   token: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
@@ -14,7 +14,6 @@ const authSlice = createSlice({
   extraReducers: {
     [authOperations.create.fulfilled](state, action) {
       state.user = action.payload.user;
-      state.isLoggedIn = true;
     },
     [authOperations.register.fulfilled](state, action) {
       state.user = action.payload.user;
@@ -32,15 +31,15 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       window.location.reload();
     },
-    [authOperations.updateInfoUser.pending](state) {
+    [authOperations.fetchCurrentUser.pending](state) {
       state.isFetchingCurrentUser = true;
     },
-    [authOperations.updateInfoUser.fulfilled](state, action) {
+    [authOperations.fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isFetchingCurrentUser = false;
     },
-    [authOperations.updateInfoUser.rejected](state) {
+    [authOperations.fetchCurrentUser.rejected](state) {
       state.isFetchingCurrentUser = false;
     },
   },
