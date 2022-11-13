@@ -15,6 +15,7 @@ import { ReactComponent as AddIcon } from "../icons/add.svg";
 // import { ReactComponent as RemoveIcon } from "../icons/remove.svg";
 
 let category = '';
+let photo;
 
 export const NoticeCategoryItem = ({ notice }) => {
     switch (notice.category) {
@@ -31,10 +32,16 @@ export const NoticeCategoryItem = ({ notice }) => {
         default: '';
     };
 
+    if (notice.photo) {
+        photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
+    } else {
+        photo = 'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
+    };
+
     return (
         <NoticeCategoryItemStyled>
             <CardImageContainer>
-                <Photo src={`https://team-api-blended2.herokuapp.com/${notice.photo}`} alt={notice.comments} />
+                <Photo src={photo} alt={notice.comments} />
                 <Category>{category}</Category>
                 <AddToFavoriteBtn>
                     <AddIcon width="24" height="22" />

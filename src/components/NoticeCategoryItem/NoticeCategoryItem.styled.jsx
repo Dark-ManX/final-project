@@ -1,20 +1,49 @@
 import styled from "styled-components";
 
 export const NoticeCategoryItemStyled = styled.li`
-    list-style: none;
-    width: 280px;
-    height: 606px;
+    max-width: 280px;
+    padding-bottom: 32px;
     background: #FFFFFF;
     box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
     border-radius: 0px 0px 20px 20px;
 
-    @media screen and (min-width: 768px) {
-        width: 336px;
-    }
+    @media screen and (max-width: 767px) {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 32px;
+
+        &:last-child {
+            margin-bottom: 0;
+        };
+    };
+
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+        max-width: 336px;
+        margin-right: 32px;
+        margin-bottom: 32px;
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        };
+
+        &:nth-last-child(-n + 2) {
+            margin-bottom: 0;
+        };
+    };
 
     @media screen and (min-width: 1280px) {
-        width: 288px;
-    }
+        max-width: 288px;
+        margin-right: 32px;
+        margin-bottom: 32px;
+
+        &:nth-child(4n) {
+            margin-right: 0;
+        };
+
+        &:nth-last-child(-n + 4) {
+            margin-bottom: 0;
+        };
+    };
 `;
 
 export const CardInfoContainer = styled.div`
@@ -33,6 +62,7 @@ export const CardInfoContainer = styled.div`
 export const Title = styled.h2`
     margin-top: 0;
     margin-bottom: 20px;
+    height: 76px;
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
@@ -40,6 +70,8 @@ export const Title = styled.h2`
     line-height: 1.36;
     letter-spacing: -0.01em;
     color: #111111;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const CardImageContainer = styled.div`
@@ -69,6 +101,7 @@ export const Category = styled.p`
     padding: 6px 50px 7px 20px;
     margin: 0;
 
+    text-align: center;
     font-family: 'Manrope';
     font-weight: 500;
     font-size: 12px;
@@ -134,6 +167,10 @@ export const CardDetailInfo = styled.p`
     font-size: 16px;
     line-height: 1.37;
     color: #111111;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 `;
 
 export const Button = styled.button`
@@ -143,7 +180,6 @@ export const Button = styled.button`
     padding: 8px 28px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 32px;
     width: 248px;
     height: 38px;
 

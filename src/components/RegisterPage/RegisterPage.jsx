@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 
-const Registration = ({ id }) => {
+  const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [createNewUser] = useCreateUserMutation();
@@ -65,4 +65,4 @@ const Registration = ({ id }) => {
   );
 };
 
-export default Registration;
+export default RegisterPage;
