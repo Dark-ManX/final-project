@@ -28,10 +28,7 @@ const Registration = ({ id }) => {
     }
   };
   const createUser = () => {
-    const newUser = {
-      email,
-      password,
-    };
+    const newUser = { id, email, password };
     createNewUser(newUser);
   };
 
@@ -63,9 +60,9 @@ const Registration = ({ id }) => {
           placeholder="password"
           onChange={handleChange}
         />
-        <Link to={`/register/${id}`}>
-          <button type="submit">Submit</button>
-        </Link>
+        {/* <Link to={`/register/${id}`}> */}
+        <button type="submit">Submit</button>
+        {/* </Link> */}
       </form>
     </>
   );

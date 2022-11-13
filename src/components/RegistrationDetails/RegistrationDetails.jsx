@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import { useEffect } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 
-const RegistrationDetails = () => {
+const RegistrationDetails = ({ id }) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
@@ -57,7 +57,7 @@ const RegistrationDetails = () => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           name="name"
@@ -79,7 +79,9 @@ const RegistrationDetails = () => {
           placeholder="Mobile phone"
           onChange={handleChange}
         />
-        <button type="submit">Register</button>
+        <button type="submit" onClick={() => registerUser(id)}>
+          Register
+        </button>
         <button type="submit">Back</button>
       </form>
     </>
