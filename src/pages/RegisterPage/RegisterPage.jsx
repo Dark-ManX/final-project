@@ -3,22 +3,27 @@ import { useRegisterUserMutation } from 'redux/auth/authAPI';
 
 const RegisterPage = () => {
 
-    const [registerUser] = useRegisterUserMutation();
-
+  const [registerUser] = useRegisterUserMutation();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('')
 
+  const res = password === confirmedPassword
+  console.log(res)
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
             setEmail(value);
-            console.log(email);
         break;
 
       case 'password':
             setPassword(value);
-            console.log(value)
+        break;
+      
+      case 'confirm':
+        setConfirmedPassword(value);
         break;
 
       default:
@@ -29,7 +34,8 @@ const RegisterPage = () => {
   const handleSubmit = async(event) => {
     event.preventDefault();
 
-      await registerUser({ email, password });
+      const result = await registerUser({ email, password });
+console.log(result);
 
     reset();
   };
@@ -40,10 +46,12 @@ const RegisterPage = () => {
     
   return (
     <>
+      <p>Registration</p>
       <form onSubmit={handleSubmit}>
-        <input type="text" name='email' placeholder="email" onChange={handleChange} />
-        <input type="password" name='password' placeholder="password" onChange={handleChange} />
-        <button type="submit">Submit</button>
+        <input type="text" name='email' placeholder="Email" onChange={handleChange} />
+        <input type="password" name='password' placeholder="Password" onChange={handleChange} />
+        <input type='password' name='confirm' placeholder='Confirm password' onChange={handleChange} />
+        <button type="submit" disabled={(password === '') || (password !== confirmedPassword)}>Next</button>
       </form>
     </>
   );

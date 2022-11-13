@@ -6,3 +6,5 @@ const AuthForm = () => {
         <Modal children={ <></> } />
     )
 }
+
+export default AuthForm;

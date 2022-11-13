@@ -20,6 +20,7 @@ const Header = () => {
     <>
       <StyledHeader>
         <ModalContainer>
+
           <Paragraph>
             pe<AccentSpan>t</AccentSpan>ly
           </Paragraph>
@@ -28,15 +29,24 @@ const Header = () => {
           </Button>
         </ModalContainer>
 
+        {/* Дублює наступний div варто відредагувати */}
         <BlockAcc>
+          {/* ------------- */}
+          
           <div className={`headerMenu ${user ? 'shown' : ''}`}>
+
+            {/* Можливо варто зробити одним компонентом без обгортки AuthNavBlock */}
             <AuthNavBlock>
               <AuthNav user={user} />
             </AuthNavBlock>
+            {/* ------------------ */}
 
+            {/* Create new component UserNav */}
             <Navigat>
               <Navigation />
             </Navigat>
+            {/* ----------- */}
+
           </div>
         </BlockAcc>
       </StyledHeader>

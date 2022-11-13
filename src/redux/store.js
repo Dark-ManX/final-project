@@ -1,16 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import {
+  persistStore
+} from 'redux-persist';
 import { authApi } from './auth/authAPI';
 
 // const middlewareForLogger = [
