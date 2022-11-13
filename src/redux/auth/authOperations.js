@@ -29,18 +29,6 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
-    loginUser: builder.mutation({
-      query: logUser => ({
-        url: '/login',
-        method: 'POST',
-        body: logUser,
-      }),
-      invalidatesTags: [{ type: 'User' }],
-    }),
-    currentUser: builder.query({
-      query: () => '/current',
-      providesTags: ['User'],
-    }),
   }),
 });
 export const { useCreateUserMutation, useRegisterUserMutation } = authApi;
