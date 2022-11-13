@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
 import userEvent from '@testing-library/user-event';
 import { nanoid } from 'nanoid';
+
 const RegistrationDetails = ({ id }) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
