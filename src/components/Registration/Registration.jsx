@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import authOperations from '../../redux/auth/authOperations';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [createNewUser] = useCreateUserMutation();
 
   const dispatch = useDispatch();
 
@@ -25,12 +26,21 @@ const Registration = () => {
         return;
     }
   };
+  const createUser = () => {
+    const newUser = {
+      email,
+      password,
+    };
+    createNewUser(newUser);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(authOperations.create({ email, password }));
+    createUser();
 
     reset();
   };
+
   const reset = () => {
     setEmail('');
     setPassword('');

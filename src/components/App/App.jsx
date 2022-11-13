@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Registration from '../Registration/Registration';
 import RegistrationDetails from 'components/RegistrationDetails';
 import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from 'redux/auth';
 import { useEffect } from 'react';
 
 // const AsyncHeader = lazy(() => import('../Header/Header'));
@@ -11,10 +10,10 @@ import { useEffect } from 'react';
 // const NotFound = lazy(() => import('../../pages/NotFound'))
 
 export const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(authOperations.fetchCurrentUser());
+  // }, [dispatch]);
 
   return (
     <Routes>

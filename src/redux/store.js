@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { authApi } from './auth/authOperations';
 import authSlice from './auth/authSlice';
 
 const middlewareForLogger = [
@@ -31,11 +32,12 @@ export const store = configureStore({
   reducer: {
     // pets: petsReducer,
     auth: persistReducer(authPersistConfig, authSlice),
+    [authApi.reducerPath]: authApi.reducer,
   },
   middlewareForLogger,
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({ serializableCheck: false }),
-    /* logger, */
+    /* logger, */ authApi.middleware,
   ],
 
   devTools: process.env.NODE_ENV === 'development',

@@ -1,47 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
-import authOperations from './authOperations';
+import { authApi } from './authOperations';
 
 const initialState = {
   user: { email: null, name: null, city: null, phone: null },
   token: null,
+  isLoading: false,
   isLoggedIn: false,
-  isFetchingCurrentUser: false,
+  isFetchingCurrent: true,
 };
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  extraReducers: {
-    [authOperations.create.fulfilled](state, action) {
-      state.user = action.payload.user;
-    },
-    [authOperations.register.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    },
-    [authOperations.logIn.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    },
-    [authOperations.logOut.fulfilled](state) {
-      state.user = { name: null, email: null };
-      state.token = null;
-      state.isLoggedIn = false;
-      window.location.reload();
-    },
-    [authOperations.fetchCurrentUser.pending](state) {
-      state.isFetchingCurrentUser = true;
-    },
-    [authOperations.fetchCurrentUser.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      state.isFetchingCurrentUser = false;
-    },
-    [authOperations.fetchCurrentUser.rejected](state) {
-      state.isFetchingCurrentUser = false;
-    },
+  extraReducers: builder => {
+    builder.addMatcher(
+      authApi.endpoints.createUser.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+        state.isLoggedIn = false;
+        state.isLoading = true;
+      }
+    );
+    builder.addMatcher(
+      authApi.endpoints.registerUser.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLoggedIn = false;
+        state.isLoading = true;
+      }
+    );
   },
 });
 

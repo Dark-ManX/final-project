@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import authOperations from '../../redux/auth/authOperations';
-
-const RegistrationDetails = () => {
+import { useRegisterUserMutation } from 'redux/auth/authOperations';
+import userEvent from '@testing-library/user-event';
+import { nanoid } from 'nanoid';
+const RegistrationDetails = ({ id }) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
+  const [registerNewUser] = useRegisterUserMutation();
 
   const dispatch = useDispatch();
 
@@ -28,9 +30,19 @@ const RegistrationDetails = () => {
         return;
     }
   };
+  const registerUser = () => {
+    const newUser = {
+      id: nanoid(5),
+      name,
+      city,
+      phone,
+    };
+    registerNewUser(newUser);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(authOperations.register({ name, city, phone }));
+    registerUser();
 
     reset();
   };
@@ -41,7 +53,7 @@ const RegistrationDetails = () => {
   };
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
@@ -57,7 +69,7 @@ const RegistrationDetails = () => {
           onChange={handleChange}
         />
         <input
-          type="text"
+          type="tel"
           name="phone"
           value={phone}
           placeholder="Mobile phone"
