@@ -40,6 +40,7 @@ const authSlice = createSlice({
     builder.addMatcher(authApi.endpoints.logOutUser.matchFulfilled, state => {
       state.user = { name: null, email: null, city: null, phone: null };
       state.token = null;
+
       state.isLoading = false;
     });
     builder.addMatcher(authApi.endpoints.currentUser.matchPending, state => {
