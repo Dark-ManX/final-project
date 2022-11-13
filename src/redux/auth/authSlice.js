@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './authOperations';
 
 const initialState = {
-  user: { email: null, name: null, city: null, phone: null },
+  user: { email: null, id: null, name: null, city: null, phone: null },
   token: null,
   isLoading: false,
   isLoggedIn: false,
   isFetchingCurrent: true,
 };
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,

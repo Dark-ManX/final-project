@@ -17,7 +17,9 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<RegistrationDetails />} />
+      <Route path="/register" element={<Registration />} />
+      <Route path="/register/:id" element={<RegistrationDetails />} />
+
       {/* <Route index element={<AsyncMainPage />} /> */}
 
       {/* <Route path='*' element={<NotFound/>} />   */}

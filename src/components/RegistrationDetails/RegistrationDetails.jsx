@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
-import userEvent from '@testing-library/user-event';
 import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
 
-const RegistrationDetails = ({ id }) => {
+const RegistrationDetails = () => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
+  const [createNewUser] = useCreateUserMutation();
 
   const dispatch = useDispatch();
 
@@ -38,6 +40,7 @@ const RegistrationDetails = ({ id }) => {
       city,
       phone,
     };
+    console.log(newUser.id);
     registerNewUser(newUser);
   };
 

@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
+import { Link } from 'react-router-dom';
 
-const Registration = () => {
+const Registration = ({ id }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [createNewUser] = useCreateUserMutation();
@@ -62,7 +63,9 @@ const Registration = () => {
           placeholder="password"
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
+        <Link to={`/register/${id}`}>
+          <button type="submit">Submit</button>
+        </Link>
       </form>
     </>
   );
