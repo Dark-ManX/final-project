@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
-// import { toast } from "react-toastify";
 import { SearchForm } from "../../components/SearchForm/SearchForm";
 import { getNews, fetchNewsSearch } from 'api/newsApi';
 
@@ -13,35 +12,6 @@ import {
   NewsItemLink, NewsItemDate,
   NewsItemRectangle, NewsItemInfo
 } from './NewsPages.styled'
-
-
-
-// const useFetchNews = () => {
-//     const [trendingNews, setTrendingNews] = useState([]);
-//     const [error, setError] = useState(null);
-//     const [isLoading, setIsLoading] = useState(false);
-
-//     useEffect(() => {
-//         setIsLoading(true);
-//         const getData = async () => {
-//             try {
-//                 const data = await getNews();
-//                 setTrendingNews(data);
-//             }
-//             catch (error) {
-//                 setError(error.message)
-//                 console.error(error.message);
-//             } finally {
-//                 setIsLoading(false)
-//             }
-//         };
-//         getData();
-//     }, [])
-  
-//     return {trendingNews, error, isLoading} ;
-// };
-
-//================
 
 
 const NewsPages = () => {
