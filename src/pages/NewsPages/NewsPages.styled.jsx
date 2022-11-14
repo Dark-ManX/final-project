@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const NewsPageTitle = styled.h2`
+    margin-bottom: 28px;    
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
@@ -8,6 +9,10 @@ export const NewsPageTitle = styled.h2`
     line-height: 1.4;
     text-align: center;
     color: #111111;
+    
+    @media screen and (min-width: 768px) {
+        margin-bottom: 40px; 
+    }
 `
 
 export const NewsSet = styled.ul`

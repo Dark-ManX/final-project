@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useState, useEffect } from 'react'
-// import {useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
 // import { toast } from "react-toastify";
+import { SearchForm } from "../../components/SearchForm/SearchForm";
+import { getNews, fetchNewsSearch } from 'api/newsApi';
 
 
 import {
@@ -14,60 +15,96 @@ import {
 } from './NewsPages.styled'
 
 
-axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
 
-const getNews = async() => {
-  const {data} = await axios.get(`/news`);
-  const { news } = data.data;
-  return news;
-};
+// const useFetchNews = () => {
+//     const [trendingNews, setTrendingNews] = useState([]);
+//     const [error, setError] = useState(null);
+//     const [isLoading, setIsLoading] = useState(false);
 
-// const fetchNewsSearch = async(query) => {
-//     console.log(query);
-//     const {data} = await axios.get(`/news/search/?query=${query}`);
-//     const { news } = data.data;
-//     console.log(news)
-//     return news;
+//     useEffect(() => {
+//         setIsLoading(true);
+//         const getData = async () => {
+//             try {
+//                 const data = await getNews();
+//                 setTrendingNews(data);
+//             }
+//             catch (error) {
+//                 setError(error.message)
+//                 console.error(error.message);
+//             } finally {
+//                 setIsLoading(false)
+//             }
+//         };
+//         getData();
+//     }, [])
+  
+//     return {trendingNews, error, isLoading} ;
 // };
 
-const useFetchNews = () => {
-    const [trendingNews, setTrendingNews] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        setIsLoading(true);
-        const getData = async () => {
-            try {
-                const data = await getNews();
-                setTrendingNews(data);
-            }
-            catch (error) {
-                setError(error.message)
-                console.error(error.message);
-            } finally {
-                setIsLoading(false)
-            }
-        };
-        getData();
-    }, [])
-  
-    return {trendingNews, error, isLoading} ;
-};
+//================
 
 
 const NewsPages = () => {
-  const { trendingNews, error, isLoading } = useFetchNews();
- 
   
+const [, setQueryNews] = useState('');
+const [resultQuery, setResultQuery] = useState([])
+const [searchParams, setSearchParams] = useSearchParams();
+const [error, setError] = useState(null);
+const [isLoading, setIsLoading] = useState(false);
+     
+
+  useEffect(() => {
+    const newsName = searchParams.get('q');
+      
+    if (!newsName) {
+        setIsLoading(true);
+            const getData = async () => {
+                try {
+                    const data = await getNews();
+                    setResultQuery(data);
+                }
+                catch (error) {
+                    setError(error.message)
+                    console.error(error.message);
+                } finally {
+                    setIsLoading(false)
+                }
+            };
+            getData();     
+        return;
+    };
+
+    setIsLoading(true);
+    const getData = async () => {
+        try {
+            const data = await fetchNewsSearch(newsName);
+            setResultQuery(data);
+        }
+        catch (error) {
+            setError(error.message);
+            console.error(error.message);
+            setSearchParams();
+        } finally {
+            setIsLoading(false)
+        }
+        };
+        getData();
+    }, [searchParams, setSearchParams, setResultQuery] );
+
+    const handleSubmit = formInput => {
+        setQueryNews(searchParams.get('q'));
+        setSearchParams({ q: formInput })
+  }
+    
+
   return (
     <>
       <NewsPageTitle>News</NewsPageTitle>
-      {/* <SearchForm/> */}
+      <SearchForm onSubmit={handleSubmit}/>
       {isLoading && <h3>Чекайте, ще 2-3 тижні</h3>}
       {error && <h3>Упс! Щось пішло не так</h3>}
       <NewsSet>
-        {trendingNews.length !== 0 && trendingNews.map(({_id, title, url, description, date }) =>
+        {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>
         (<NewsItem key={_id}>
           <NewsItemRectangle/>
           <NewsItemTitle>
