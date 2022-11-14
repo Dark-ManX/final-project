@@ -1,20 +1,16 @@
 import AuthNav from 'components/AuthUserNav/AuthNav';
+import UserNav from 'components/AuthUserNav/UserNav';
+import Logo from 'components/Logo/Logo';
 import Nav from 'components/Nav/Nav';
 import { useState } from 'react';
 import { TiThMenu } from 'react-icons/ti';
-import Logo from 'components/Logo/Logo';
-import UserNav from 'components/AuthUserNav/UserNav';
-import { useSelector } from 'react-redux';
-import {
-  AccentSpan, AuthNavBlock, BlockAcc, Button,
-  ModalContainer, Navigat, Paragraph,
-  StyledHeader, MobileMenu, AuthUserContainer
-} from './Header.styled';
+// import { useSelector } from 'react-redux';
+import { AuthUserContainer, Button, MobileMenu, StyledHeader } from './Header.styled';
 
 
 const Header = () => {
 
-  const user = useSelector(state => state.isLoggedIn)
+  // const user = useSelector(state => state.isLoggedIn)
   const [shown, setShown] = useState(false);
 
   const toggleUser = () => {

@@ -1,4 +1,4 @@
-import { StyledColoredLink, StyledSpan,VscAccount } from "./AuthUserNav.styled";
+import { StyledColoredLink, StyledSpan } from "./AuthUserNav.styled";
 
 const UserNav = () => {
 

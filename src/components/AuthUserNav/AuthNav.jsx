@@ -1,9 +1,5 @@
-import { VscAccount } from 'react-icons/vsc';
 import {
-  StyledColoredLink,
-  StyledSpan,
-  StyledWhiteLink,
-  UnregiteredUser,
+  StyledColoredLink, StyledWhiteLink
 } from './AuthUserNav.styled';
 
 const AuthNav = ({ user }) => {
