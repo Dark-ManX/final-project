@@ -31,11 +31,9 @@ export const UserDataItem = ({ user }) => {
 };
 
 UserDataItem.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string,
-    birthday: PropTypes.string,
-    phone: PropTypes.string,
-    city: PropTypes.string,
-  }),
+  name: PropTypes.string,
+  email: PropTypes.string,
+  birthday: PropTypes.string,
+  phone: PropTypes.string,
+  city: PropTypes.string,
 };
