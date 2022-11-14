@@ -1,57 +1,67 @@
-import AuthNav from "components/AuthNav/AuthNav";
-import Navigation from "components/Navigation/Navigation";
-import { Suspense, useState } from "react";
-import { TiThMenu } from "react-icons/ti";
-import { RotatingLines } from 'react-loader-spinner';
-import { Outlet } from "react-router-dom";
-import {
-    AccentSpan,
-    Button,
-    // MenuContainer,
-    ModalContainer,
-    Paragraph,
-    StyledHeader
-} from "./Header.styled";
+import AuthNav from 'components/AuthUserNav/AuthNav';
+import UserNav from 'components/AuthUserNav/UserNav';
+import Logo from 'components/Logo/Logo';
+import Nav from 'components/Nav/Nav';
+import { useState } from 'react';
+import { TiThMenu } from 'react-icons/ti';
+// import { useSelector } from 'react-redux';
+import { AuthUserContainer, Button, MobileMenu, StyledHeader } from './Header.styled';
+
 
 const Header = () => {
-    
-    const [user, setUser] = useState(false)
 
-    const toggleUser = () => {
+  // const user = useSelector(state => state.isLoggedIn)
+  const [shown, setShown] = useState(false);
+
+  const toggleUser = () => {
+    setShown(!shown);
+  };
+
+  return (
+    <>
+      <StyledHeader>
+        {/* <ModalContainer> */}
+        <Logo />
         
-        setUser(!user)
-    }
+        <MobileMenu>
+          <Nav />
+        
+          <AuthUserContainer>
+            {shown
+              ? <AuthNav />
+              : <UserNav />
+            }
+          </AuthUserContainer>
+        </MobileMenu>
 
-    return (
-        <>
-            <StyledHeader>
-                <ModalContainer>
-                    <Paragraph>pe<AccentSpan>t</AccentSpan>ly</Paragraph>
-                    <Button onClick={toggleUser}><TiThMenu /></Button>
-                </ModalContainer>
-                
-                <div className={`headerMenu ${user ? 'shown' : ''}`} >
+          
+          <Button onClick={toggleUser}>
+            <TiThMenu size={36} />
+          </Button>
+        {/* </ModalContainer> */}
+          
+          {/* <BlockAcc className={`headerMenu ${user ? 'shown' : ''}`}> */}
 
-                    <AuthNav user={user} />
+            {/* Можливо варто зробити одним компонентом без обгортки AuthNavBlock */}
+            {/* <AuthNavBlock> */}
+              {/* <AuthNav user={user} /> */}
+            {/* </AuthNavBlock> */}
+            {/* ------------------ */}
 
-                    <Navigation />
-                    
-                </div>
-            </StyledHeader>
-            
-            <Suspense fallback={
-                <RotatingLines
-                    strokeColor="grey"
-                    strokeWidth="5"
-                    animationDuration="0.75"
-                    width="96"
-                    visible={true}
-                />}>
-                <Outlet />
-            </Suspense>
-            
-        </>
-    )
+            {/* Create new component UserNav */}
+            {/* <Navigat>
+              <Navigation />
+            </Navigat> */}
+        
+      
+            {/* ----------- */}
+
+          {/* </BlockAcc> */}
+      </StyledHeader>
+      
+    </>
+  );
+
 };
 
 export default Header;

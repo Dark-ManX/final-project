@@ -5,25 +5,53 @@ import {
     Photo,
     Category,
     AddToFavoriteBtn,
+    // RemoveFromFavoriteBtn,
     CardDetailsContainer,
     CardImageContainer,
     CardDetailInfo,
     Button
 } from "./NoticeCategoryItem.styled";
 import { ReactComponent as AddIcon } from "../icons/add.svg";
+// import { ReactComponent as RemoveIcon } from "../icons/remove.svg";
 
-export const NoticeCategoryItem = () => {
+let category = '';
+let photo;
+
+export const NoticeCategoryItem = ({ notice }) => {
+    switch (notice.category) {
+        case 'sell':
+            category = 'Sell';
+            break;
+        case 'lost-found':
+            category = 'Lost/found';
+            break;
+        case 'in good hands':
+            category = 'In good hands';
+            break;
+        // eslint-disable-next-line no-unused-expressions
+        default: '';
+    };
+
+    if (notice.photo) {
+        photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
+    } else {
+        photo = 'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
+    };
+
     return (
         <NoticeCategoryItemStyled>
             <CardImageContainer>
-                <Photo src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg" alt="dog" />
-                <Category>In good hands</Category>
+                <Photo src={photo} alt={notice.comments} />
+                <Category>{category}</Category>
                 <AddToFavoriteBtn>
                     <AddIcon width="24" height="22" />
                 </AddToFavoriteBtn>
+                {/* <RemoveFromFavoriteBtn>
+                    <RemoveIcon width="19.5" height="21" />
+                </RemoveFromFavoriteBtn> */}
             </CardImageContainer>
             <CardInfoContainer>
-                <Title>Сute dog looking for a home</Title>
+                <Title>{notice.title}</Title>
                 <CardDetailsContainer>
                     <li>
                         <CardDetailInfo>Breed:</CardDetailInfo>
@@ -31,9 +59,9 @@ export const NoticeCategoryItem = () => {
                         <CardDetailInfo>Age:</CardDetailInfo>
                     </li>
                     <li>
-                        <CardDetailInfo>Pomeranian</CardDetailInfo>
-                        <CardDetailInfo>Lviv</CardDetailInfo>
-                        <CardDetailInfo>One year</CardDetailInfo>
+                        <CardDetailInfo>{notice.breed}</CardDetailInfo>
+                        <CardDetailInfo>{notice.place}</CardDetailInfo>
+                        <CardDetailInfo>{notice.age}</CardDetailInfo>
                     </li>
                 </CardDetailsContainer>
             </CardInfoContainer>
