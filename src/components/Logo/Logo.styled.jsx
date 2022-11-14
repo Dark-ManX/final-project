@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export const Paragraph = styled.p`
-font-family: 'Poppins';
-font-weight: bold;
-color: black;
-`
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  color: black;
+`;
 
 export const AccentSpan = styled.span`
-color: #F59256;
-`
+  color: #f59256;
+`;
