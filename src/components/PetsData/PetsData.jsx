@@ -5,7 +5,8 @@ import { PetsList } from 'components/PetsList/PetsList';
 import { ROUTES } from '../../routes/routes';
 import add from '../../components/icons/addPet.svg';
 
-import { Container, Title, AddBtn, ContainerTitle } from './PetsData.styled';
+import { Title } from 'pages/UserPage/UserPage.styled';
+import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
 
 axios.defaults.baseURL = ROUTES.BASE_URL;
 axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';

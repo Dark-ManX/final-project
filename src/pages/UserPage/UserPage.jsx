@@ -4,20 +4,20 @@ import { PetsData } from 'components/PetsData/PetsData';
 // import ModalAddsPet from 'components/ModalAddsPet/ModalAddsPet';
 // import Modal from 'components/Modal';
 
-import { Container } from './UserPage.styled';
+import { Container, ContainerUser, Title } from './UserPage.styled';
 
 const UserPage = () => {
   return (
-    <Container>
-      <h2>My information:</h2>
-      <div>
-        <UserData />
-        <Logout />
-      </div>
-      <PetsData />
-
-    </Container>
-
+    <>
+      <Title>My information:</Title>
+      <Container>
+        <ContainerUser>
+          <UserData />
+          <Logout />
+        </ContainerUser>
+        <PetsData />
+      </Container>
+    </>
   );
 };
 
