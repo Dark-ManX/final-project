@@ -12,6 +12,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
+
   tagTypes: ['User'],
   endpoints: builder => ({
     // POST create: '/register',
@@ -43,11 +44,11 @@ export const authApi = createApi({
       invalidatesTags: [{ type: 'User' }],
     }),
 
-    // POST logout: '/logout',
+    // get logout: '/logout',
     logOutUser: builder.mutation({
       query: () => ({
         url: '/logout',
-        method: 'POST',
+        method: 'GET',
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -67,7 +68,7 @@ export const authApi = createApi({
     // PATCH updateInfoUser: '/user'
     updateUserInfo: builder.mutation({
       query: updatedUser => ({
-        url: `/user`,
+        url: `/user/update`,
         method: 'PATCH',
         body: updatedUser,
       }),

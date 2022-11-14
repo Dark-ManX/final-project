@@ -1,18 +1,25 @@
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
-import { useEffect, useParams, useSelector } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
-import { getUserId } from '../../redux/auth/authSelectors';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 
 const RegistrationDetails = () => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
-  const [createNewUser] = useCreateUserMutation();
+  const [editableUser, setEditableUser] = useState({});
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   setEditableUser(selectedUser);
+  // }, [selectedUser, id]);
+
+  // const onChange = ({ target: { name, value } }) => {
+  //   setEditableUser(currentData => ({ ...currentData, [name]: value }));
+  // };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -33,13 +40,13 @@ const RegistrationDetails = () => {
         return;
     }
   };
+
   const registerUser = () => {
     const newUser = {
       name,
       city,
       phone,
     };
-    console.log(newUser.id);
     registerNewUser(newUser);
   };
 
