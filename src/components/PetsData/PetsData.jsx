@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import { PetsList } from 'components/PetsList/PetsList';
+import { Modal } from '../Modal/Modal';
+import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
 import { ROUTES } from '../../routes/routes';
 import add from '../../components/icons/addPet.svg';
 
@@ -17,6 +19,9 @@ const getPets = () => {
 };
 
 export const PetsData = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleBtnClick = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
@@ -31,13 +36,17 @@ export const PetsData = () => {
         <Title>My pets:</Title>
         <Title>
           Add pet
-          <AddBtn>
+          <AddBtn type="button" onClick={handleBtnClick}>
             <img src={add} alt="addPet" />
           </AddBtn>
         </Title>
       </ContainerTitle>
-      {/* відкриває модалку - компонент ModalAddsPet */}
       <PetsList pets={pets} />
+      {openModal && (
+        <Modal onClose={handleCloseModal}>
+          <ModalAddsPet onClose={handleCloseModal} />
+        </Modal>
+      )}
     </Container>
   );
 };
