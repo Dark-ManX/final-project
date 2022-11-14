@@ -14,17 +14,96 @@ export const authApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: builder => ({
+    // POST create: '/register',
     createUser: builder.mutation({
       query: newUser => ({
         url: '/register',
         method: 'POST',
+        body: newUser,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
+
+    // PATCH register: '/register/:id',
     registerUser: builder.mutation({
       query: userId => ({
         url: `/register/${userId}`,
         method: 'PATCH',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // POST login: '/login',
+    loginUser: builder.mutation({
+      query: logUser => ({
+        url: '/login',
+        method: 'POST',
+        body: logUser,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // POST logout: '/logout',
+    logOutUser: builder.mutation({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // GET current: '/current',
+    currentUser: builder.query({
+      query: () => '/current',
+      providesTags: ['User'],
+    }),
+
+    //   GET getUserInfo: '/user',
+    getUserInfo: builder.query({
+      query: () => '/user',
+      providesTags: ['User'],
+    }),
+
+    // PATCH updateInfoUser: '/user'
+    updateUserInfo: builder.mutation({
+      query: updatedUser => ({
+        url: `/user`,
+        method: 'PATCH',
+        body: updatedUser,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    //   GET getUserPets: '/pets'
+    getUserPets: builder.query({
+      query: () => '/pets',
+      providesTags: ['User'],
+    }),
+
+    // POST  createUserPet: '/pets',
+    createUserPets: builder.mutation({
+      query: newPet => ({
+        url: '/pets',
+        method: 'POST',
+        body: newPet,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // PATCH  addUserPet: '/pets/:id',
+    changeUserPet: builder.mutation({
+      query: userPetId => ({
+        url: `/pets/${userPetId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // DELETE deleteUserPet: '/pets/:id',
+    deleteUserPet: builder.mutation({
+      query: userPetId => ({
+        url: `/pets/${userPetId}`,
+        method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'User' }],
     }),

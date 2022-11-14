@@ -2,12 +2,16 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 import { Link } from 'react-router-dom';
+import { useEffect, useParams, useSelector } from 'react';
 
 const Registration = ({ id }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [createNewUser] = useCreateUserMutation();
 
+  const userId = useSelector(state =>
+    state.data.data.user.find(user => user.id === id)
+  );
   const dispatch = useDispatch();
 
   const handleChange = event => {
