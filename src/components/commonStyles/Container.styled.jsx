@@ -12,8 +12,8 @@ margin: 0 auto;
     padding: 20px 32px 100px;
 }
 
-@media screen and (min-width: 1280) {
-        max-width: 1280px;
+@media screen and (min-width: 1280px) {
+    max-width: 1280px;
     padding: 20px 16px 200px;
 }
 `

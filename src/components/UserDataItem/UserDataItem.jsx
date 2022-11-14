@@ -1,26 +1,39 @@
-export const UserDataItem = () => {
+import PropTypes from 'prop-types';
+
+export const UserDataItem = ({ user }) => {
+  const { name, email, birthday, phone, city } = user;
+  console.log(user);
+
   return (
     <ul>
       <li>
-        <p>Name:</p>
+        <p>Name:{name}</p>
         <button>Edit or Done</button>
       </li>
       <li>
-        <p>Email:</p>
+        <p>Email:{email}</p>
         <button>Edit or Done</button>
       </li>
       <li>
-        <p>Birthday:</p>
+        <p>Birthday:{birthday}</p>
         <button>Edit or Done</button>
       </li>
       <li>
-        <p>Phone:</p>
+        <p>Phone:{phone}</p>
         <button>Edit or Done</button>
       </li>
       <li>
-        <p>City:</p>
+        <p>City:{city}</p>
         <button>Edit or Done</button>
       </li>
     </ul>
   );
+};
+
+UserDataItem.propTypes = {
+  name: PropTypes.string,
+  email: PropTypes.string,
+  birthday: PropTypes.string,
+  phone: PropTypes.string,
+  city: PropTypes.string,
 };

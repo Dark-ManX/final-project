@@ -40,12 +40,12 @@ a {
   text-decoration: none;
 }
 
-.headerMenu {
+/* .headerMenu {
   visibility: hidden;
   height: 100vh;
   transform: translate(100%, 0);
   transition: transform 250ms linear;
-}
+} */
 
 .shown {
   visibility: visible;
@@ -53,3 +53,5 @@ a {
   transform: translate(0, 0);
   transition: transform 250ms linear;
 }
+
+
