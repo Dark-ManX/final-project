@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import {
-  persistStore
-} from 'redux-persist';
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import { authApi } from './auth/authAPI';
+import { noticesApi } from './notices/noticesApi';
+import notices from './notices/notices';
 
 // const middlewareForLogger = [
 //   ...getDefaultMiddleware({
@@ -23,10 +23,16 @@ export const store = configureStore({
   reducer: {
     // pets: petsReducer,
     [authApi.reducerPath]: authApi.reducer,
+    notices,
+    [noticesApi.reducerPath]: noticesApi.reducer,
   },
   // middlewareForLogger,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ serializableCheck: false }),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(noticesApi.middleware),
 
   devTools: process.env.NODE_ENV === 'development',
 });

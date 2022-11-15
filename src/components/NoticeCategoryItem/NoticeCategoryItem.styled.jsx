@@ -182,6 +182,7 @@ export const Button = styled.button`
     margin-right: auto;
     width: 248px;
     height: 38px;
+    outline: none;
 
     background: #FFFFFF;
     border: 2px solid #F59256;
