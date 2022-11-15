@@ -1,68 +1,87 @@
-import { useState } from 'react';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 
-  const RegisterPage = () => {
+const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [createNewUser] = useCreateUserMutation();
+  const [userId, setUserId] = useState('');
 
+  const navigate = useNavigate();
+
+  const [createNewUser] = useCreateUserMutation();
+  
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
         setEmail(value);
-        console.log(email);
         break;
 
       case 'password':
         setPassword(value);
-        console.log(password);
         break;
 
       default:
         return;
     }
   };
-  const createUser = () => {
-    const newUser = {
-      email,
-      password,
-    };
-    createNewUser(newUser);
+
+  const createUser = async () => {
+    const newUser = { email, password };
+    const { data } = await createNewUser(newUser);
+    console.log(data);
+    const { id } = data.data.user;
+    setUserId(id);
+    console.log(id);
+    return id;
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    createUser();
-
+    const updatedUser = await createUser();
+    setUserId(updatedUser);
     reset();
+    navigate(`/register/${updatedUser}`);
   };
 
   const reset = () => {
     setEmail('');
     setPassword('');
   };
+
+  useEffect(() => {}, [userId]);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="password"
-          onChange={handleChange}
-        />
-          <button type="submit">Submit</button>
-      </form>
+      {!userId ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="email"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="password"
+            onChange={handleChange}
+          />
+
+          <button type="submit">
+            {/* <navigate to={`/register/${userId}`} /> */}
+            Submit
+          </button>
+        </form>
+      ) : (
+        <RegistrationDetails details={userId} />
+      )}
     </>
   );
 };
 
-export default RegisterPage;
+export default Registration;
