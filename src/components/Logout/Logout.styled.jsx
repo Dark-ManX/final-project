@@ -18,4 +18,10 @@ export const LogoutBtn = styled.button`
   img {
     padding-right: 8px;
   }
+
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    top: 85%;
+    left: -21%;
+  }
 `;

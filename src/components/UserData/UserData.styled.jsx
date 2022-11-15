@@ -5,11 +5,13 @@ export const UserInfo = styled.div`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
   }
 `;
+
 export const Avatar = styled.div`
   @media screen and (min-width: 768px) {
-    margin: 24px 40px 24px 52px;
+    margin: 0 0 0 52px;
   }
 `;
 
@@ -18,6 +20,7 @@ export const ImgUser = styled.img`
   height: 233px;
   margin: 20px 24px 12px 23px;
   border-radius: 50%;
+
   @media screen and (min-width: 768px) {
     margin: 0;
   }
@@ -39,5 +42,9 @@ export const EditPhotoBtn = styled.button`
 
   img {
     padding-right: 4px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-left: 152px;
   }
 `;

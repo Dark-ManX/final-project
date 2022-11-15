@@ -24,6 +24,8 @@ export const ContainerUser = styled.div`
   border-radius: 20px;
 
   @media screen and (min-width: 768px) {
+    position: relative;
     margin-top: 40px;
+    padding: 24px 40px 24px 32px;
   }
 `;
