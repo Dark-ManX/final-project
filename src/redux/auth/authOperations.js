@@ -93,10 +93,11 @@ export const authApi = createApi({
     }),
 
     // PATCH  addUserPet: '/pets/:id',
-    changeUserPet: builder.mutation({
-      query: userPetId => ({
+    AddUserPet: builder.mutation({
+      query: (newPet, userPetId) => ({
         url: `/pets/${userPetId}`,
         method: 'PATCH',
+        body: newPet,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -111,16 +112,17 @@ export const authApi = createApi({
     }),
 
     //   GET getNotices: '/notices/one/owner'
-    getUserNotices: builder.query({
+    getNotices: builder.query({
       query: () => '/notices/one/owner',
       providesTags: ['User'],
     }),
 
     // PATCH  addNotice: '/notices/addfavorite/${noticeId}',
-    addNotice: builder.mutation({
-      query: noticeId => ({
+    addFavoriteNotice: builder.mutation({
+      query: (newNotice, noticeId) => ({
         url: `/notices/addfavorite/${noticeId}`,
         method: 'PATCH',
+        body: newNotice,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -160,4 +162,16 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useLogOutUserMutation,
+  useCurrentUserQuery,
+  useGetUserInfoQuery,
+  useUpdateUserInfoMutation,
+  useGetUserPetsQuery,
+  useCreateUserPetsMutation,
+  useAddUserPetMutation,
+  useDeleteUserPetMutation,
+  useGetNoticesQuery,
+  useAddFavoriteNoticeMutation,
+  useCreateNoticeMutation,
+  useDeleteFavoriteNoticeMutation,
+  useDeleteNoticeMutation,
 } = authApi;
