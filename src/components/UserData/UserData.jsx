@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import { UserDataItem } from 'components/UserDataItem/UserDataItem';
+import editPhoto from '../icons/editPhoto.svg';
+import { ImgUser, EditPhotoBtn, UserInfo, Avatar } from './UserData.styled';
 
 import { ROUTES } from '../../routes/routes';
 
@@ -25,11 +27,19 @@ export const UserData = () => {
   }, []);
 
   return (
-    <>
-      <img src={user.logo} alt={user.name} />
-      <button>Edit photo</button>
+    <UserInfo>
+      <Avatar>
+        <ImgUser
+          src="https://st2.depositphotos.com/4323461/8632/v/950/depositphotos_86329636-stock-illustration-business-cat-works-for-a.jpg"
+          alt={user.name}
+        />
+        <EditPhotoBtn>
+          <img src={editPhoto} alt="addPet" />
+          Edit photo
+        </EditPhotoBtn>
+      </Avatar>
       <UserDataItem user={user} />
-    </>
+    </UserInfo>
   );
 };
 

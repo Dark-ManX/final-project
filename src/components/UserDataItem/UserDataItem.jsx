@@ -1,32 +1,56 @@
 import PropTypes from 'prop-types';
+import edit from '../../components/icons/edit.svg';
+
+import {
+  UserInfoList,
+  UserInfoItem,
+  UserInfoText,
+  UserInfoBtn,
+  UserInfoData,
+} from './UserDataItem.styled';
 
 export const UserDataItem = ({ user }) => {
   const { name, email, birthday, phone, city } = user;
   console.log(user);
 
   return (
-    <ul>
-      <li>
-        <p>Name:{name}</p>
-        <button>Edit or Done</button>
-      </li>
-      <li>
-        <p>Email:{email}</p>
-        <button>Edit or Done</button>
-      </li>
-      <li>
-        <p>Birthday:{birthday}</p>
-        <button>Edit or Done</button>
-      </li>
-      <li>
-        <p>Phone:{phone}</p>
-        <button>Edit or Done</button>
-      </li>
-      <li>
-        <p>City:{city}</p>
-        <button>Edit or Done</button>
-      </li>
-    </ul>
+    <UserInfoList>
+      <UserInfoItem>
+        <UserInfoText>Name:</UserInfoText>
+        <UserInfoData>{name}</UserInfoData>
+        <UserInfoBtn>
+          <img src={edit} alt="edit information about user" />
+        </UserInfoBtn>
+      </UserInfoItem>
+      <UserInfoItem>
+        <UserInfoText>Email:</UserInfoText>
+        <UserInfoData>{email}</UserInfoData>
+        <UserInfoBtn>
+          <img src={edit} alt="edit information about user" />
+        </UserInfoBtn>
+      </UserInfoItem>
+      <UserInfoItem>
+        <UserInfoText>Birthday:</UserInfoText>
+        <UserInfoData>{birthday}</UserInfoData>
+        <UserInfoBtn>
+          <img src={edit} alt="edit information about user" />
+        </UserInfoBtn>
+      </UserInfoItem>
+      <UserInfoItem>
+        <UserInfoText>Phone:</UserInfoText>
+        <UserInfoData>{phone}</UserInfoData>
+        <UserInfoBtn>
+          <img src={edit} alt="edit information about user" />
+        </UserInfoBtn>
+      </UserInfoItem>
+      <UserInfoItem>
+        <UserInfoText>City:</UserInfoText>
+        <UserInfoData>{city}</UserInfoData>
+        <UserInfoBtn>
+          <img src={edit} alt="edit information about user" />
+        </UserInfoBtn>
+      </UserInfoItem>
+    </UserInfoList>
   );
 };
 

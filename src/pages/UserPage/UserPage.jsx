@@ -1,23 +1,27 @@
 import { UserData } from 'components/UserData/UserData';
 import { Logout } from 'components/Logout/Logout';
 import { PetsData } from 'components/PetsData/PetsData';
-// import ModalAddsPet from 'components/ModalAddsPet/ModalAddsPet';
-// import Modal from 'components/Modal';
-
-import { Container } from './UserPage.styled';
+import {
+  Container,
+  ContainerUser,
+  Title,
+  ContainerInfo,
+} from './UserPage.styled';
 
 const UserPage = () => {
   return (
-    <Container>
-      <h2>My information:</h2>
+    <ContainerInfo>
       <div>
-        <UserData />
-        <Logout />
+        <Title>My information:</Title>
+        <Container>
+          <ContainerUser>
+            <UserData />
+            <Logout />
+          </ContainerUser>
+        </Container>
       </div>
       <PetsData />
-
-    </Container>
-
+    </ContainerInfo>
   );
 };
 
