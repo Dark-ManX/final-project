@@ -1,8 +1,6 @@
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import axios from 'axios';
 import RegistrationDetails from '../../pages/RegisterPageDetails/RegisterPageDetails';
 
 const Registration = () => {
