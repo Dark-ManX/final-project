@@ -1,12 +1,7 @@
 import { lazy } from 'react';
 
-// const AsyncHeader = lazy(() => import('../Header/Header'));
-// const AsyncMainPage = lazy(() => import('../../pages/MainPage'))
-// const NotFound = lazy(() => import('../../pages/NotFound'))
-
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
-// import Modal from 'components/Modal/Modal';
 
 const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
@@ -35,11 +30,6 @@ const NotFound = lazy(() => import('pages/NotFound'));
 const App = () => {
   return (
     <Routes>
-      {/* <Route path="/login" element={<Login />} /> */}
-
-      {/* <Route index element={<AsyncMainPage />} /> */}
-
-      {/* <Route path='*' element={<NotFound/>} />   */}
 
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<AsyncMainPage />} />
