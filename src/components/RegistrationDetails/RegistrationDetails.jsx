@@ -6,6 +6,7 @@ const RegistrationDetails = ({ details }) => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
+  console.log(details);
 
   const handleChange = event => {
     const { name, value } = event.target;

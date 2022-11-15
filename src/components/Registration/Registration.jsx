@@ -8,10 +8,9 @@ import RegistrationDetails from 'components/RegistrationDetails';
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [userId, setUserId] = useState('');
 
-  // const [name, setName] = useState('');
+  // const [username, setUsername] = useState('');
   // const [city, setCity] = useState('');
   // const [phone, setPhone] = useState('');
 
