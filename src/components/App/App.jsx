@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
+import PrivateRoute from 'components/PrivateRoutes/PrivateRoutes';
 // import Modal from 'components/Modal/Modal';
 
 const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'))
@@ -9,6 +10,8 @@ const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
 const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFoundNoticesPage'));
 const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));
+const AsyncFavoriteNoticesPage = lazy(() => import('pages/NoticesPage/FavoriteNoticesPage'));
+const AsyncOwnNoticesPage = lazy(() => import('pages/NoticesPage/OwnNoticesPage'));
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -28,12 +31,13 @@ const App = () => {
 
         <Route path='notices' element={<AsyncNoticesPage />}>
           <Route path='sell' element={<AsyncSellNoticesPage />} />
-          <Route path='for-free' element={<AsyncLostFoundNoticesPage />} />
-          <Route path='lost-found' element={<AsyncForFreeNoticesPage />} />
-          
-          <Route path='favorite' element={<AsyncNoticesPage />} />
-          
-          <Route path='own' element={<AsyncNoticesPage />} />
+          <Route path='for-free' element={<AsyncForFreeNoticesPage />} />
+          <Route path='lost-found' element={<AsyncLostFoundNoticesPage />} />
+        </Route>
+        
+        <Route path='notices' element={<PrivateRoute />}>
+          <Route path='favorite' element={<AsyncFavoriteNoticesPage />} />
+          <Route path='own' element={<AsyncOwnNoticesPage />} />
         </Route>
 
         <Route path='friends' element={<AsyncOurFriendsPage />} />
