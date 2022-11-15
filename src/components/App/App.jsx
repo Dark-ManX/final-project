@@ -29,10 +29,10 @@ const App = () => {
 
         <Route path="news" element={<AsyncNewsPage />} />
 
-        <Route path="notices" element={<AsyncNoticesPage />}>
+        {/* <Route path="notices" element={<AsyncNoticesPage />}>
           <Route path="sell" element={<AsyncSellNoticesPage />} />
           <Route path="for-free" element={<AsyncLostFoundNoticesPage />} />
-          <Route path="lost-found" element={<AsyncForFreeNoticesPage />} />
+          <Route path="lost-found" element={<AsyncForFreeNoticesPage />} /> */}
 
         <Route path='notices' element={<AsyncNoticesPage />}>
           <Route path='sell' element={<AsyncSellNoticesPage />} />

@@ -1,30 +1,20 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from './auth/authOperations';
 import authSlice from './auth/authSlice';
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import { noticesApi } from './notices/noticesApi';
 import notices from './notices/notices';
-
-const middlewareForLogger = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-];
+import { noticesApi } from './notices/noticesApi';
 
 const authPersistConfig = {
   key: 'auth',
@@ -39,11 +29,13 @@ export const store = configureStore({
     notices,
     [noticesApi.reducerPath]: noticesApi.reducer,
   },
-  middlewareForLogger,
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware({ serializableCheck: false }),
-    /* logger, */ authApi.middleware,
-  ],
+
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(authApi.middleware),
 
   devTools: process.env.NODE_ENV === 'development',
 });
