@@ -16,7 +16,7 @@ import {
 import { ReactComponent as AddIcon } from "../icons/add.svg";
 import { ReactComponent as RemoveIcon } from "../icons/remove.svg";
 import { Modal } from "../Modal/Modal";
-import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation, useGetFavoriteNoticesQuery } from "../../redux/notices/noticesApi";
+import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation } from "../../redux/notices/noticesApi";
 
 let category = '';
 let photo;
