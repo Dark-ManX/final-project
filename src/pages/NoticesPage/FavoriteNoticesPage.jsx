@@ -16,7 +16,10 @@ const FavoriteNotices = () => {
         <>
             {error && <p>{error.message}</p>}
 
-            <NoticesCategoryList notices={favoriteNotices} />
+            {notices
+                ? <NoticesCategoryList notices={favoriteNotices} />
+                : <p>Nothing added in favorite</p>
+            }
         </>
     );
 };

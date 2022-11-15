@@ -21,11 +21,10 @@ export const noticesApi = createApi({
         }),
       
         addFavoriteNotices: builder.mutation({
-          query({ id, payload }) {
+          query({ id }) {
             return {
               url: `/notices/addfavorite/${id}`,
               method: 'PATCH',
-              body: payload,
             }
           },
           invalidatesTags: ['Notices'],
@@ -34,7 +33,7 @@ export const noticesApi = createApi({
         deleteFavoriteNotices: builder.mutation({
           query: ({ id }) => ({
             url: `/notices/deletefavorite/${id}`,
-            method: 'DELETE',
+            method: 'PATCH',
           }),
           invalidatesTags: ['Notices'],
         }),

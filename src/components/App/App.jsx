@@ -1,7 +1,6 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
-import PrivateRoute from 'components/PrivateRoutes/PrivateRoutes';
 // import Modal from 'components/Modal/Modal';
 
 const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
@@ -12,6 +11,7 @@ const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFound
 const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));
 const AsyncFavoriteNoticesPage = lazy(() => import('pages/NoticesPage/FavoriteNoticesPage'));
 const AsyncOwnNoticesPage = lazy(() => import('pages/NoticesPage/OwnNoticesPage'));
+// const AsyncPrivateRoute = lazy(() => import('components/PrivateRoutes/PrivateRoutes'));
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
 const AsyncRegistrationDetails = lazy(() => import('pages/RegisterPageDetails/RegisterPageDetails'));
@@ -38,9 +38,6 @@ const App = () => {
           <Route path='sell' element={<AsyncSellNoticesPage />} />
           <Route path='for-free' element={<AsyncForFreeNoticesPage />} />
           <Route path='lost-found' element={<AsyncLostFoundNoticesPage />} />
-        </Route>
-        
-        <Route path='notices' element={<PrivateRoute />}>
           <Route path='favorite' element={<AsyncFavoriteNoticesPage />} />
           <Route path='own' element={<AsyncOwnNoticesPage />} />
         </Route>
