@@ -13,6 +13,10 @@ import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from './auth/authOperations';
 import authSlice from './auth/authSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { noticesApi } from './notices/noticesApi';
+import notices from './notices/notices';
 
 const middlewareForLogger = [
   ...getDefaultMiddleware({
@@ -30,9 +34,10 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    // pets: petsReducer,
     auth: persistReducer(authPersistConfig, authSlice),
     [authApi.reducerPath]: authApi.reducer,
+    notices,
+    [noticesApi.reducerPath]: noticesApi.reducer,
   },
   middlewareForLogger,
   middleware: getDefaultMiddleware => [

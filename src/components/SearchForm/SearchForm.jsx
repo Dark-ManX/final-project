@@ -18,7 +18,7 @@ export const SearchForm = ({onSubmit}) => {
             return;
         }
         onSubmit(query);
-        // setQuery('');
+        setQuery('');
     };
 
     return (

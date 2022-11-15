@@ -16,15 +16,17 @@ export const NewsPageTitle = styled.h2`
 `
 
 export const NewsSet = styled.ul`
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     row-gap: 40px;
 
     @media screen and (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
         gap: 60px 32px;
     }
 
     @media screen and (min-width: 1280px){
+        grid-template-columns: repeat(3, 1fr);
     }
     
 `
@@ -32,6 +34,8 @@ export const NewsItem = styled.li`
     width: 280px;
     height: 286px;
     // margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
 
     @media screen and (min-width: 768px) {
         width: 336px;
@@ -72,6 +76,7 @@ export const NewsItemContent = styled.p`
     font-size: 16px;
     line-height: 1.4;
     color: #111321;
+    flex-grow: 1;
     
     @media screen and (min-width: 768px){
         margin-bottom: 40px;
@@ -81,7 +86,7 @@ export const NewsItemInfo = styled.p`
     font-family: 'Manrope';
     font-style: normal;
     font-size: 16px;
-    line-height: 1.4px;
+    line-height: 1.4;
     display: flex;
     justify-content: space-between;
     
