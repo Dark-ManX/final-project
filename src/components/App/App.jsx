@@ -25,7 +25,7 @@ const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
 const AsyncRegistrationDetails = lazy(() =>
   import('../RegistrationDetails/RegistrationDetails')
 );
-const AsyncLoginPage = lazy(() => import('../Login/Login'));
+const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
 const AsyncOurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
