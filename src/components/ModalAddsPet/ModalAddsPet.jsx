@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'components/Common/Button/Button';
 import { Input } from '../Common/Input/Input';
 import { ModalBody } from 'components/Modal/Modal.styled';
-import { ReactComponent as Cross } from '../../images/cross.svg';
+// import { ReactComponent as Cross } from '../../images/cross.svg';
 import { CloseModal } from '../ModalAddsPet/ModalAddsPet.styled';
 import { ModalName } from '../ModalAddsPet/ModalAddsPet.styled';
 
@@ -11,7 +11,7 @@ const ModalAddsPet = ({ onClose }) => {
     <div>
       <ModalBody>
         <CloseModal type="button" onClick={onClose}>
-          <Cross width="20px" height="20px" />
+          {/* <Cross width="20px" height="20px" /> */}
         </CloseModal>
         <ModalName>Add pet</ModalName>
 
