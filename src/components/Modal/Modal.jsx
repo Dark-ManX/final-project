@@ -4,7 +4,7 @@ import { ModalBackdrop, ModalBody } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal');
 
-export const Modal = props => {
+const Modal = props => {
   const handleKeyDown = useCallback(
     event => {
       if (event.code === 'Escape') {
@@ -31,3 +31,5 @@ export const Modal = props => {
     modalRoot
   );
 };
+
+export default Modal;

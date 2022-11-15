@@ -1,60 +1,86 @@
-import { useState } from 'react';
-import { useRegisterUserMutation } from 'redux/auth/authAPI';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import RegistrationDetails from 'components/RegistrationDetails';
 
-const RegisterPage = () => {
-
-  const [registerUser] = useRegisterUserMutation();
-  
+const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('')
+  const [userId, setUserId] = useState('');
 
-  const res = password === confirmedPassword
-  console.log(res)
+  const navigate = useNavigate();
+
+  const [createNewUser] = useCreateUserMutation();
+
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
-            setEmail(value);
+        setEmail(value);
         break;
 
       case 'password':
-            setPassword(value);
-        break;
-      
-      case 'confirm':
-        setConfirmedPassword(value);
+        setPassword(value);
         break;
 
       default:
         return;
     }
-    };
-    
-  const handleSubmit = async(event) => {
-    event.preventDefault();
-
-      const result = await registerUser({ email, password });
-console.log(result);
-
-    reset();
   };
+
+  const createUser = async () => {
+    const newUser = { email, password };
+    const { data } = await createNewUser(newUser);
+    console.log(data);
+    const { id } = data.data.user;
+    setUserId(id);
+    console.log(id);
+    return id;
+  };
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const updatedUser = await createUser();
+    setUserId(updatedUser);
+    reset();
+    navigate(`/register/${updatedUser}`);
+  };
+
   const reset = () => {
     setEmail('');
     setPassword('');
   };
-    
+
+  useEffect(() => {}, [userId]);
+
   return (
     <>
-      <p>Registration</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name='email' placeholder="Email" onChange={handleChange} />
-        <input type="password" name='password' placeholder="Password" onChange={handleChange} />
-        <input type='password' name='confirm' placeholder='Confirm password' onChange={handleChange} />
-        <button type="submit" disabled={(password === '') || (password !== confirmedPassword)}>Next</button>
-      </form>
+      {!userId ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="email"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="password"
+            onChange={handleChange}
+          />
+
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+      ) : (
+        <RegistrationDetails details={userId} />
+      )}
     </>
   );
 };
 
-export default RegisterPage;
+export default Registration;
