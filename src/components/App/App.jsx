@@ -11,16 +11,8 @@ import { useEffect } from 'react';
 // const NotFound = lazy(() => import('../../pages/NotFound'))
 
 export const App = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(authOperations.fetchCurrentUser());
-  // }, [dispatch]);
-
   return (
     <Routes>
-      <Route path="/register/" element={<Registration />}>
-        <Route path=":id" element={<RegistrationDetails />} />
-      </Route>
       {/* <Route path="/login" element={<Login />} /> */}
 
       {/* <Route index element={<AsyncMainPage />} /> */}
