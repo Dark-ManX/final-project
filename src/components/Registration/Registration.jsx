@@ -1,7 +1,7 @@
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import RegistrationDetails from '../../pages/RegisterPageDetails/RegisterPageDetails';
+import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
