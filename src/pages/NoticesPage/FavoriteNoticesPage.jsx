@@ -4,17 +4,19 @@ import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCateg
 
 const FavoriteNotices = () => {
     // eslint-disable-next-line no-unused-vars
-    const [page, setPage] = useState(1);
     const [error, setError] = useState('');
-    const { data: notices = [] } = useGetFavoriteNoticesQuery();
+    const { data: notices } = useGetFavoriteNoticesQuery();
+    let favoriteNotices = [];
     
-    console.log(notices);
+    if (notices) {
+        favoriteNotices = notices.data.pets;
+    };
 
     return (
         <>
             {error && <p>{error.message}</p>}
 
-            {/* <NoticesCategoryList notices={favoriteNotices} /> */}
+            <NoticesCategoryList notices={favoriteNotices} />
         </>
     );
 };
