@@ -1,3 +1,4 @@
+
 import {
   useCreateUserMutation,
   useRegisterUserMutation,
@@ -26,17 +27,31 @@ const Registration = () => {
 
   const registrationDetails = { city, name, phone };
 
+
+import { useState } from 'react';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
+
+  const RegisterPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [createNewUser] = useCreateUserMutation();
+
+
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
         setEmail(value);
-        // console.log(email);
+
+ 
+ 
+
         break;
 
       case 'password':
         setPassword(value);
-        // console.log(password);
+
+      
         break;
 
       case 'name':
@@ -49,6 +64,8 @@ const Registration = () => {
 
       case 'phone':
         setPhone(value);
+
+     
         break;
 
       default:
@@ -72,12 +89,28 @@ const Registration = () => {
     setUserId(updatedUser);
     reset();
     navigate(`/register/${updatedUser}`);
+
+  const createUser = () => {
+    const newUser = {
+      email,
+      password,
+    };
+    createNewUser(newUser);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    createUser();
+
+    reset();
+
   };
 
   const reset = () => {
     setEmail('');
     setPassword('');
   };
+
 
   const result = async () => {
     try {
@@ -147,8 +180,30 @@ const Registration = () => {
       ) : (
         <RegistrationDetails details={userId} />
       )}
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          placeholder="email"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          placeholder="password"
+          onChange={handleChange}
+        />
+          <button type="submit">Submit</button>
+      </form>
+
     </>
   );
 };
 
 export default Registration;
+

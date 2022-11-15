@@ -1,33 +1,17 @@
 @import 'normalize.css'; /* bring in normalize.css styles */
 
 :root {
-  --main-background: #F5F5F5;
+  --main-background: #FDF7F2;
   --buttons-color: #F59256;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', 'Inter',
+  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', 
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  max-width: 320px;
-  margin: 0 20px;
-}
-
-@media screen and (min-width: 320px) and (max-width: 768px) {
-  body {
-    max-width: 768px;
-    margin: 0 32px;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  body {
-    max-width: 1280px;
-    margin: 0 16px;
-  }
+  background-color: var(--main-background);
 }
 
 code {
@@ -49,9 +33,25 @@ ul {
 
 li {
   list-style: none;
+  color: black;
 }
 
 a {
   text-decoration: none;
 }
+
+/* .headerMenu {
+  visibility: hidden;
+  height: 100vh;
+  transform: translate(100%, 0);
+  transition: transform 250ms linear;
+} */
+
+.shown {
+  visibility: visible;
+  width: 100%;
+  transform: translate(0, 0);
+  transition: transform 250ms linear;
+}
+
 
