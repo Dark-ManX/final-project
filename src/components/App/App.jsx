@@ -1,30 +1,19 @@
 import { lazy } from 'react';
-
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
 
 const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
-const AsyncSellNoticesPage = lazy(() =>
-  import('pages/NoticesPage/SellNoticesPage')
-);
-const AsyncLostFoundNoticesPage = lazy(() =>
-  import('pages/NoticesPage/LostFoundNoticesPage')
-);
-const AsyncForFreeNoticesPage = lazy(() =>
-  import('pages/NoticesPage/ForFreeNoticesPage')
-);
+const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
+const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFoundNoticesPage'));
+const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
-const AsyncRegistrationDetails = lazy(() =>
-  import('pages/RegisterPageDetails/RegisterPageDetails')
-);
+const AsyncRegistrationDetails = lazy(() => import('pages/RegisterPageDetails/RegisterPageDetails'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
-const AsyncOurFriendsPage = lazy(() =>
-  import('pages/OurFriendsPage/OurFriendsPage')
-);
+const AsyncOurFriendsPage = lazy(() => import('pages/OurFriendsPage/OurFriendsPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 
 const App = () => {
