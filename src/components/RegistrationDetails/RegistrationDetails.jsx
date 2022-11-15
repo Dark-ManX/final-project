@@ -49,6 +49,7 @@ const RegistrationDetails = ({ details }) => {
     setCity('');
     setPhone('');
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>

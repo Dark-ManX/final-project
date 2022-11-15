@@ -69,7 +69,7 @@ const Registration = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     const updatedUser = await createUser();
-    console.log(typeof updatedUser);
+    setUserId(updatedUser);
     reset();
     navigate(`/register/${updatedUser}`);
   };

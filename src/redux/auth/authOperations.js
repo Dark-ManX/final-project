@@ -92,8 +92,8 @@ export const authApi = createApi({
       invalidatesTags: [{ type: 'User' }],
     }),
 
-    // PATCH  addUserPet: '/pets/:id',
-    AddUserPet: builder.mutation({
+    // PATCH  changeUserPet: '/pets/:id',
+    cnhangeUserPet: builder.mutation({
       query: (newPet, userPetId) => ({
         url: `/pets/${userPetId}`,
         method: 'PATCH',
@@ -114,6 +114,12 @@ export const authApi = createApi({
     //   GET getNotices: '/notices/one/owner'
     getNotices: builder.query({
       query: () => '/notices/one/owner',
+      providesTags: ['User'],
+    }),
+
+    //   GET getFavoriteNotices: '/notices/one/favorite'
+    getFavoriteNotices: builder.query({
+      query: () => '/notices/one/favorite',
       providesTags: ['User'],
     }),
 
@@ -167,7 +173,7 @@ export const {
   useUpdateUserInfoMutation,
   useGetUserPetsQuery,
   useCreateUserPetsMutation,
-  useAddUserPetMutation,
+  useChangeUserPetMutation,
   useDeleteUserPetMutation,
   useGetNoticesQuery,
   useAddFavoriteNoticeMutation,
