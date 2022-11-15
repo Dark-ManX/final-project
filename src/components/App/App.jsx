@@ -23,7 +23,7 @@ const AsyncForFreeNoticesPage = lazy(() =>
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
 const AsyncRegistrationDetails = lazy(() =>
-  import('../RegistrationDetails/RegistrationDetails')
+  import('pages/RegisterPageDetails/RegisterPageDetails')
 );
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
