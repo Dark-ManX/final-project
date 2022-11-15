@@ -27,9 +27,10 @@ export const authApi = createApi({
 
     // PATCH register: '/register/:id',
     registerUser: builder.mutation({
-      query: userId => ({
+      query: (registeredUser, userId) => ({
         url: `/register/${userId}`,
         method: 'PATCH',
+        body: registeredUser,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -108,6 +109,55 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
+
+    //   GET getNotices: '/notices/one/owner'
+    getUserNotices: builder.query({
+      query: () => '/notices/one/owner',
+      providesTags: ['User'],
+    }),
+
+    // PATCH  addNotice: '/notices/addfavorite/${noticeId}',
+    addNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/notices/addfavorite/${noticeId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // DELETE  deleteFavoriteNotice: '/notices/addfavorite/${noticeId}',
+    deleteFavoriteNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/notices/deletefavorite/${noticeId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // POST  notices: '/notices',
+    createNotice: builder.mutation({
+      query: newNotice => ({
+        url: '/notices',
+        method: 'POST',
+        body: newNotice,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
+    // DELETE deleteNotice: `/notices/delete/${noticeId}`,
+    deleteNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/notices/delete/${noticeId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
   }),
 });
-export const { useCreateUserMutation, useRegisterUserMutation } = authApi;
+
+export const {
+  useCreateUserMutation,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useLogOutUserMutation,
+} = authApi;

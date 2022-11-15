@@ -1,24 +1,30 @@
-import { useCreateUserMutation } from 'redux/auth/authOperations';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import React, { useState, useEffect, useRef } from 'react';
+import {
+  useCreateUserMutation,
+  useRegisterUserMutation,
+} from 'redux/auth/authOperations';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-const getNews = async () => {
-  const { data } = await axios.get(`/register`);
-};
+import RegistrationDetails from 'components/RegistrationDetails';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [userId, setUserId] = useState('');
+
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const [registerNewUser] = useRegisterUserMutation();
   const [createNewUser] = useCreateUserMutation();
+
   const registrationDetails = { city, name, phone };
-  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -33,6 +39,18 @@ const Registration = () => {
         // console.log(password);
         break;
 
+      case 'name':
+        setName(value);
+        break;
+
+      case 'city':
+        setCity(value);
+        break;
+
+      case 'phone':
+        setPhone(value);
+        break;
+
       default:
         return;
     }
@@ -41,16 +59,19 @@ const Registration = () => {
   const createUser = async () => {
     const newUser = { email, password };
     const { data } = await createNewUser(newUser);
+    console.log(data);
     const { id } = data.data.user;
     setUserId(id);
     console.log(id);
+    return id;
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
     const updatedUser = await createUser();
-    console.log(updatedUser);
+    console.log(typeof updatedUser);
     reset();
+    navigate(`/register/${updatedUser}`);
   };
 
   const reset = () => {
@@ -60,18 +81,44 @@ const Registration = () => {
 
   const result = async () => {
     try {
-      const data = await axios.patch(
+      const fetchUser = await fetch(
         `https://team-api-blended2.herokuapp.com/register/${userId}`,
-        registrationDetails
+        {
+          method: 'PATCH',
+          body: { name, city, phone },
+          headers: { 'Content-Type': 'string' },
+        }
       );
+      console.log(fetchUser);
     } catch (error) {
       console.log(error);
     }
+
+    // try {
+    //   const data = await axios.patch(
+    //     `https://team-api-blended2.herokuapp.com/register/${userId}`,
+    //     registrationDetails
+    //   );
+    //   return data;
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
   };
 
-  useEffect(() => {
+  const handleRegisterSubmit = event => {
+    event.preventDefault();
     result();
-  }, [userId]);
+    resetRegister();
+  };
+
+  const resetRegister = () => {
+    setName('');
+    setCity('');
+    setPhone('');
+  };
+
+  useEffect(() => {}, [userId]);
 
   return (
     <>
@@ -91,12 +138,14 @@ const Registration = () => {
             placeholder="password"
             onChange={handleChange}
           />
-          {/* <Link to={`/register/${userId}`}> */}
-          <button type="submit">Submit</button>
-          {/* </Link> */}
+
+          <button type="submit">
+            {/* <navigate to={`/register/${userId}`} /> */}
+            Submit
+          </button>
         </form>
       ) : (
-        <p>Привіт</p>
+        <RegistrationDetails details={userId} />
       )}
     </>
   );

@@ -1,15 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import authOperations from '../../redux/auth/authOperations';
-import css from '../SignIn/SignIn.module.css';
+import { useLoginUserMutation } from 'redux/auth/authOperations';
 
-export default function SignIn() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
+  const [loginUser] = useLoginUserMutation();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -27,10 +22,17 @@ export default function SignIn() {
     }
   };
 
+  const loginNewUser = () => {
+    const newUser = {
+      email,
+      password,
+    };
+    loginUser(newUser);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(authOperations.logIn({ email, password }));
-
+    loginNewUser();
     reset();
   };
 
@@ -38,13 +40,27 @@ export default function SignIn() {
     setEmail('');
     setPassword('');
   };
+
   return (
     <>
-      <form>
-        <input type="input" placeholder="email" onChange={handleChange} />
-        <input type="input" placeholder="password" onChange={handleChange} />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          value={password}
+          name="password"
+          placeholder="password"
+          onChange={handleChange}
+        />
         <button type="submit">Submit</button>
       </form>
     </>
   );
-}
+};
+export default Login;

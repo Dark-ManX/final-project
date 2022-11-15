@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Registration from '../Registration/Registration';
 import RegistrationDetails from 'components/RegistrationDetails';
+import Login from 'components/Login/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -17,8 +18,10 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="/register" element={<Registration />} />
-      <Route path="/register/:id" element={<RegistrationDetails />} />
+      <Route path="/register/" element={<Registration />}>
+        <Route path=":id" element={<RegistrationDetails />} />
+      </Route>
+      {/* <Route path="/login" element={<Login />} /> */}
 
       {/* <Route index element={<AsyncMainPage />} /> */}
 

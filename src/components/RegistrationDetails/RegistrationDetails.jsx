@@ -1,25 +1,12 @@
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const RegistrationDetails = () => {
+const RegistrationDetails = ({ details }) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
-  const [editableUser, setEditableUser] = useState({});
-
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   setEditableUser(selectedUser);
-  // }, [selectedUser, id]);
-
-  // const onChange = ({ target: { name, value } }) => {
-  //   setEditableUser(currentData => ({ ...currentData, [name]: value }));
-  // };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -41,21 +28,22 @@ const RegistrationDetails = () => {
     }
   };
 
-  const registerUser = () => {
+  const registerUser = async () => {
     const newUser = {
       name,
       city,
       phone,
     };
-    registerNewUser(newUser);
+    await registerNewUser(newUser, details);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    registerUser();
+    await registerUser();
 
     reset();
   };
+
   const reset = () => {
     setName('');
     setCity('');
