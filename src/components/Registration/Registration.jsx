@@ -1,12 +1,8 @@
-
-import {
-  useCreateUserMutation,
-  useRegisterUserMutation,
-} from 'redux/auth/authOperations';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import { Link } from 'react-router-dom';
+// import axios from 'axios';
 import RegistrationDetails from 'components/RegistrationDetails';
 
 const Registration = () => {
@@ -15,58 +11,42 @@ const Registration = () => {
 
   const [userId, setUserId] = useState('');
 
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
+  // const [name, setName] = useState('');
+  // const [city, setCity] = useState('');
+  // const [phone, setPhone] = useState('');
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [registerNewUser] = useRegisterUserMutation();
+  // const [registerNewUser] = useRegisterUserMutation();
   const [createNewUser] = useCreateUserMutation();
 
-  const registrationDetails = { city, name, phone };
-
-
-import { useState } from 'react';
-import { useCreateUserMutation } from 'redux/auth/authOperations';
-
-  const RegisterPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [createNewUser] = useCreateUserMutation();
-
+  // const registrationDetails = { city, name, phone };
 
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
         setEmail(value);
-
- 
- 
-
+        // console.log(email);
         break;
 
       case 'password':
         setPassword(value);
-
-      
+        // console.log(password);
         break;
 
-      case 'name':
-        setName(value);
-        break;
+      // case 'name':
+      //   setName(value);
+      //   break;
 
-      case 'city':
-        setCity(value);
-        break;
+      // case 'city':
+      //   setCity(value);
+      //   break;
 
-      case 'phone':
-        setPhone(value);
-
-     
-        break;
+      // case 'phone':
+      //   setPhone(value);
+      //   break;
 
       default:
         return;
@@ -89,21 +69,6 @@ import { useCreateUserMutation } from 'redux/auth/authOperations';
     setUserId(updatedUser);
     reset();
     navigate(`/register/${updatedUser}`);
-
-  const createUser = () => {
-    const newUser = {
-      email,
-      password,
-    };
-    createNewUser(newUser);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    createUser();
-
-    reset();
-
   };
 
   const reset = () => {
@@ -111,45 +76,44 @@ import { useCreateUserMutation } from 'redux/auth/authOperations';
     setPassword('');
   };
 
+  // const result = async () => {
+  //   try {
+  //     const fetchUser = await fetch(
+  //       `https://team-api-blended2.herokuapp.com/register/${userId}`,
+  //       {
+  //         method: 'PATCH',
+  //         body: { name, city, phone },
+  //         headers: { 'Content-Type': 'string' },
+  //       }
+  //     );
+  //     console.log(fetchUser);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-  const result = async () => {
-    try {
-      const fetchUser = await fetch(
-        `https://team-api-blended2.herokuapp.com/register/${userId}`,
-        {
-          method: 'PATCH',
-          body: { name, city, phone },
-          headers: { 'Content-Type': 'string' },
-        }
-      );
-      console.log(fetchUser);
-    } catch (error) {
-      console.log(error);
-    }
+  //   // try {
+  //   //   const data = await axios.patch(
+  //   //     `https://team-api-blended2.herokuapp.com/register/${userId}`,
+  //   //     registrationDetails
+  //   //   );
+  //   //   return data;
+  //   //   console.log(data);
+  //   // } catch (error) {
+  //   //   console.log(error.message);
+  //   // }
+  // };
 
-    // try {
-    //   const data = await axios.patch(
-    //     `https://team-api-blended2.herokuapp.com/register/${userId}`,
-    //     registrationDetails
-    //   );
-    //   return data;
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
-  };
+  // const handleRegisterSubmit = event => {
+  //   event.preventDefault();
+  //   result();
+  //   resetRegister();
+  // };
 
-  const handleRegisterSubmit = event => {
-    event.preventDefault();
-    result();
-    resetRegister();
-  };
-
-  const resetRegister = () => {
-    setName('');
-    setCity('');
-    setPhone('');
-  };
+  // const resetRegister = () => {
+  //   setName('');
+  //   setCity('');
+  //   setPhone('');
+  // };
 
   useEffect(() => {}, [userId]);
 
@@ -180,30 +144,8 @@ import { useCreateUserMutation } from 'redux/auth/authOperations';
       ) : (
         <RegistrationDetails details={userId} />
       )}
-
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="password"
-          onChange={handleChange}
-        />
-          <button type="submit">Submit</button>
-      </form>
-
     </>
   );
 };
 
 export default Registration;
-

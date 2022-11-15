@@ -1,5 +1,4 @@
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
-import { useCreateUserMutation } from 'redux/auth/authOperations';
 import React, { useState } from 'react';
 
 const RegistrationDetails = ({ details }) => {
