@@ -7,11 +7,19 @@ export const UserInfo = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+
+  @media screen and (min-width: 1280px) {
+    flex-direction: column;
+  }
 `;
 
 export const Avatar = styled.div`
   @media screen and (min-width: 768px) {
     margin: 0 0 0 52px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin: 0 0 36px 0;
   }
 `;
 

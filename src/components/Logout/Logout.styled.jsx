@@ -24,4 +24,10 @@ export const LogoutBtn = styled.button`
     top: 85%;
     left: -21%;
   }
+
+  @media screen and (min-width: 1280px) {
+    position: absolute;
+    top: 90%;
+    left: -33%;
+  }
 `;

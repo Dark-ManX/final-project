@@ -8,6 +8,12 @@ export const UserInfoList = styled.ul`
     height: 192px;
     margin: 0;
   }
+
+  @media screen and (min-width: 1280px) {
+    width: 379px;
+    height: 192px;
+    margin: 0;
+  }
 `;
 
 export const UserInfoItem = styled.li`
@@ -16,6 +22,14 @@ export const UserInfoItem = styled.li`
 
   &:nth-child(5) {
     margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 15px;
+
+    &:nth-child(5) {
+      margin-bottom: 0;
+    }
   }
 `;
 
