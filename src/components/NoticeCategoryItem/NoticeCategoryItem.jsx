@@ -16,6 +16,7 @@ import {
 import { ReactComponent as AddIcon } from "icons/add.svg";
 import { ReactComponent as RemoveIcon } from "icons/remove.svg";
 import Modal from "components/Modal/Modal";
+import { ModalNotice } from 'components/ModalNotice/ModalNotice';
 import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation } from "redux/notices/noticesApi";
 
 let category = '';
@@ -106,7 +107,9 @@ export const NoticeCategoryItem = ({ notice }) => {
                 </CardDetailsContainer>
             </CardInfoContainer>
             <Button type="button" onClick={handleOpenModal}>Learn more</Button>
-            {showModal && <Modal onClose={handleCloseModal} />}
+            {showModal && <Modal onClose={handleCloseModal}>
+                <ModalNotice notice={notice} />
+            </Modal>}
         </NoticeCategoryItemStyled>
     ); 
 };
