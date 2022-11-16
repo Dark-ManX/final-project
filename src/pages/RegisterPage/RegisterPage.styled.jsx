@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import bigWave from '../../img/bigWave.jpg';
 
-export const Img = styled.img`
-  background-image: url(${bigWave});
-  background-repeat: no-repeat;
-`;
+// export const Img = styled.img`
+//   background-image: url(${bigWave});
+//   background-repeat: no-repeat;
+// `;
 export const Container = styled.div`
   margin: 0 auto;
   margin-top: 55px;
