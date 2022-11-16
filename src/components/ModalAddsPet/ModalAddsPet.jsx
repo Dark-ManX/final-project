@@ -1,18 +1,16 @@
-import React from 'react';
 import Button from 'components/Common/Button/Button';
 import { Input } from '../Common/Input/Input';
-import { ModalBody } from 'components/Modal/Modal.styled';
-// import { ReactComponent as Cross } from '../../images/cross.svg';
-import { CloseModal } from '../ModalAddsPet/ModalAddsPet.styled';
-import { ModalName } from '../ModalAddsPet/ModalAddsPet.styled';
+import { ReactComponent as Cross } from 'icons/cross.svg';
+import { CloseModal, ModalName } from './ModalAddsPet.styled';
 
-const ModalAddsPet = ({ onClose }) => {
+const AddsPet = ({ onClose }) => {
   return (
-    <div>
-      <ModalBody>
-        <CloseModal type="button" onClick={onClose}>
-          {/* <Cross width="20px" height="20px" /> */}
-        </CloseModal>
+    <>
+      
+      <CloseModal type="button" onClick={onClose}>
+        <Cross width="20px" height="20px" />
+      </CloseModal>
+      
         <ModalName>Add pet</ModalName>
 
         <form>
@@ -33,9 +31,9 @@ const ModalAddsPet = ({ onClose }) => {
           <Button type="submit" content="Next" variant="primary" />
           <Button type="button" content="Cancel" variant="inverse" />
         </form>
-      </ModalBody>
-    </div>
+      
+    </>
   );
 };
 
-export default ModalAddsPet;
+export default AddsPet;

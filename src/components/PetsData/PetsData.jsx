@@ -20,8 +20,9 @@ const getPets = () => {
 
 export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
-  const handleBtnClick = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+
+  const handleBtnClick = () => setOpenModal(!openModal);
+
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
@@ -43,8 +44,8 @@ export const PetsData = () => {
       </ContainerTitle>
       <PetsList pets={pets} />
       {openModal && (
-        <Modal onClose={handleCloseModal}>
-          <ModalAddsPet onClose={handleCloseModal} />
+        <Modal onClose={handleBtnClick}>
+          <ModalAddsPet onClose={handleBtnClick} />
         </Modal>
       )}
     </Container>
