@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin: 0 auto;
   margin-top: 55px;
   width: 618px;
-  height: 541px;
+  height: 605px;
   left: 331px;
   top: 112px;
   background: #ffffff;
@@ -51,7 +51,7 @@ export const Form = styled.form`
   flex-wrap: wrap;
 `;
 
-export const Button = styled.button`
+export const RegisterBtn = styled.button`
   margin-top: 24px;
   margin-bottom: 16px;
   width: 458px;
@@ -69,6 +69,23 @@ export const Button = styled.button`
   color: #ffffff;
 `;
 
+export const BackBtn = styled.button`
+  margin-bottom: 40px;
+  color: #000000;
+  width: 458px;
+  height: 48px;
+  background: #ffffff;
+  border-radius: 40px;
+  border: 1px solid #f59256;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: #000000;
+`;
 export const P = styled.p`
   font-family: 'Manrope';
   font-style: normal;

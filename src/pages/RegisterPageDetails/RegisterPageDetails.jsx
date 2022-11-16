@@ -11,7 +11,7 @@ import {
   Span,
 } from './RegisterPageDetails.styled';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import wave from '../../img/bigWave.jpg';
+// import wave from '../../img/bigWave.jpg';
 import { useSelector } from 'react-redux';
 
 const RegistrationDetails = ({ details }) => {
