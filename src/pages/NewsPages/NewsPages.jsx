@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react'
 import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
 import { SearchForm } from "../../components/SearchForm/SearchForm";
-import { getNews, fetchNewsSearch } from 'api/newsApi';
-
-
+import { fetchNewsSearch } from 'api/newsApi';
 import {
   NewsPageTitle,
   NewsSet, NewsItem,
@@ -30,7 +28,7 @@ const [isLoading, setIsLoading] = useState(false);
         setIsLoading(true);
             const getData = async () => {
                 try {
-                    const data = await getNews();
+                    const data = await fetchNewsSearch();
                     setResultQuery(data);
                 }
                 catch (error) {

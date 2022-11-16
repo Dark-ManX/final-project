@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Container, FriendsThumb, CardThumb, FriendTitle, FirstThumb, SecondThumb, Title, Image, Item } from "./OurFriendsPage.styled";
+import { useEffect, useState } from 'react';
+import { CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, SecondThumb, Title, Item, Anchor} from "./OurFriendsPage.styled";
 
 
 const OurFriendsPage = () => { 
@@ -14,7 +14,7 @@ const OurFriendsPage = () => {
     }, [])
 
     return (
-        <>
+        <div>
             <Title>Our friends</Title>
             
             <FriendsThumb>
@@ -32,24 +32,26 @@ const OurFriendsPage = () => {
                             <SecondThumb>
                                 
                                 <ul>
-                                    <Item>Time:
+                                    <Item >Time: <br />
+                                        <div className='time'>
                                         {
                                             time ? (<span>{time}</span>) : (<span>----------</span>)
-                                        }
+                                            }
+                                        </div>
                                     </Item>
-                                    <Item>Adress:
+                                    <Item>Adress:<br/>
                                         {
                                             address ? (<span>{address}</span>) : (<span>----------</span>)
                                         }
                                     </Item>
-                                    <Item>Email:
+                                    <Item>Email:<br/>
                                         {
-                                            email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
+                                            email ? (<Anchor href={`mailto:${email}`}>{email}</Anchor>) : (<span>----------</span>)
                                         }
                                     </Item>
-                                    <Item>Phone:
+                                    <Item>Phone:<br/>
                                         {
-                                            phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
+                                            phone ? (<Anchor href={`tel:${phone}`}>{phone}</Anchor>) : (<span>----------</span>)
                                         }
                                     </Item>
                                 </ul>
@@ -62,7 +64,7 @@ const OurFriendsPage = () => {
                 }
                 
             </FriendsThumb>
-        </>
+        </div>
     )
 }
 
