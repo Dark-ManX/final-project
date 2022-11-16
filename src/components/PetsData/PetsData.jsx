@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 
 import { PetsList } from 'components/PetsList/PetsList';
 import Modal from 'components/Modal/Modal';
-import ModalAddsPet from '../ModalAddsPet/ModalAddsPet';
-import { ROUTES } from '../../routes/routes';
-import add from '../../components/icons/addPet.svg';
+import ModalAddsPet from 'components/ModalAddsPet/ModalAddsPet';
+import { ROUTES } from 'routes/routes';
+import add from 'components/icons/addPet.svg';
 
 import { Title } from 'pages/UserPage/UserPage.styled';
 import { Container, AddBtn, ContainerTitle } from './PetsData.styled';

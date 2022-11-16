@@ -15,7 +15,7 @@ import {
 } from "./NoticeCategoryItem.styled";
 import { ReactComponent as AddIcon } from "../icons/add.svg";
 import { ReactComponent as RemoveIcon } from "../icons/remove.svg";
-import { Modal } from "../Modal/Modal";
+import Modal from "components/Modal/Modal";
 import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation } from "../../redux/notices/noticesApi";
 
 
