@@ -1,11 +1,26 @@
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
 import React, { useState } from 'react';
+import {
+  Input,
+  Title,
+  Container,
+  Form,
+  RegisterBtn,
+  BackBtn,
+  P,
+  Span,
+} from './RegisterPageDetails.styled';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import wave from '../../img/bigWave.jpg';
+import { useSelector } from 'react-redux';
 
 const RegistrationDetails = ({ details }) => {
+  const location = useLocation();
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
+  const { id } = useParams();
   console.log(details);
 
   const handleChange = event => {
@@ -52,31 +67,42 @@ const RegistrationDetails = ({ details }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="Name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="city"
-          value={city}
-          placeholder="City, region"
-          onChange={handleChange}
-        />
-        <input
-          type="tel"
-          name="phone"
-          value={phone}
-          placeholder="Mobile phone"
-          onChange={handleChange}
-        />
-        <button type="submit">Register</button>
-        <button type="submit">Back</button>
-      </form>
+      <Container>
+        <Title>Registration</Title>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Name"
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            name="city"
+            value={city}
+            placeholder="City, region"
+            onChange={handleChange}
+          />
+          <Input
+            type="tel"
+            name="phone"
+            value={phone}
+            placeholder="Mobile phone"
+            onChange={handleChange}
+          />
+          <RegisterBtn type="submit">Register</RegisterBtn>
+          <Link to={`/login`} state={{ from: location }}>
+            <BackBtn type="submit">Back</BackBtn>
+          </Link>
+          <P>
+            Already have an account?
+            <Link to={`/login`} state={{ from: location }}>
+              <Span>Login </Span>
+            </Link>
+          </P>
+        </Form>
+      </Container>
     </>
   );
 };
