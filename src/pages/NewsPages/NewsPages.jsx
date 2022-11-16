@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
 import { SearchForm } from "../../components/SearchForm/SearchForm";
-import { getNews, fetchNewsSearch } from 'api/newsApi';
-
-
+import { fetchNewsSearch } from 'api/newsApi';
+import { MainContainer } from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
   NewsSet, NewsItem,
@@ -30,7 +29,7 @@ const [isLoading, setIsLoading] = useState(false);
         setIsLoading(true);
             const getData = async () => {
                 try {
-                    const data = await getNews();
+                    const data = await fetchNewsSearch();
                     setResultQuery(data);
                 }
                 catch (error) {
@@ -69,6 +68,7 @@ const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
+      <MainContainer>
       <NewsPageTitle>News</NewsPageTitle>
       <SearchForm onSubmit={handleSubmit}/>
       {isLoading && <h3>Чекайте, ще 2-3 тижні</h3>}
@@ -89,7 +89,8 @@ const [isLoading, setIsLoading] = useState(false);
           </NewsItemInfo>
         </NewsItem>)
         )}
-      </NewsSet>
+        </NewsSet>
+        </MainContainer>
     </>
   )
 

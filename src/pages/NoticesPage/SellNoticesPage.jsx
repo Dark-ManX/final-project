@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchSellNotices } from 'api/noticesApi';
+import { fetchNotices } from 'api/noticesApi';
 import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
 
 const SellNotices = () => {
@@ -9,7 +9,7 @@ const SellNotices = () => {
     const [error, setError] = useState('');
 
     useEffect((page) => {
-        fetchSellNotices().then(data => {
+        fetchNotices('sell').then(data => {
             setNotices(prevState => [...prevState, ...data]);
         }).catch(error => setError(error));
     }, [page]);

@@ -52,15 +52,31 @@ flex-direction: column-reverse;
 justify-content: flex-end;
 padding: 46px 0 190px;
 width: 100%;
-height: 100vh;
 overflow: hidden;
 background-color: #FDF7F2;
 row-gap: 60px;
 align-items: center;
+z-index: 20;
+
+@media screen and (max-width: 767px) {
+transform: scaleY(0);
+opacity: 0;
+height: 100vh;
+
+transform-origin: top;
+transition: transform 250ms linear, opacity 250ms linear;
+
+&.shown {
+transform: scaleY(1);
+opacity: 1;
+}
+}
 
 @media screen and (min-width: 768px) {
+padding: 0;
+position: relative;
 overflow: visible;
-padding: 88px 0;
+height: auto;
 }
 
 @media screen and (min-width: 1280px) {
@@ -73,24 +89,28 @@ height: auto;
 `
 
 export const AuthUserContainer = styled.div`
-text-align: center;
   display: flex;
   gap: 12px;
   justify-content: center;
   align-items: center;
   width: 250px;
-  margin-left: auto;
 
 @media screen and (min-width: 768px) {
   position: absolute;
-  top: -38px;
-  right: 92px;
-  justify-content: flex-end;
+  top: 0;
+  right: 25px;
+  transform: translateY(-50%);
+  justify-content: center;
 }
 
 @media screen and (min-width: 1280px) {
   position: relative;
+  display: flex;
+  column-gap: 20px;
+
   top: 0;
   right: 0;
+  margin-left: auto;
+  transform: translate(0);
 }
 `

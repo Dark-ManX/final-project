@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchForFreeNotices } from 'api/noticesApi';
+import { fetchNotices } from 'api/noticesApi';
 import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
 
 const ForFreeNotices = () => {
@@ -9,7 +9,7 @@ const ForFreeNotices = () => {
     const [error, setError] = useState('');
 
     useEffect((page) => {
-        fetchForFreeNotices().then(data => {
+        fetchNotices('for-free').then(data => {
             setNotices(prevState => [...prevState, ...data]);
         }).catch(error => setError(error));
     }, [page]);

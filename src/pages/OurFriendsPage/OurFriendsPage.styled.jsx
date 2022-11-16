@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-padding: 12px 4px;
+padding: 12px 17px 12px 4px;
 border-radius: 20px;
 background-color: white;
+color: black;
 box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-
-@media screen and (min-width: 320px) {
-    border-radius: 40px;
-}
+border-radius: 40px;
 `;
 
 export const FriendsThumb = styled.div`
@@ -34,11 +32,23 @@ export const CardThumb = styled.div`
 display: flex;
 column-gap: 12px;
 margin-top: 12px;
+align-items: flex-start;
 `
 
 export const FriendTitle = styled.h3`
 text-align: center;
 color: #F59256;
+display: block;
+
+&.time {
+
+    /* &:after {
+        content: "hello";
+        top: 100%;
+        left: 0;
+        width: 100%;
+    } */
+}
 `
 
 export const FirstThumb = styled.div`
@@ -50,14 +60,17 @@ width: 110px;
 
 export const SecondThumb = styled.div`
 width: 150px;
+color: black;
 `
 
 export const Title = styled.h2`
+display: block;
 font-weight: 700;
 font-size: 24px;
 line-height: calc(33 / 24);
+color: black;
+margin: 47px;
 text-align: center;
-margin-top: 47px;
 `
 
 export const Image = styled.img`
@@ -66,5 +79,11 @@ width: 100%;
 `
 
 export const Item = styled.li`
-color: #F59256;
+&:not(:last-child) {
+    margin-bottom: 4px;
+}`
+
+export const Anchor = styled.a`
+color: inherit;
+text-decoration: none;
 `

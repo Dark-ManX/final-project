@@ -6,6 +6,8 @@ background-color: #FDF7F2;
 max-width: 320px;
 padding: 0 20px;
 margin: 0 auto;
+/* overflow-x: hidden; */
+height: 100vh;
 
 @media screen and (min-width: 768px) {
     max-width: 768px;

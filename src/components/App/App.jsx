@@ -13,7 +13,7 @@ const AsyncFavoriteNoticesPage = lazy(() => import('pages/NoticesPage/FavoriteNo
 const AsyncOwnNoticesPage = lazy(() => import('pages/NoticesPage/OwnNoticesPage'));
 // const AsyncPrivateRoute = lazy(() => import('components/PrivateRoutes/PrivateRoutes'));
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
-const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
+const AsyncRegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const AsyncRegistrationDetails = lazy(() => import('pages/RegisterPageDetails/RegisterPageDetails'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
@@ -29,11 +29,6 @@ const App = () => {
 
         <Route path="news" element={<AsyncNewsPage />} />
 
-        {/* <Route path="notices" element={<AsyncNoticesPage />}>
-          <Route path="sell" element={<AsyncSellNoticesPage />} />
-          <Route path="for-free" element={<AsyncLostFoundNoticesPage />} />
-          <Route path="lost-found" element={<AsyncForFreeNoticesPage />} /> */}
-
         <Route path='notices' element={<AsyncNoticesPage />}>
           <Route path='sell' element={<AsyncSellNoticesPage />} />
           <Route path='for-free' element={<AsyncForFreeNoticesPage />} />
@@ -44,7 +39,7 @@ const App = () => {
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
-        <Route path="register/" element={<AsyncRegisterPage />}>
+        <Route path="register" element={<AsyncRegisterPage />}>
           <Route path=":id" element={<AsyncRegistrationDetails />} />
         </Route>
 
