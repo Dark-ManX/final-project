@@ -144,11 +144,17 @@ export const CloseModal = styled.button`
 
 export const ButtonGroup = styled.div`
     display: flex;
-    justify-content: end;
+    flex-direction: column-reverse;
+
+    @media screen and (min-width: 768px){
+        flex-direction: unset;
+        justify-content: end;
+            
+    }
 `
 
-export const  ButtonAdd = styled.button`
-    width: 160px;
+export const ButtonAdd = styled.button`
+    width: 100%;
     height: 40px;
     background: #FFFFFF;
     border: 2px solid #F59256;
@@ -163,14 +169,21 @@ export const  ButtonAdd = styled.button`
     text-align: center;
     letter-spacing: 0.04em;
     color: #111111;
-
+ 
     &:disabled {
-    &:hover {
-      pointer-events: none;
+        &:hover {
+            pointer-events: none;
+        }
     }
+
+    @media screen and (min-width: 768px){
+        width: 160px;
+    }
+
 `
+
 export const ButtonCall = styled.a`
-    width: 160px;
+    width: 100%;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -179,6 +192,7 @@ export const ButtonCall = styled.a`
     border-radius: 40px;
     border: none;
     margin-right: 12px;
+    margin-bottom: 12px;
 
     font-family: 'Manrope';
     font-style: normal;
@@ -192,5 +206,10 @@ export const ButtonCall = styled.a`
         &:hover {
         pointer-events: none;
         }
+    }
+    
+    @media screen and (min-width: 768px){
+        width: 160px;
+        margin-bottom: 0;
     }
 `
