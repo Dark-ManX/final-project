@@ -15,14 +15,18 @@ import {
 } from "./NoticeCategoryItem.styled";
 import { ReactComponent as AddIcon } from "../icons/add.svg";
 import { ReactComponent as RemoveIcon } from "../icons/remove.svg";
-import Modal from "components/Modal/Modal";
+import { Modal } from "../Modal/Modal";
+import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation } from "../../redux/notices/noticesApi";
+
 
 let category = '';
 let photo;
 
 export const NoticeCategoryItem = ({ notice }) => {
-    const [addToFavorite, setAddToFavorite] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [addToFavorite, setAddToFavorite] = useState(false);
+    const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
+    const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
     // const { token } = useSelector(state => state.user);
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzM0OGUyM2RhMjk5YmRlY2I2NTFlNCIsImlhdCI6MTY2ODQ5OTcwNSwiZXhwIjoxNjY4NTM1NzA1fQ.W9gK98YZ9OzenWQpIP_e6irUwwyHiAI90L2xk4_Ebmg';
 
@@ -46,18 +50,31 @@ export const NoticeCategoryItem = ({ notice }) => {
         photo = 'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
     };
 
+    const handleAddToFavoriteNotices = (id) => {
+        id = notice._id;
+        addToFavoriteNotices({ id });
+        setAddToFavorite(true);
+    };
+
+    const handleRemoveFromFavoriteNotices = (id) => {
+        id = notice._id;
+        removeFromFavoriteNotices({ id });
+        setAddToFavorite(false);
+    };
+
     const handleAddToFavoriteBtn = () => {
         if (!token) {
             alert('please login');
             return;
         };
         console.log('add to favorite: ', notice._id);
-        setAddToFavorite(true);
+        handleAddToFavoriteNotices();
+        
     };
     
     const handleRemoveFromFavoriteBtn = () => {
         console.log('remove from favorite: ', notice._id);
-        setAddToFavorite(false);
+        handleRemoveFromFavoriteNotices();
     };
 
     const handleBtnClick = () => setShowModal(true);
