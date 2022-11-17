@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
+const MainContainer = styled.div`
 box-sizing: border-box;
 background-color: #FDF7F2;
 max-width: 320px;
@@ -19,3 +19,5 @@ height: 100vh;
     padding: 20px 16px 200px;
 }
 `
+
+export default MainContainer;

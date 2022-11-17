@@ -7,7 +7,6 @@ import { TiThMenu } from 'react-icons/ti';
 import { useSelector } from 'react-redux';
 import { AuthUserContainer, Button, MobileMenu, StyledHeader } from './Header.styled';
 
-
 const Header = () => {
 
   const user = useSelector(state => state.isLoggedIn)
@@ -20,7 +19,7 @@ const Header = () => {
   return (
     <>
       <StyledHeader>
-        {/* <ModalContainer> */}
+        
         <Logo />
         
         <MobileMenu className={shown && 'shown'}>

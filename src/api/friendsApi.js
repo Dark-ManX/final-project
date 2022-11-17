@@ -1,5 +1,11 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
-
-export const 
+export const fetchFriends = async url => {
+  try {
+    const { data } = await axios.get(`${url}/friends`);
+    const { friends } = data.data;
+    return friends;
+  } catch (err) {
+    console.log(err.message);
+  }
+};

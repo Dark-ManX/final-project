@@ -1,33 +1,18 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
-  margin-top: 12px;
+margin-top: 16px;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 5;
   
   @media screen and (min-width: 1280px) {
   column-gap: 80px;
+  margin-top: 20px;
   }
-
 `;
-
-// export const ModalContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   padding-top: 16px;
-// `;
-
-
-// export const BlockAcc = styled.div`
-//   padding-top: 48px;
-//   display: flex;
-//   text-align: center;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 0 auto;
-// `;
 
 export const Button = styled.button`
   display: flex;
@@ -107,9 +92,8 @@ export const AuthUserContainer = styled.div`
   position: relative;
   display: flex;
   column-gap: 20px;
-
   top: 0;
-  right: 0;
+  right: 16px;
   margin-left: auto;
   transform: translate(0);
 }

@@ -8,8 +8,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState('');
 
-  // const navigate = useNavigate();
-
   const [createNewUser] = useCreateUserMutation();
 
   const handleChange = event => {

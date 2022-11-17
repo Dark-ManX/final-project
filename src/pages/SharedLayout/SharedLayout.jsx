@@ -1,8 +1,7 @@
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import { RotatingLines } from 'react-loader-spinner';
+import MainContainer from "components/commonStyles/Container.styled";
 import Header from "components/Header/Header";
-import { MainContainer } from "components/commonStyles/Container.styled";
+import { RotatingLines } from 'react-loader-spinner';
+import { Outlet } from "react-router-dom";
 import { SuspenseContainer } from "./SharedLayout.styled";
 
 const SharedLayout = () => {
@@ -12,8 +11,7 @@ const SharedLayout = () => {
         <MainContainer>
             <Header/>
 
-            <SuspenseContainer>
-                <Suspense fallback={
+                <SuspenseContainer fallback={
                     <RotatingLines
                         strokeColor="grey"
                         strokeWidth="5"
@@ -23,8 +21,7 @@ const SharedLayout = () => {
                     />}>
                     <Outlet />
 
-                </Suspense>
-            </SuspenseContainer>
+                </SuspenseContainer>
         </MainContainer>
     )
 }

@@ -11,7 +11,6 @@ const Nav = ({set}) => {
       <List>
         <NavigationItem>
 
-          {/* Якір у якорі, треба залишити один */}
           <NavigationLink to={'/news'} state={{ from: location }}>
             News
           </NavigationLink>
@@ -30,7 +29,6 @@ const Nav = ({set}) => {
       </List>
     </Navigation>
   );
-
 };
 
 export default Nav;

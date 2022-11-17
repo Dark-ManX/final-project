@@ -69,8 +69,12 @@ font-weight: 700;
 font-size: 24px;
 line-height: calc(33 / 24);
 color: black;
-margin: 47px;
+margin-top: 47px;
 text-align: center;
+
+@media screen and (min-width: 768px) {
+margin-top: 94px;
+}
 `
 
 export const Image = styled.img`

@@ -61,7 +61,6 @@ export const Nav = styled.nav`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  max-width: 280px;
 
   @media screen and (max-width: 767px) {
     margin-left: auto;

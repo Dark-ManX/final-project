@@ -10,18 +10,19 @@ export const ModalBackdrop = styled.div`
   background: transparent;
   z-index: 1200;
   background-color: rgba(0, 0, 0, 0.5);
+
+  .headerModal & {
+    background-color: #fff;
+  }
 `;
 
 export const ModalBody = styled.div`
   position: absolute;
-  width: 280px;
-  /* height: 530px; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45vh);
   background-color: white;
   border-radius: 25px;
   padding: 40px 20px 40px 20px;
-  // margin: 100px auto;
   overflow: hidden;
 `;

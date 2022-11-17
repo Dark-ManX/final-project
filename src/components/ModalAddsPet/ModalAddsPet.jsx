@@ -44,7 +44,6 @@ const AddsPet = ({ onClose }) => {
 
   return (
     <>
-      
       <CloseModal type="button" onClick={onClose}>
         <Cross width="20px" height="20px" />
       </CloseModal>

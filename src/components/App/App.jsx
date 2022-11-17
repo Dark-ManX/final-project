@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
-// import Modal from 'components/Modal/Modal';
+import MainPage from 'components/MainPage/MainPage';
 
-const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
+// const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
@@ -25,7 +25,7 @@ const App = () => {
     <Routes>
 
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<AsyncMainPage />} />
+        <Route index element={<MainPage />} />
 
         <Route path="news" element={<AsyncNewsPage />} />
 

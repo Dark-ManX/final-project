@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
-import { SearchForm } from "../../components/SearchForm/SearchForm";
+import { SearchForm } from "components/SearchForm/SearchForm";
 import { fetchNewsSearch } from 'api/newsApi';
-import { MainContainer } from 'components/commonStyles/Container.styled';
+import MainContainer from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
   NewsSet, NewsItem,
@@ -65,7 +65,6 @@ const [isLoading, setIsLoading] = useState(false);
         setSearchParams({ q: formInput })
   }
     
-
   return (
     <>
       <MainContainer>

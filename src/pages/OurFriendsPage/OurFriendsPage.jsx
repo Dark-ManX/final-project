@@ -1,20 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import Fetch from 'api'
+import { fetchFriends } from 'api/friendsApi';
 import { CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, SecondThumb, Title, Item, Anchor} from "./OurFriendsPage.styled";
 
+const fetch = new Fetch();
 
 const OurFriendsPage = () => { 
     
-    const [arr, setArr] = useState([]);
+    const [arr, setArr] = useState([])
+
+    const getFriends = async () => {
+        try {
+            const res = await fetchFriends();
+            setArr(res);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
     useEffect(() => {
-        fetch('https://team-api-blended2.herokuapp.com/friends').then(res => res.json()).then(({ data }) => {
-            console.log(data.friends)
-            setArr(data.friends)
-        }).catch(err => console.log(err.message))
-    }, [])
+        getFriends();
+    }, []);
 
     return (
-        <div>
+        <>
             <Title>Our friends</Title>
             
             <FriendsThumb>
@@ -64,7 +73,7 @@ const OurFriendsPage = () => {
                 }
                 
             </FriendsThumb>
-        </div>
+        </>
     )
 }
 
