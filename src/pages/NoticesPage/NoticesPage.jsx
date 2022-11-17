@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 // import { useSelector } from 'react-redux';
-import { Link, Nav, Container } from "./NoticesPage.styled";
+import { Link, AuthLink, Title, Nav, Container, LinkContainer, AuthLinkContainer } from "./NoticesPage.styled";
 
 const NoticesPage = () => {
     // const { token } = useSelector((state) => state.user);
@@ -9,16 +9,19 @@ const NoticesPage = () => {
     
     return ( 
         <Container>
+            <Title>Find your favorite pet</Title>
             <Nav>
-                <Link to="sell">Sell</Link>
-                <Link to="for-free">In good hands</Link>
-                <Link to="lost-found">Lost/found</Link>
+                <LinkContainer>
+                    <Link to="lost-found">Lost/found</Link>
+                    <Link to="for-free">In good hands</Link>
+                    <Link to="sell">Sell</Link>
+                </LinkContainer>    
 
                 {token &&
-                    <>
-                        <Link to="favorite">Favorite ads</Link>
-                        <Link to="own">My ads</Link>
-                    </>
+                    <AuthLinkContainer>
+                        <AuthLink to="favorite">Favorite ads</AuthLink>
+                        <AuthLink to="own">My ads</AuthLink>
+                    </AuthLinkContainer>
                 }
             </Nav>
             
