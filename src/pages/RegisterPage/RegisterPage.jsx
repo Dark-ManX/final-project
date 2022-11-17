@@ -1,6 +1,5 @@
 import RegistrationDetails from 'components/RegistrationDetails/RegistrationDetails';
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 
 const RegisterPage = () => {
@@ -51,7 +50,7 @@ const RegisterPage = () => {
     setPassword('');
   };
 
-  // useEffect(() => {navigate(`/register/${userId}`);}, [userId]);
+  useEffect(() => {navigate(`/register/${userId}`);}, [userId]);
 
   return (
     <>

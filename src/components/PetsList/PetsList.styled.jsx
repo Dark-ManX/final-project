@@ -4,8 +4,6 @@ export const Item = styled.li`
   position: relative;
   margin-bottom: 20px;
   padding: 16px 20px 40px 20px;
-  /* width: 280px;
-  height: 541px; */
 
   background: #ffffff;
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
