@@ -1,11 +1,14 @@
 import RegistrationDetails from 'components/RegistrationDetails/RegistrationDetails';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCreateUserMutation } from 'redux/auth/authOperations';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState('');
+
+  const navigate = useNavigate();
 
   const [createNewUser] = useCreateUserMutation();
 
@@ -50,7 +53,7 @@ const RegisterPage = () => {
     setPassword('');
   };
 
-  useEffect(() => {navigate(`/register/${userId}`);}, [userId]);
+  useEffect(() => {navigate(`/register/${userId}`)}, [userId]);
 
   return (
     <>
