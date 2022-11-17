@@ -25,12 +25,10 @@ let photo;
 export const NoticeCategoryItem = ({ notice }) => {
     const [showModal, setShowModal] = useState(false);
     const notices = useSelector(state => state.notices.items);
-    // const userID = useSelector(state => state.auth.user.id);
     const userID = '6374ac4a84c43b1851b51dda';
     const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
     const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzRhYzRhODRjNDNiMTg1MWI1MWRkYSIsImlhdCI6MTY2ODU5MDY3NywiZXhwIjoxNjY4NjI2Njc3fQ.l9nv-VhZ582KYX7GKbo2X22zFh30STKiqxdMcJrD49M';
-    // const { token } = useSelector(state => state.auth);
 
     switch (notice.category) {
         case 'sell':

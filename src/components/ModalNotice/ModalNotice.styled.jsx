@@ -1,19 +1,10 @@
-<<<<<<< HEAD
-// import styled from "styled-components";
-=======
 import styled from "styled-components";
 
-
-
 export const Container = styled.div`
-    // width: 704px;
-
-
 `
 
 export const Description = styled.div`
      margin-bottom: 20px;
-    //  padding: 40px 20px 40px 20px;
     
     @media screen and (min-width: 768px){
         display: flex;
@@ -22,8 +13,8 @@ export const Description = styled.div`
 export const CardImageContainer = styled.div`
     position: relative;
     margin-bottom: 16px;
-    // display: flex;
 `
+
 export const Photo = styled.img`
     width: 240px;
     height: 240px;
@@ -41,6 +32,7 @@ export const Photo = styled.img`
        
     }
 `
+
 export const Category = styled.p`
     position: absolute;
     top: 20px;
@@ -108,6 +100,7 @@ export const InfoValue = styled.div`
     line-height: 1.4;
     color: #000000;
 `
+
 export const Comments = styled.p`
     font-family: 'Manrope';
     font-style: normal;
@@ -122,6 +115,7 @@ export const Comments = styled.p`
         margin-bottom: 32px;
     }
 `
+
 export const Span = styled.span`
     font-family: 'Manrope';
     font-style: normal;
@@ -216,4 +210,3 @@ export const ButtonCall = styled.a`
         margin-bottom: 0;
     }
 `
->>>>>>> 28f11a0e49f08daf093dbe3b0418d054de29436b
