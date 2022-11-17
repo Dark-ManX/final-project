@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react';
-import Fetch from 'api'
 import { fetchFriends } from 'api/friendsApi';
-import { CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, SecondThumb, Title, Item, Anchor} from "./OurFriendsPage.styled";
-
-const fetch = new Fetch();
+import { useEffect, useState } from 'react';
+import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => { 
     
