@@ -22,15 +22,14 @@ export const authApi = createApi({
         method: 'POST',
         body: newUser,
       }),
-      invalidatesTags: [{ type: 'User' }],
+      invalidatesTags: (result, error, arg) => [{ type: 'User', id: arg.id }],
     }),
 
     // PATCH register: '/register/:id',
     registerUser: builder.mutation({
-      query: (registeredUser, userId) => ({
-        url: `/register/${userId}`,
+      query: (registeredUser, id) => ({
+        url: `/register/${id}`,
         method: 'PATCH',
-        body: registeredUser,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -40,7 +39,7 @@ export const authApi = createApi({
       query: logUser => ({
         url: '/login',
         method: 'POST',
-        body: logUser,
+        body: { ...logUser },
       }),
       invalidatesTags: [{ type: 'User' }],
     }),

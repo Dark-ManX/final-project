@@ -1,8 +1,6 @@
 import { useCreateUserMutation } from '../../redux/auth/authOperations';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import axios from 'axios';
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import {
   Input,
@@ -12,6 +10,8 @@ import {
   Button,
   P,
   Span,
+  ImageContainer,
+  Section,
 } from './RegisterPage.styled';
 
 const Registration = () => {
@@ -21,17 +21,19 @@ const Registration = () => {
   const [userId, setUserId] = useState('');
   const [page, setPage] = useState(0);
 
+  const USER_REGEX = /^[A-Z]{3-20}$/;
+  const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+  const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+  const [user, setNewUser] = useState({});
   // const [username, setUsername] = useState('');
   // const [city, setCity] = useState('');
   // const [phone, setPhone] = useState('');
 
-  // const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // const [registerNewUser] = useRegisterUserMutation();
   const [createNewUser] = useCreateUserMutation();
 
-  // const registrationDetails = { city, name, phone };
   const FormTitles = ['Sign Up', 'Personal Info', 'Other'];
 
   const handleChange = event => {
@@ -39,35 +41,16 @@ const Registration = () => {
     switch (name) {
       case 'email':
         setEmail(value);
-        // console.log(email);
+
         break;
 
       case 'password':
         setPassword(value);
-        // console.log(password);
+
         break;
-
-      // case 'name':
-      //   setName(value);
-      //   break;
-
-      // case 'city':
-      //   setCity(value);
-      //   break;
-
-      // case 'phone':
-      //   setPhone(value);
-      //   break;
 
       default:
         return;
-    }
-  };
-  const PageDisplay = () => {
-    if (page === 0) {
-      return <Registration />;
-    } else if (page === 1) {
-      return <RegistrationDetails />;
     }
   };
 
@@ -86,7 +69,7 @@ const Registration = () => {
     const updatedUser = await createUser();
     setUserId(updatedUser);
     reset();
-    // navigate(`/register/${updatedUser}`);
+    navigate(`/register/${updatedUser}`);
   };
 
   const reset = () => {
@@ -94,95 +77,53 @@ const Registration = () => {
     setPassword('');
   };
 
-  // const handleRegisterSubmit = event => {
-  //   event.preventDefault();
-  //   result();
-  //   resetRegister();
-  // };
-
-  // const resetRegister = () => {
-  //   setName('');
-  //   setCity('');
-  //   setPhone('');
-  // };
-
   useEffect(() => {}, [userId]);
 
   return (
     <>
       {!userId ? (
-        <Container>
-          <Title>Registration</Title>
-          <Form onSubmit={handleSubmit}>
-            <Input
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Email"
-              onChange={handleChange}
-            />
-            <Input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Password"
-              onChange={handleChange}
-            />
-            <Input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Confirm password"
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              onClick={() => {
-                setPage(currPage => currPage + 1);
-              }}
-            >
-              Next
-            </Button>
-            <P>
-              Already have an account?{' '}
-              <Link to={`/login`} state={{ from: location }}>
-                <Span>Login </Span>
-              </Link>
-            </P>
-          </Form>
-        </Container>
+        <Section>
+          <ImageContainer>
+            <Container>
+              <Title>Registration</Title>
+              <Form onSubmit={handleSubmit}>
+                <Input
+                  type="email"
+                  name="email"
+                  value={email}
+                  placeholder="Email"
+                  onChange={handleChange}
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={handleChange}
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  value={password}
+                  placeholder="Confirm password"
+                  onChange={handleChange}
+                />
+                <Button type="submit">Next</Button>
+                <P>
+                  Already have an account?{' '}
+                  <Link to={`/login`} state={{ from: location }}>
+                    <Span>Login </Span>
+                  </Link>
+                </P>
+              </Form>
+            </Container>
+          </ImageContainer>
+        </Section>
       ) : (
-        <RegistrationDetails details={userId} />
+        <RegistrationDetails id={userId} />
       )}
     </>
   );
 };
 
 export default Registration;
-
-// const result = async () => {
-//   try {
-//     const fetchUser = await fetch(
-//       `https://team-api-blended2.herokuapp.com/register/${userId}`,
-//       {
-//         method: 'PATCH',
-//         body: { name, city, phone },
-//         headers: { 'Content-Type': 'string' },
-//       }
-//     );
-//     console.log(fetchUser);
-//   } catch (error) {
-//     console.log(error);
-//   }
-
-//   // try {
-//   //   const data = await axios.patch(
-//   //     `https://team-api-blended2.herokuapp.com/register/${userId}`,
-//   //     registrationDetails
-//   //   );
-//   //   return data;
-//   //   console.log(data);
-//   // } catch (error) {
-//   //   console.log(error.message);
-//   // }
-// };
