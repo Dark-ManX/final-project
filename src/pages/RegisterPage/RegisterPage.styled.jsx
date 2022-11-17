@@ -21,7 +21,7 @@ export const ImageContainer = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     background-position: bottom;
     position: absolute;
-    top: 20px;
+    top: 400px;
     left: -152px;
     background-image: url(${wavesTablet});
     background-repeat: no-repeat;
@@ -43,6 +43,8 @@ export const ImageContainer = styled.div`
 `;
 export const Container = styled.div`
   @media screen and (min-width: 768px) {
+    top: -300px;
+    left: 110px;
     position: absolute;
     width: 608px;
     height: 517px;

@@ -18,6 +18,7 @@ const Registration = () => {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [userId, setUserId] = useState('');
   const [page, setPage] = useState(0);
 
@@ -49,6 +50,11 @@ const Registration = () => {
 
         break;
 
+      case 'confirmedPassword':
+        setConfirmedPassword(value);
+
+        break;
+
       default:
         return;
     }
@@ -66,10 +72,14 @@ const Registration = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const updatedUser = await createUser();
-    setUserId(updatedUser);
-    reset();
-    navigate(`/register/${updatedUser}`);
+    if (confirmedPassword !== password) {
+      setConfirmedPassword('');
+      return 'Passwords do not match!';
+    } else {
+      const updatedUser = await createUser();
+      setUserId(updatedUser);
+      reset();
+    }
   };
 
   const reset = () => {
@@ -102,15 +112,22 @@ const Registration = () => {
                   onChange={handleChange}
                 />
                 <Input
-                  type="password"
-                  name="password"
-                  value={password}
+                  type="Confirmed password"
+                  name="confirmedPassword"
+                  value={confirmedPassword}
                   placeholder="Confirm password"
                   onChange={handleChange}
                 />
-                <Button type="submit">Next</Button>
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    setPage(currPage => currPage + 1);
+                  }}
+                >
+                  Next
+                </Button>
                 <P>
-                  Already have an account?{' '}
+                  Already have an account?
                   <Link to={`/login`} state={{ from: location }}>
                     <Span>Login </Span>
                   </Link>
