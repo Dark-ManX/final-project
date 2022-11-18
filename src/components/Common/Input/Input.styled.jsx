@@ -4,7 +4,6 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 11px;
-  // max-width: 100%;
 `;
 
 export const Input = styled.input`
