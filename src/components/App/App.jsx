@@ -57,8 +57,7 @@ const App = () => {
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
-        <Route path="auth/check" element={<AsyncRegisterPage />} />
-        <Route path="auth/register" element={<AsyncRegistrationDetails />} />
+        <Route path="auth/register" element={<AsyncRegisterPage />} />
 
         <Route path="login" element={<AsyncLoginPage />} />
 

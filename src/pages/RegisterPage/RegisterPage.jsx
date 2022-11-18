@@ -48,9 +48,10 @@ const Registration = () => {
   };
   const conditionalComponent = () => {
     switch (page) {
-      case 0:
-        return <AuthForm />;
       case 1:
+        return <AuthForm />;
+
+      case 2:
         return <RegistrationDetails />;
 
       default:
@@ -62,7 +63,6 @@ const Registration = () => {
     switch (name) {
       case 'email':
         setEmail(value);
-
         break;
 
       case 'password':
@@ -71,7 +71,6 @@ const Registration = () => {
 
       case 'confirmedPassword':
         setConfirmedPassword(value);
-
         break;
 
       default:
@@ -93,8 +92,9 @@ const Registration = () => {
       return 'Passwords do not match!';
     } else {
       createUser();
-      navigate(`/auth/register`, { replace: true });
+      // navigate(`/auth/register`, { replace: true });
     }
+    setPage(page + 1);
   };
   return (
     <>
@@ -102,7 +102,18 @@ const Registration = () => {
         <ImageContainer>
           <Container>
             <Title>Registration</Title>
-            <Form onSubmit={handleSubmit}> {conditionalComponent()} </Form>
+            <Form>
+              {conditionalComponent()}
+              <Button onClick={handleSubmit}>
+                {page === 0 || page === 1 ? 'Next' : 'Register'}
+              </Button>
+              <P>
+                Already have an account?
+                {/* <Link to={`/login`} state={{ from: location }}> */}
+                <Span>Login </Span>
+                {/* </Link> */}
+              </P>
+            </Form>
           </Container>
         </ImageContainer>
       </Section>

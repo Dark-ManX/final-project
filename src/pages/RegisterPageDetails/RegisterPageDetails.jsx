@@ -85,16 +85,16 @@ const RegistrationDetails = ({ email, password }) => {
         placeholder="Mobile phone"
         // onChange={handleChange}
       />
-      <RegisterBtn type="submit">Register</RegisterBtn>
+
       <Link to={`/login`} state={{ from: location }}>
         <BackBtn type="submit">Back</BackBtn>
       </Link>
-      <P>
+      {/* <P>
         Already have an account?
         <Link to={`/login`} state={{ from: location }}>
           <Span>Login </Span>
         </Link>
-      </P>
+      </P> */}
     </>
   );
 };

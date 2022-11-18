@@ -37,15 +37,6 @@ const AuthForm = () => {
         placeholder="Confirm password"
         required
       />
-
-      <Button type="submit">Next</Button>
-
-      <P>
-        Already have an account?
-        {/* <Link to={`/login`} state={{ from: location }}> */}
-        <Span>Login </Span>
-        {/* </Link> */}
-      </P>
     </>
   );
 };
