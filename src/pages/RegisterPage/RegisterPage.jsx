@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
+import AuthForm from 'components/AuthForm';
 import {
   Input,
   Title,
@@ -45,7 +46,17 @@ const Registration = () => {
       return <RegistrationDetails />;
     }
   };
+  const conditionalComponent = () => {
+    switch (page) {
+      case 0:
+        return <AuthForm />;
+      case 1:
+        return <RegistrationDetails />;
 
+      default:
+        return <AuthForm />;
+    }
+  };
   const handleChange = event => {
     const { name, value } = event.target;
     switch (name) {
@@ -85,59 +96,16 @@ const Registration = () => {
       navigate(`/auth/register`, { replace: true });
     }
   };
-
   return (
     <>
-      {
-        <Section>
-          <ImageContainer>
-            <Container>
-              <Title>Registration</Title>
-              <Form onSubmit={handleSubmit}>
-                <Input
-                  type="email"
-                  name="email"
-                  value={email}
-                  placeholder="Email"
-                  onChange={handleChange}
-                  email={email}
-                />
-                <Input
-                  type="password"
-                  name="password"
-                  value={password}
-                  placeholder="Password"
-                  onChange={handleChange}
-                  password={password}
-                />
-                <Input
-                  type="Confirmed password"
-                  name="confirmedPassword"
-                  value={confirmedPassword}
-                  placeholder="Confirm password"
-                  onChange={handleChange}
-                />
-
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    setPage(currPage => currPage + 1);
-                  }}
-                >
-                  Next
-                </Button>
-
-                <P>
-                  Already have an account?
-                  <Link to={`/login`} state={{ from: location }}>
-                    <Span>Login </Span>
-                  </Link>
-                </P>
-              </Form>
-            </Container>
-          </ImageContainer>
-        </Section>
-      }
+      <Section>
+        <ImageContainer>
+          <Container>
+            <Title>Registration</Title>
+            <Form onSubmit={handleSubmit}> {conditionalComponent()} </Form>
+          </Container>
+        </ImageContainer>
+      </Section>
     </>
   );
 };

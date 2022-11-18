@@ -64,46 +64,37 @@ const RegistrationDetails = ({ email, password }) => {
 
   return (
     <>
-      <Section>
-        <ImageContainer>
-          <Container>
-            <Title>Registration</Title>
-            <Form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                name="name"
-                value={name}
-                placeholder="Name"
-                onChange={handleChange}
-              />
-              <Input
-                type="text"
-                name="city"
-                value={city}
-                placeholder="City, region"
-                onChange={handleChange}
-              />
-              <Input
-                type="tel"
-                name="phone"
-                value={phone}
-                placeholder="Mobile phone"
-                onChange={handleChange}
-              />
-              <RegisterBtn type="submit">Register</RegisterBtn>
-              <Link to={`/login`} state={{ from: location }}>
-                <BackBtn type="submit">Back</BackBtn>
-              </Link>
-              <P>
-                Already have an account?
-                <Link to={`/login`} state={{ from: location }}>
-                  <Span>Login </Span>
-                </Link>
-              </P>
-            </Form>
-          </Container>
-        </ImageContainer>
-      </Section>
+      <Input
+        type="text"
+        // name="name"
+        // value={name}
+        placeholder="Name"
+        // onChange={handleChange}
+      />
+      <Input
+        type="text"
+        // name="city"
+        // value={city}
+        placeholder="City, region"
+        // onChange={handleChange}
+      />
+      <Input
+        type="tel"
+        // name="phone"
+        // value={phone}
+        placeholder="Mobile phone"
+        // onChange={handleChange}
+      />
+      <RegisterBtn type="submit">Register</RegisterBtn>
+      <Link to={`/login`} state={{ from: location }}>
+        <BackBtn type="submit">Back</BackBtn>
+      </Link>
+      <P>
+        Already have an account?
+        <Link to={`/login`} state={{ from: location }}>
+          <Span>Login </Span>
+        </Link>
+      </P>
     </>
   );
 };
