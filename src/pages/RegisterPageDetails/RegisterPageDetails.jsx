@@ -17,50 +17,50 @@ import { useSelector } from 'react-redux';
 
 const RegistrationDetails = ({ email, password }) => {
   const location = useLocation();
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
-  console.log(password);
+  // const [name, setName] = useState('');
+  // const [city, setCity] = useState('');
+  // const [phone, setPhone] = useState('');
+  // console.log(password);
 
-  const [registerNewUser] = useRegisterUserMutation();
+  // const [registerNewUser] = useRegisterUserMutation();
 
-  const handleChange = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
+  // const handleChange = event => {
+  //   const { name, value } = event.target;
+  //   switch (name) {
+  //     case 'name':
+  //       setName(value);
+  //       break;
 
-      case 'city':
-        setCity(value);
-        break;
+  //     case 'city':
+  //       setCity(value);
+  //       break;
 
-      case 'phone':
-        setPhone(value);
-        break;
+  //     case 'phone':
+  //       setPhone(value);
+  //       break;
 
-      default:
-        return;
-    }
-  };
+  //     default:
+  //       return;
+  //   }
+  // };
 
-  const registerUser = async () => {
-    const newUser = { name, city, phone };
-    console.log(newUser);
-    await registerNewUser(newUser);
-  };
+  // const registerUser = async () => {
+  //   const newUser = { name, city, phone };
+  //   console.log(newUser);
+  //   await registerNewUser(newUser);
+  // };
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    await registerUser();
-    reset();
-  };
+  // const handleSubmit = async event => {
+  //   event.preventDefault();
+  //   await registerUser();
+  //   reset();
+  // };
 
-  const reset = () => {
-    setName('');
-    setCity('');
-    setPhone('');
-  };
+  // const reset = () => {
+  //   setName('');
+  //   setCity('');
+  //   setPhone('');
+  // };
 
   return (
     <>

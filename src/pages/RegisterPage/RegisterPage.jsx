@@ -18,9 +18,6 @@ import {
 
 const Registration = () => {
   const location = useLocation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -58,44 +55,26 @@ const Registration = () => {
         return <AuthForm />;
     }
   };
-  const handleChange = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
 
-      case 'password':
-        setPassword(value);
-        break;
-
-      case 'confirmedPassword':
-        setConfirmedPassword(value);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  const createUser = async () => {
-    const newUser = { email, password };
-    const { data } = await createNewUser(newUser);
-    console.log(data);
-    createNewUser(newUser);
-  };
+  // const createUser = async () => {
+  //   const newUser = { email, password };
+  //   const { data } = await createNewUser(newUser);
+  //   console.log(data);
+  //   createNewUser(newUser);
+  // };
 
   const handleSubmit = async event => {
     event.preventDefault();
-    if (confirmedPassword !== password) {
-      setConfirmedPassword('');
-      return 'Passwords do not match!';
-    } else {
-      createUser();
-      // navigate(`/auth/register`, { replace: true });
-    }
+    // if (confirmedPassword !== password) {
+    //   setConfirmedPassword('');
+    //   return 'Passwords do not match!';
+    // } else {
+    //   createUser();
+    //   // navigate(`/auth/register`, { replace: true });
+    // }
     setPage(page + 1);
   };
+
   return (
     <>
       <Section>
