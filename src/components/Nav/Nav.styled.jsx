@@ -49,7 +49,7 @@ export const Navigation = styled.nav`
     position: absolute;
     background-color: #FDF7F2;
     top: 20px;
-    right: -80px;
+    left: -95px;
     width: 768px;
     height: 110vh;
     padding-top: 108px;
