@@ -132,7 +132,6 @@ export const Button = styled.button`
   margin-bottom:40px;
   margin-top: 24px;
   background-color: #F59256;
-
   @media screen and (min-width: 768px) {  
     line-height: 27px;  
     font-weight: 500;

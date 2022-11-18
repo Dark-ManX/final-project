@@ -1,42 +1,34 @@
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import {
-  Input,
-  Title,
-  Container,
-  Form,
-  Button,
-  P,
-  Span,
-  ImageContainer,
-  Section,
-} from './AuthForm.styled';
+import { Input } from './AuthForm.styled';
 
-const AuthForm = () => {
+const AuthForm = ({ formData, setFormData }) => {
+  console.log(formData);
   return (
     <>
       <Input
         type="email"
-        //   name="email"
-        //   value={email}
+        onChange={e => {
+          setFormData({
+            ...formData,
+            email: e.target.value,
+          });
+        }}
+        value={formData.email}
         placeholder="Email"
-        //   onChange={handleChange}
         required
       />
       <Input
         type="password"
-        //   name="password"
-        //   value={password}
+        onChange={e => {
+          setFormData({
+            ...formData,
+            password: e.target.value,
+          });
+        }}
+        value={formData.password}
         placeholder="Password"
-        //   onChange={handleChange}
         required
       />
-      <Input
-        type="Confirmed password"
-        //   name="confirmedPassword"
-        //   value={confirmedPassword}
-        placeholder="Confirm password"
-        required
-      />
+      <Input type="Confirmed password" placeholder="Confirm password" />
     </>
   );
 };

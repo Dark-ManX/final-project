@@ -132,7 +132,6 @@ export const Button = styled.button`
   margin-bottom:40px;
   margin-top: 24px;
   background-color: #F59256;
-
   @media screen and (min-width: 768px) {  
     line-height: 27px;  
     font-weight: 500;
@@ -143,6 +142,7 @@ export const Button = styled.button`
   @media screen and (min-width: 1280px) {
     width: 458px;
     height: 48px;
+    margin-bottom:20px;
   }
 `;
 
@@ -156,9 +156,29 @@ export const P = styled.p`
   text-align: center;
   letter-spacing: 0.04em;
   color: rgba(17, 17, 17, 0.6);
+  margin-top: 10px;
 `;
 export const Span = styled.span`
   color: rgba(48, 145, 235, 1);
   border-bottom: 1px solid rgba(48, 145, 235, 1);
   border-width: thin;
+`;
+export const BackBtn = styled.button`
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 40px;
+    color: #000000;
+    width: 458px;
+    height: 48px;
+    background: #ffffff;
+    border-radius: 40px;
+    border: 1px solid #f59256;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    align-items: center;
+    letter-spacing: 0.04em;
+    color: #000000;
+  }
 `;
