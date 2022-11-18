@@ -82,11 +82,16 @@ const OurFriendsPage = () => {
             </>
             )}
 
+<<<<<<< HEAD
             {isLoading && <Loading/>}
 
             {error && <Error/>}
         </>
    
+=======
+            {error && <Error/>}
+    </>
+>>>>>>> 1856537 (last deployed)
     )
 }
 
