@@ -1,15 +1,16 @@
 import { useLocation } from 'react-router-dom';
-import { NavigationItem, NavigationLink, Navigation, List } from './Nav.styled';
+import { List, Navigation, NavigationItem, NavigationLink } from './Nav.styled';
 
-const Nav = () => {
+const Nav = ({set}) => {
   const location = useLocation();
 
+  console.log(set)
+
   return (
-    <Navigation>
+    <Navigation className={set && 'shown'}>
       <List>
         <NavigationItem>
 
-          {/* Якір у якорі, треба залишити один */}
           <NavigationLink to={'/news'} state={{ from: location }}>
             News
           </NavigationLink>
@@ -28,7 +29,6 @@ const Nav = () => {
       </List>
     </Navigation>
   );
-
 };
 
 export default Nav;

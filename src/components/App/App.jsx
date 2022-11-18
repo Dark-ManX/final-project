@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
-// import Modal from 'components/Modal/Modal';
+import MainPage from 'components/MainPage/MainPage';
 
-const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
+// const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const AsyncSellNoticesPage = lazy(() =>
@@ -35,14 +35,9 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<AsyncMainPage />} />
+        <Route index element={<MainPage />} />
 
         <Route path="news" element={<AsyncNewsPage />} />
-
-        {/* <Route path="notices" element={<AsyncNoticesPage />}>
-          <Route path="sell" element={<AsyncSellNoticesPage />} />
-          <Route path="for-free" element={<AsyncLostFoundNoticesPage />} />
-          <Route path="lost-found" element={<AsyncForFreeNoticesPage />} /> */}
 
         <Route path="notices" element={<AsyncNoticesPage />}>
           <Route path="sell" element={<AsyncSellNoticesPage />} />
@@ -54,7 +49,7 @@ const App = () => {
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
-        <Route path="/register" element={<AsyncRegisterPage />} />
+        <Route path="register" element={<AsyncRegisterPage />} />
 
         <Route path="login" element={<AsyncLoginPage />} />
 

@@ -15,7 +15,7 @@ import {
   BackBtn,
 } from './RegisterPage.styled';
 
-const Registration = () => {
+const RegisterPage = () => {
   const location = useLocation();
   const [formData, setFormData] = useState({
     email: '',
@@ -87,4 +87,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegisterPage;

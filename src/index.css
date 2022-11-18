@@ -47,11 +47,4 @@ a {
   transition: transform 250ms linear;
 } */
 
-.shown {
-  visibility: visible;
-  width: 100%;
-  transform: translate(0, 0);
-  transition: transform 250ms linear;
-}
-
 

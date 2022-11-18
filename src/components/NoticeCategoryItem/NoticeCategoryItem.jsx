@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   NoticeCategoryItemStyled,
   CardInfoContainer,
@@ -13,25 +13,26 @@ import {
   CardDetailInfo,
   Button,
 } from './NoticeCategoryItem.styled';
-import { ReactComponent as AddIcon } from '../icons/add.svg';
-import { ReactComponent as RemoveIcon } from '../icons/remove.svg';
-import Modal from '../Modal/Modal';
+import { ReactComponent as AddIcon } from 'icons/add.svg';
+import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
+import Modal from 'components/Modal/Modal';
+import { ModalNotice } from 'components/ModalNotice/ModalNotice';
 import {
   useAddFavoriteNoticesMutation,
   useDeleteFavoriteNoticesMutation,
-} from '../../redux/notices/noticesApi';
+} from 'redux/notices/noticesApi';
 
 let category = '';
 let photo;
 
 export const NoticeCategoryItem = ({ notice }) => {
   const [showModal, setShowModal] = useState(false);
-  const [addToFavorite, setAddToFavorite] = useState(false);
+  const notices = useSelector(state => state.notices.items);
+  const userID = '6374ac4a84c43b1851b51dda';
   const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
   const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
-  // const { token } = useSelector(state => state.user);
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzM0OGUyM2RhMjk5YmRlY2I2NTFlNCIsImlhdCI6MTY2ODQ5OTcwNSwiZXhwIjoxNjY4NTM1NzA1fQ.W9gK98YZ9OzenWQpIP_e6irUwwyHiAI90L2xk4_Ebmg';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzRhYzRhODRjNDNiMTg1MWI1MWRkYSIsImlhdCI6MTY2ODU5MDY3NywiZXhwIjoxNjY4NjI2Njc3fQ.l9nv-VhZ582KYX7GKbo2X22zFh30STKiqxdMcJrD49M';
 
   switch (notice.category) {
     case 'sell':
@@ -43,7 +44,6 @@ export const NoticeCategoryItem = ({ notice }) => {
     case 'in good hands':
       category = 'In good hands';
       break;
-    // eslint-disable-next-line no-unused-expressions
     default:
       return;
   }
@@ -55,33 +55,29 @@ export const NoticeCategoryItem = ({ notice }) => {
       'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
   }
 
-  const handleAddToFavoriteNotices = id => {
+  const handleRemoveFavoriteBtnClick = id => {
     id = notice._id;
-    addToFavoriteNotices({ id });
-    setAddToFavorite(true);
+    const existingNotice = notices.data.pets.find(notice => notice._id === id);
+
+    if (existingNotice) {
+      console.log('remove from favorite: ', id);
+      removeFromFavoriteNotices({ id });
+    }
   };
 
-  const handleRemoveFromFavoriteNotices = id => {
+  const handleAddFavoriteBtnClick = id => {
     id = notice._id;
-    removeFromFavoriteNotices({ id });
-    setAddToFavorite(false);
-  };
 
-  const handleAddToFavoriteBtn = () => {
     if (!token) {
       alert('please login');
       return;
     }
-    console.log('add to favorite: ', notice._id);
-    handleAddToFavoriteNotices();
+
+    console.log('add to favorite: ', id);
+    addToFavoriteNotices({ id });
   };
 
-  const handleRemoveFromFavoriteBtn = () => {
-    console.log('remove from favorite: ', notice._id);
-    handleRemoveFromFavoriteNotices();
-  };
-
-  const handleBtnClick = () => setShowModal(true);
+  const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
   return (
@@ -89,13 +85,13 @@ export const NoticeCategoryItem = ({ notice }) => {
       <CardImageContainer>
         <Photo src={photo} alt={notice.comments} />
         <Category>{category}</Category>
-        {!addToFavorite && (
-          <AddToFavoriteBtn onClick={handleAddToFavoriteBtn}>
+        {!notice.favorite.includes(userID) && (
+          <AddToFavoriteBtn onClick={handleAddFavoriteBtnClick}>
             <AddIcon width="24" height="22" />
           </AddToFavoriteBtn>
         )}
-        {addToFavorite && (
-          <RemoveFromFavoriteBtn onClick={handleRemoveFromFavoriteBtn}>
+        {notice.favorite.includes(userID) && (
+          <RemoveFromFavoriteBtn onClick={handleRemoveFavoriteBtnClick}>
             <RemoveIcon width="19.5" height="21" />
           </RemoveFromFavoriteBtn>
         )}
@@ -115,10 +111,14 @@ export const NoticeCategoryItem = ({ notice }) => {
           </li>
         </CardDetailsContainer>
       </CardInfoContainer>
-      <Button type="button" onClick={handleBtnClick}>
+      <Button type="button" onClick={handleOpenModal}>
         Learn more
       </Button>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && (
+        <Modal onClose={handleCloseModal}>
+          <ModalNotice notice={notice} onClose={handleCloseModal} />
+        </Modal>
+      )}
     </NoticeCategoryItemStyled>
   );
 };

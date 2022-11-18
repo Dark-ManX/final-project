@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const NewsPageTitle = styled.h2`
-    margin-bottom: 28px;    
+    margin-bottom: 28px;  
+    margin-top: 54px;
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;

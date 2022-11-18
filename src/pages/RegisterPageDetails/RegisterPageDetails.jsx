@@ -1,18 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Input,
-  Title,
-  Container,
-  Form,
-  RegisterBtn,
-  BackBtn,
-  P,
-  Span,
-  ImageContainer,
-  Section,
-} from './RegisterPageDetails.styled';
-
-import { useSelector } from 'react-redux';
+import { Input } from './RegisterPageDetails.styled';
 
 const RegistrationDetails = ({ formData, setFormData }) => {
   return (

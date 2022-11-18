@@ -1,4 +1,5 @@
 import { StyledColoredLink, StyledSpan } from "./AuthUserNav.styled";
+import accountIcon from 'icons/Vector.svg';
 
 const UserNav = () => {
 
@@ -6,7 +7,7 @@ const UserNav = () => {
       
         <StyledColoredLink to={'/user'}>
           <StyledSpan>
-            <p>ICON</p>
+            <img src={accountIcon} alt="account icon" />
           </StyledSpan>
           Account
         </StyledColoredLink>

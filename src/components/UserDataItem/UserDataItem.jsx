@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import edit from '../../components/icons/edit.svg';
-
+import edit from 'icons/edit.svg';
 import {
   UserInfoList,
   UserInfoItem,

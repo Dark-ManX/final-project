@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import remove from '../../components/icons/remove.svg';
+import remove from 'icons/remove.svg';
 
 import { Item, Text, Image, DeleteBtn, DeleteSvg } from './PetsList.styled';
 
