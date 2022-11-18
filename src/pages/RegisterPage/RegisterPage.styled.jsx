@@ -165,6 +165,8 @@ export const Span = styled.span`
 `;
 export const BackBtn = styled.button`
   @media screen and (min-width: 1280px) {
+  }
+  @media screen and (min-width: 1280px) {
     margin-bottom: 40px;
     color: #000000;
     width: 458px;
