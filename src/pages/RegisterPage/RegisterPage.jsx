@@ -1,6 +1,7 @@
 import { useCreateUserMutation } from '../../redux/auth/authOperations';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import {
   Input,
@@ -19,23 +20,31 @@ const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [userId, setUserId] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    city: '',
+    phone: '',
+  });
+
   const [page, setPage] = useState(0);
+  const dispatch = useDispatch();
 
   const USER_REGEX = /^[A-Z]{3-20}$/;
   const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
   const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
-  const [user, setNewUser] = useState({});
-  // const [username, setUsername] = useState('');
-  // const [city, setCity] = useState('');
-  // const [phone, setPhone] = useState('');
-
   const navigate = useNavigate();
-
   const [createNewUser] = useCreateUserMutation();
 
-  const FormTitles = ['Sign Up', 'Personal Info', 'Other'];
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <Registration />;
+    } else if (page === 1) {
+      return <RegistrationDetails />;
+    }
+  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -47,7 +56,6 @@ const Registration = () => {
 
       case 'password':
         setPassword(value);
-
         break;
 
       case 'confirmedPassword':
@@ -64,10 +72,7 @@ const Registration = () => {
     const newUser = { email, password };
     const { data } = await createNewUser(newUser);
     console.log(data);
-    const { id } = data.data.user;
-    setUserId(id);
-    console.log(id);
-    return id;
+    createNewUser(newUser);
   };
 
   const handleSubmit = async event => {
@@ -76,22 +81,14 @@ const Registration = () => {
       setConfirmedPassword('');
       return 'Passwords do not match!';
     } else {
-      const updatedUser = await createUser();
-      setUserId(updatedUser);
-      reset();
+      createUser();
+      navigate(`/auth/register`, { replace: true });
     }
   };
 
-  const reset = () => {
-    setEmail('');
-    setPassword('');
-  };
-
-  useEffect(() => {}, [userId]);
-
   return (
     <>
-      {!userId ? (
+      {
         <Section>
           <ImageContainer>
             <Container>
@@ -103,6 +100,7 @@ const Registration = () => {
                   value={email}
                   placeholder="Email"
                   onChange={handleChange}
+                  email={email}
                 />
                 <Input
                   type="password"
@@ -110,6 +108,7 @@ const Registration = () => {
                   value={password}
                   placeholder="Password"
                   onChange={handleChange}
+                  password={password}
                 />
                 <Input
                   type="Confirmed password"
@@ -118,6 +117,7 @@ const Registration = () => {
                   placeholder="Confirm password"
                   onChange={handleChange}
                 />
+
                 <Button
                   type="submit"
                   onClick={() => {
@@ -126,6 +126,7 @@ const Registration = () => {
                 >
                   Next
                 </Button>
+
                 <P>
                   Already have an account?
                   <Link to={`/login`} state={{ from: location }}>
@@ -136,9 +137,7 @@ const Registration = () => {
             </Container>
           </ImageContainer>
         </Section>
-      ) : (
-        <RegistrationDetails id={userId} />
-      )}
+      }
     </>
   );
 };

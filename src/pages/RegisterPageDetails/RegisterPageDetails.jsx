@@ -13,18 +13,16 @@ import {
   Section,
 } from './RegisterPageDetails.styled';
 import { Link, useLocation, useParams } from 'react-router-dom';
-// import wave from '../../img/bigWave.jpg';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 
-const RegistrationDetails = ({ id }) => {
+const RegistrationDetails = ({ email, password }) => {
   const location = useLocation();
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
-  const [userId, setUserId] = useState('');
+  console.log(password);
+
   const [registerNewUser] = useRegisterUserMutation();
-  console.log(id);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -55,7 +53,6 @@ const RegistrationDetails = ({ id }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     await registerUser();
-
     reset();
   };
 
@@ -64,7 +61,7 @@ const RegistrationDetails = ({ id }) => {
     setCity('');
     setPhone('');
   };
-  useEffect(() => setUserId(id), [id, setUserId]);
+
   return (
     <>
       <Section>
