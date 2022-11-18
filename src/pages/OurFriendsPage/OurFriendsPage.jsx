@@ -97,9 +97,7 @@ const OurFriendsPage = () => {
                 </>
             )}
 
-            {error && (
-                <Error/>
-            )}
+            {error && <Error/>}
     </>
     )
 }
