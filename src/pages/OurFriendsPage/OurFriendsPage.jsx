@@ -1,4 +1,4 @@
-import {response} from 'api';
+import { response } from 'api';
 import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loding/Loading';
@@ -6,26 +6,28 @@ import Error from 'components/error/error';
 import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => { 
+
+    const { getFriends } = response;
     
     const [arr, setArr] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false)
 
-    const getFriends = async () => {
-        setIsLoading(true);
+    const getAllFriends = async () => {
         try {
-            const res = await response.getFriends();
+            setIsLoading(true);
+            const res = await getFriends();
+            console.log(res)
             setArr(res);
         } catch (err) {
             setError(err);
-            return;
         } finally {
             setIsLoading(false);
         }
     }
 
     useEffect(() => {
-        getFriends();
+        getAllFriends();
     }, []);
 
     return (
