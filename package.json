@@ -17,7 +17,6 @@
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
-    "react-scripts": "^5.0.1",
     "redux-persist": "^6.0.0",
     "shortid": "^2.2.16",
     "styled-components": "^5.3.6",
@@ -50,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^8.27.0",
     "gh-pages": "^4.0.0"
   }
 }
