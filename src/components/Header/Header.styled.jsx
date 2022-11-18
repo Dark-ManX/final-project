@@ -31,17 +31,17 @@ export const Button = styled.button`
 export const MobileMenu = styled.div`
 position: absolute;
 top: 100%;
-left: 0;
+left: -20px;
 display: flex;
 flex-direction: column-reverse;
 justify-content: flex-end;
-padding: 46px 0 190px;
-width: 100%;
+padding-top: 46px;
+width: 320px;
+height: 100%;
 overflow: hidden;
 background-color: #FDF7F2;
 row-gap: 60px;
 align-items: center;
-z-index: 20;
 
 @media screen and (max-width: 767px) {
 transform: scaleY(0);
@@ -54,6 +54,7 @@ transition: transform 250ms linear, opacity 250ms linear;
 &.shown {
 transform: scaleY(1);
 opacity: 1;
+z-index: 10;
 }
 }
 
@@ -62,6 +63,7 @@ padding: 0;
 position: relative;
 overflow: visible;
 height: auto;
+width: 1280px;
 }
 
 @media screen and (min-width: 1280px) {
