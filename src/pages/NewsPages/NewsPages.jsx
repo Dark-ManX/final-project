@@ -66,12 +66,16 @@ const [isLoading, setIsLoading] = useState(false);
   }
     
   return (
-    <>
-      <MainContainer>
+    <MainContainer>
+
       <NewsPageTitle>News</NewsPageTitle>
-      <SearchForm onSubmit={handleSubmit}/>
+
+      <SearchForm onSubmit={handleSubmit} />
+      
       {isLoading && <h3>Чекайте, ще 2-3 тижні</h3>}
+
       {error && <h3>Упс! Щось пішло не так</h3>}
+
       <NewsSet>
         {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>
         (<NewsItem key={_id}>
@@ -79,9 +83,11 @@ const [isLoading, setIsLoading] = useState(false);
           <NewsItemTitle>
             <EllipsisText text={title} length={42} />
           </NewsItemTitle>
+
           <NewsItemContent>
             <EllipsisText text={description} length={231} />
           </NewsItemContent>
+
           <NewsItemInfo>
             <NewsItemDate>{date}</NewsItemDate>
             <NewsItemLink href={url} target='_blank'>Read more</NewsItemLink>
@@ -89,8 +95,7 @@ const [isLoading, setIsLoading] = useState(false);
         </NewsItem>)
         )}
         </NewsSet>
-        </MainContainer>
-    </>
+    </MainContainer>
   )
 
 };

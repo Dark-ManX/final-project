@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetFavoriteNoticesQuery } from 'redux/notices/noticesApi';
-import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
+import { NoticesCategoryList } from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
 
 const FavoriteNotices = () => {
     // eslint-disable-next-line no-unused-vars

@@ -1,4 +1,4 @@
-import RegistrationDetails from 'components/RegistrationDetails/RegistrationDetails';
+import RegistrationDetails from 'components/Auth/RegistrationDetails/RegistrationDetails';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCreateUserMutation } from 'redux/auth/authOperations';

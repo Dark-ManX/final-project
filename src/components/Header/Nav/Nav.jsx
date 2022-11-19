@@ -4,8 +4,6 @@ import { List, Navigation, NavigationItem, NavigationLink } from './Nav.styled';
 const Nav = ({set}) => {
   const location = useLocation();
 
-  console.log(set)
-
   return (
     <Navigation className={set && 'shown'}>
       <List>

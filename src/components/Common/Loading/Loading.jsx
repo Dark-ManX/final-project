@@ -1,4 +1,4 @@
-import wait from 'img/wait.jpg'
+import wait from 'img/wait.jpg';
 
 const Loading = () => {
 

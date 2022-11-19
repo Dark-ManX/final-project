@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // import { useLocation } from 'react-router-dom';
-import Loading from 'components/Common/Loding/Loading';
+import Loading from 'components/Common/Loading/Loading';
 import Error from 'components/Common/Error/Error';
 import { response } from 'api';
 import { NoticesCategoryList } from 'components/Notices/NoticesCategoryList/NoticesCategoryList';

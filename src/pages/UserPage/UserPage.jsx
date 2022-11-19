@@ -1,6 +1,6 @@
-import { UserData } from 'components/UserData/UserData';
-import { Logout } from 'components/Logout/Logout';
-import { PetsData } from 'components/PetsData/PetsData';
+import { UserData } from 'components/User/UserData/UserData';
+import { Logout } from 'components/User/Logout/Logout';
+import { PetsData } from 'components/User/PetsData/PetsData';
 import {
   Container,
   ContainerUser,

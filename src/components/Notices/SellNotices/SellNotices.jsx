@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { fetchNotices } from 'api/noticesApi';
-import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
+import { NoticesCategoryList } from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
 
-const LostFoundNotices = () => {
+const SellNotices = () => {
     // eslint-disable-next-line no-unused-vars
     const [page, setPage] = useState(1);
     const [notices, setNotices] = useState([]);
     const [error, setError] = useState('');
 
     useEffect((page) => {
-        fetchNotices('lost-found').then(data => {
+        fetchNotices('sell').then(data => {
             setNotices(prevState => [...prevState, ...data]);
         }).catch(error => setError(error));
     }, [page]);
@@ -23,4 +23,4 @@ const LostFoundNotices = () => {
     );
 };
 
-export default LostFoundNotices;
+export default SellNotices;

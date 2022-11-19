@@ -6,7 +6,7 @@ margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 5;
+  z-index: 20;
   
   @media screen and (min-width: 1280px) {
   column-gap: 80px;
@@ -47,7 +47,6 @@ align-items: center;
 transform: scaleY(0);
 opacity: 0;
 height: 100vh;
-
 transform-origin: top;
 transition: transform 250ms linear, opacity 250ms linear;
 
@@ -63,7 +62,7 @@ padding: 0;
 position: relative;
 overflow: visible;
 height: auto;
-width: 1280px;
+width: 768px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -72,6 +71,7 @@ flex-direction: row;
 justify-content: flex-start;
 padding: 20px 0;
 height: auto;
+width: 1280px;
 }
 `
 
@@ -80,12 +80,12 @@ export const AuthUserContainer = styled.div`
   gap: 12px;
   justify-content: center;
   align-items: center;
-  width: 250px;
+  /* width: 250px; */
 
 @media screen and (min-width: 768px) {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 0;
   transform: translateY(-50%);
   justify-content: center;
 }

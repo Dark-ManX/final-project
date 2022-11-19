@@ -1,5 +1,5 @@
-import AuthNav from 'components/AuthUserNav/AuthNav';
-import UserNav from 'components/AuthUserNav/UserNav';
+import AuthNav from 'components/Header/AuthUserNav/AuthNav';
+import UserNav from 'components/Header/AuthUserNav/UserNav';
 import Logo from 'components/Header/Logo/Logo';
 import Nav from 'components/Header/Nav/Nav';
 import { useState } from 'react';

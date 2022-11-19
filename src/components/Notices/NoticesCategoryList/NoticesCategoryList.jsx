@@ -2,8 +2,6 @@ import { NoticeCategoryItem } from "components/Notices/NoticeCategoryItem/Notice
 import { Gallery } from "./NoticesCategoryList.styled";
 
 export const NoticesCategoryList = ({ notices }) => {
-
-    console.log(notices)
     return (
         <Gallery>
             {notices.map(notice =>

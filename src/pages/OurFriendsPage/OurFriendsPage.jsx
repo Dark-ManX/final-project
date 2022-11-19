@@ -1,7 +1,7 @@
 import { fetchFriends } from 'api/friendsApi';
 import { useEffect, useState } from 'react';
 import Error from 'components/Common/Error/Error';
-import Loading from 'components/Common/Loding/Loading';
+import Loading from 'components/Common/Loading/Loading';
 import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => {

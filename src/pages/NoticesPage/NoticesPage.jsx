@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import Loading from "components/Common/Loading/Loading";
 import { Link, AuthLink, Title, Nav, Container, LinkContainer, AuthLinkContainer } from "./NoticesPage.styled";
 
 const NoticesPage = () => {
@@ -7,12 +8,9 @@ const NoticesPage = () => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzM0OGUyM2RhMjk5YmRlY2I2NTFlNCIsImlhdCI6MTY2ODQ5OTcwNSwiZXhwIjoxNjY4NTM1NzA1fQ.W9gK98YZ9OzenWQpIP_e6irUwwyHiAI90L2xk4_Ebmg';
     
     return ( 
-// <<<<<<< HEAD
-//         <MainContainer>
-// =======
+
         <Container>
             <Title>Find your favorite pet</Title>
-{/* >>>>>>> 28f11a0e49f08daf093dbe3b0418d054de29436b */}
             <Nav>
                 <LinkContainer>
                     <Link to="lost-found">Lost/found</Link>
@@ -28,7 +26,7 @@ const NoticesPage = () => {
                 }
             </Nav>
             
-            <Suspense fallback='Loading...'>
+            <Suspense fallback={<Loading/>}>
                 <Outlet />
             </Suspense>
         </Container>

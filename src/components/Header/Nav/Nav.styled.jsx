@@ -48,12 +48,13 @@ export const Navigation = styled.nav`
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     position: absolute;
     background-color: #FDF7F2;
-    top: 20px;
-    left: -95px;
+    top: 25px;
+    right: -115px;
     width: 768px;
-    height: 110vh;
+    height: 0;
     padding-top: 108px;
     opacity: 0;
+    pointer-events: none;
     transform: scaleY(0.5);
     transform-origin: top;
     transition: transform 250ms linear, opacity 250ms linear;
@@ -61,6 +62,10 @@ export const Navigation = styled.nav`
     &.shown {
       transform: scaleY(1);
       opacity: 1;
+      width: 768px;
+      height: 110vh;
+      visibility: visible;
+      pointer-events: auto;
     }
   }
 
