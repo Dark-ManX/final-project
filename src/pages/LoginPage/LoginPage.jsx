@@ -56,7 +56,6 @@ const LoginPage = () => {
 
   return (
     <>
-      {' '}
       <Section>
         <ImageContainer>
           <Container>

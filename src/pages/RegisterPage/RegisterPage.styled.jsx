@@ -5,14 +5,14 @@ import wavesTablet from '../../img/wavesTablet.png';
 
 export const Section = styled.section`
   @media screen and (min-width: 768px) {
-    position: absolute;
+    position: relative;
   }
 `;
 export const ImageContainer = styled.div`
   background-position: bottom;
   position: absolute;
-  top: 20px;
-  left: -152px;
+  top: 100px;
+  left: 0px;
   background-image: url(${wavesPhone});
   background-repeat: no-repeat;
   background-size: contain;
@@ -42,6 +42,7 @@ export const ImageContainer = styled.div`
   }
 `;
 export const Container = styled.div`
+  margin-top: 30px;
   @media screen and (min-width: 768px) {
     top: -300px;
     left: 110px;
@@ -70,6 +71,8 @@ export const Title = styled.h2`
   text-align: center;
   letter-spacing: 0.04em;
   color: #111111;
+  margin-bottom: 40px;
+
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
     padding-top: 60px;
@@ -110,17 +113,14 @@ export const Input = styled.input`
 `;
 
 export const Form = styled.form`
-  @media screen and (min-width: 768px) {
-    display: flex;
-    justify-content: center;
-    justify-content: column;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 export const Button = styled.button`
-  width: 280px; 
-  height: 44px
+  width: 280px;
+  height: 40px;
   background: #f59256;
   border-radius: 40px;
   border: none;
@@ -129,11 +129,12 @@ export const Button = styled.button`
   align-items: center;
   letter-spacing: 0.04em;
   color: #ffffff;
-  margin-bottom:40px;
+  margin-bottom: 30px;
   margin-top: 24px;
-  background-color: #F59256;
-  @media screen and (min-width: 768px) {  
-    line-height: 27px;  
+  background-color: #f59256;
+
+  @media screen and (min-width: 768px) {
+    line-height: 27px;
     font-weight: 500;
     font-size: 20px;
     width: 448px;
@@ -142,7 +143,7 @@ export const Button = styled.button`
   @media screen and (min-width: 1280px) {
     width: 458px;
     height: 48px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -164,7 +165,24 @@ export const Span = styled.span`
   border-width: thin;
 `;
 export const BackBtn = styled.button`
-  @media screen and (min-width: 1280px) {
+  margin-bottom: 40px;
+  color: #000000;
+  width: 280px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 40px;
+  border: 1px solid #f59256;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: #000000;
+
+  @media screen and (min-width: 768px) {
+    visibility: visible;
     margin-bottom: 40px;
     color: #000000;
     width: 458px;
@@ -180,5 +198,15 @@ export const BackBtn = styled.button`
     align-items: center;
     letter-spacing: 0.04em;
     color: #000000;
+    line-height: 27px;
+    font-weight: 500;
+    font-size: 20px;
+    width: 448px;
+    height: 44px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 458px;
+    height: 48px;
+    margin-bottom: 20px;
   }
 `;
