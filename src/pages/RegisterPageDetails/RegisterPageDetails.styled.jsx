@@ -46,20 +46,33 @@ export const Title = styled.h2`
   }
 `;
 export const Input = styled.input`
-  @media screen and (min-width: 1280px) {
-    padding-left: 32px;
-    margin-bottom: 16px;
-    width: 426px;
+  width: 280px;
+  height: 40px;
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: rgba(17, 17, 17, 0.6);
+  padding-left: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+
+  @media screen and (min-width: 768px) {
+    width: 448px;
     height: 52px;
-    background: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    font-weight: 400;
     font-size: 18px;
     line-height: 25px;
-    align-items: center;
-    letter-spacing: 0.04em;
-    color: rgba(17, 17, 17, 0.6);
+    padding-left: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 426px;
+    height: 52px;
   }
 `;
 
@@ -92,25 +105,6 @@ export const RegisterBtn = styled.button`
   }
 `;
 
-export const BackBtn = styled.button`
-  @media screen and (min-width: 1280px) {
-    margin-bottom: 40px;
-    color: #000000;
-    width: 458px;
-    height: 48px;
-    background: #ffffff;
-    border-radius: 40px;
-    border: 1px solid #f59256;
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 27px;
-    align-items: center;
-    letter-spacing: 0.04em;
-    color: #000000;
-  }
-`;
 export const P = styled.p`
   @media screen and (min-width: 1280px) {
     font-family: 'Manrope';

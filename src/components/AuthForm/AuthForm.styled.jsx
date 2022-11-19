@@ -161,3 +161,6 @@ export const Span = styled.span`
   border-bottom: 1px solid rgba(48, 145, 235, 1);
   border-width: thin;
 `;
+export const InvalidInput = styled.input`
+  background-color: #ffdddd;
+`;
