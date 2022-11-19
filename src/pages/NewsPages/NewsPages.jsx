@@ -94,7 +94,8 @@ const [isLoading, setIsLoading] = useState(false);
           </NewsItemInfo>
         </NewsItem>)
         )}
-        </NewsSet>
+      </NewsSet>
+      
     </MainContainer>
   )
 
