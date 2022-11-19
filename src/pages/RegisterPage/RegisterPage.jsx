@@ -1,9 +1,9 @@
-import { useCreateUserMutation } from 'redux/auth/authOperations';
+import RegistrationDetails from 'components/RegistrationDetails/RegistrationDetails';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import RegistrationDetails from 'components/RegistrationDetails';
+import { useCreateUserMutation } from 'redux/auth/authOperations';
 
-const Registration = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userId, setUserId] = useState('');
@@ -38,12 +38,14 @@ const Registration = () => {
     return id;
   };
 
+
+
   const handleSubmit = async event => {
     event.preventDefault();
     const updatedUser = await createUser();
     setUserId(updatedUser);
     reset();
-    navigate(`/register/${updatedUser}`);
+  
   };
 
   const reset = () => {
@@ -51,7 +53,7 @@ const Registration = () => {
     setPassword('');
   };
 
-  useEffect(() => {}, [userId]);
+  useEffect(() => {navigate(`/register/${userId}`)}, [userId]);
 
   return (
     <>
@@ -83,4 +85,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegisterPage;

@@ -23,7 +23,7 @@ export const Form = styled.form`
 `
 
 export const InputSearch = styled.input`
-    width: 540px;
+    width: 240px;
     border-radius: 20px 0 0 20px;
     border: none;
     outline: none;
@@ -38,6 +38,10 @@ export const InputSearch = styled.input`
     letter-spacing: 0.04em;
     padding: 9px 12px;
     color: #535353;
+
+    @media screen and (min-width: 768px) {
+        width: 554px;
+    }
 
 `
 export const ButtonSearch = styled.button`

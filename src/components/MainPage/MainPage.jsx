@@ -1,11 +1,11 @@
 import portrait from 'img/portrait.png';
-import { Image, ImageContainer, MainPageSection } from "./MainPage.styled";
+import { Header, Image, ImageContainer, MainPageSection } from "./MainPage.styled";
 
 const MainPage = () => {
 
     return (
       <MainPageSection>        
-        
+          <Header>Take good care of your small pets</Header>
           <ImageContainer>
             <Image
               src={portrait} alt="portrait" />

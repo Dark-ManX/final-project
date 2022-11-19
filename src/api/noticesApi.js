@@ -2,20 +2,26 @@ import axios from "axios";
 
 axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
 
-export const fetchSellNotices = async () => {
-    const res = await axios.get('/notices/sell');
-
-    return res.data.data.notices;
+export const fetchNotices = async (param) => {
+    const {data} = await axios.get(`/notices/${param}`);
+    const { notices } = data.data;
+    return notices;
 };
 
-export const fetchForFreeNotices = async () => {
-    const res = await axios.get('/notices/for-free');
+// export const fetchSellNotices = async () => {
+//     const {data} = await axios.get('/notices/sell');
+//     const { notices } = data.data;
+//     return data.data.notices;
+// };
 
-    return res.data.data.notices;
-};
+// export const fetchForFreeNotices = async () => {
+//     const {data} = await axios.get('/notices/for-free');
+//     const {notices} 
+//     return data.data.notices;
+// };
 
-export const fetchLostFoundNotices = async () => {
-    const res = await axios.get('/notices/lost-found');
+// export const fetchLostFoundNotices = async () => {
+//     const {data} = await axios.get('/notices/lost-found');
 
-    return res.data.data.notices;
-};
+//     return data.data.notices;
+// };

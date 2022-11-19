@@ -21,4 +21,5 @@ export const CloseModal = styled.button`
   top: 20px;
   border-radius: 50%;
   align-items: center;
+  cursor: pointer;
 `;

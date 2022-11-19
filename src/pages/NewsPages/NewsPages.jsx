@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import {useSearchParams} from "react-router-dom";
 import EllipsisText from "react-ellipsis-text";
-import { SearchForm } from "../../components/SearchForm/SearchForm";
-import { getNews, fetchNewsSearch } from 'api/newsApi';
-
-
+import { SearchForm } from "components/SearchForm/SearchForm";
+// import { fetchNewsSearch } from 'api/newsApi';
+import { response } from 'api';
+import Loading from 'components/Loding/Loading';
+import Error from 'components/error/error';
+import MainContainer from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
   NewsSet, NewsItem,
@@ -27,10 +29,11 @@ const [isLoading, setIsLoading] = useState(false);
     const newsName = searchParams.get('q');
       
     if (!newsName) {
-        setIsLoading(true);
+      setIsLoading(true);
+      
             const getData = async () => {
                 try {
-                    const data = await getNews();
+                    const data = await response.getNews();
                     setResultQuery(data);
                 }
                 catch (error) {
@@ -41,13 +44,13 @@ const [isLoading, setIsLoading] = useState(false);
                 }
             };
             getData();     
-        return;
+        return ;
     };
 
     setIsLoading(true);
     const getData = async () => {
         try {
-            const data = await fetchNewsSearch(newsName);
+            const data = await response.getNews(newsName);
             setResultQuery(data);
         }
         catch (error) {
@@ -66,13 +69,17 @@ const [isLoading, setIsLoading] = useState(false);
         setSearchParams({ q: formInput })
   }
     
-
   return (
     <>
-      <NewsPageTitle>News</NewsPageTitle>
-      <SearchForm onSubmit={handleSubmit}/>
-      {isLoading && <h3>Чекайте, ще 2-3 тижні</h3>}
-      {error && <h3>Упс! Щось пішло не так</h3>}
+      <MainContainer>
+        <NewsPageTitle>News</NewsPageTitle>
+        
+        <SearchForm onSubmit={handleSubmit} />
+        
+        {isLoading && <Loading />}
+        
+        {error && <Error />}
+        
       <NewsSet>
         {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>
         (<NewsItem key={_id}>
@@ -89,7 +96,8 @@ const [isLoading, setIsLoading] = useState(false);
           </NewsItemInfo>
         </NewsItem>)
         )}
-      </NewsSet>
+        </NewsSet>
+        </MainContainer>
     </>
   )
 

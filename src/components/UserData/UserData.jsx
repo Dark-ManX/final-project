@@ -1,13 +1,10 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { UserDataItem } from 'components/UserDataItem/UserDataItem';
-import editPhoto from '../icons/editPhoto.svg';
-import { ImgUser, EditPhotoBtn, UserInfo, Avatar } from './UserData.styled';
-
-import { ROUTES } from '../../routes/routes';
+import editPhoto from 'icons/editPhoto.svg';
+import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
+import { ROUTES } from 'routes/routes';
 
 axios.defaults.baseURL = ROUTES.BASE_URL;
 axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';

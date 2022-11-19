@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchLostFoundNotices } from 'api/noticesApi';
+import { fetchNotices } from 'api/noticesApi';
 import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
 
 const LostFoundNotices = () => {
@@ -9,7 +9,7 @@ const LostFoundNotices = () => {
     const [error, setError] = useState('');
 
     useEffect((page) => {
-        fetchLostFoundNotices().then(data => {
+        fetchNotices('lost-found').then(data => {
             setNotices(prevState => [...prevState, ...data]);
         }).catch(error => setError(error));
     }, [page]);

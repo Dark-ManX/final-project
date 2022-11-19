@@ -19,11 +19,11 @@ const Modal = props => {
     }
   };
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
-  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);  
+    
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
+
   return createPortal(
     <ModalBackdrop onClick={handleBackdropClick}>
       <ModalBody>{props.children}</ModalBody>

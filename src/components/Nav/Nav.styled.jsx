@@ -20,8 +20,9 @@ export const NavigationLink = styled(NavLink)`
   line-height: calc(44 / 32);
   letter-spacing: 0.04em;
   color: #181c27;
-  transition-property: color, text-decoration-line;
-  transition-duration: 250ms, 250ms;
+  transform: scale(1);
+  transition-property: color, text-decoration-line, transform;
+  transition-duration: 250ms, 250ms, 250ms;
 
     @media screen and (min-width: 768px) {
     font-weight: 500;
@@ -38,28 +39,40 @@ export const NavigationLink = styled(NavLink)`
   &:focus {
     color: #f59256;
     text-decoration-line: underline;
-    @keyframes textWeight {
-      from {
-        font-weight: 500;
-      }
-      to {
-        font-weight: 700;
-      }
-    }
-    animation: textWeight 250ms forwards;
+    transform: scale(1.1);
   }
 `
 export const Navigation = styled.nav`
   text-align: center;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    position: absolute;
+    background-color: #FDF7F2;
+    top: 20px;
+    left: -95px;
+    width: 768px;
+    height: 110vh;
+    padding-top: 108px;
+    opacity: 0;
+    transform: scaleY(0.5);
+    transform-origin: top;
+    transition: transform 250ms linear, opacity 250ms linear;
+
+    &.shown {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+    @media screen and (min-width: 1280px) {
+      position: static;
+      padding: 0;
+    }
+
+
 `
 
 export const List = styled.ul`
-
-  /* @media screen and (min-width: 768px) {
-    font-weight: 500;
-    font-size: 48px;
-    line-height: calc(66 / 48);
-  } */
 
   @media screen and (min-width: 1280px) {
     display: flex;

@@ -1,68 +1,104 @@
-import { useState, useEffect } from 'react';
-import { Container, FriendsThumb, CardThumb, FriendTitle, FirstThumb, SecondThumb, Title, Image, Item } from "./OurFriendsPage.styled";
-
+import { response } from 'api';
+import { useEffect, useState } from 'react';
+// import { RotatingLines } from 'react-loader-spinner';
+import Loading from 'components/Loding/Loading';
+import Error from 'components/error/error';
+import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => { 
+
+    const { getFriends } = response;
     
     const [arr, setArr] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+
+    const getAllFriends = async () => {
+        try {
+            setIsLoading(true);
+            const res = await getFriends();
+            console.log(res)
+            setArr(res);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
-        fetch('https://team-api-blended2.herokuapp.com/friends').then(res => res.json()).then(({ data }) => {
-            console.log(data.friends)
-            setArr(data.friends)
-        }).catch(err => console.log(err.message))
-    }, [])
+        getAllFriends();
+    }, []);
 
     return (
         <>
-            <Title>Our friends</Title>
+            {isLoading && (
+                <Loading/>
+                // <RotatingLines
+                //         strokeColor="grey"
+                //         strokeWidth="5"
+                //         animationDuration="0.75"
+                //         width="96"
+                //         visible={true}
+                // />
+            )}
+
+            {arr && (
+                <>
+                    <Title>Our friends</Title>
             
-            <FriendsThumb>
+                    <FriendsThumb>
 
-                {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
+                        {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
                   
-                    <Container key={_id}>
-                        <FriendTitle>{title}</FriendTitle>
+                            <Container key={_id}>
+                                <FriendTitle>{title}</FriendTitle>
 
-                        <CardThumb>
-                            <FirstThumb>
-                                <Image src={imageUrl} alt={`${title} img`} />
-                            </FirstThumb>
+                                <CardThumb>
+                                    <FirstThumb>
+                                        <Image src={imageUrl} alt={`${title} img`} />
+                                    </FirstThumb>
 
-                            <SecondThumb>
+                                    <SecondThumb>
                                 
-                                <ul>
-                                    <Item>Time:
-                                        {
-                                            time ? (<span>{time}</span>) : (<span>----------</span>)
-                                        }
-                                    </Item>
-                                    <Item>Adress:
-                                        {
-                                            address ? (<span>{address}</span>) : (<span>----------</span>)
-                                        }
-                                    </Item>
-                                    <Item>Email:
-                                        {
-                                            email ? (<a href={`mailto:${email}`}>{email}</a>) : (<span>----------</span>)
-                                        }
-                                    </Item>
-                                    <Item>Phone:
-                                        {
-                                            phone ? (<a href={`tel:${phone}`}>{phone}</a>) : (<span>----------</span>)
-                                        }
-                                    </Item>
-                                </ul>
+                                        <ul>
+                                            <Item >Time: <br />
+                                                <div className='time'>
+                                                    {
+                                                        time ? (<span>{time}</span>) : (<span>----------</span>)
+                                                    }
+                                                </div>
+                                            </Item>
+                                            <Item>Adress:<br />
+                                                {
+                                                    address ? (<span>{address}</span>) : (<span>----------</span>)
+                                                }
+                                            </Item>
+                                            <Item>Email:<br />
+                                                {
+                                                    email ? (<Anchor href={`mailto:${email}`}>{email}</Anchor>) : (<span>----------</span>)
+                                                }
+                                            </Item>
+                                            <Item>Phone:<br />
+                                                {
+                                                    phone ? (<Anchor href={`tel:${phone}`}>{phone}</Anchor>) : (<span>----------</span>)
+                                                }
+                                            </Item>
+                                        </ul>
 
-                            </SecondThumb>
-                        </CardThumb>    
-                    </Container>
+                                    </SecondThumb>
+                                </CardThumb>
+                            </Container>
                 
-                ))
-                }
+                        ))
+                        }
                 
-            </FriendsThumb>
-        </>
+                    </FriendsThumb>
+                </>
+            )}
+
+            {error && <Error/>}
+    </>
     )
 }
 

@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
-// import Modal from 'components/Modal/Modal';
+import MainPage from 'components/MainPage/MainPage';
 
-const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
+// const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
@@ -13,7 +13,7 @@ const AsyncFavoriteNoticesPage = lazy(() => import('pages/NoticesPage/FavoriteNo
 const AsyncOwnNoticesPage = lazy(() => import('pages/NoticesPage/OwnNoticesPage'));
 // const AsyncPrivateRoute = lazy(() => import('components/PrivateRoutes/PrivateRoutes'));
 // const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
-const AsyncRegisterPage = lazy(() => import('../Registration/Registration'));
+const AsyncRegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const AsyncRegistrationDetails = lazy(() => import('pages/RegisterPageDetails/RegisterPageDetails'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
@@ -25,14 +25,9 @@ const App = () => {
     <Routes>
 
       <Route path="/" element={<SharedLayout />}>
-        <Route index element={<AsyncMainPage />} />
+        <Route index element={<MainPage />} />
 
         <Route path="news" element={<AsyncNewsPage />} />
-
-        {/* <Route path="notices" element={<AsyncNoticesPage />}>
-          <Route path="sell" element={<AsyncSellNoticesPage />} />
-          <Route path="for-free" element={<AsyncLostFoundNoticesPage />} />
-          <Route path="lost-found" element={<AsyncForFreeNoticesPage />} /> */}
 
         <Route path='notices' element={<AsyncNoticesPage />}>
           <Route path='sell' element={<AsyncSellNoticesPage />} />
@@ -44,7 +39,7 @@ const App = () => {
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
-        <Route path="register/" element={<AsyncRegisterPage />}>
+        <Route path="register" element={<AsyncRegisterPage />}>
           <Route path=":id" element={<AsyncRegistrationDetails />} />
         </Route>
 
