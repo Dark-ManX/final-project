@@ -45,6 +45,10 @@ const LoginPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    // if (password === '' || password.includes(' ')) {
+    //   return alert('Please, enter a valid password!');
+    // }
     loginNewUser();
     reset();
   };
@@ -67,6 +71,7 @@ const LoginPage = () => {
                 name="email"
                 value={email}
                 onChange={handleChange}
+                required
               />
               <Input
                 type="password"
@@ -74,6 +79,10 @@ const LoginPage = () => {
                 name="password"
                 placeholder="Password"
                 onChange={handleChange}
+                required
+                pattern="[^\s]"
+                minlength="7"
+                maxlength="32"
               />
               <Button type="submit">Login</Button>{' '}
               <P>

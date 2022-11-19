@@ -6,6 +6,7 @@ const AuthForm = ({ formData, setFormData }) => {
     <>
       <Input
         type="email"
+        required
         onChange={e => {
           setFormData({
             ...formData,
@@ -14,7 +15,6 @@ const AuthForm = ({ formData, setFormData }) => {
         }}
         value={formData.email}
         placeholder="Email"
-        required
       />
       <Input
         type="password"
@@ -26,9 +26,22 @@ const AuthForm = ({ formData, setFormData }) => {
         }}
         value={formData.password}
         placeholder="Password"
+        pattern="[^\s]"
+        minlength="7"
+        maxlength="32"
         required
       />
-      <Input type="Confirmed password" placeholder="Confirm password" />
+      <Input
+        type="Confirmed password"
+        placeholder="Confirm password"
+        // onChange={e => {
+        //   setFormData({
+        //     ...formData,
+        //     confirmedPassword: e.target.value,
+        //   });
+        // }}
+        // value={formData.ConfirmedPassword}
+      />
     </>
   );
 };

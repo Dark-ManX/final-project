@@ -56,7 +56,7 @@ export const Container = styled.div`
     top: 20px;
     left: 510px;
     width: 618px;
-    height: 541px;
+    height: 605px;
   }
 `;
 
@@ -96,6 +96,9 @@ export const Input = styled.input`
   font-weight: 500;
   margin-bottom: 16px;
 
+  // &:invalid {
+  //   border: 1px solid red;
+  // }
   @media screen and (min-width: 768px) {
     width: 448px;
     height: 52px;

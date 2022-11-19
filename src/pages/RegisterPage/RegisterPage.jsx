@@ -20,13 +20,13 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    name: '',
+    city: '',
+    phone: '',
+    // confirmedPassword: '',
   });
   // const [confirmedPassword] = useState('');
   const [page, setPage] = useState(0);
-
-  // const USER_REGEX = /^[A-Z]{3-20}$/;
-  // const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
-  // const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
   // const navigate = useNavigate();
   const [registerNewUser] = useRegisterUserMutation();
@@ -48,9 +48,16 @@ const RegisterPage = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    // if (confirmedPassword !== formData.password) {
+    // if (formData.confirmedPassword !== formData.password) {
     //   return alert('Passwords do not match!');
     // }
+
+    if (formData.email === '' || !formData.email.includes('@')) {
+      return alert('Please, enter a valid email!');
+    }
+    if (formData.password === '' || formData.password.includes(' ')) {
+      return alert('Please, enter a valid password!');
+    }
     if (page < 1) {
       setPage(page + 1);
     } else if (page === 1) {
@@ -65,8 +72,10 @@ const RegisterPage = () => {
         <ImageContainer>
           <Container>
             <Title>Registration</Title>
+
             <Form>
               {conditionalComponent()}
+
               <Button onClick={handleSubmit}>
                 {page === 0 || page < 1 ? 'Next' : 'Register'}
               </Button>

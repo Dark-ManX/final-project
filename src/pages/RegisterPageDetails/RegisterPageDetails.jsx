@@ -5,16 +5,17 @@ const RegistrationDetails = ({ formData, setFormData }) => {
     <>
       <Input
         type="text"
+        name="city"
+        pattern="^[a-zA-Z]$"
+        required
         onChange={e => {
           setFormData({
             ...formData,
             name: e.target.value,
           });
         }}
-        // name="name"
         value={formData.name}
         placeholder="Name"
-        // onChange={handleChange}
       />
       <Input
         type="text"
@@ -24,10 +25,8 @@ const RegistrationDetails = ({ formData, setFormData }) => {
             city: e.target.value,
           });
         }}
-        // name="city"
         value={formData.city}
         placeholder="City, region"
-        // onChange={handleChange}
       />
       <Input
         type="tel"
@@ -37,18 +36,9 @@ const RegistrationDetails = ({ formData, setFormData }) => {
             phone: e.target.value,
           });
         }}
-        // name="phone"
         value={formData.phone}
         placeholder="Mobile phone"
-        // onChange={handleChange}
       />
-
-      {/* <P>
-        Already have an account?
-        <Link to={`/login`} state={{ from: location }}>
-          <Span>Login </Span>
-        </Link>
-      </P> */}
     </>
   );
 };
