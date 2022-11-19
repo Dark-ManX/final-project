@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
+// axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
 
 // export const fetchNews = async() => {
 //   const {data} = await axios.get(`/news`);
@@ -8,9 +8,9 @@ axios.defaults.baseURL = 'https://team-api-blended2.herokuapp.com';
 //   return news;
 // };
 
-export const fetchNewsSearch = async query => {
+export const fetchNewsSearch = async (url, query) => {
   if (!query) {
-    const { data } = await axios.get(`/news`);
+    const { data } = await axios.get(`${url}/news`);
     const { news } = data.data;
     return news;
   }

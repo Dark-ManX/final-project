@@ -3,6 +3,7 @@ import mobileBack from 'img/Vector@2x.png';
 import tabletBack from 'img/tabletBackground.png';
 import desktopBack from 'img/desktopBack.png';
 import desktopBack2 from 'img/desktopBack2.png';
+import heart from 'img/heart.png';
 
 export const MainPageSection = styled.div`
 padding-top: 60px;
@@ -49,9 +50,9 @@ align-items: flex-end;
 @media screen and (min-width: 1280px) {
     width: 1280px;
     height: 655px;
-    background-image: url(${desktopBack}), url(${desktopBack2});
-    background-size: 1120px 410px, 585px 410px;
-    background-position: left bottom, right bottom;
+    background-image: url(${desktopBack}), url(${desktopBack2}), url(${heart});
+    background-size: 1120px 410px, 585px 410px, 92px 89px;
+    background-position: left bottom, right bottom, 715px 0;
 }
 `
 
@@ -78,7 +79,10 @@ font-weight: bold;
 font-size: 32px;
 line-height: calc(44 / 32);
 width: 280px;
+<<<<<<< HEAD
 z-index: 1;
+=======
+>>>>>>> 18565377fb22b321d07d02483ce4f38b2b97ef28
 
 @media screen and (min-width: 768px) {
 font-size: 68px;
