@@ -1,23 +1,11 @@
 import { response } from 'api';
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
-import Error from 'components/Common/Error/Error';
-import Loading from 'components/Common/Loading/Loading';
-import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
-
-const OurFriendsPage = () => {
-    
-    const [arr, setArr] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-=======
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loding/Loading';
 import Error from 'components/error/error';
 import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => { 
->>>>>>> 18565377fb22b321d07d02483ce4f38b2b97ef28
 
     const { getFriends } = response;
     
