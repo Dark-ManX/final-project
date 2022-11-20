@@ -9,9 +9,12 @@ import add from 'icons/addPet.svg';
 
 import { Title } from 'pages/UserPage/UserPage.styled';
 import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
+import { useGetUserPetsQuery } from 'redux/auth/authOperations';
 
+const AUTH_TOKEN =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhAZ21haWwuY29tIiwiaWF0IjoxNjY4OTc4MjgxLCJleHAiOjE2NjkwMTQyODF9.yCoebGuTWQPK-yKEoTQcTUCrzeq_IvOE244Ub5Mh1_A';
 axios.defaults.baseURL = ROUTES.BASE_URL;
-axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 const getPets = () => {
   const response = axios.get(`${ROUTES.USER.getUserPets}`);
@@ -20,6 +23,8 @@ const getPets = () => {
 
 export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
+  const { getUserPets } = useGetUserPetsQuery();
+  console.log(getUserPets);
 
   const handleBtnClick = () => setOpenModal(!openModal);
 
@@ -27,7 +32,7 @@ export const PetsData = () => {
 
   useEffect(() => {
     getPets()
-      .then(({ data }) => setPets(data.data.pets))
+      .then(({ data }) => console.log(data.data.pets))
       .catch(error => console.log(error.message));
   }, []);
 
