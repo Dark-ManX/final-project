@@ -34,13 +34,13 @@ const AuthForm = ({ formData, setFormData }) => {
       <Input
         type="Confirmed password"
         placeholder="Confirm password"
-        // onChange={e => {
-        //   setFormData({
-        //     ...formData,
-        //     confirmedPassword: e.target.value,
-        //   });
-        // }}
-        // value={formData.ConfirmedPassword}
+        onChange={e => {
+          setFormData({
+            ...formData,
+            confirmedPassword: e.target.value,
+          });
+        }}
+        value={formData.ConfirmedPassword}
       />
     </>
   );
