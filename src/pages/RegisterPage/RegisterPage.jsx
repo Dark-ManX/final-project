@@ -28,6 +28,7 @@ const RegisterPage = () => {
   });
   const [page, setPage] = useState(0);
 
+  const [confirmedPassword] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
 
   const conditionalComponent = () => {
@@ -44,6 +45,10 @@ const RegisterPage = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
+
+    if (formData.confirmedPassword !== formData.password) {
+      return alert('Passwords do not match!');
+    }
 
     if (formData.email === '' || !formData.email.includes('@')) {
       return alert('Please, enter a valid email!');
