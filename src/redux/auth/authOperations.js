@@ -6,6 +6,7 @@ export const authApi = createApi({
     baseUrl: 'https://team-api-blended2.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
+      console.log(token);
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -15,22 +16,12 @@ export const authApi = createApi({
 
   tagTypes: ['User'],
   endpoints: builder => ({
-    // POST create: '/register',
-    createUser: builder.mutation({
-      query: newUser => ({
-        url: '/register',
-        method: 'POST',
-        body: newUser,
-      }),
-      invalidatesTags: [{ type: 'User' }],
-    }),
-
-    // PATCH register: '/register/:id',
+    // PATCH register: '/auth/register',
     registerUser: builder.mutation({
-      query: (registeredUser, userId) => ({
-        url: `/register/${userId}`,
-        method: 'PATCH',
-        body: registeredUser,
+      query: formData => ({
+        url: `/register`,
+        method: 'POST',
+        body: formData,
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
@@ -40,7 +31,7 @@ export const authApi = createApi({
       query: logUser => ({
         url: '/login',
         method: 'POST',
-        body: logUser,
+        body: { ...logUser },
       }),
       invalidatesTags: [{ type: 'User' }],
     }),

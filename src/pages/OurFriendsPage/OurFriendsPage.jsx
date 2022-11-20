@@ -3,7 +3,18 @@ import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loding/Loading';
 import Error from 'components/error/error';
-import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
+import {
+  Anchor,
+  CardThumb,
+  Container,
+  FirstThumb,
+  FriendsThumb,
+  FriendTitle,
+  Image,
+  Item,
+  SecondThumb,
+  Title
+} from './OurFriendsPage.styled';
 
 const OurFriendsPage = () => { 
 
@@ -17,14 +28,15 @@ const OurFriendsPage = () => {
         try {
             setIsLoading(true);
             const res = await getFriends();
-            console.log(res)
             setArr(res);
+
         } catch (err) {
             setError(err);
+
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         getAllFriends();

@@ -4,34 +4,34 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { IconContext } from "react-icons";
 
 
-export const SearchForm = ({onSubmit}) => {
+export const SearchForm = ({onSubmit, handelSearchChange}) => {
     const [query, setQuery] = useState('');
 
-    const handelSearchChange = e => {
-        setQuery(e.currentTarget.value.toLowerCase());
-    };
+    // const handelSearchChange = e => {
+    //     setQuery(e.currentTarget.value.toLowerCase());
+    // };
 
-    const handelSubmit = e => {
-        e.preventDefault();
-        if (query.trim() === '') {
-            alert('🦄 Boolshit!');
-            return;
-        }
-        onSubmit(query);
-        setQuery('');
-    };
+    // const handelSubmit = e => {
+    //     e.preventDefault();
+    //     if (query.trim() === '') {
+    //         alert('🦄 Boolshit!');
+    //         return;
+    //     }
+    //     onSubmit(query);
+    //     setQuery('');
+    // };
 
     return (
         <SearchBar>
             <Form
-                onSubmit={handelSubmit} >
+                onSubmit={onSubmit} >
                 <InputSearch
                     type="text"
                     autoComplete="off"
                     autoFocus
                     placeholder="Search..."
                     name="search"
-                    value={query}
+                    // value={query}
                     onChange={handelSearchChange}
                 />
                 <ButtonSearch type="submit">

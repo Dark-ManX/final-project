@@ -79,6 +79,8 @@ font-weight: bold;
 font-size: 32px;
 line-height: calc(44 / 32);
 width: 280px;
+z-index: 1;
+
 
 @media screen and (min-width: 768px) {
 font-size: 68px;

@@ -32,21 +32,19 @@ export const NewsSet = styled.ul`
     
 `
 export const NewsItem = styled.li`
-    width: 280px;
-    height: 286px;
-    // margin-bottom: 40px;
+    /* width: 280px; */
+    /* height: 286px; */
     display: flex;
     flex-direction: column;
 
     @media screen and (min-width: 768px) {
-        width: 336px;
-        height: 288px;
+        /* width: 336px;
+        height: 288px; */
     }
 
     @media screen and (min-width: 1280px){
-        // flex-grow: 1;
-        width: 395px;
-        height: 266px;
+        /* width: 395px;
+        height: 266px; */
     }
 `
 export const NewsItemRectangle = styled.span`
