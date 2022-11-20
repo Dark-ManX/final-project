@@ -1,14 +1,17 @@
 @import 'normalize.css'; /* bring in normalize.css styles */
-
+/* *::after,
+*::before, */
+* {
+  box-sizing: border-box;
+}
 :root {
-  --main-background: #FDF7F2;
-  --buttons-color: #F59256;
+  --main-background: #fdf7f2;
+  --buttons-color: #f59256;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', 
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-background);
@@ -47,5 +50,3 @@ a {
   transform: translate(100%, 0);
   transition: transform 250ms linear;
 } */
-
-
