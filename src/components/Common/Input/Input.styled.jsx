@@ -8,12 +8,12 @@ export const InputBox = styled.div`
 
 export const Input = styled.input`
   max-width: 100%;
-  height: 40px;
+  height: ${({ height }) => height ?? '40px'};
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
+  border-radius: ${({ borderRadius }) => borderRadius ?? '40px'};
   margin-top: 8px;
-  padding: 0px 14px;
+  padding: ${({ padding }) => padding ?? '0 14px'};
 
   &::placeholder {
     font-family: 'Manrope';
