@@ -31,17 +31,17 @@ export const Button = styled.button`
 export const MobileMenu = styled.div`
 position: absolute;
 top: 100%;
-left: -20px;
+left: -21px;
 display: flex;
 flex-direction: column-reverse;
 justify-content: flex-end;
 padding-top: 46px;
-width: 320px;
-height: 100%;
+width: 322px;
 overflow: hidden;
 background-color: #FDF7F2;
 row-gap: 60px;
 align-items: center;
+padding: 60px 0 190px;
 
 @media screen and (max-width: 767px) {
 transform: scaleY(0);
