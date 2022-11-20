@@ -46,9 +46,14 @@ const LoginPage = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // if (password === '' || password.includes(' ')) {
-    //   return alert('Please, enter a valid password!');
-    // }
+    if (email === '' || !email.includes('@')) {
+      return alert('Please, enter a valid email!');
+    }
+
+    if (password === '' || password.includes(' ')) {
+      return alert('Please, enter a valid password without spaces!');
+    }
+
     loginNewUser();
     reset();
   };
@@ -80,7 +85,6 @@ const LoginPage = () => {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                pattern="[^\s]"
                 minlength="7"
                 maxlength="32"
               />
