@@ -1,6 +1,11 @@
 import axios from 'axios';
 
 export const fetchNotices = async (url, param) => {
+  if (!param) {
+    const { data } = await axios.get(`${url}/notices/sell`);
+  const { notices } = data.data;
+  return notices;
+  }
   const { data } = await axios.get(`${url}/notices/${param}`);
   const { notices } = data.data;
   console.log(notices);

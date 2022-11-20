@@ -9,9 +9,9 @@ const NoticesCategoryList = () => {
     const notices = useOutletContext()
         console.log(notices);
 
-    const getNotices = () => {
-        // if (notices === [])
-    }
+    // const getNotices = () => {
+    //     // if (notices === [])
+    // }
 
     // const [notices, setNotices] = useState([])
 
