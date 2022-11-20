@@ -21,9 +21,10 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    name: '',
-    city: '',
-    phone: '',
+    name: 'Name',
+    city: 'City',
+    phone: '380000000000',
+    confirmedPassword: '',
   });
   const [page, setPage] = useState(0);
 
@@ -31,7 +32,6 @@ const RegisterPage = () => {
 
   const conditionalComponent = () => {
     switch (page) {
-    
       case 1:
         return (
           <RegistrationDetails formData={formData} setFormData={setFormData} />
