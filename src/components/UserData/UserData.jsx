@@ -9,10 +9,8 @@ import { ROUTES } from 'routes/routes';
 
 import { useGetUserInfoQuery } from 'redux/auth/authOperations';
 
-const AUTH_TOKEN =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhAZ21haWwuY29tIiwiaWF0IjoxNjY4OTc4MjgxLCJleHAiOjE2NjkwMTQyODF9.yCoebGuTWQPK-yKEoTQcTUCrzeq_IvOE244Ub5Mh1_A';
 axios.defaults.baseURL = ROUTES.BASE_URL;
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
 
 const getUser = () => {
   const response = axios.get(`${ROUTES.USER.getUserInfo}`);
