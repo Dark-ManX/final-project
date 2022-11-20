@@ -46,11 +46,12 @@ export const Navigation = styled.nav`
   text-align: center;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
+    padding: 88px 0 715px;
     position: absolute;
     background-color: #FDF7F2;
     top: 25px;
-    right: -115px;
-    width: 768px;
+    right: -113px;
+    width: 770px;
     height: 0;
     padding-top: 108px;
     opacity: 0;
