@@ -15,7 +15,7 @@ const Nav = ({set}) => {
           </NavigationItem>
         
         <NavigationItem>
-          <NavigationLink to={'/notices/sell'} state={{ from: location }}>
+          <NavigationLink to={`/notices/${'sell'}`} state={{ from: location }}>
             Find pet
           </NavigationLink>
         </NavigationItem>

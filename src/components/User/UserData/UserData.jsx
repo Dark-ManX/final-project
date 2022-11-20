@@ -1,6 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useGetUserInfoQuery } from 'redux/auth/authOperations';
 import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
@@ -16,6 +17,8 @@ const getUser = () => {
 
 export const UserData = () => {
   const [user, setUser] = useState([]);
+
+  const [getUserInfo] = useGetUserInfoQuery();
 
   useEffect(() => {
     getUser()

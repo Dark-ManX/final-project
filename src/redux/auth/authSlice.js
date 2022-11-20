@@ -3,7 +3,8 @@ import { authApi } from './authOperations';
 
 const initialState = {
   user: { email: null, id: null },
-  token: null,
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InF3ZXJAbWFpbC5jb20iLCJpYXQiOjE2Njg5MDMwNTEsImV4cCI6MTY2ODkzOTA1MX0.gRcd-B2lrIqg8odMK9OKY4HpveMY01vaAhs1ofqrd8Y',
   isLoading: false,
   isLoggedIn: false,
   isFetchingCurrent: true,

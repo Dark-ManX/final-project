@@ -27,11 +27,11 @@ const ForFreeNotices = () => {
         }
     }
 
-        useEffect(() => {
+        // useEffect(() => {
         
-            fetchNotices('for-free');
+            // fetchNotices('for-free');
             // setNotices(prevState => [...prevState, ...fetchedNotices]);
-    }, []);
+    // }, []);
     
     return (
         <>

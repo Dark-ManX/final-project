@@ -1,6 +1,5 @@
 import MainContainer from "components/commonStyles/Container.styled";
 import Header from "components/Header/Header/Header";
-import { RotatingLines } from 'react-loader-spinner';
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 

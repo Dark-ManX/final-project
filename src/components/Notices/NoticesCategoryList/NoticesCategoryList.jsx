@@ -1,7 +1,22 @@
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { NoticeCategoryItem } from "components/Notices/NoticeCategoryItem/NoticeCategoryItem";
+import { response } from "api";
 import { Gallery } from "./NoticesCategoryList.styled";
 
-export const NoticesCategoryList = ({ notices }) => {
+const NoticesCategoryList = () => {
+
+    const notices = useOutletContext()
+        console.log(notices);
+
+    const getNotices = () => {
+        // if (notices === [])
+    }
+
+    // const [notices, setNotices] = useState([])
+
+    // const { getNotices } = response;
+
     return (
         <Gallery>
             {notices.map(notice =>
@@ -10,3 +25,5 @@ export const NoticesCategoryList = ({ notices }) => {
         </Gallery>
     );
 };
+
+export default NoticesCategoryList;

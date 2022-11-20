@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchNotices } from 'api/noticesApi';
-import { NoticesCategoryList } from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
+import NoticesCategoryList from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
 
 const LostFoundNotices = () => {
     // eslint-disable-next-line no-unused-vars

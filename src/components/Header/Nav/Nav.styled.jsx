@@ -48,13 +48,8 @@ export const Navigation = styled.nav`
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     position: absolute;
     background-color: #FDF7F2;
-<<<<<<< HEAD:src/components/Header/Nav/Nav.styled.jsx
     top: 25px;
     right: -115px;
-=======
-    top: 20px;
-    left: -95px;
->>>>>>> 18565377fb22b321d07d02483ce4f38b2b97ef28:src/components/Nav/Nav.styled.jsx
     width: 768px;
     height: 0;
     padding-top: 108px;

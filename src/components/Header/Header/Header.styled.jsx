@@ -62,11 +62,8 @@ padding: 0;
 position: relative;
 overflow: visible;
 height: auto;
-<<<<<<< HEAD:src/components/Header/Header/Header.styled.jsx
 width: 768px;
-=======
-width: 1280px;
->>>>>>> 18565377fb22b321d07d02483ce4f38b2b97ef28:src/components/Header/Header.styled.jsx
+
 }
 
 @media screen and (min-width: 1280px) {

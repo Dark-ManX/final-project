@@ -4,9 +4,11 @@ import { ReactComponent as Cross } from 'icons/cross.svg';
 import { CloseModal, ModalName } from './ModalAddsPet.styled';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import {fetchPetAdd} from 'api/petApi'
+import {response} from 'api'
 
 const AddsPet = ({ onClose }) => {
+
+  const {getAddsPet} = response
 
   const token = useSelector(state => state.token)
 
@@ -38,7 +40,7 @@ const AddsPet = ({ onClose }) => {
   }
 
   const handleSubmit = async () => {
-    const res = await fetchPetAdd({name: petName, birth, breed}, token)
+    const res = await getAddsPet({name: petName, birth, breed}, token)
     console.log(res);
   }
 
@@ -48,22 +50,22 @@ const AddsPet = ({ onClose }) => {
         <Cross width="20px" height="20px" />
       </CloseModal>
       
-        <ModalName>Add pet</ModalName>
+      <ModalName>Add pet</ModalName>
 
-        <form onSubmit={handleSubmit}>
-          <Input
+      <form onSubmit={handleSubmit}>
+        <Input
           type="text"
           name='petName'
-            label="Name pet"
-            placeholder="Type name pet"
+          label="Name pet"
+          placeholder="Type name pet"
           required
           onChange={handleChange}
-          />
-          <Input
+        />
+        <Input
           type="text"
           name='birth'
-            label="Date of birth"
-            placeholder="Type date of birth"
+          label="Date of birth"
+          placeholder="Type date of birth"
           required
           onChange={handleChange}
           />
@@ -75,9 +77,9 @@ const AddsPet = ({ onClose }) => {
           required
           onChange={handleChange} />
 
-          <Button type="submit" content="Next" variant="primary" />
-          <Button type="button" content="Cancel" variant="inverse" />
-        </form>
+        <Button type="submit" content="Next" variant="primary" />
+        <Button type="button" content="Cancel" variant="inverse" />
+      </form>
       
     </>
   );
