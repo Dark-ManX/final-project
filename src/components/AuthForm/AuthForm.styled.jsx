@@ -5,20 +5,19 @@ import wavesTablet from '../../img/wavesTablet.png';
 
 export const Section = styled.section`
   @media screen and (min-width: 768px) {
-    position: relative;
+    position: absolute;
   }
 `;
 export const ImageContainer = styled.div`
   background-position: bottom;
   position: absolute;
-  top: 70px;
-  left: 0px;
+  top: 20px;
+  left: -152px;
   background-image: url(${wavesPhone});
   background-repeat: no-repeat;
   background-size: contain;
   width: 100vw;
   min-height: 100vh;
-
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     background-position: bottom;
     position: absolute;
@@ -43,10 +42,6 @@ export const ImageContainer = styled.div`
   }
 `;
 export const Container = styled.div`
-  margin-top: 30px;
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    max-width: 480px;
-  }
   @media screen and (min-width: 768px) {
     top: -300px;
     left: 110px;
@@ -61,7 +56,7 @@ export const Container = styled.div`
     top: 20px;
     left: 510px;
     width: 618px;
-    height: 449px;
+    height: 605px;
   }
 `;
 
@@ -75,8 +70,6 @@ export const Title = styled.h2`
   text-align: center;
   letter-spacing: 0.04em;
   color: #111111;
-  margin-bottom: 40px;
-
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
     padding-top: 60px;
@@ -102,6 +95,7 @@ export const Input = styled.input`
   padding-left: 14px;
   font-weight: 500;
   margin-bottom: 16px;
+
   // &:invalid {
   //   border: 1px solid red;
   // }
@@ -119,14 +113,17 @@ export const Input = styled.input`
 `;
 
 export const Form = styled.form`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    justify-content: column;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Button = styled.button`
-  width: 280px;
-  height: 40px;
+  width: 280px; 
+  height: 44px
   background: #f59256;
   border-radius: 40px;
   border: none;
@@ -135,14 +132,11 @@ export const Button = styled.button`
   align-items: center;
   letter-spacing: 0.04em;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-bottom:40px;
   margin-top: 24px;
-  background-color: #f59256;
-  font-size: 18px;
-  line-height: 24px;
-
-  @media screen and (min-width: 768px) {
-    line-height: 27px;
+  background-color: #F59256;
+  @media screen and (min-width: 768px) {  
+    line-height: 27px;  
     font-weight: 500;
     font-size: 20px;
     width: 448px;
@@ -151,7 +145,6 @@ export const Button = styled.button`
   @media screen and (min-width: 1280px) {
     width: 458px;
     height: 48px;
-    margin-bottom: 20px;
   }
 `;
 
@@ -165,39 +158,12 @@ export const P = styled.p`
   text-align: center;
   letter-spacing: 0.04em;
   color: rgba(17, 17, 17, 0.6);
-  margin-top: 10px;
 `;
 export const Span = styled.span`
   color: rgba(48, 145, 235, 1);
   border-bottom: 1px solid rgba(48, 145, 235, 1);
   border-width: thin;
 `;
-export const BackBtn = styled.button`
-  margin-bottom: 40px;
-  color: #000000;
-  width: 458px;
-  height: 48px;
-  background: #ffffff;
-  border-radius: 40px;
-  border: 1px solid #f59256;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
-  align-items: center;
-  letter-spacing: 0.04em;
-  color: #000000;
-  @media screen and (min-width: 768px) {
-    line-height: 27px;
-    font-weight: 500;
-    font-size: 20px;
-    width: 448px;
-    height: 44px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 458px;
-    height: 48px;
-    margin-bottom: 20px;
-  }
+export const InvalidInput = styled.input`
+  background-color: #ffdddd;
 `;
