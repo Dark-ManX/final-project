@@ -49,11 +49,11 @@ const RegisterPage = () => {
     event.preventDefault();
 
     if (formData.email === '' || !formData.email.includes('@')) {
-      return Notiflix.Notify.warning('Please, enter a valid email!');
+      return Notiflix.Notify.failure('Please, enter a valid email!');
     }
 
     if (formData.password === '' || formData.password.includes(' ')) {
-      return Notiflix.Notify.warning(
+      return Notiflix.Notify.failure(
         'Please, enter a valid password without spaces!'
       );
     }
