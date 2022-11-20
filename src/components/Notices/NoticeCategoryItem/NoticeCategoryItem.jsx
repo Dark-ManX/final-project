@@ -14,12 +14,16 @@ let category = '';
 let photo;
 
 export const NoticeCategoryItem = ({ notice }) => {
-    const [showModal, setShowModal] = useState(false);
-    const notices = useSelector(state => state.notices.items);
-    const userID = '6374ac4a84c43b1851b51dda';
-    const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
-    const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzRhYzRhODRjNDNiMTg1MWI1MWRkYSIsImlhdCI6MTY2ODU5MDY3NywiZXhwIjoxNjY4NjI2Njc3fQ.l9nv-VhZ582KYX7GKbo2X22zFh30STKiqxdMcJrD49M';
+
+  const [showModal, setShowModal] = useState(false);
+
+  const notices = useSelector(state => state.notices.items);
+  const userID = '6374ac4a84c43b1851b51dda';
+  
+  const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
+  const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
+  
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzRhYzRhODRjNDNiMTg1MWI1MWRkYSIsImlhdCI6MTY2ODU5MDY3NywiZXhwIjoxNjY4NjI2Njc3fQ.l9nv-VhZ582KYX7GKbo2X22zFh30STKiqxdMcJrD49M';
 
     switch (notice.category) {
         case 'sell':
@@ -35,11 +39,12 @@ export const NoticeCategoryItem = ({ notice }) => {
             return;
     };
 
-    if (notice.photo) {
-        photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
-    } else {
-        photo = 'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
-    };
+  if (notice.photo) {
+    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
+  } else {
+    photo =
+      'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
+  }
 
     const handleRemoveFavoriteBtnClick = (id) => {
         id = notice._id;
@@ -102,3 +107,4 @@ export const NoticeCategoryItem = ({ notice }) => {
         </NoticeCategoryItemStyled>
     ); 
 };
+

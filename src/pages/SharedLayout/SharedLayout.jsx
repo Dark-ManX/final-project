@@ -4,17 +4,15 @@ import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 const SharedLayout = () => {
+  return (
+    <MainContainer>
+      <Header />
 
-    return (
-
-        <MainContainer>
-            <Header/>
-
-            <Suspense>
-                <Outlet />
-            </Suspense>
-        </MainContainer>
-    )
-}
+      <Suspense>
+        <Outlet />
+      </Suspense>
+    </MainContainer>
+  );
+};
 
 export default SharedLayout;

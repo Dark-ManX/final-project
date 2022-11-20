@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './authOperations';
 
 const initialState = {
-  user: { email: null, id: null },
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InF3ZXJAbWFpbC5jb20iLCJpYXQiOjE2Njg5MDMwNTEsImV4cCI6MTY2ODkzOTA1MX0.gRcd-B2lrIqg8odMK9OKY4HpveMY01vaAhs1ofqrd8Y',
+
+  user: { email: null, password: null },
+  token: null,
   isLoading: false,
   isLoggedIn: false,
   isFetchingCurrent: true,
@@ -15,19 +15,11 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder.addMatcher(
-      authApi.endpoints.createUser.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.user;
-        state.isLoggedIn = false;
-        state.isLoading = true;
-      }
-    );
-    builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
-        state.isLoggedIn = false;
+        state.isLoggedIn = true;
         state.isLoading = true;
       }
     );

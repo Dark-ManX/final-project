@@ -1,86 +1,89 @@
 import RegistrationDetails from 'components/Auth/RegistrationDetails/RegistrationDetails';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCreateUserMutation } from 'redux/auth/authOperations';
+import { useRegisterUserMutation } from 'redux/auth/authOperations';
+import { Link, useLocation } from 'react-router-dom';
+import AuthForm from 'components/AuthForm';
+import {
+  Title,
+  Container,
+  Form,
+  Button,
+  P,
+  Span,
+  ImageContainer,
+  Section,
+  BackBtn,
+} from './RegisterPage.styled';
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userId, setUserId] = useState('');
+  const location = useLocation();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: '',
+    city: '',
+    phone: '',
+  });
+  const [page, setPage] = useState(0);
 
-  const navigate = useNavigate();
+  const [registerNewUser] = useRegisterUserMutation();
 
-  const [createNewUser] = useCreateUserMutation();
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-
-      case 'password':
-        setPassword(value);
-        break;
+  const conditionalComponent = () => {
+    switch (page) {
+    
+      case 1:
+        return (
+          <RegistrationDetails formData={formData} setFormData={setFormData} />
+        );
 
       default:
-        return;
+        return <AuthForm formData={formData} setFormData={setFormData} />;
     }
   };
 
-  const createUser = async () => {
-    const newUser = { email, password };
-    const { data } = await createNewUser(newUser);
-    console.log(data);
-    const { id } = data.data.user;
-    setUserId(id);
-    console.log(id);
-    return id;
-  };
-
-
-
   const handleSubmit = async event => {
     event.preventDefault();
-    const updatedUser = await createUser();
-    setUserId(updatedUser);
-    reset();
-  
-  };
 
-  const reset = () => {
-    setEmail('');
-    setPassword('');
+    if (formData.email === '' || !formData.email.includes('@')) {
+      return alert('Please, enter a valid email!');
+    }
+    if (formData.password === '' || formData.password.includes(' ')) {
+      return alert('Please, enter a valid password!');
+    }
+    if (page < 1) {
+      setPage(page + 1);
+    } else if (page === 1) {
+      registerNewUser(formData);
+    }
   };
-
-  useEffect(() => {navigate(`/register/${userId}`)}, [userId]);
 
   return (
     <>
-      {!userId ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="email"
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="password"
-            onChange={handleChange}
-          />
+      <Section>
+        <ImageContainer>
+          <Container>
+            <Title>Registration</Title>
 
-          <button type="submit">
-            Submit
-          </button>
-        </form>
-      ) : (
-        <RegistrationDetails details={userId} />
-      )}
+            <Form>
+              {conditionalComponent()}
+
+              <Button onClick={handleSubmit}>
+                {page === 0 || page < 1 ? 'Next' : 'Register'}
+              </Button>
+              {page > 0 && (
+                <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
+              )}
+              <P>
+                Already have an account?
+                <Link to={`/login`} state={{ from: location }}>
+                  <Span>Login </Span>
+                </Link>
+              </P>
+            </Form>
+          </Container>
+        </ImageContainer>
+      </Section>
     </>
   );
 };

@@ -11,14 +11,13 @@ export const Section = styled.section`
 export const ImageContainer = styled.div`
   background-position: bottom;
   position: absolute;
-  top: 70px;
+  top: 120px;
   left: 0px;
   background-image: url(${wavesPhone});
   background-repeat: no-repeat;
   background-size: contain;
   width: 100vw;
   min-height: 100vh;
-
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     background-position: bottom;
     position: absolute;
@@ -43,10 +42,7 @@ export const ImageContainer = styled.div`
   }
 `;
 export const Container = styled.div`
-  margin-top: 30px;
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    max-width: 480px;
-  }
+  margin-top: -10px;
   @media screen and (min-width: 768px) {
     top: -300px;
     left: 110px;
@@ -61,7 +57,7 @@ export const Container = styled.div`
     top: 20px;
     left: 510px;
     width: 618px;
-    height: 449px;
+    height: 541px;
   }
 `;
 
@@ -102,9 +98,7 @@ export const Input = styled.input`
   padding-left: 14px;
   font-weight: 500;
   margin-bottom: 16px;
-  // &:invalid {
-  //   border: 1px solid red;
-  // }
+
   @media screen and (min-width: 768px) {
     width: 448px;
     height: 52px;
@@ -135,11 +129,9 @@ export const Button = styled.button`
   align-items: center;
   letter-spacing: 0.04em;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   margin-top: 24px;
   background-color: #f59256;
-  font-size: 18px;
-  line-height: 24px;
 
   @media screen and (min-width: 768px) {
     line-height: 27px;
