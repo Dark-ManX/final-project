@@ -9,6 +9,7 @@ export const LogoutBtn = styled.button`
   line-height: 22px;
   letter-spacing: 0.04em;
   color: rgba(17, 17, 17, 0.6);
+  cursor: pointer;
 
   display: flex;
   align-items: center;
