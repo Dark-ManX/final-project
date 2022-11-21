@@ -36,3 +36,4 @@ export const Input = styled.input`
 export const InvalidInput = styled.input`
   background-color: #ffdddd;
 `;
+export const Eye = styled.img``;

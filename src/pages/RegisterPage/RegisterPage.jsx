@@ -1,6 +1,6 @@
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
 import { Link, useLocation } from 'react-router-dom';
 import AuthForm from 'components/AuthForm';
@@ -28,9 +28,9 @@ const RegisterPage = () => {
     phone: '380000000000',
     confirmedPassword: '',
   });
+
   const [page, setPage] = useState(0);
 
-  const [confirmedPassword] = useState('');
   const [registerNewUser] = useRegisterUserMutation();
 
   const conditionalComponent = () => {
