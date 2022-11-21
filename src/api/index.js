@@ -14,7 +14,7 @@ class Fetch {
 
   getNotices = async query => await fetchNotices(this.BASE_URL, query);
 
-  getAddsPet = async (pet, query) => await fetchPetAdd(this.BASE_URL, pet, query);
+  addPet = async (pet, query) => await fetchPetAdd(this.BASE_URL, pet, query);
 }
 
 export const response = new Fetch();

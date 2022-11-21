@@ -77,7 +77,7 @@ const RegisterPage = () => {
               <P>
                 Already have an account?
                 <Link to={`/login`} state={{ from: location }}>
-                  <Span>Login </Span>
+                  <Span>Login</Span>
                 </Link>
               </P>
             </Form>

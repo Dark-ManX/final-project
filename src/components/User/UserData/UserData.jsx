@@ -17,8 +17,24 @@ const getUser = () => {
 
 export const UserData = () => {
   const [user, setUser] = useState([]);
-
   const [getUserInfo] = useGetUserInfoQuery();
+  // console.log(info);
+  console.log(getUserInfo);
+
+  // console.log(getUserInfo().then(data => console.log(data)));
+
+  // const fatchUser = async () => {
+  //   try {
+  //     const result = await getUserInfo;
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  // fatchUser();
+
+  // const [getUserInfo] = useGetUserInfoQuery();
 
   useEffect(() => {
     getUser()
@@ -33,10 +49,12 @@ export const UserData = () => {
           src="https://st2.depositphotos.com/4323461/8632/v/950/depositphotos_86329636-stock-illustration-business-cat-works-for-a.jpg"
           alt={user.name}
         />
-        <EditPhotoBtn>
+        <label>
+          <input type="file" name="Edit photo" />
           <img src={editPhoto} alt="addPet" />
-          Edit photo
-        </EditPhotoBtn>
+          {/* <span>Edit photo</span> */}
+          <EditPhotoBtn>Edit photo</EditPhotoBtn>
+        </label>
       </Avatar>
       <UserDataItem user={user} />
     </UserInfo>
