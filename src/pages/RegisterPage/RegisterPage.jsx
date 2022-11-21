@@ -99,6 +99,7 @@ const RegisterPage = () => {
     <>
       <Section>
         <ImageContainer>
+
           {page === 0 && (
             <FirstContainer>
               <Title>Registration</Title>
@@ -158,6 +159,7 @@ const RegisterPage = () => {
               </Form>
             </Container>
           )}
+
         </ImageContainer>
       </Section>
     </>

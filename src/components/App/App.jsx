@@ -7,9 +7,9 @@ import MainPage from 'components/MainPage/MainPage';
 // const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
-const AsyncNoticesCategoryList = lazy(() =>
-  import('components/Notices/NoticesCategoryList/NoticesCategoryList')
-);
+
+const AsyncNoticesCategoryList = lazy(() => import('components/Notices/NoticesCategoryList/NoticesCategoryList'))
+
 // const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
 // const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFoundNoticesPage'));
 // const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));

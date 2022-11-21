@@ -9,6 +9,7 @@ import add from 'icons/addPet.svg';
 
 import { Title } from 'pages/UserPage/UserPage.styled';
 import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
+import { useGetUserPetsQuery } from 'redux/auth/authOperations';
 
 axios.defaults.baseURL = ROUTES.BASE_URL;
 axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
@@ -20,6 +21,8 @@ const getPets = () => {
 
 export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
+  const { getUserPets } = useGetUserPetsQuery();
+  console.log(getUserPets);
 
   const handleBtnClick = () => setOpenModal(!openModal);
 
@@ -27,7 +30,7 @@ export const PetsData = () => {
 
   useEffect(() => {
     getPets()
-      .then(({ data }) => setPets(data.data.pets))
+      .then(({ data }) => console.log(data.data.pets))
       .catch(error => console.log(error.message));
   }, []);
 

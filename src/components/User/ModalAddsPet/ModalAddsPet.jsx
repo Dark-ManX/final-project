@@ -26,7 +26,7 @@ const MODAL_STATE = {
 const AddsPet = ({ onClose }) => {
   const token = useSelector(state => state.token);
 
-  // const {getAddsPet} = response;
+  const {addPet} = response;
 
   const [modalState, setModalState] = useState(MODAL_STATE.IDLE);
 
@@ -83,9 +83,8 @@ const AddsPet = ({ onClose }) => {
 
   useEffect(() => {
     if (modalState === MODAL_STATE.DONE) {
-      fetchPetAdd({ name: petName, birth, breed, file, info }, token).then(
-        onClose
-      );
+      addPet({ name: petName, birth, breed, file, info }, token)
+      onClose();
     }
   }, [modalState, petName, birth, breed, file, info, token, onClose]);
 

@@ -10,7 +10,7 @@ import {
 
 export const UserDataItem = ({ user }) => {
   const { name, email, birthday, phone, city } = user;
-  console.log(user);
+  // console.log(user);
 
   return (
     <UserInfoList>

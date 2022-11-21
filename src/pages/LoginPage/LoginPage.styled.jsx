@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Waves from '../../img/Waves.png';
-import wavesPhone from '../../img/wavesPhone.png';
-import wavesTablet from '../../img/wavesTablet.png';
+import Waves from 'img/Waves.png';
+import wavesPhone from 'img/wavesPhone.png';
+import wavesTablet from 'img/wavesTablet.png';
 
 export const Section = styled.section`
   @media screen and (min-width: 768px) {
