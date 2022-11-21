@@ -3,7 +3,18 @@ import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loding/Loading';
 import Error from 'components/error/error';
-import { Anchor, CardThumb, Container, FirstThumb, FriendsThumb, FriendTitle, Image, Item, SecondThumb, Title } from "./OurFriendsPage.styled";
+import {
+  Anchor,
+  CardThumb,
+  Container,
+  FirstThumb,
+  FriendsThumb,
+  FriendTitle,
+  Image,
+  Item,
+  SecondThumb,
+  Title
+} from './OurFriendsPage.styled';
 
 const OurFriendsPage = () => { 
 
@@ -17,14 +28,15 @@ const OurFriendsPage = () => {
         try {
             setIsLoading(true);
             const res = await getFriends();
-            console.log(res)
             setArr(res);
+
         } catch (err) {
             setError(err);
+
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         getAllFriends();
@@ -32,6 +44,8 @@ const OurFriendsPage = () => {
 
     return (
         <>
+          <Title>Our friends</Title>
+
             {isLoading && (
                 <Loading/>
                 // <RotatingLines
@@ -44,57 +58,55 @@ const OurFriendsPage = () => {
             )}
 
             {arr && (
-                <>
-                    <Title>Our friends</Title>
-            
-                    <FriendsThumb>
+              <FriendsThumb>
 
-                        {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
+                {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
                   
-                            <Container key={_id}>
-                                <FriendTitle>{title}</FriendTitle>
+                  <Container key={_id}>
+                    <FriendTitle>{title}</FriendTitle>
 
-                                <CardThumb>
-                                    <FirstThumb>
-                                        <Image src={imageUrl} alt={`${title} img`} />
-                                    </FirstThumb>
+                      <CardThumb>
+                        <FirstThumb>
+                          <Image src={imageUrl} alt={`${title} img`} />
+                        </FirstThumb>
 
-                                    <SecondThumb>
+                        <SecondThumb>
                                 
-                                        <ul>
-                                            <Item >Time: <br />
-                                                <div className='time'>
-                                                    {
-                                                        time ? (<span>{time}</span>) : (<span>----------</span>)
-                                                    }
-                                                </div>
-                                            </Item>
-                                            <Item>Adress:<br />
-                                                {
-                                                    address ? (<span>{address}</span>) : (<span>----------</span>)
-                                                }
-                                            </Item>
-                                            <Item>Email:<br />
-                                                {
-                                                    email ? (<Anchor href={`mailto:${email}`}>{email}</Anchor>) : (<span>----------</span>)
-                                                }
-                                            </Item>
-                                            <Item>Phone:<br />
-                                                {
-                                                    phone ? (<Anchor href={`tel:${phone}`}>{phone}</Anchor>) : (<span>----------</span>)
-                                                }
-                                            </Item>
-                                        </ul>
+                          <ul>
+                            <Item >Time: <br />
+                              <div className='time'>
+                                {
+                                  time ? (<span>{time}</span>) : (<span>----------</span>)
+                                }
+                              </div>
+                            </Item>
+                            
+                            <Item>Adress:<br />
+                              {
+                                address ? (<span>{address}</span>) : (<span>----------</span>)
+                              }
+                            </Item>
+                            
+                            <Item>Email:<br />
+                              {
+                                email ? (<Anchor href={`mailto:${email}`}>{email}</Anchor>) : (<span>----------</span>)
+                              }
+                            </Item>
+                            
+                            <Item>Phone:<br />
+                              {
+                                phone ? (<Anchor href={`tel:${phone}`}>{phone}</Anchor>) : (<span>----------</span>)
+                              }
+                            </Item>
+                          </ul>
 
-                                    </SecondThumb>
-                                </CardThumb>
-                            </Container>
+                        </SecondThumb>
+                      </CardThumb>
+                    </Container>
+                  ))
+                }
                 
-                        ))
-                        }
-                
-                    </FriendsThumb>
-                </>
+              </FriendsThumb>
             )}
 
             {error && <Error/>}

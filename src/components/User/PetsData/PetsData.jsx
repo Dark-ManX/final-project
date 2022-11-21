@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import { PetsList } from 'components/PetsList/PetsList';
+import { PetsList } from 'components/User/PetsList/PetsList';
 import Modal from 'components/Modal/Modal';
-import ModalAddsPet from 'components/ModalAddsPet/ModalAddsPet';
+import ModalAddsPet from 'components/User/ModalAddsPet/ModalAddsPet';
 import { ROUTES } from 'routes/routes';
 import add from 'icons/addPet.svg';
 

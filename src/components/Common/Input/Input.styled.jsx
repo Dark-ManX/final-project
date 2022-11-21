@@ -4,16 +4,16 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 11px;
-  // max-width: 100%;
 `;
 
 export const Input = styled.input`
   max-width: 100%;
-  height: 40px;
+  height: ${({ height }) => height ?? '40px'};
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
+  border-radius: ${({ borderRadius }) => borderRadius ?? '40px'};
   margin-top: 8px;
+  padding: ${({ padding }) => padding ?? '0 14px'};
 
   &::placeholder {
     font-family: 'Manrope';
@@ -21,7 +21,6 @@ export const Input = styled.input`
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
-    padding-left: 14px;
     color: rgba(27, 27, 27, 0.6);
   }
 `;

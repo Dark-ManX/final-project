@@ -1,13 +1,11 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-
-import { UserDataItem } from 'components/UserDataItem/UserDataItem';
+import { useGetUserInfoQuery } from 'redux/auth/authOperations';
+import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
-
-import { useGetUserInfoQuery } from 'redux/auth/authOperations';
 
 axios.defaults.baseURL = ROUTES.BASE_URL;
 axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
@@ -19,7 +17,7 @@ const getUser = () => {
 
 export const UserData = () => {
   const [user, setUser] = useState([]);
-  const getUserInfo = useGetUserInfoQuery();
+  const [getUserInfo] = useGetUserInfoQuery();
   // console.log(info);
   console.log(getUserInfo);
 
@@ -35,6 +33,8 @@ export const UserData = () => {
   // };
 
   // fatchUser();
+
+  // const [getUserInfo] = useGetUserInfoQuery();
 
   useEffect(() => {
     getUser()

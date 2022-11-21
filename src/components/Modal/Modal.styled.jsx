@@ -18,6 +18,7 @@ export const ModalBackdrop = styled.div`
 
 export const ModalBody = styled.div`
   position: absolute;
+  width: 280px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45vh);

@@ -18,7 +18,7 @@ export const StyledColoredLink = styled(Link)`
   background-color: #f59256;
   color: white;
   font-weight: 500;
-  padding: 8px 36px;
+  padding: 8px 28px;
   border-radius: 40px;
   font-size: 14px;
   line-height: calc(19 / 14);

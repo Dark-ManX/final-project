@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './authOperations';
 
 const initialState = {
-  user: { email: null, id: null },
+
+  user: { email: null, password: null },
   token: null,
   isLoading: false,
   isLoggedIn: false,
@@ -14,19 +15,11 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder.addMatcher(
-      authApi.endpoints.createUser.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.user;
-        state.isLoggedIn = false;
-        state.isLoading = true;
-      }
-    );
-    builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
-        state.isLoggedIn = false;
+        state.isLoggedIn = true;
         state.isLoading = true;
       }
     );

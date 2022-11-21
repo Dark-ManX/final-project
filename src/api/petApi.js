@@ -6,6 +6,7 @@ export const fetchPetAdd = async (param, token) => {
   const data = await axios.post(`/pets/add`, param, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  //   const { notices } = data.data;
+
+  console.log(data);
   return data;
 };

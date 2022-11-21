@@ -1,7 +1,20 @@
 import { useState } from 'react';
 import { useLoginUserMutation } from 'redux/auth/authOperations';
+import {
+  Input,
+  Title,
+  Container,
+  Form,
+  Button,
+  P,
+  Span,
+  ImageContainer,
+  Section,
+} from './LoginPage.styled';
+import { Link, useLocation } from 'react-router-dom';
 
 const LoginPage = () => {
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginUser] = useLoginUserMutation();
@@ -32,6 +45,10 @@ const LoginPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    // if (password === '' || password.includes(' ')) {
+    //   return alert('Please, enter a valid password!');
+    // }
     loginNewUser();
     reset();
   };
@@ -43,23 +60,41 @@ const LoginPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          value={password}
-          name="password"
-          placeholder="password"
-          onChange={handleChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <Section>
+        <ImageContainer>
+          <Container>
+            <Title>Login</Title>
+            <Form onSubmit={handleSubmit}>
+              <Input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={handleChange}
+                required
+              />
+              <Input
+                type="password"
+                value={password}
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                required
+                pattern="[^\s]"
+                minlength="7"
+                maxlength="32"
+              />
+              <Button type="submit">Login</Button>{' '}
+              <P>
+                Don`t have an account?`
+                <Link to={`/register`} state={{ from: location }}>
+                  <Span> Register</Span>
+                </Link>
+              </P>
+            </Form>
+          </Container>
+        </ImageContainer>
+      </Section>
     </>
   );
 };

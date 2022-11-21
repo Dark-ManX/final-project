@@ -70,8 +70,9 @@ const [isLoading, setIsLoading] = useState(false);
   }
     
   return (
-    <>
-      <MainContainer>
+
+    <MainContainer>
+
         <NewsPageTitle>News</NewsPageTitle>
         
         <SearchForm onSubmit={handleSubmit} />
@@ -87,18 +88,20 @@ const [isLoading, setIsLoading] = useState(false);
           <NewsItemTitle>
             <EllipsisText text={title} length={42} />
           </NewsItemTitle>
+
           <NewsItemContent>
             <EllipsisText text={description} length={231} />
           </NewsItemContent>
+
           <NewsItemInfo>
             <NewsItemDate>{date}</NewsItemDate>
             <NewsItemLink href={url} target='_blank'>Read more</NewsItemLink>
           </NewsItemInfo>
         </NewsItem>)
         )}
-        </NewsSet>
-        </MainContainer>
-    </>
+      </NewsSet>
+
+    </MainContainer>
   )
 
 };
