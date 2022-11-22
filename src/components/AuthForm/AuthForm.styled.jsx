@@ -44,9 +44,17 @@ export const EyeSymbol = styled.span`
   position: absolute;
   background: #fdf7f2;
   cursor: pointer;
-  top: 20px;
-  right: 20px;
   align-self: center;
+  top: 12px;
+  right: 20px;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    background: #fdf7f2;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    align-self: center;
+  }
 `;
 
 export const EyeContainer = styled.div`
