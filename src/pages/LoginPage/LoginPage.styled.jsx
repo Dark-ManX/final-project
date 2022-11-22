@@ -19,6 +19,12 @@ export const ImageContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
 
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    margin: 0 auto;
+    position: absolute;
+    top: 100px;
+  }
+
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     background-position: bottom;
     position: absolute;
@@ -44,9 +50,12 @@ export const ImageContainer = styled.div`
 `;
 export const Container = styled.div`
   margin-top: 30px;
+
   @media screen and (min-width: 480px) and (max-width: 767px) {
-    max-width: 480px;
+    width: 480px;
+    margin: 0 auto;
   }
+
   @media screen and (min-width: 768px) {
     top: -300px;
     left: 110px;
@@ -59,7 +68,7 @@ export const Container = styled.div`
   }
   @media screen and (min-width: 1280px) {
     top: 20px;
-    left: 510px;
+    left: 450px;
     width: 618px;
     height: 449px;
   }

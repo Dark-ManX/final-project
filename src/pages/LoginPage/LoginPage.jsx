@@ -12,6 +12,7 @@ import {
   Section,
 } from './LoginPage.styled';
 import { Link, useLocation } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const LoginPage = () => {
   const location = useLocation();
@@ -46,9 +47,16 @@ const LoginPage = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // if (password === '' || password.includes(' ')) {
-    //   return alert('Please, enter a valid password!');
-    // }
+    if (email === '' || !email.includes('@')) {
+      return Notiflix.Notify.failure('Please, enter a valid email!');
+    }
+
+    if (password === '' || password.includes(' ')) {
+      return Notiflix.Notify.failure(
+        'Please, enter a valid password without spaces!'
+      );
+    }
+
     loginNewUser();
     reset();
   };
@@ -80,7 +88,6 @@ const LoginPage = () => {
                 placeholder="Password"
                 onChange={handleChange}
                 required
-                pattern="[^\s]"
                 minlength="7"
                 maxlength="32"
               />

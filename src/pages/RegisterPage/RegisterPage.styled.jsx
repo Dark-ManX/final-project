@@ -18,17 +18,24 @@ export const ImageContainer = styled.div`
   background-size: contain;
   width: 100vw;
   min-height: 100vh;
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    margin: 0 auto;
+    position: absolute;
+    top: 100px;
+  }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     background-position: bottom;
     position: absolute;
     top: 400px;
-    left: -152px;
+    left: -20px;
     background-image: url(${wavesTablet});
     background-repeat: no-repeat;
     background-size: contain;
     width: 100vw;
     min-height: 100vh;
   }
+
   @media screen and (min-width: 1280px) {
     background-position: bottom;
     position: absolute;
@@ -41,17 +48,17 @@ export const ImageContainer = styled.div`
     min-height: 100vh;
   }
 `;
-export const Container = styled.div`
+
+export const FirstContainer = styled.div`
   margin-top: 30px;
 
   @media screen and (min-width: 480px) and (max-width: 767px) {
-    display: flex;
-    flex-direction: column;
-    max-width: 480px;
+    margin: 0 auto;
+    width: 480px;
   }
   @media screen and (min-width: 768px) {
     top: -300px;
-    left: 110px;
+    left: 100px;
     position: absolute;
     width: 608px;
     height: 517px;
@@ -61,7 +68,32 @@ export const Container = styled.div`
   }
   @media screen and (min-width: 1280px) {
     top: 20px;
-    left: 510px;
+    left: 450px;
+    width: 618px;
+    height: 541px;
+  }
+`;
+export const Container = styled.div`
+  margin-top: 30px;
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    width: 480px;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    top: -300px;
+    left: 110px;
+    position: absolute;
+    width: 608px;
+    height: 605px;
+    background: #ffffff;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 40px;
+  }
+  @media screen and (min-width: 1280px) {
+    top: 20px;
+    left: 450px;
     width: 618px;
     height: 605px;
   }
@@ -78,6 +110,10 @@ export const Title = styled.h2`
   letter-spacing: 0.04em;
   color: #111111;
   margin-bottom: 40px;
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    margin-bottom: 20px;
+  }
 
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
@@ -190,6 +226,10 @@ export const BackBtn = styled.button`
   align-items: center;
   letter-spacing: 0.04em;
   color: #000000;
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 
   @media screen and (min-width: 768px) {
     visibility: visible;
