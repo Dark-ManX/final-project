@@ -8,6 +8,7 @@ import {
   Title,
   FirstContainer,
   Container,
+  Input,
   Form,
   Button,
   P,
@@ -16,135 +17,160 @@ import {
   Section,
   BackBtn,
 } from './RegisterPage.styled';
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const RegisterPage = () => {
    const navigate = useNavigate();
   const location = useLocation();
-  const [formData1, setFormData1] = useState({
-    email: '',
-    password: '',
-    confirmedPassword: '',
-  });
-    const [formData2, setFormData2] = useState({
-
-    name: 'Name',
-    city: 'City,region',
-    phone: '380000000000',
-
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  // const [page, setPage]=useState(false)
   const isId = useSelector(state => state.auth.user.id);
   console.log(isId)
-  const [page, setPage] = useState(0);
+console.log(email,password,confirmPassword)
+ const [passwordShown, setPasswordShown] = useState(false);
 
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
   const [registerNewUser] = useRegisterUserMutation();
+  // const isToken = useSelector(state => state.auth.token);
 
-  const conditionalComponent = () => {
-    switch (page) {
-      case 1:
-        return (
-          <RegistrationDetails formData={formData2} setFormData={setFormData2} />
-        );
 
+  // if (isToken !== null) {
+  //   skip = false;
+  // }
+  // useCurrentUserQuery(nameI, { skip });
+
+  const handelChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'confirmPassword':
+        setConfirmPassword(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
       default:
-        return <AuthForm formData={formData1} setFormData={setFormData1} />;
+        break;
     }
   };
+  const addUser = () => {
+    const newUser = {
+      email,
+      password,
+    };
+    registerNewUser(newUser).then(({ error }) => {
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-
-    if (formData1.email === '' || !formData1.email.includes('@')) {
-      return Notiflix.Notify.failure('Please, enter a valid email!');
-    }
-
-    if (formData1.password === '' || formData1.password.includes(' ')) {
-      return Notiflix.Notify.failure(
-        'Please, enter a valid password without spaces!'
-      );
-    }
-
-    if (
-      formData1.confirmedPassword !== formData1.password ||
-      formData1.confirmedPassword === ''
-    ) {
-      return Notiflix.Notify.failure('Passwords do not match!');
-    }
-    if (!/^[a-zA-Z]*$/g.test(formData2.name)) {
-      return Notiflix.Notify.info('Name may only include letters');
-    }
-    if (formData2.name === '') {
-      return Notiflix.Notify.failure('Please, enter your name');
-    }
-
-    if (formData2.city === '') {
-      return Notiflix.Notify.failure('Please, enter your city and region');
-    }
-    if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(formData2.city)) {
-      return Notiflix.Notify.info(
-        'Please, enter your city and region separated by comma'
-      );
-    }
-    if (formData2.phone === '') {
-      return Notiflix.Notify.failure('Please, enter your phone number');
-    }
-    if (!/^\d{12}$/g.test(formData2.phone)) {
-      return Notiflix.Notify.info(
-        'Your phone number must consist of 12 numbers'
-      );
-    }
-    const formData= {
-      email:  formData1.email,
-      password: formData1.password,
-    }
-
-   registerNewUser(formData).then(({ error }) => {
-
-     if (error) {
+      if (error) {
         const newName = error.data.name;
         const errorPassword = error.data.message;
         if (newName && newName === 'MongoError') {
-          return Notiflix.Notify.failure(`A user email  ${formData1.email} already exists`);
+          return Notify.failure(`A user email  ${email} already exists`);
         }
-       if (errorPassword) {
-
-          return Notiflix.Notify.failure(`${errorPassword}`);
-       }
+        if (errorPassword) {
+          return Notify.failure(`${errorPassword}`);
+        }
+      }
       navigate('/contacts', { replace: true });
-     }
-
-   });;
-
-    // if (page < 1) {
-    //   setPage(page + 1);
-    // } else if (page === 1) {
-    //   registerNewUser(formData);
+    });
+  };
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    if (password !== confirmPassword || confirmPassword==='') {
+return Notify.failure('Fatal confirm password');
+    }
+    if (email === '' || !email.includes('@')) {
+      return Notify.failure('Please, enter a valid email!');
+    }
+    if (password === '' || password.includes(' ')) {
+      return Notify.failure(
+        'Please, enter a valid password without spaces!'
+      );
+    }
+    // if (!/^[a-zA-Z]*$/g.test(formData2.name)) {
+    //   return Notiflix.Notify.info('Name may only include letters');
     // }
+    // if (formData2.name === '') {
+    //   return Notiflix.Notify.failure('Please, enter your name');
+    // }
+
+    // if (formData2.city === '') {
+    //   return Notiflix.Notify.failure('Please, enter your city and region');
+    // }
+    // if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(formData2.city)) {
+    //   return Notiflix.Notify.info(
+    //     'Please, enter your city and region separated by comma'
+    //   );
+    // }
+    // if (formData2.phone === '') {
+    //   return Notiflix.Notify.failure('Please, enter your phone number');
+    // }
+    // if (!/^\d{12}$/g.test(formData2.phone)) {
+    //   return Notiflix.Notify.info(
+    //     'Your phone number must consist of 12 numbers'
+    //   );
+    // }
+    addUser();
+    setConfirmPassword('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
     <>
-      <Section>
-        <ImageContainer>
 
-          {page === 0 && (
-            <FirstContainer>
-              <Title>Registration</Title>
 
               <Form>
-                {conditionalComponent()}
+<>
+          <Input
+        name="email"
+        type="email"
+        required
+        onChange={ handelChange }
+        value={email}
+        placeholder="Email"
+      />
+      <div>
+            <Input
+
+          name="password"
+          type={passwordShown ? 'text' : 'password'}
+          onChange={ handelChange }
+          value={password}
+          placeholder="Password"
+          pattern="[^\s]"
+          minlength="7"
+          maxlength="32"
+          required
+        />
+        <i onClick={togglePassword}></i>
+      </div>
+          <Input
+        name="confirmPassword"
+        type="password"
+        placeholder="Confirm password"
+        onChange={handelChange }
+        value={confirmPassword}
+      />
+    </>
                 <ul>
                   <li>
                     <Button onClick={handleSubmit}>
-                      {page === 0 || page < 1 ? 'Next' : 'Register'}
+                      Next
                     </Button>
                   </li>
-
+{/*
                   {page > 0 && (
                     <li>
-                      <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
+                      <BackBtn>Back</BackBtn>
                     </li>
-                  )}
+                  )} */}
                   <li>
                     <P>
                       Already have an account?
@@ -155,7 +181,7 @@ const RegisterPage = () => {
                   </li>
                 </ul>
               </Form>
-            </FirstContainer>
+            {/* </FirstContainer>
           )}
           {page > 0 && (
             <Container>
@@ -188,7 +214,7 @@ const RegisterPage = () => {
           )}
 
         </ImageContainer>
-      </Section>
+      </Section> */}
     </>
   );
 };
