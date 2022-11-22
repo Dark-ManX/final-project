@@ -102,7 +102,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             </CardInfoContainer>
             <Button type="button" onClick={handleOpenModal}>Learn more</Button>
             {showModal && <Modal onClose={handleCloseModal}>
-                <ModalNotice notice={notice} onClose={handleCloseModal} />
+                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick} />
             </Modal>}
         </NoticeCategoryItemStyled>
     ); 
