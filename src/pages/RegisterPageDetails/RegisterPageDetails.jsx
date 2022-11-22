@@ -1,6 +1,9 @@
 import { Input } from './RegisterPageDetails.styled';
+import { useSelector } from 'react-redux';
 
 const RegistrationDetails = ({ formData, setFormData }) => {
+  const isId = useSelector(state => state.auth.user.id);
+  console.log(isId)
   return (
     <>
       <Input

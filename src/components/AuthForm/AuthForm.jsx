@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const AuthForm = ({ formData, setFormData }) => {
   const [passwordShown, setPasswordShown] = useState(false);
-  console.log(formData);
+
   const togglePassword = () => {
     // When the handler is invoked
     // inverse the boolean state of passwordShown

@@ -1,8 +1,8 @@
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation ,useNavigate} from 'react-router-dom';
 import AuthForm from 'components/AuthForm';
 import {
   Title,
@@ -19,16 +19,22 @@ import {
 import Notiflix from 'notiflix';
 
 const RegisterPage = () => {
+   const navigate = useNavigate();
   const location = useLocation();
-  const [formData, setFormData] = useState({
+  const [formData1, setFormData1] = useState({
     email: '',
     password: '',
+    confirmedPassword: '',
+  });
+    const [formData2, setFormData2] = useState({
+
     name: 'Name',
     city: 'City,region',
     phone: '380000000000',
-    confirmedPassword: '',
-  });
 
+  });
+  const isId = useSelector(state => state.auth.user.id);
+  console.log(isId)
   const [page, setPage] = useState(0);
 
   const [registerNewUser] = useRegisterUserMutation();
@@ -37,62 +43,83 @@ const RegisterPage = () => {
     switch (page) {
       case 1:
         return (
-          <RegistrationDetails formData={formData} setFormData={setFormData} />
+          <RegistrationDetails formData={formData2} setFormData={setFormData2} />
         );
 
       default:
-        return <AuthForm formData={formData} setFormData={setFormData} />;
+        return <AuthForm formData={formData1} setFormData={setFormData1} />;
     }
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (formData.email === '' || !formData.email.includes('@')) {
+    if (formData1.email === '' || !formData1.email.includes('@')) {
       return Notiflix.Notify.failure('Please, enter a valid email!');
     }
 
-    if (formData.password === '' || formData.password.includes(' ')) {
+    if (formData1.password === '' || formData1.password.includes(' ')) {
       return Notiflix.Notify.failure(
         'Please, enter a valid password without spaces!'
       );
     }
 
     if (
-      formData.confirmedPassword !== formData.password ||
-      formData.confirmedPassword === ''
+      formData1.confirmedPassword !== formData1.password ||
+      formData1.confirmedPassword === ''
     ) {
       return Notiflix.Notify.failure('Passwords do not match!');
     }
-    if (!/^[a-zA-Z]*$/g.test(formData.name)) {
+    if (!/^[a-zA-Z]*$/g.test(formData2.name)) {
       return Notiflix.Notify.info('Name may only include letters');
     }
-    if (formData.name === '') {
+    if (formData2.name === '') {
       return Notiflix.Notify.failure('Please, enter your name');
     }
 
-    if (formData.city === '') {
+    if (formData2.city === '') {
       return Notiflix.Notify.failure('Please, enter your city and region');
     }
-    if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(formData.city)) {
+    if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(formData2.city)) {
       return Notiflix.Notify.info(
         'Please, enter your city and region separated by comma'
       );
     }
-    if (formData.phone === '') {
+    if (formData2.phone === '') {
       return Notiflix.Notify.failure('Please, enter your phone number');
     }
-    if (!/^\d{12}$/g.test(formData.phone)) {
+    if (!/^\d{12}$/g.test(formData2.phone)) {
       return Notiflix.Notify.info(
         'Your phone number must consist of 12 numbers'
       );
     }
-
-    if (page < 1) {
-      setPage(page + 1);
-    } else if (page === 1) {
-      registerNewUser(formData);
+    const formData= {
+      email:  formData1.email,
+      password: formData1.password,
     }
+
+   registerNewUser(formData).then(({ error }) => {
+
+     if (error) {
+        const newName = error.data.name;
+        const errorPassword = error.data.message;
+        if (newName && newName === 'MongoError') {
+          return Notiflix.Notify.failure(`A user email  ${formData1.email} already exists`);
+        }
+       if (errorPassword) {
+
+          return Notiflix.Notify.failure(`${errorPassword}`);
+       }
+      navigate('/contacts', { replace: true });
+     }
+
+   });;
+
+    // if (page < 1) {
+    //   setPage(page + 1);
+    // } else if (page === 1) {
+    //   registerNewUser(formData);
+    // }
   };
 
   return (
