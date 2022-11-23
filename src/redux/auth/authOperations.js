@@ -6,7 +6,7 @@ export const authApi = createApi({
     baseUrl: 'http://localhost:3010',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log(token);
+      // console.log(token);
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -27,11 +27,13 @@ export const authApi = createApi({
     }),
     // PATCH register: '/auth/register',
     addUser: builder.mutation({
-      query: (formData, id) => ({
-        url: `/register/${id}`,
+      query: addInfoAuth => ({
+        url: `/register/${addInfoAuth.isId}`,
         method: 'PATCH',
-        body: formData,
+        body: addInfoAuth,
       }),
+      // console.log(addInfoAuth)
+
       invalidatesTags: [{ type: 'User' }],
     }),
     // POST login: '/login',

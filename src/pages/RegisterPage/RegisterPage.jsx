@@ -28,7 +28,8 @@ const RegisterPage = () => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
-  const [page, setPage]=useState(false)
+  const [page, setPage] = useState(false)
+  // const [id, setId]=useState(null)
   const isId = useSelector(state => state.auth.user.id);
 //   console.log(isId)
 // console.log(email,password,confirmPassword)
@@ -40,7 +41,7 @@ const RegisterPage = () => {
     setPasswordShown(!passwordShown);
   };
   const [registerNewUser] = useRegisterUserMutation();
-  const [addInfo] = useAddUserMutation();
+  const [addUser] = useAddUserMutation();
   // const isToken = useSelector(state => state.auth.token);
 
 
@@ -73,7 +74,7 @@ const RegisterPage = () => {
         break;
     }
   };
-  const addUser = () => {
+  const createUser = () => {
     const newUser = {
       email,
       password,
@@ -90,7 +91,7 @@ const RegisterPage = () => {
           return Notify.failure(`${errorPassword}`);
         }
       }
-
+      setPage(true)
       navigate('/register', { replace: true });
     });
   };
@@ -107,26 +108,31 @@ return Notify.failure('Fatal confirm password');
         'Please, enter a valid password without spaces!'
       );
     }
-    addUser();
+    createUser();
+
     setConfirmPassword('');
     setEmail('');
     setPassword('');
   };
-const addUserInfo = () => {
+
+const addUserInfo = async () => {
     const addInfoAuth = {
       name,
       city,
       phone,
+      isId,
     };
-    addInfo(addInfoAuth).then(({ error }) => {
+
+   await addUser(addInfoAuth).then(({ error }) => {
 
       if (error) {
+        console.log(error)
         const errorPassword = error.data.message;
         if (errorPassword) {
           return Notify.failure(`${errorPassword}`);
         }
       }
-      navigate('/register', { replace: true });
+      navigate('/notices/sell', { replace: true });
     });
   };
   const handleSubmitInfo = evt => {
@@ -218,7 +224,7 @@ const addUserInfo = () => {
           name="city"
           type="text"
           onChange={ handelChange }
-          value={password}
+          value={city}
           placeholder="City"
         />
         <i onClick={togglePassword}></i>
@@ -228,7 +234,7 @@ const addUserInfo = () => {
         type="phone"
         placeholder="Phone"
         onChange={handelChange }
-        value={confirmPassword}
+        value={phone}
       />
     </>
 
@@ -236,18 +242,12 @@ const addUserInfo = () => {
 
 
                 <ul>
-                  <li>
-                    <Button onClick={handleSubmit}>
+                <li>
+                  {!page ? <Button onClick={handleSubmit}>
                       Next
-                    </Button>
-                  </li>
-{/*
-                  {page > 0 && (
-                    <li>
-                      <BackBtn>Back</BackBtn>
-                    </li>
-                  )} */}
-                  <li>
+                    </Button>:<Button onClick={handleSubmitInfo}>
+                      Register
+                    </Button>}
                     <P>
                       Already have an account?
                       <Link to={`/login`} state={{ from: location }}>
