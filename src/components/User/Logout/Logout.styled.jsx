@@ -29,6 +29,6 @@ export const LogoutBtn = styled.button`
   @media screen and (min-width: 1280px) {
     position: absolute;
     top: 90%;
-    left: -33%;
+    left: -40%;
   }
 `;
