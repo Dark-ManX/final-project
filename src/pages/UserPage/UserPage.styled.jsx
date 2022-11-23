@@ -10,13 +10,14 @@ export const ContainerInfo = styled.div`
   @media screen and (min-width: 1280px) {
     display: flex;
     justify-content: space-between;
+    position: relative;
     margin-top: 58px;
   }
 `;
 
 export const AboutUser = styled.div`
   @media screen and (min-width: 768px) {
-    /* position: relative; */
+    position: relative;
     height: 400px;
     margin-top: 40px;
   }
@@ -63,7 +64,7 @@ export const ContainerUser = styled.div`
   @media screen and (min-width: 768px) {
     position: absolute;
     left: 0;
-    top: 200px;
+    top: 20px;
     margin-top: 40px;
     padding: 24px 40px 24px 32px;
     border-radius: 0px 40px 40px 0px;
@@ -71,8 +72,8 @@ export const ContainerUser = styled.div`
 
   @media screen and (min-width: 1280px) {
     position: absolute;
-    left: 0px;
-    top: 188px;
+    left: 0;
+    top: 30px;
     width: 411px;
     height: 580px;
     padding: 20px 16px 60px 16px;
