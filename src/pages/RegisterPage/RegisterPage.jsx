@@ -1,7 +1,7 @@
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useRegisterUserMutation } from 'redux/auth/authOperations';
+import { useRegisterUserMutation ,useAddUserMutation} from 'redux/auth/authOperations';
 import { Link, useLocation ,useNavigate} from 'react-router-dom';
 import AuthForm from 'components/AuthForm';
 import {
@@ -25,11 +25,14 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  // const [page, setPage]=useState(false)
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
+  const [page, setPage]=useState(false)
   const isId = useSelector(state => state.auth.user.id);
-  console.log(isId)
-console.log(email,password,confirmPassword)
- const [passwordShown, setPasswordShown] = useState(false);
+//   console.log(isId)
+// console.log(email,password,confirmPassword)
+ const [passwordShown, setPasswordShown] = useState(true);
 
   const togglePassword = () => {
     // When the handler is invoked
@@ -37,6 +40,7 @@ console.log(email,password,confirmPassword)
     setPasswordShown(!passwordShown);
   };
   const [registerNewUser] = useRegisterUserMutation();
+  const [addInfo] = useAddUserMutation();
   // const isToken = useSelector(state => state.auth.token);
 
 
@@ -56,6 +60,15 @@ console.log(email,password,confirmPassword)
       case 'password':
         setPassword(value);
         break;
+      case 'name':
+        setName(value);
+        break;
+      case 'city':
+        setCity(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
       default:
         break;
     }
@@ -68,16 +81,17 @@ console.log(email,password,confirmPassword)
     registerNewUser(newUser).then(({ error }) => {
 
       if (error) {
-        const newName = error.data.name;
         const errorPassword = error.data.message;
-        if (newName && newName === 'MongoError') {
+        if (error.status === 409) {
+          navigate('/login', { replace: true });
           return Notify.failure(`A user email  ${email} already exists`);
         }
         if (errorPassword) {
           return Notify.failure(`${errorPassword}`);
         }
       }
-      navigate('/contacts', { replace: true });
+
+      navigate('/register', { replace: true });
     });
   };
   const handleSubmit = evt => {
@@ -93,40 +107,68 @@ return Notify.failure('Fatal confirm password');
         'Please, enter a valid password without spaces!'
       );
     }
-    // if (!/^[a-zA-Z]*$/g.test(formData2.name)) {
-    //   return Notiflix.Notify.info('Name may only include letters');
-    // }
-    // if (formData2.name === '') {
-    //   return Notiflix.Notify.failure('Please, enter your name');
-    // }
-
-    // if (formData2.city === '') {
-    //   return Notiflix.Notify.failure('Please, enter your city and region');
-    // }
-    // if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(formData2.city)) {
-    //   return Notiflix.Notify.info(
-    //     'Please, enter your city and region separated by comma'
-    //   );
-    // }
-    // if (formData2.phone === '') {
-    //   return Notiflix.Notify.failure('Please, enter your phone number');
-    // }
-    // if (!/^\d{12}$/g.test(formData2.phone)) {
-    //   return Notiflix.Notify.info(
-    //     'Your phone number must consist of 12 numbers'
-    //   );
-    // }
     addUser();
     setConfirmPassword('');
     setEmail('');
     setPassword('');
   };
+const addUserInfo = () => {
+    const addInfoAuth = {
+      name,
+      city,
+      phone,
+    };
+    addInfo(addInfoAuth).then(({ error }) => {
+
+      if (error) {
+        const errorPassword = error.data.message;
+        if (errorPassword) {
+          return Notify.failure(`${errorPassword}`);
+        }
+      }
+      navigate('/register', { replace: true });
+    });
+  };
+  const handleSubmitInfo = evt => {
+    evt.preventDefault();
+    if (!/^[a-zA-Z]*$/g.test(name)) {
+      return Notify.info('Name may only include letters');
+    }
+    if (name === '') {
+      return Notify.failure('Please, enter your name');
+    }
+
+    if (city === '') {
+      return Notify.failure('Please, enter your city and region');
+    }
+    if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(city)) {
+      return Notify.info(
+        'Please, enter your city and region separated by comma'
+      );
+    }
+    if (phone === '') {
+      return Notify.failure('Please, enter your phone number');
+    }
+    if (!/^\d{12}$/g.test(phone)) {
+      return Notify.info(
+        'Your phone number must consist of 12 numbers'
+      );
+    }
+    addUserInfo();
+    setName('');
+    setCity('');
+    setPhone('');
+  };
 
   return (
     <>
+      <Section>
+        <ImageContainer>
+          <FirstContainer>
+            <Title>Registration</Title>
 
-
-              <Form>
+            <Form>
+              {!page ?        (<div>
 <>
           <Input
         name="email"
@@ -159,6 +201,40 @@ return Notify.failure('Fatal confirm password');
         value={confirmPassword}
       />
     </>
+
+              </div> ): (<div>
+<>
+          <Input
+        name="name"
+        type="name"
+        required
+        onChange={ handelChange }
+        value={name}
+        placeholder="Name"
+      />
+      <div>
+            <Input
+
+          name="city"
+          type="text"
+          onChange={ handelChange }
+          value={password}
+          placeholder="City"
+        />
+        <i onClick={togglePassword}></i>
+      </div>
+          <Input
+        name="phone"
+        type="phone"
+        placeholder="Phone"
+        onChange={handelChange }
+        value={confirmPassword}
+      />
+    </>
+
+              </div>)}
+
+
                 <ul>
                   <li>
                     <Button onClick={handleSubmit}>
@@ -181,6 +257,12 @@ return Notify.failure('Fatal confirm password');
                   </li>
                 </ul>
               </Form>
+
+          </FirstContainer>
+        </ImageContainer>
+</Section>
+
+
             {/* </FirstContainer>
           )}
           {page > 0 && (

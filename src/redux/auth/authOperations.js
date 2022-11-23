@@ -25,7 +25,15 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
-
+    // PATCH register: '/auth/register',
+    addUser: builder.mutation({
+      query: (formData, id) => ({
+        url: `/register/${id}`,
+        method: 'PATCH',
+        body: formData,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
     // POST login: '/login',
     loginUser: builder.mutation({
       query: logUser => ({
@@ -171,4 +179,5 @@ export const {
   useCreateNoticeMutation,
   useDeleteFavoriteNoticeMutation,
   useDeleteNoticeMutation,
+  useAddUserMutation,
 } = authApi;
