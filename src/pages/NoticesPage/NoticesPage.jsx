@@ -6,11 +6,20 @@ import Loading from "components/Common/Loading/Loading";
 import NoticesCategoriesNav from "components/Notices/NoticesCategoryNav/NoticesCategoryNav";
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
 import { SearchForm } from "components/SearchForm/SearchForm";
-import { AuthLink, Title, Nav, Container, AuthLinkContainer } from "./NoticesPage.styled";
+import { AuthLink, Title, Nav, Container, AuthLinkContainer , Category} from "./NoticesPage.styled";
 // import SearchForm from "components/Notices/SearchForm/SearchForm";
+import {
+  LinkAddPet,
+  //   NavSection,
+  AddPet,
+  AddPetBlock,
+  Icon,
+} from './ButtonAddNotice.styled';
+import { ReactComponent as AddIcon } from '../../icons/addPet.svg';
+import Modal from '../../components/Modal/Modal';
 
 const NoticesPage = () => {
-
+const [showModal, setShowModal] = useState(false);
     const [query, setQuery] = useState(null);
     const [input, setInput] = useState('')
     const [notices, setNotices] = useState([]);
@@ -70,8 +79,10 @@ const NoticesPage = () => {
         document.addEventListener('click', handleClick);
         return () => document.removeEventListener('click', handleClick);
      }, [query]);
-    
-    return ( 
+     const toggleModal = evt => {
+    setShowModal(!showModal);
+  };
+    return (
 
         <Container>
             <Title>Find your favorite pet</Title>
@@ -83,17 +94,29 @@ const NoticesPage = () => {
                     <Link to="for-free">In good hands</Link>
                     <Link to="sell">Sell</Link>
                 </LinkContainer>     */}
-
-                <NoticesCategoriesNav />
+          <Category>
+              <NoticesCategoriesNav />
 
                 {token &&
                     <AuthLinkContainer>
                         <AuthLink to="favorite">Favorite ads</AuthLink>
                         <AuthLink to="own">My ads</AuthLink>
                     </AuthLinkContainer>
-                }
+          }
+</Category>
+
+           <AddPetBlock>
+          <AddPet>Add pet</AddPet>
+          <LinkAddPet onClick={toggleModal}>
+            <Icon>
+              <AddIcon width="100%" height="100%" />
+            </Icon>
+          </LinkAddPet>
+        </AddPetBlock>
             </Nav>
-            
+             {showModal && (
+        <Modal onClose={toggleModal}>{/* <FormAddNotice /> */}</Modal>
+      )}
             <Suspense fallback={<Loading/>}>
                 <Outlet context={notices} />
             </Suspense>
