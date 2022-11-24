@@ -1,17 +1,25 @@
-// import { useState } from 'react';
-// import { NoticesCategoryList } from 'components/NoticesCategoryList/NoticesCategoryList';
+import { useState } from 'react';
+import { useGetOwnNoticesQuery } from 'redux/notices/noticesApi';
+import NoticesCategoryList from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
 
 const OwnNotices = () => {
-
-    // const [page, setPage] = useState(1);
-    // const [notices, setNotices] = useState([]);
-    // const [error, setError] = useState('');
+    // eslint-disable-next-line no-unused-vars
+    const [error, setError] = useState('');
+    const { data: notices } = useGetOwnNoticesQuery();
+    let ownNotices = [];
     
+    if (notices) {
+        ownNotices = notices.data.pets;
+    };
+
     return (
         <>
-            {/* {error && <p>{error.message}</p>} */}
+            {error && <p>{error.message}</p>}
 
-            {/* <NoticesCategoryList notices={notices} /> */}
+            {notices
+                ? <NoticesCategoryList notices={ownNotices} />
+                : <p>Nothing added</p>
+            }
         </>
     );
 };
