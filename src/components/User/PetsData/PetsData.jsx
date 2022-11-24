@@ -11,8 +11,11 @@ import { Title } from 'pages/UserPage/UserPage.styled';
 import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
 import { useGetUserPetsQuery } from 'redux/auth/authOperations';
 
+// const AUTH_TOKEN =
+//   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2UwMWEyOTkxODkxNmVjZDlkZmJmOSIsImlhdCI6MTY2OTIzMTU2NywiZXhwIjoxNjY5MjY3NTY3fQ.Uu4RDE9b6iMWWT8sxMkImG5An19qaKsbPuMrxii2Shc';
+
 axios.defaults.baseURL = ROUTES.BASE_URL;
-axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 const getPets = () => {
   const response = axios.get(`${ROUTES.USER.getUserPets}`);
@@ -30,7 +33,10 @@ export const PetsData = () => {
 
   useEffect(() => {
     getPets()
-      .then(({ data }) => console.log(data.data.pets))
+      .then(({ data }) => {
+        setPets(data.data.pets);
+        console.log(data.data.pets);
+      })
       .catch(error => console.log(error.message));
   }, []);
 
