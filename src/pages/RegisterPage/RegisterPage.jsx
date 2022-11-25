@@ -20,17 +20,20 @@ import {
   Section,
   BackBtn,
   Input,
+  EyeContainer,
+  EyeSymbol,
 } from './RegisterPage.styled';
 import Notiflix from 'notiflix';
+import { BsEyeSlash, BsEye } from 'react-icons/bs';
 
 const RegisterPage = () => {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('name');
+  const [city, setCity] = useState('city');
+  const [phone, setPhone] = useState('phone');
   const [page, setPage] = useState(0);
 
   const isId = useSelector(state => state.auth.user.id);
@@ -42,16 +45,6 @@ const RegisterPage = () => {
   const [showPassword, setshowPassword] = useState(false);
   // To Hide/Show confirm password
   const [showRePassword, setshowRePassword] = useState(false);
-
-  // const conditionalComponent = () => {
-  //   switch (page) {
-  //     case 1:
-  //       return <RegistrationDetails email={email} password={password} />;
-
-  //     default:
-  //       return <AuthForm />;
-  //   }
-  // };
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -151,7 +144,6 @@ const RegisterPage = () => {
               <Title>Registration</Title>
 
               <Form>
-                {/* {conditionalComponent()} */}{' '}
                 <div>
                   <Input
                     type="email"
@@ -162,38 +154,38 @@ const RegisterPage = () => {
                     placeholder="Email"
                   />
                 </div>
-                {/* <EyeContainer> */}
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  onChange={handleChange}
-                  value={password}
-                  placeholder="Password"
-                  pattern="[^\s]"
-                  minlength="7"
-                  maxlength="32"
-                  required
-                />
-                {/* <EyeSymbol
+                <EyeContainer>
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    onChange={handleChange}
+                    value={password}
+                    placeholder="Password"
+                    pattern="[^\s]"
+                    minlength="7"
+                    maxlength="32"
+                    required
+                  />
+                  <EyeSymbol
                     onClick={() => setshowPassword(prevState => !prevState)}
                   >
                     {showPassword ? <BsEye /> : <BsEyeSlash />}
                   </EyeSymbol>
                 </EyeContainer>
-                <EyeContainer> */}
-                <Input
-                  // type={showRePassword ? 'text' : 'password'}
-                  name="confirmedPassword"
-                  placeholder="Confirm password"
-                  onChange={handleChange}
-                  value={confirmedPassword}
-                />
-                {/* <EyeSymbol
+                <EyeContainer>
+                  <Input
+                    type={showRePassword ? 'text' : 'password'}
+                    name="confirmedPassword"
+                    placeholder="Confirm password"
+                    onChange={handleChange}
+                    value={confirmedPassword}
+                  />
+                  <EyeSymbol
                     onClick={() => setshowRePassword(prevState => !prevState)}
                   >
                     {showRePassword ? <BsEye /> : <BsEyeSlash />}
                   </EyeSymbol>
-                </EyeContainer> */}
+                </EyeContainer>
                 <ul>
                   <li>
                     <Button onClick={handleSubmit}>
@@ -223,7 +215,6 @@ const RegisterPage = () => {
               <Title>Registration</Title>
 
               <Form>
-                {/* {conditionalComponent()} */}
                 <Input
                   name="name"
                   type="text"

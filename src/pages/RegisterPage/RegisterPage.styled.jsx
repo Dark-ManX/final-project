@@ -260,3 +260,24 @@ export const BackBtn = styled.button`
     margin-bottom: 20px;
   }
 `;
+//For password eye symbol
+export const EyeSymbol = styled.span`
+  position: absolute;
+  background: #fdf7f2;
+  cursor: pointer;
+  align-self: center;
+  top: 12px;
+  right: 20px;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    background: #fdf7f2;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    align-self: center;
+  }
+`;
+
+export const EyeContainer = styled.div`
+  position: relative;
+`;
