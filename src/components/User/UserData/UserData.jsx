@@ -1,105 +1,129 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
-import { useGetUserInfoQuery } from 'redux/auth/authOperations';
+import {
+  useGetUserInfoQuery,
+  useUpdateAvatarMutation,
+} from 'redux/auth/authOperations';
 import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
 
-// const AUTH_TOKEN =
-//   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2UwMWEyOTkxODkxNmVjZDlkZmJmOSIsImlhdCI6MTY2OTIzMTU2NywiZXhwIjoxNjY5MjY3NTY3fQ.Uu4RDE9b6iMWWT8sxMkImG5An19qaKsbPuMrxii2Shc';
-
-axios.defaults.baseURL = ROUTES.BASE_URL;
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-
-const getUser = () => {
-  const response = axios.get(`${ROUTES.USER.getUserInfo}`);
-  return response;
-};
+import axios from 'axios';
 
 export const UserData = () => {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({});
   const [user, setUser] = useState([]);
   const getUserInfo = useGetUserInfoQuery();
-  console.log(getUserInfo);
+  // console.log(getUserInfo);
+  const [updateAvatar] = useUpdateAvatarMutation();
 
-  // console.log(getUserInfo().then(data => console.log(data)));
-
-  // const fatchUser = async () => {
-  //   try {
-  //     const result = await getUserInfo;
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // fatchUser();
-
-  // const [getUserInfo] = useGetUserInfoQuery();
+  const getUser = async () => {
+    const user = await getUserInfo;
+    return user;
+  };
 
   useEffect(() => {
     getUser()
       .then(({ data }) => setUser(data.data.user))
       .catch(error => console.log(error.message));
-  }, []);
+  }, [getUser]);
 
   const inputRef = useRef(null);
 
-  const handleUploadClick = event => {
-    const click = inputRef.current?.click();
-    console.log(click);
-  };
+  // const handleUploadClick = event => {
+  //   const click = inputRef.current?.click();
+  //   return click;
+  //   // console.log(click);
+  // };
+
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
 
   const handleChange = evt => {
     if (!evt.target.files) {
       return;
     }
-    setFile(evt.target.files[0]);
-    // handleSubmit();
-    console.log(evt.target);
+
+    setSelectedFile(evt.target.files[0]);
     console.log(evt.target.files[0]);
+    console.log(typeof selectedFile);
+    console.log(selectedFile);
+    setIsFilePicked(true);
+
+    // const avatar = evt.target.files[0];
+
+    // console.log(evt.target.files[0]);
+    // handleSubmit();
+    // return avatar;
+    // console.log(file);
     // handleFile(fileUploaded);
-    console.log(file);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
     // const url = 'http://localhost:3000/uploadFile';
-    const url = `${ROUTES.BASE_URL}/auth/avatars`;
-    console.log(url);
+    // const url = `${ROUTES.BASE_URL}/auth/avatars`;
+    // console.log(url);
+    // console.log(avatar);
+    console.log(selectedFile);
+    console.log('Click');
+
     const formData = new FormData();
-    formData.append('file', file);
-    // formData.append('fileName', file.name);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    axios
-      .patch(url, formData, config)
-      .then(response => {
-        console.log(response.data);
+
+    formData.append('File', selectedFile);
+
+    const AUTH_TOKEN = 'Bearer ';
+
+    axios.defaults.baseURL = ROUTES.BASE_URL;
+    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+    axios.defaults.headers.patch['content-type'] = 'multipart/form-data';
+
+    axios('https://team-api-blended2.herokuapp.com/avatars', {
+      method: 'PATCH',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Success:', result);
       })
-      .catch(error => console.log(error.message));
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    // console.log(formData);
+    // updateAvatar(formData);
+    // formData.append('fileName', file.name);
+    // const config = {
+    //   headers: {
+    //     'content-type': 'multipart/form-data',
+    //   },
+    // };
+    // axios
+    //   .patch(url, formData, config)
+    //   .then(response => {
+    //     console.log(response.data);
+    //   })
+    //   .catch(error => console.log(error.message));
   };
 
+  const { logo, name } = user;
   return (
     <UserInfo>
       <Avatar>
-        <ImgUser src={`${ROUTES.BASE_URL}/${user.logo}`} alt={user.name} />
-        <form onSubmit={handleSubmit}>
-          <EditPhotoBtn onClick={handleUploadClick}>
-            <img src={editPhoto} alt="addPet" />
-            Edit photo
-          </EditPhotoBtn>
+        <ImgUser src={`${ROUTES.BASE_URL}/${logo}`} alt={name} />
+        <form encType="multipart/form-data" onSubmit={handleSubmit}>
           <input
             type="file"
             ref={inputRef}
+            multiple
             onChange={handleChange}
             style={{ display: 'none' }}
           />
+          <EditPhotoBtn onClick={() => inputRef.current?.click()}>
+            <img src={editPhoto} alt="addPet" />
+            Edit photo
+          </EditPhotoBtn>
         </form>
       </Avatar>
       <UserDataItem user={user} />

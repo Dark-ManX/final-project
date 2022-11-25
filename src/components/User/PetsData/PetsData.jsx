@@ -13,7 +13,6 @@ export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
   const [pets, setPets] = useState([]);
   const getUserPets = useGetUserPetsQuery();
-  console.log(getUserPets);
 
   const getPets = async () => {
     const pets = await getUserPets;
@@ -24,7 +23,6 @@ export const PetsData = () => {
     getPets()
       .then(({ data }) => {
         setPets(data.data.pets);
-        console.log(data.data.pets);
       })
       .catch(error => console.log(error.message));
   }, [getPets]);
