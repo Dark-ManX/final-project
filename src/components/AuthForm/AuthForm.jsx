@@ -2,8 +2,7 @@ import { Input, EyeSymbol, EyeContainer } from './AuthForm.styled';
 import { useState } from 'react';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 
-const AuthForm = ({ formData, setFormData }) => {
-  console.log(formData);
+const AuthForm = ({ handleChange, email, password, confirmedPassword }) => {
   // To Hide/Show password
   const [showPassword, setshowPassword] = useState(false);
   // To Hide/Show confirm password
@@ -15,26 +14,16 @@ const AuthForm = ({ formData, setFormData }) => {
         <Input
           type="email"
           required
-          onChange={e => {
-            setFormData({
-              ...formData,
-              email: e.target.value,
-            });
-          }}
-          value={formData.email}
+          onChange={handleChange}
+          value={email}
           placeholder="Email"
         />
       </div>
       <EyeContainer>
         <Input
           type={showPassword ? 'text' : 'password'}
-          onChange={e => {
-            setFormData({
-              ...formData,
-              password: e.target.value,
-            });
-          }}
-          value={formData.password}
+          onChange={handleChange}
+          value={password}
           placeholder="Password"
           pattern="[^\s]"
           minlength="7"
@@ -49,13 +38,8 @@ const AuthForm = ({ formData, setFormData }) => {
         <Input
           type={showRePassword ? 'text' : 'password'}
           placeholder="Confirm password"
-          onChange={e => {
-            setFormData({
-              ...formData,
-              confirmedPassword: e.target.value,
-            });
-          }}
-          value={formData.confirmedPassword}
+          // onChange={handleChange}
+          value={confirmedPassword}
         />
         <EyeSymbol onClick={() => setshowRePassword(prevState => !prevState)}>
           {showRePassword ? <BsEye /> : <BsEyeSlash />}
