@@ -31,8 +31,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [name, setName] = useState('name');
-  const [city, setCity] = useState('city');
+  const [name, setName] = useState('Name');
+  const [city, setCity] = useState('City,region');
   const [phone, setPhone] = useState('380950654352');
   const [page, setPage] = useState(0);
 
