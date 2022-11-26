@@ -1,7 +1,7 @@
 import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   useRegisterUserMutation,
   useAddUserInfoMutation,
@@ -35,6 +35,7 @@ const RegisterPage = () => {
   const [city, setCity] = useState('City,region');
   const [phone, setPhone] = useState('380950654352');
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   const isId = useSelector(state => state.auth.user.id);
 
@@ -133,6 +134,7 @@ const RegisterPage = () => {
       );
     }
     addUser();
+    navigate('/user', { replace: true });
   };
 
   return (

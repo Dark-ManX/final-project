@@ -40,7 +40,7 @@ const authSlice = createSlice({
       (state, { payload }) => {
         state.user = payload.data.user;
         state.token = payload.token;
-        state.isLoading = true;
+        state.isLoggedIn = true;
       }
     );
     builder.addMatcher(authApi.endpoints.logOutUser.matchFulfilled, state => {
