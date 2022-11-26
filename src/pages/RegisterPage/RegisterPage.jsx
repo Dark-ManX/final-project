@@ -118,11 +118,11 @@ const RegisterPage = () => {
     }
 
     if (city === '') {
-      return Notiflix.Notify.failure('Please, enter your city and region');
+      return Notiflix.Notify.failure('Please, enter your city and region ');
     }
     if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(city)) {
       return Notiflix.Notify.info(
-        'Please, enter your city and region separated by comma'
+        'Please, enter your city and region separated by comma and without spaces'
       );
     }
     if (phone === '') {
