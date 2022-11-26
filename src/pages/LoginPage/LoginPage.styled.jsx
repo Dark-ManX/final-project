@@ -20,32 +20,19 @@ export const ImageContainer = styled.div`
   min-height: 100vh;
 
   @media screen and (min-width: 480px) and (max-width: 767px) {
-    margin: 0 auto;
-    position: absolute;
     top: 100px;
+    left: -55px;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    background-position: bottom;
-    position: absolute;
     top: 400px;
-    left: -152px;
+    left: -55px;
     background-image: url(${wavesTablet});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100vw;
-    min-height: 100vh;
   }
   @media screen and (min-width: 1280px) {
-    background-position: bottom;
-    position: absolute;
     top: 20px;
     left: -152px;
     background-image: url(${Waves});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100vw;
-    min-height: 100vh;
   }
 `;
 export const Container = styled.div`
@@ -209,4 +196,21 @@ export const BackBtn = styled.button`
     height: 48px;
     margin-bottom: 20px;
   }
+`;
+//For password eye symbol
+export const EyeSymbol = styled.span`
+  position: absolute;
+  background: #fdf7f2;
+  cursor: pointer;
+  align-self: center;
+  top: 12px;
+  right: 20px;
+  @media screen and (min-width: 768px) {
+    top: 18px;
+    right: 20px;
+  }
+`;
+
+export const EyeContainer = styled.div`
+  position: relative;
 `;
