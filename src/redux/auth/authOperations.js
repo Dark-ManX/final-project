@@ -6,7 +6,7 @@ export const authApi = createApi({
     baseUrl: 'https://team-api-blended2.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log(token);
+      // console.log(token);
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -194,4 +194,5 @@ export const {
   useCreateNoticeMutation,
   useDeleteFavoriteNoticeMutation,
   useDeleteNoticeMutation,
+  useAddUserMutation,
 } = authApi;

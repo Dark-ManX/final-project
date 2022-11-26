@@ -32,7 +32,9 @@ export const Title = styled.h2`
 export const AuthLinkContainer = styled.div`
   display: flex;
 `;
+export const Category= styled.div`
 
+`;
 export const AuthLink = styled(Link)`
   &:first-child {
       margin-bottom: 0;
@@ -40,8 +42,9 @@ export const AuthLink = styled(Link)`
 `;
 
 export const Nav = styled.nav`
+position:relative;
   padding: 0;
-
+display:flex;
   @media screen and (max-width: 767px) {
     margin-left: auto;
     margin-right: auto;

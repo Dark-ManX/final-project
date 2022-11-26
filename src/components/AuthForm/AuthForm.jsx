@@ -8,6 +8,15 @@ const AuthForm = ({ handleChange, email, password, confirmedPassword }) => {
   // To Hide/Show confirm password
   const [showRePassword, setshowRePassword] = useState(false);
 
+const AuthForm = ({ formData, setFormData }) => {
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
+
   return (
     <>
       <div>

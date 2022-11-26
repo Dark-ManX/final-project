@@ -1,17 +1,16 @@
-import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
+
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import {
-  useRegisterUserMutation,
-  useAddUserInfoMutation,
-} from 'redux/auth/authOperations';
-import { Link, useLocation } from 'react-router-dom';
+import { useRegisterUserMutation ,useAddUserMutation} from 'redux/auth/authOperations';
+import { Link, useLocation ,useNavigate} from 'react-router-dom';
+
 import AuthForm from 'components/AuthForm';
+
 import {
   Title,
   FirstContainer,
   Container,
+  Input,
   Form,
   Button,
   P,
@@ -23,36 +22,54 @@ import {
   EyeContainer,
   EyeSymbol,
 } from './RegisterPage.styled';
-import Notiflix from 'notiflix';
+
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 
+
 const RegisterPage = () => {
+   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
+
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
-  const [page, setPage] = useState(0);
-  const navigate = useNavigate();
-
+  const [page, setPage] = useState(false)
   const isId = useSelector(state => state.auth.user.id);
+ const [passwordShown, setPasswordShown] = useState(true);
 
+const isId = useSelector(state => state.auth.user.id);
+
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
   const [registerNewUser] = useRegisterUserMutation();
-  const [addUserInfo] = useAddUserInfoMutation();
+
+  const [addUser] = useAddUserMutation();
+  // const isToken = useSelector(state => state.auth.token);
+
+
+  // if (isToken !== null) {
+  //   skip = false;
+  // }
+  // useCurrentUserQuery(nameI, { skip });
+
+  const handelChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'confirmPassword':
+        setConfirmPassword(value);
 
   // To Hide/Show password
   const [showPassword, setshowPassword] = useState(false);
   // To Hide/Show confirm password
   const [showRePassword, setshowRePassword] = useState(false);
 
-  const handleChange = event => {
-    const { name, value } = event.currentTarget;
-
-    switch (name) {
-      case 'confirmedPassword':
-        setConfirmedPassword(value);
         break;
       case 'email':
         setEmail(value);
@@ -73,135 +90,182 @@ const RegisterPage = () => {
         break;
     }
   };
-
-  const createUser = async () => {
+  const createUser = () => {
     const newUser = {
       email,
       password,
     };
-    await registerNewUser(newUser);
+    registerNewUser(newUser).then(({ error }) => {
+
+      if (error) {
+        const errorPassword = error.data.message;
+        if (error.status === 409) {
+          navigate('/login', { replace: true });
+          return Notify.failure(`A user email  ${email} already exists`);
+        }
+        if (errorPassword) {
+          return Notify.failure(`${errorPassword}`);
+        }
+      }
+      setPage(true)
+      navigate('/register', { replace: true });
+    });
   };
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-
-    if (email === '' || !email.includes('@')) {
-      return Notiflix.Notify.failure('Please, enter a valid email!');
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    if (password !== confirmPassword || confirmPassword==='') {
+return Notify.failure('Fatal confirm password');
     }
-
+    if (email === '' || !email.includes('@')) {
+      return Notify.failure('Please, enter a valid email!');
+    }
     if (password === '' || password.includes(' ')) {
-      return Notiflix.Notify.failure(
+      return Notify.failure(
+
         'Please, enter a valid password without spaces!'
       );
     }
-
-    if (confirmedPassword !== password || confirmedPassword === '') {
-      return Notiflix.Notify.failure('Passwords do not match!');
-    }
-
-    setPage(page + 1);
     createUser();
-  };
-  const addUser = async () => {
-    const addInfo = { isId, name, city, phone };
 
-    await addUserInfo(addInfo);
+    setConfirmPassword('');
+    setEmail('');
+    setPassword('');
   };
-  const handlePatchSubmit = event => {
-    event.preventDefault();
 
-    if (!/^[a-zA-Z0-9]{2,30}/g.test(name)) {
-      return Notiflix.Notify.info('Name may only include letters');
+const addUserInfo = async () => {
+    const addInfoAuth = {
+      name,
+      city,
+      phone,
+      isId,
+    };
+
+   await addUser(addInfoAuth).then(({ error }) => {
+
+      if (error) {
+        console.log(error)
+        const errorPassword = error.data.message;
+        if (errorPassword) {
+          return Notify.failure(`${errorPassword}`);
+        }
+      }
+      navigate('/notices/sell', { replace: true });
+    });
+  };
+  const handleSubmitInfo = evt => {
+    evt.preventDefault();
+    if (!/^[a-zA-Z]*$/g.test(name)) {
+      return Notify.info('Name may only include letters');
     }
     if (name === '') {
-      return Notiflix.Notify.failure('Please, enter your name');
+      return Notify.failure('Please, enter your name');
     }
 
     if (city === '') {
-      return Notiflix.Notify.failure('Please, enter your city and region ');
+      return Notify.failure('Please, enter your city and region');
     }
     if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(city)) {
-      return Notiflix.Notify.info(
-        'Please, enter your city and region separated by comma and without spaces'
+      return Notify.info(
+        'Please, enter your city and region separated by comma'
       );
     }
     if (phone === '') {
-      return Notiflix.Notify.failure('Please, enter your phone number');
+      return Notify.failure('Please, enter your phone number');
     }
     if (!/^\d{12}$/g.test(phone)) {
-      return Notiflix.Notify.info(
+      return Notify.info(
         'Your phone number must consist of 12 numbers'
       );
     }
-    addUser();
-
-    navigate('/user', { replace: true });
+    addUserInfo();
+    setName('');
+    setCity('');
+    setPhone('');
   };
 
   return (
     <>
       <Section>
         <ImageContainer>
-          {page === 0 && (
-            <FirstContainer>
-              <Title>Registration</Title>
+          <FirstContainer>
+            <Title>Registration</Title>
 
-              <Form>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    required
-                    onChange={handleChange}
-                    value={email}
-                    placeholder="Email"
-                  />
-                </div>
-                <EyeContainer>
-                  <Input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    onChange={handleChange}
-                    value={password}
-                    placeholder="Password"
-                    pattern="[^\s]"
-                    minlength="7"
-                    maxlength="32"
-                    required
-                  />
-                  <EyeSymbol
-                    onClick={() => setshowPassword(prevState => !prevState)}
-                  >
-                    {showPassword ? <BsEye /> : <BsEyeSlash />}
-                  </EyeSymbol>
-                </EyeContainer>
-                <EyeContainer>
-                  <Input
-                    type={showRePassword ? 'text' : 'password'}
-                    name="confirmedPassword"
-                    placeholder="Confirm password"
-                    onChange={handleChange}
-                    value={confirmedPassword}
-                  />
-                  <EyeSymbol
-                    onClick={() => setshowRePassword(prevState => !prevState)}
-                  >
-                    {showRePassword ? <BsEye /> : <BsEyeSlash />}
-                  </EyeSymbol>
-                </EyeContainer>
+            <Form>
+              {!page ?        (<div>
+<>
+          <Input
+        name="email"
+        type="email"
+        required
+        onChange={ handelChange }
+        value={email}
+        placeholder="Email"
+      />
+      <div>
+            <Input
+
+          name="password"
+          type={passwordShown ? 'text' : 'password'}
+          onChange={ handelChange }
+          value={password}
+          placeholder="Password"
+          pattern="[^\s]"
+          minlength="7"
+          maxlength="32"
+          required
+        />
+        <i onClick={togglePassword}></i>
+      </div>
+          <Input
+        name="confirmPassword"
+        type="password"
+        placeholder="Confirm password"
+        onChange={handelChange }
+        value={confirmPassword}
+      />
+    </>
+
+              </div> ): (<div>
+<>
+          <Input
+        name="name"
+        type="name"
+        required
+        onChange={ handelChange }
+        value={name}
+        placeholder="Name"
+      />
+      <div>
+            <Input
+
+          name="city"
+          type="text"
+          onChange={ handelChange }
+          value={city}
+          placeholder="City"
+        />
+        <i onClick={togglePassword}></i>
+      </div>
+          <Input
+        name="phone"
+        type="phone"
+        placeholder="Phone"
+        onChange={handelChange }
+        value={phone}
+      />
+    </>
+
+              </div>)}
+
+
                 <ul>
-                  <li>
-                    <Button onClick={handleSubmit}>
-                      {page === 0 || page < 1 ? 'Next' : 'Register'}
-                    </Button>
-                  </li>
+                <li>
+                  {!page ? <Button onClick={handleSubmit}>
+                      Next
+                    </Button>:<Button onClick={handleSubmitInfo}>
+                      Register
+                    </Button>}
 
-                  {page > 0 && (
-                    <li>
-                      <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
-                    </li>
-                  )}
-                  <li>
                     <P>
                       Already have an account?
                       <Link to={`/login`} state={{ from: location }}>
@@ -211,57 +275,9 @@ const RegisterPage = () => {
                   </li>
                 </ul>
               </Form>
-            </FirstContainer>
-          )}
-          {page > 0 && (
-            <Container>
-              <Title>Registration</Title>
 
-              <Form>
-                <Input
-                  name="name"
-                  type="text"
-                  onChange={handleChange}
-                  value={name}
-                  placeholder="Name"
-                />
-                <Input
-                  name="city"
-                  type="text"
-                  onChange={handleChange}
-                  value={city}
-                  placeholder="City, region"
-                />
-                <Input
-                  name="phone"
-                  type="tel"
-                  onChange={handleChange}
-                  value={phone}
-                  placeholder="Mobile phone"
-                />
-                <ul>
-                  <li>
-                    <Button onClick={handlePatchSubmit}>
-                      {page === 0 || page < 1 ? 'Next' : 'Register'}
-                    </Button>
-                  </li>
-                  {page > 0 && (
-                    <li>
-                      <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
-                    </li>
-                  )}
-                  <li>
-                    <P>
-                      Already have an account?
-                      <Link to={`/login`} state={{ from: location }}>
-                        <Span>Login </Span>
-                      </Link>
-                    </P>
-                  </li>
-                </ul>
-              </Form>
-            </Container>
-          )}
+          </FirstContainer>
+
         </ImageContainer>
       </Section>
     </>
