@@ -6,12 +6,13 @@ import {
   ContainerUser,
   Title,
   ContainerInfo,
+  AboutUser,
 } from './UserPage.styled';
 
 const UserPage = () => {
   return (
     <ContainerInfo>
-      <div>
+      <AboutUser>
         <Title>My information:</Title>
         <Container>
           <ContainerUser>
@@ -19,7 +20,7 @@ const UserPage = () => {
             <Logout />
           </ContainerUser>
         </Container>
-      </div>
+      </AboutUser>
       <PetsData />
     </ContainerInfo>
   );

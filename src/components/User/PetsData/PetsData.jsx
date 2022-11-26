@@ -1,38 +1,33 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import { useGetUserPetsQuery } from 'redux/auth/authOperations';
 import { PetsList } from 'components/User/PetsList/PetsList';
 import Modal from 'components/Modal/Modal';
 import ModalAddsPet from 'components/User/ModalAddsPet/ModalAddsPet';
-import { ROUTES } from 'routes/routes';
 import add from 'icons/addPet.svg';
 
 import { Title } from 'pages/UserPage/UserPage.styled';
 import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
-import { useGetUserPetsQuery } from 'redux/auth/authOperations';
-
-axios.defaults.baseURL = ROUTES.BASE_URL;
-axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
-
-const getPets = () => {
-  const response = axios.get(`${ROUTES.USER.getUserPets}`);
-  return response;
-};
 
 export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
-  const { getUserPets } = useGetUserPetsQuery();
-  console.log(getUserPets);
-
-  const handleBtnClick = () => setOpenModal(!openModal);
-
   const [pets, setPets] = useState([]);
+  const getUserPets = useGetUserPetsQuery();
+
+  const getPets = async () => {
+    const pets = await getUserPets;
+    return pets;
+  };
 
   useEffect(() => {
     getPets()
-      .then(({ data }) => console.log(data.data.pets))
+      .then(({ data }) => {
+        setPets(data.data.pets);
+      })
       .catch(error => console.log(error.message));
-  }, []);
+  }, [getPets]);
+
+  const handleBtnClick = () => setOpenModal(!openModal);
 
   return (
     <Container>
