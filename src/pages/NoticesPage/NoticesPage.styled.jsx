@@ -32,10 +32,29 @@ export const Title = styled.h2`
 export const AuthLinkContainer = styled.div`
   display: flex;
 `;
-export const Category= styled.div`
+export const Category = styled.div`
 
+  @media screen and (min-width: 1280px){
+    display: flex;
+  }
 `;
 export const AuthLink = styled(Link)`
+  text-align: center;
+  padding: 10px 28px;
+  margin-right: 12px;
+  text-decoration: none;
+
+  background: #FFFFFF;
+  border: 2px solid #F59256;
+  border-radius: 40px;
+
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.04em;
+  color: #111111;
+
   &:first-child {
       margin-bottom: 0;
     };

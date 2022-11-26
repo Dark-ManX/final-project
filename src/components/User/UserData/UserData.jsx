@@ -15,7 +15,6 @@ export const UserData = () => {
   const [file, setFile] = useState({});
   const [user, setUser] = useState([]);
   const getUserInfo = useGetUserInfoQuery();
-  // console.log(getUserInfo);
   const [updateAvatar] = useUpdateAvatarMutation();
 
   const getUser = async () => {

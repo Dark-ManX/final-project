@@ -1,6 +1,6 @@
 import { fetchFriends } from './friendsApi';
 import { fetchNewsSearch } from './newsApi';
-import { fetchNotices } from './noticesApi';
+import { fetchNotices, fetchOwnNotices } from './noticesApi';
 import { fetchPetAdd } from './petApi';
 
 class Fetch {
@@ -13,6 +13,11 @@ class Fetch {
   getNews = async query => await fetchNewsSearch(this.BASE_URL, query);
 
   getNotices = async query => await fetchNotices(this.BASE_URL, query);
+
+  // findNotices = async query => await fetchSearch(this.BASE_URL, query);
+
+  getOwn = async (query, token) =>
+    await fetchOwnNotices(this.BASE_URL, query, token);
 
   addPet = async (pet, query) => await fetchPetAdd(this.BASE_URL, pet, query);
 }
