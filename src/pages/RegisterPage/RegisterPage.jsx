@@ -31,9 +31,9 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [name, setName] = useState('Name');
-  const [city, setCity] = useState('City,region');
-  const [phone, setPhone] = useState('380950654352');
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
@@ -134,7 +134,8 @@ const RegisterPage = () => {
       );
     }
     addUser();
-    navigate('/user', { replace: true });
+
+    // navigate('/user', { replace: true });
   };
 
   return (
