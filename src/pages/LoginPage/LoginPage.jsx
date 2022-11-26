@@ -21,7 +21,7 @@ const LoginPage = () => {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginUser, { isLoggedIn }] = useLoginUserMutation(); // To Hide/Show password
+  const [loginUser] = useLoginUserMutation(); // To Hide/Show password
   const [showPassword, setshowPassword] = useState(false);
   const navigate = useNavigate();
 
