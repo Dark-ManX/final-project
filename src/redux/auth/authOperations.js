@@ -64,7 +64,7 @@ export const authApi = createApi({
 
     // PATCH avatars: '/avatars',
     updateAvatar: builder.mutation({
-      query: (body) => ({
+      query: body => ({
         url: '/avatars',
         method: 'PATCH',
         body,
@@ -105,7 +105,7 @@ export const authApi = createApi({
     }),
 
     // PATCH  changeUserPet: '/pets/:id',
-    cnhangeUserPet: builder.mutation({
+    changeUserPet: builder.mutation({
       query: (newPet, userPetId) => ({
         url: `/pets/${userPetId}`,
         method: 'PATCH',

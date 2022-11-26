@@ -63,6 +63,14 @@ const authSlice = createSlice({
         state.isFetchingCurrent = true;
       }
     );
+    builder.addMatcher(
+      authApi.endpoints.currentUser.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.data.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
+      }
+    );
   },
 });
 
