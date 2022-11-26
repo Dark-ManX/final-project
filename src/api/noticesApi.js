@@ -5,7 +5,7 @@ export const fetchNotices = async (url, query) => {
     const { data } = await axios.get(`${url}/notices/sell`);
 
     const { notices } = data.data;
-    return data;
+    return notices;
   }
   const { data } = await axios.get(`${url}/notices/${query}`);
   const { notices } = data.data;
@@ -23,12 +23,12 @@ export const fetchOwnNotices = async (url, query, token) => {
   return pets;
 };
 
-// export const fetchSearch = async (url, query) => {
-//   const { data } = await axios.get(`${url}/notices/search/${query}`);
+export const fetchSearch = async (url, query) => {
+  const { data } = await axios.get(`${url}/notices/search/${query}`);
 
-//   const { news } = data;
-//   return news;
-// };
+  const { news } = data.data;
+  return news;
+};
 
 // export const fetchSellNotices = async () => {
 //     const {data} = await axios.get('/notices/sell');

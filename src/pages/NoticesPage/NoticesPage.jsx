@@ -21,6 +21,7 @@ const NoticesPage = () => {
 const [showModal, setShowModal] = useState(false);
     const [query, setQuery] = useState(null);
     const [ownQuery, setOwnQuery] = useState(null);
+    const [search, setSearch] = useState(null)
     const [count, setCount] = useState(0);
     const [input, setInput] = useState('');
     const [notices, setNotices] = useState([]);
@@ -30,21 +31,16 @@ const [showModal, setShowModal] = useState(false);
     const { getNotices, getOwn, findNotices } = response;
 
     const token = useSelector((state) => state.auth.token);
-    console.log(token);
  
     const fetchNotices = async (req, key) => {
         try {
             if (!key) {
                 const res = await getNotices(req);
-                console.log(res);
+                console.log('first');
                 setNotices(res);
                 return;
             }
-            // else if (input) {
-            //     const res = await findNotices(input);
-            //     setNotices(res);
-            //     return;
-            // }
+            console.log('second')
             const res = await getOwn(req, key);
             setNotices(res);
             
@@ -52,8 +48,23 @@ const [showModal, setShowModal] = useState(false);
                 console.log(err.message);
             }
     }
+
+    const fetchSearch = async (req) => {
+        try {
+            const res = await findNotices(req);
+            console.log('res', res)
+            setNotices(res);
+            console.log('third');
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
         const handleSubmit = formInput => {
             setInput(formInput);
+
+            setQuery(null);
+            setSearch(input);
+            setCount(count + 1);
         }
     console.log(input)
 
@@ -63,16 +74,16 @@ const [showModal, setShowModal] = useState(false);
     
     // console.log(input);
 
-    // const handelSubmit = e => {
+    const handelSubmit = e => {
 
     //     e.preventDefault();
     //     if (input === '') {
     //         alert('🦄 Boolshit!');
     //         return;
     //     }
-    //     setQuery(`search/${input}`);
-    //     setCount(count + 1);
-    // };
+        setSearch(input);
+        setCount(count + 1);
+    };
 
     const handleClick = async (e) => {
 
@@ -88,6 +99,7 @@ const [showModal, setShowModal] = useState(false);
             return;
         } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
             setQuery(null);
+            setOwnQuery(null);
             setCount(count + 1);
 
             const path = (pathname.split('/').at(-1));
@@ -103,17 +115,20 @@ const [showModal, setShowModal] = useState(false);
         setShowModal(!showModal);
     }
 
-    console.log(count);
+    console.log(notices);
 
     useEffect(() => {
 
         if (!count || query) {
             console.log('!count or query');
             const result = fetchNotices(query);
-            console.log(result)
+            console.log(result);
         } else if (ownQuery) {
-            console.log('ownQuery')
+            console.log('ownQuery');
             fetchNotices(ownQuery, token);
+        } else if (count && !query && !ownQuery && search) {
+            console.log('find');
+            fetchSearch(search);
         }
 
         document.addEventListener('click', handleClick);
