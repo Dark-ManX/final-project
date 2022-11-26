@@ -1,27 +1,36 @@
+import { ReactComponent as AddIcon } from "icons/add.svg";
+// import { ReactComponent as RemoveIcon } from "icons/remove.svg";
+import { GrClose } from 'react-icons/gr';
+import { IconContext } from "react-icons";
 import {
-    Container, InfoContainer, Info, InfoKey,
-    InfoValue, Description, Photo,
+    Container, InfoContainer, Info, Key,
+    Value, Description, Photo, Li, BtnAddName,
     CardImageContainer, Category, ButtonAdd, ButtonCall,
     Title, Comments, Span, ButtonGroup, CloseModal
 } from './ModalNotice.styled.jsx';
 
 
 
-export const ModalNotice = ({ notice, onClose }) => {
+export const ModalNotice = ({ notice, onClose}) => {
  
  
-    const { title, name, breed, birth,
-        place, age, sex, price, photo,
-        category, comments, owner,
+    const { title, name, birth, breed, 
+        place, sex, photo, price,
+        category, comments, owner, 
     } = notice;
      
-    console.log({ owner })
+    console.log(name);
+    console.log(owner)
     const photoUrl = `https://team-api-blended2.herokuapp.com/${photo}`;
 
     return (
         <>
             <Container>
-                <CloseModal type="button" onClick={onClose}></CloseModal>
+                <CloseModal type="button" onClick={onClose}>
+                    <IconContext.Provider value={{ size: '20px' }}>
+                        <GrClose/>
+                    </IconContext.Provider>
+                </CloseModal>
                 <Description>
                     <CardImageContainer>
                         <Photo src={photoUrl} alt={name} />
@@ -30,32 +39,22 @@ export const ModalNotice = ({ notice, onClose }) => {
                     <InfoContainer>
                         <Title>{title}</Title>
                         <Info>
-                            <InfoKey>
-                                <p>Name:</p>
-                                <p>Birthday:</p>
-                                <p>Breed:</p>
-                                <p>Place:</p>
-                                <p>The sex:</p>
-                                <p>Email:</p>
-                                <p>Phone:</p>
-                            </InfoKey>
-                            <InfoValue>
-                                <p>{name}</p>
-                                <p>{birth}</p>
-                                <p>{breed}</p>
-                                <p>{place}</p>
-                                <p>{sex}</p>
-                                {/* <p>{email}</p> */}
-                                {/* <p>{phone}</p> */}
-                            </InfoValue>
-                            
-                        </Info>
-                        
+                            <Li><Key>Name:</Key><Value>{name}</Value></Li>
+                            <Li><Key>Birthday:</Key><Value>{birth}</Value></Li>
+                            <Li><Key>Breed:</Key><Value>{breed}</Value></Li>
+                            <Li><Key>Place:</Key><Value>{place}</Value></Li>
+                            <Li><Key>The sex:</Key><Value>{sex}</Value></Li>
+                            <Li><Key>Email:</Key><Value>{owner.email}</Value></Li>
+                            <Li><Key>Phone:</Key><Value>{owner.phone}</Value></Li>
+                            {category === 'sell' ? <Li><Key>Price:</Key><Value>{price}</Value></Li>:null}
+                        </Info>    
                     </InfoContainer>
                 </Description>
                 <Comments><Span>Comments:</Span>{comments} </Comments>
                 <ButtonGroup>
-                    <ButtonAdd type="button">Add to</ButtonAdd>
+                    <ButtonAdd type="button" >
+                        <BtnAddName>Add to</BtnAddName> <AddIcon width="24" height="22" />
+                    </ButtonAdd>
                     <ButtonCall href="tel:1111111111">Contact</ButtonCall>
                 </ButtonGroup>
             </Container>
