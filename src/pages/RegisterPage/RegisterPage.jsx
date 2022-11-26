@@ -135,7 +135,7 @@ const RegisterPage = () => {
     }
     addUser();
 
-    // navigate('/user', { replace: true });
+    navigate('/user', { replace: true });
   };
 
   return (
