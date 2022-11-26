@@ -19,10 +19,10 @@ export const NoticeCategoryItem = ({ notice }) => {
 
   const notices = useSelector(state => state.notices.items);
   const userID = '637cc1e43fd413f680009302';
-  
+
   const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
   const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
-  
+
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2l1czdAZ21haWwuY29tIiwiaWF0IjoxNjY5MTIwNDg0LCJleHAiOjE2NjkxNTY0ODR9.Mc57JFDG1jQFixUsHJeRnPkLKP7YQNy3GKTCe0nDAvI';
 
     switch (notice.category) {
@@ -40,7 +40,9 @@ export const NoticeCategoryItem = ({ notice }) => {
     };
 
   if (notice.photo) {
-    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
+    photo= notice.photo;
+    // photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`
+
   } else {
     photo =
       'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
@@ -105,6 +107,6 @@ export const NoticeCategoryItem = ({ notice }) => {
                 <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick} />
             </Modal>}
         </NoticeCategoryItemStyled>
-    ); 
+    );
 };
 
