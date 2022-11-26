@@ -33,7 +33,7 @@ const RegisterPage = () => {
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [name, setName] = useState('name');
   const [city, setCity] = useState('city');
-  const [phone, setPhone] = useState('phone');
+  const [phone, setPhone] = useState('380950654352');
   const [page, setPage] = useState(0);
 
   const isId = useSelector(state => state.auth.user.id);
