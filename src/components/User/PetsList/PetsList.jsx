@@ -1,21 +1,22 @@
 import PropTypes from 'prop-types';
 
 import remove from 'icons/remove.svg';
+import { ROUTES } from 'routes/routes';
+import { useDeleteUserPetMutation } from 'redux/auth/authOperations';
 
 import { Item, Text, Image, DeleteBtn, DeleteSvg } from './PetsList.styled';
 
 export const PetsList = ({ pets }) => {
-  console.log(pets);
+  const baseUrl = ROUTES.BASE_URL;
+  const [deleteUserPet] = useDeleteUserPetMutation();
+
   return (
     <ul>
       {pets.map(({ _id, photoPet, name, birth, breed, comments }) => {
         return (
           <Item key={_id}>
-            <Image
-              src="https://media.wired.com/photos/5e1f66f3736d3e00096ebb11/master/pass/Science_techintwocats-98125846.jpg"
-              alt={name}
-            />
-            <DeleteBtn>
+            <Image src={`${baseUrl}/${photoPet}`} alt={name} />
+            <DeleteBtn onClick={() => deleteUserPet(_id)}>
               <DeleteSvg src={remove} alt="removePet" />
             </DeleteBtn>
             <div>

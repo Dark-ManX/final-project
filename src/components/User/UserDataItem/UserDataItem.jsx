@@ -1,53 +1,221 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import edit from 'icons/edit.svg';
+import done from 'icons/done.svg';
+import { useUpdateUserInfoMutation } from 'redux/auth/authOperations';
 import {
   UserInfoList,
   UserInfoItem,
   UserInfoText,
   UserInfoBtn,
   UserInfoData,
+  FormUpdate,
+  InputUpdate,
 } from './UserDataItem.styled';
 
 export const UserDataItem = ({ user }) => {
+  const [updateUser, setUpdateUser] = useState(false);
+  const [nameUser, setNameUser] = useState('');
+  const [emailUser, setEmailUser] = useState('');
+  const [birthdayUser, setBirthdayUser] = useState('');
+  const [phoneUser, setPhoneUser] = useState('');
+  const [cityUser, setCityUser] = useState('');
+  const [userInfo, setUserInfo] = useState({});
+  // const [updateInfoUser] = useUpdateUserInfoMutation();
+  // console.log(updateInfoUser);
+
   const { name, email, birthday, phone, city } = user;
-  // console.log(user);
+
+  const handleUpdateUser = evt => {
+    console.log(evt.target);
+    setUpdateUser(!updateUser);
+    console.log(updateUser);
+  };
+
+  const handleChangeValue = evt => {
+    const { name, value } = evt.currentTarget;
+    console.log(name, value);
+
+    switch (name) {
+      case 'nameUser':
+        setNameUser(value);
+        break;
+
+      case 'emailUser':
+        setEmailUser(value);
+        break;
+
+      case 'birthdayUser':
+        setBirthdayUser(value);
+        break;
+
+      case 'phoneUser':
+        setPhoneUser(value);
+        break;
+
+      case 'cityUser':
+        setCityUser(value);
+        break;
+
+      default:
+        return;
+    }
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    console.log('click');
+
+    const updateUserValue = {
+      name: nameUser,
+      email: emailUser,
+      birthday: birthdayUser,
+      phone: phoneUser,
+      city: cityUser,
+    };
+
+    // updateInfoUser({payload: updateUserValue});
+    setUserInfo(updateUserValue);
+    setUpdateUser(!updateUser);
+
+    console.log(updateUserValue);
+  };
 
   return (
     <UserInfoList>
+      {}
       <UserInfoItem>
         <UserInfoText>Name:</UserInfoText>
-        <UserInfoData>{name}</UserInfoData>
-        <UserInfoBtn>
-          <img src={edit} alt="edit information about user" />
-        </UserInfoBtn>
+        {!updateUser ? (
+          <>
+            <UserInfoData>{name}</UserInfoData>
+            <UserInfoBtn type="button" onClick={handleUpdateUser}>
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="nameUser"
+                value={nameUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
       </UserInfoItem>
+
       <UserInfoItem>
         <UserInfoText>Email:</UserInfoText>
-        <UserInfoData>{email}</UserInfoData>
-        <UserInfoBtn>
-          <img src={edit} alt="edit information about user" />
-        </UserInfoBtn>
+        {!updateUser ? (
+          <>
+            <UserInfoData>{email}</UserInfoData>
+            <UserInfoBtn
+              type="button"
+              onClick={handleUpdateUser}
+              isActive="true"
+            >
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="emailUser"
+                value={emailUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
       </UserInfoItem>
+
       <UserInfoItem>
         <UserInfoText>Birthday:</UserInfoText>
-        <UserInfoData>{birthday}</UserInfoData>
-        <UserInfoBtn>
-          <img src={edit} alt="edit information about user" />
-        </UserInfoBtn>
+        {!updateUser ? (
+          <>
+            <UserInfoData>{birthday}</UserInfoData>
+            <UserInfoBtn type="button" onClick={handleUpdateUser}>
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="birthdayUser"
+                value={birthdayUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
       </UserInfoItem>
+
       <UserInfoItem>
         <UserInfoText>Phone:</UserInfoText>
-        <UserInfoData>{phone}</UserInfoData>
-        <UserInfoBtn>
-          <img src={edit} alt="edit information about user" />
-        </UserInfoBtn>
+        {!updateUser ? (
+          <>
+            <UserInfoData>{phone}</UserInfoData>
+            <UserInfoBtn type="button" onClick={handleUpdateUser}>
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="phoneUser"
+                value={phoneUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
       </UserInfoItem>
+
       <UserInfoItem>
         <UserInfoText>City:</UserInfoText>
-        <UserInfoData>{city}</UserInfoData>
-        <UserInfoBtn>
-          <img src={edit} alt="edit information about user" />
-        </UserInfoBtn>
+        {!updateUser ? (
+          <>
+            <UserInfoData>{city}</UserInfoData>
+            <UserInfoBtn type="button" onClick={handleUpdateUser}>
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="cityUser"
+                value={cityUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
       </UserInfoItem>
     </UserInfoList>
   );

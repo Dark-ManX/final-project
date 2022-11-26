@@ -62,6 +62,16 @@ export const authApi = createApi({
       providesTags: ['User'],
     }),
 
+    // PATCH avatars: '/avatars',
+    updateAvatar: builder.mutation({
+      query: (body) => ({
+        url: '/avatars',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: [{ type: 'User' }],
+    }),
+
     //   GET getUserInfo: '/user',
     getUserInfo: builder.query({
       query: () => '/user',
@@ -107,7 +117,7 @@ export const authApi = createApi({
     // DELETE deleteUserPet: '/pets/:id',
     deleteUserPet: builder.mutation({
       query: userPetId => ({
-        url: `/pets/${userPetId}`,
+        url: `/pets/delete/${userPetId}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'User' }],
@@ -172,6 +182,7 @@ export const {
   useLoginUserMutation,
   useLogOutUserMutation,
   useCurrentUserQuery,
+  useUpdateAvatarMutation,
   useGetUserInfoQuery,
   useUpdateUserInfoMutation,
   useGetUserPetsQuery,

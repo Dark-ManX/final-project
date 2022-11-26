@@ -35,14 +35,19 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
+
         state.user = payload.data.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       }
     );
-    builder.addMatcher(authApi.endpoints.logOutUser.matchFulfilled, state => {
+    builder.addMatcher(authApi.endpoints.logOutUser.matchFulfilled, (state, _) => {
       state.user = { name: null, email: null, city: null, phone: null };
       state.token = null;
+
+      state.isLoggedIn = false;
+      state.isLoading = false;
+
     });
     builder.addMatcher(authApi.endpoints.currentUser.matchPending, state => {
       state.isFetchingCurrent = false;

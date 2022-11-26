@@ -1,8 +1,30 @@
 import styled from 'styled-components';
 
 export const ContainerInfo = styled.div`
+  margin-top: 61px;
+
+  @media screen and (min-width: 768px) {
+    /* position: relative; */
+    margin-top: 88px;
+  }
   @media screen and (min-width: 1280px) {
     display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 58px;
+  }
+`;
+
+export const AboutUser = styled.div`
+  @media screen and (min-width: 768px) {
+    position: relative;
+    height: 400px;
+    margin-top: 40px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    /* height: 400px; */
+    margin-top: 0;
   }
 `;
 
@@ -21,6 +43,9 @@ export const Title = styled.h2`
 `;
 
 export const Container = styled.div`
+  @media screen and (min-width: 768px) {
+    /* position: relative; */
+  }
   @media screen and (min-width: 1280px) {
     display: flex;
     justify-content: space-between;
@@ -37,15 +62,22 @@ export const ContainerUser = styled.div`
   border-radius: 20px;
 
   @media screen and (min-width: 768px) {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 20px;
     margin-top: 40px;
     padding: 24px 40px 24px 32px;
+    border-radius: 0px 40px 40px 0px;
   }
 
   @media screen and (min-width: 1280px) {
+    position: absolute;
+    left: 0;
+    top: 30px;
     width: 411px;
-    height: 535px;
-    padding: 20px 16px 40px 16px;
+    height: 580px;
+    padding: 20px 16px 60px 16px;
     margin-right: 32px;
+    border-radius: 0px 40px 40px 0px;
   }
 `;
