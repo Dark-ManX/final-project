@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
+  position: relative;
   width: 280px;
   height: 40px;
   background: #fdf7f2;
@@ -21,6 +22,7 @@ export const Input = styled.input`
   // &:invalid {
   //   border: 1px solid red;
   // }
+
   @media screen and (min-width: 768px) {
     width: 448px;
     height: 52px;
@@ -36,4 +38,25 @@ export const Input = styled.input`
 export const InvalidInput = styled.input`
   background-color: #ffdddd;
 `;
-export const Eye = styled.img``;
+
+//For password eye symbol
+export const EyeSymbol = styled.span`
+  position: absolute;
+  background: #fdf7f2;
+  cursor: pointer;
+  align-self: center;
+  top: 12px;
+  right: 20px;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    background: #fdf7f2;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    align-self: center;
+  }
+`;
+
+export const EyeContainer = styled.div`
+  position: relative;
+`;

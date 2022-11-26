@@ -16,7 +16,7 @@ export const authApi = createApi({
 
   tagTypes: ['User'],
   endpoints: builder => ({
-    // PATCH register: '/auth/register',
+    // POST register: '/register',
     registerUser: builder.mutation({
       query: formData => ({
         url: `/register`,
@@ -25,17 +25,18 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: 'User' }],
     }),
-    // PATCH register: '/auth/register',
-    addUser: builder.mutation({
-      query: addInfoAuth => ({
-        url: `/register/${addInfoAuth.isId}`,
+
+    // PATCH register/{id}: '/register/id',
+    addUserInfo: builder.mutation({
+      query: addInfo => ({
+        url: `/register/${addInfo.isId}`,
         method: 'PATCH',
-        body: addInfoAuth,
+        body: addInfo,
       }),
-      // console.log(addInfoAuth)
 
       invalidatesTags: [{ type: 'User' }],
     }),
+
     // POST login: '/login',
     loginUser: builder.mutation({
       query: logUser => ({
@@ -59,6 +60,16 @@ export const authApi = createApi({
     currentUser: builder.query({
       query: () => '/current',
       providesTags: ['User'],
+    }),
+
+    // PATCH avatars: '/avatars',
+    updateAvatar: builder.mutation({
+      query: (body) => ({
+        url: '/avatars',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: [{ type: 'User' }],
     }),
 
     //   GET getUserInfo: '/user',
@@ -106,7 +117,7 @@ export const authApi = createApi({
     // DELETE deleteUserPet: '/pets/:id',
     deleteUserPet: builder.mutation({
       query: userPetId => ({
-        url: `/pets/${userPetId}`,
+        url: `/pets/delete/${userPetId}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'User' }],
@@ -167,9 +178,11 @@ export const authApi = createApi({
 export const {
   useCreateUserMutation,
   useRegisterUserMutation,
+  useAddUserInfoMutation,
   useLoginUserMutation,
   useLogOutUserMutation,
   useCurrentUserQuery,
+  useUpdateAvatarMutation,
   useGetUserInfoQuery,
   useUpdateUserInfoMutation,
   useGetUserPetsQuery,

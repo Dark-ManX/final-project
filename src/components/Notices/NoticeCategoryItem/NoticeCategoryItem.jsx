@@ -18,12 +18,12 @@ export const NoticeCategoryItem = ({ notice }) => {
   const [showModal, setShowModal] = useState(false);
 
   const notices = useSelector(state => state.notices.items);
-  const userID = '6374ac4a84c43b1851b51dda';
+  const userID = '637cc1e43fd413f680009302';
   
   const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
   const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
   
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzRhYzRhODRjNDNiMTg1MWI1MWRkYSIsImlhdCI6MTY2ODU5MDY3NywiZXhwIjoxNjY4NjI2Njc3fQ.l9nv-VhZ582KYX7GKbo2X22zFh30STKiqxdMcJrD49M';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2l1czdAZ21haWwuY29tIiwiaWF0IjoxNjY5MTIwNDg0LCJleHAiOjE2NjkxNTY0ODR9.Mc57JFDG1jQFixUsHJeRnPkLKP7YQNy3GKTCe0nDAvI';
 
     switch (notice.category) {
         case 'sell':
@@ -102,7 +102,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             </CardInfoContainer>
             <Button type="button" onClick={handleOpenModal}>Learn more</Button>
             {showModal && <Modal onClose={handleCloseModal}>
-                <ModalNotice notice={notice} onClose={handleCloseModal} />
+                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick} />
             </Modal>}
         </NoticeCategoryItemStyled>
     ); 

@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRegisterUserMutation ,useAddUserMutation} from 'redux/auth/authOperations';
 import { Link, useLocation ,useNavigate} from 'react-router-dom';
+
+import AuthForm from 'components/AuthForm';
+
 import {
   Title,
   FirstContainer,
@@ -15,14 +18,22 @@ import {
   ImageContainer,
   Section,
   BackBtn,
+  Input,
+  EyeContainer,
+  EyeSymbol,
 } from './RegisterPage.styled';
+
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { BsEyeSlash, BsEye } from 'react-icons/bs';
+
 
 const RegisterPage = () => {
    const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
@@ -31,12 +42,15 @@ const RegisterPage = () => {
   const isId = useSelector(state => state.auth.user.id);
  const [passwordShown, setPasswordShown] = useState(true);
 
+const isId = useSelector(state => state.auth.user.id);
+
   const togglePassword = () => {
     // When the handler is invoked
     // inverse the boolean state of passwordShown
     setPasswordShown(!passwordShown);
   };
   const [registerNewUser] = useRegisterUserMutation();
+
   const [addUser] = useAddUserMutation();
   // const isToken = useSelector(state => state.auth.token);
 
@@ -50,6 +64,12 @@ const RegisterPage = () => {
     switch (name) {
       case 'confirmPassword':
         setConfirmPassword(value);
+
+  // To Hide/Show password
+  const [showPassword, setshowPassword] = useState(false);
+  // To Hide/Show confirm password
+  const [showRePassword, setshowRePassword] = useState(false);
+
         break;
       case 'email':
         setEmail(value);
@@ -101,6 +121,7 @@ return Notify.failure('Fatal confirm password');
     }
     if (password === '' || password.includes(' ')) {
       return Notify.failure(
+
         'Please, enter a valid password without spaces!'
       );
     }
@@ -244,6 +265,7 @@ const addUserInfo = async () => {
                     </Button>:<Button onClick={handleSubmitInfo}>
                       Register
                     </Button>}
+
                     <P>
                       Already have an account?
                       <Link to={`/login`} state={{ from: location }}>
@@ -255,6 +277,7 @@ const addUserInfo = async () => {
               </Form>
 
           </FirstContainer>
+
         </ImageContainer>
       </Section>
     </>
