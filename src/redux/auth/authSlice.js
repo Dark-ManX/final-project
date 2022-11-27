@@ -65,6 +65,22 @@ const authSlice = createSlice({
         state.isFetchingCurrent = true;
       }
     );
+    builder.addMatcher(
+      authApi.endpoints.getUserInfo.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.data.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
+      }
+    );
+    builder.addMatcher(
+      authApi.endpoints.getUserPets.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.data.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
+      }
+    );
   },
 });
 
