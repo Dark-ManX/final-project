@@ -3,7 +3,7 @@ import Modal from 'components/Modal/Modal';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
 import { ReactComponent as AddIcon } from 'icons/add.svg';
 import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
