@@ -17,6 +17,7 @@ import {
 } from './ButtonAddNotice.styled';
 import { ReactComponent as AddIcon } from '../../icons/addPet.svg';
 import Modal from '../../components/Modal/Modal';
+import ModalAddNotice from '../../components/Notices/ModalAddNotice/ModalAddNotice';
 
 const NoticesPage = () => {
 const [showModal, setShowModal] = useState(false);
@@ -115,7 +116,7 @@ const [showModal, setShowModal] = useState(false);
         </AddPetBlock>
             </Nav>
              {showModal && (
-        <Modal onClose={toggleModal}>{/* <FormAddNotice /> */}</Modal>
+        <Modal onClose={toggleModal}><ModalAddNotice onClose={toggleModal}/> </Modal>
       )}
             <Suspense fallback={<Loading/>}>
                 <Outlet context={notices} />

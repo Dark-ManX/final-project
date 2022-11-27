@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
+  overflow-y: auto;
   top: 0;
   left: 0;
   width: 100vw;
@@ -18,7 +19,7 @@ export const ModalBackdrop = styled.div`
 
 export const ModalBody = styled.div`
   position: absolute;
-  width: 280px;
+  // width: 280px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45vh);

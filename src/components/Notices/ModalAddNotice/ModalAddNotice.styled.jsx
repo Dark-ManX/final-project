@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-position: relative;
+overflow-y: auto;
 box-sizing: border-box;
 width: 280px;
 display: block;
 margin: 0 auto;
-padding: 40px 20px;
 
 background: #FFFFFF;
 border-radius: 20px;
 
 @media screen and (min-width: 768px) {
     width: 608px;
-    padding: 40px 80px;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -25,8 +25,8 @@ export const CloseButton = styled.div`
 position: absolute;
 width: 34px;
 height: 34px;
-right: 23px;
-top: 23px;
+right: 20px;
+top: 20px;
 border-radius: 50%;
 display: flex;
 align-items: center;
