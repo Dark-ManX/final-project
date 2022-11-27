@@ -23,12 +23,11 @@ const [showModal, setShowModal] = useState(false);
     const [ownQuery, setOwnQuery] = useState(null);
     const [search, setSearch] = useState(null)
     const [count, setCount] = useState(0);
-    const [input, setInput] = useState('');
     const [notices, setNotices] = useState([]);
 
     // const navigate = useNavigate();
 
-    const { getNotices, getOwn, findNotices } = response;
+    const { getNotices, findNotices } = response;
 
     const token = useSelector((state) => state.auth.token);
  
@@ -37,6 +36,7 @@ const [showModal, setShowModal] = useState(false);
             const res = await getNotices(req, key);
             
             setNotices(res);
+
             return;
         
         } catch (err) {
@@ -60,8 +60,6 @@ const [showModal, setShowModal] = useState(false);
             setSearch(formInput);
             setCount(count + 1);
         }
-    console.log(input)
-
 
     const handleClick = async (e) => {
         try {
@@ -77,7 +75,6 @@ const [showModal, setShowModal] = useState(false);
                 return;
             } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
                 setQuery(null);
-                setOwnQuery(null);
                 setCount(count + 1);
 
                 const path = (pathname.split('/').at(-1));
@@ -91,7 +88,6 @@ const [showModal, setShowModal] = useState(false);
 
     }
 
-    console.log('input :>> ', input);
     const toggleModal = evt => {
         setShowModal(!showModal);
     }
@@ -102,8 +98,7 @@ const [showModal, setShowModal] = useState(false);
 
         if (!count || query) {
             
-            const result = fetchNotices(query);
-            console.log(result);
+            fetchNotices(query);
         } else if (ownQuery) {
             
             fetchNotices(ownQuery, token);

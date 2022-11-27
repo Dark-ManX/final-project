@@ -1,30 +1,15 @@
-import RegistrationDetails from 'pages/RegisterPageDetails/RegisterPageDetails';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import {
-  useRegisterUserMutation,
-  useAddUserInfoMutation,
-} from 'redux/auth/authOperations';
-import { Link, useLocation } from 'react-router-dom';
-import AuthForm from 'components/AuthForm';
-import {
-  Title,
-  FirstContainer,
-  Container,
-  Form,
-  Button,
-  P,
-  Span,
-  ImageContainer,
-  Section,
-  BackBtn,
-  Input,
-  EyeContainer,
-  EyeSymbol,
-} from './RegisterPage.styled';
 import Notiflix from 'notiflix';
-import { BsEyeSlash, BsEye } from 'react-icons/bs';
+import { useState } from 'react';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  useAddUserInfoMutation, useRegisterUserMutation
+} from 'redux/auth/authOperations';
+import {
+  BackBtn, Button, Container, EyeContainer,
+  EyeSymbol, FirstContainer, Form, ImageContainer, Input, P, Section, Span, Title
+} from './RegisterPage.styled';
 
 const RegisterPage = () => {
   const location = useLocation();

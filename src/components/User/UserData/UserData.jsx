@@ -8,8 +8,9 @@ import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
-
+import { response } from 'api';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export const UserData = () => {
   const [file, setFile] = useState({});
@@ -17,16 +18,15 @@ export const UserData = () => {
   const getUserInfo = useGetUserInfoQuery();
   const [updateAvatar] = useUpdateAvatarMutation();
 
-  const getUser = async () => {
-    const user = await getUserInfo;
-    return user;
-  };
+  const token = useSelector(state => state.auth.token)
+  console.log(token)
 
-  useEffect(() => {
-    getUser()
-      .then(({ data }) => setUser(data.data.user))
-      .catch(error => console.log(error.message));
-  }, [getUser]);
+  const {getUser} = response;
+
+  const fetchUser = async (token) => {
+    const res = await getUser(token);
+    setUser(res);
+  };
 
   const inputRef = useRef(null);
 
@@ -89,22 +89,11 @@ export const UserData = () => {
       .catch(error => {
         console.error('Error:', error);
       });
+  }
 
-    // console.log(formData);
-    // updateAvatar(formData);
-    // formData.append('fileName', file.name);
-    // const config = {
-    //   headers: {
-    //     'content-type': 'multipart/form-data',
-    //   },
-    // };
-    // axios
-    //   .patch(url, formData, config)
-    //   .then(response => {
-    //     console.log(response.data);
-    //   })
-    //   .catch(error => console.log(error.message));
-  };
+  useEffect(() => {
+    fetchUser(token)
+  }, []);
 
   const { logo, name } = user;
   return (
