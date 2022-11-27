@@ -1,109 +1,143 @@
-import { Suspense } from "react";
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { response } from "api";
 import Loading from "components/Common/Loading/Loading";
 import NoticesCategoriesNav from "components/Notices/NoticesCategoryNav/NoticesCategoryNav";
+import { Suspense, useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
 import { SearchForm } from "components/SearchForm/SearchForm";
-import { AuthLink, Title, Nav, Container, AuthLinkContainer , Category} from "./NoticesPage.styled";
+import { AuthLink, AuthLinkContainer, Category, Container, Nav, Title } from "./NoticesPage.styled";
 // import SearchForm from "components/Notices/SearchForm/SearchForm";
-import {
-  LinkAddPet,
-  //   NavSection,
-  AddPet,
-  AddPetBlock,
-  Icon,
-} from './ButtonAddNotice.styled';
-import { ReactComponent as AddIcon } from '../../icons/addPet.svg';
 import Modal from '../../components/Modal/Modal';
+import { ReactComponent as AddIcon } from '../../icons/addPet.svg';
+import {
+    //   NavSection,
+    AddPet,
+    AddPetBlock,
+    Icon, LinkAddPet
+} from './ButtonAddNotice.styled';
 
 const NoticesPage = () => {
 const [showModal, setShowModal] = useState(false);
     const [query, setQuery] = useState(null);
-    const [input, setInput] = useState('')
+    const [ownQuery, setOwnQuery] = useState(null);
+    const [search, setSearch] = useState(null)
+    const [count, setCount] = useState(0);
+    const [input, setInput] = useState('');
     const [notices, setNotices] = useState([]);
 
     // const navigate = useNavigate();
 
-    const { getNotices } = response;
+    const { getNotices, getOwn, findNotices } = response;
 
-    // const { token } = useSelector((state) => state.user);
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzM0OGUyM2RhMjk5YmRlY2I2NTFlNCIsImlhdCI6MTY2ODQ5OTcwNSwiZXhwIjoxNjY4NTM1NzA1fQ.W9gK98YZ9OzenWQpIP_e6irUwwyHiAI90L2xk4_Ebmg';
-
-    const fetchPet = async () => {
-            try {
-                const res = await getNotices(query);
-                setNotices(res);
-            } catch (err) {
-                alert(err.message);
-            }
-        }
-
-        const handelSearchChange = e => {
-        setInput(e.currentTarget.value.toLowerCase());
-    };
-
-    const handelSubmit = e => {
-
-        console.log(e.target.value);
-        e.preventDefault();
-        if (input.trim() === '') {
-            alert('🦄 Boolshit!');
+    const token = useSelector((state) => state.auth.token);
+ 
+    const fetchNotices = async (req, key) => {
+        try {
+            const res = await getNotices(req, key);
+            
+            setNotices(res);
             return;
+        
+        } catch (err) {
+            console.log(err.message);
         }
-        setInput(e.target.value);
-        console.log(input)
-    };
+    }
+
+    const fetchSearch = async (req) => {
+        try {
+            const res = await findNotices(req);
+            
+            setNotices(res);
+         
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+        const handleSubmit = formInput => {
+            setOwnQuery(null);
+            setQuery(null);
+            setSearch(formInput);
+            setCount(count + 1);
+        }
+    console.log(input)
+
 
     const handleClick = async (e) => {
+        try {
+            const { nodeName, pathname, parentNode } = e.target;
 
-        const { nodeName, pathname, parentNode } = e.target;
+            if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
+                setOwnQuery(null);
+                setCount(count + 1);
 
-        if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
+                setQuery(pathname.split('/').at(-1));
+                console.log(query);
 
-            setQuery(pathname.split('/').at(-1));
-            console.log(query);
+                return;
+            } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
+                setQuery(null);
+                setOwnQuery(null);
+                setCount(count + 1);
 
-            // const res = await getNotices(query);
-            getNotices(query);
+                const path = (pathname.split('/').at(-1));
+                setOwnQuery(path);
 
-            return;
+                return;
+            }
+        } catch (err) {
+            console.log(err.message);
         }
 
     }
 
+    console.log('input :>> ', input);
+    const toggleModal = evt => {
+        setShowModal(!showModal);
+    }
+
+    console.log(notices);
+
     useEffect(() => {
-        fetchPet(query);
+
+        if (!count || query) {
+            
+            const result = fetchNotices(query);
+            console.log(result);
+        } else if (ownQuery) {
+            
+            fetchNotices(ownQuery, token);
+        } else if (count && search) {
+
+            fetchSearch(search);
+        };
+
 
         document.addEventListener('click', handleClick);
-        return () => document.removeEventListener('click', handleClick);
-     }, [query]);
-     const toggleModal = evt => {
-    setShowModal(!showModal);
-  };
+
+        return () => {
+            document.removeEventListener('click', handleClick);
+        }
+     }, [count]);
+
     return (
 
         <Container>
             <Title>Find your favorite pet</Title>
 
-            <SearchForm onSubmit={handelSubmit} handelSearchChange={ handelSearchChange} />
+            <SearchForm onSubmit={handleSubmit}/>
             <Nav>
-                {/* <LinkContainer>
-                    <Link to="lost-found">Lost/found</Link>
-                    <Link to="for-free">In good hands</Link>
-                    <Link to="sell">Sell</Link>
-                </LinkContainer>     */}
-          <Category>
-              <NoticesCategoriesNav />
+             
+            <Category>
+                <NoticesCategoriesNav />
 
                 {token &&
-                    <AuthLinkContainer>
+                    <AuthLinkContainer className="own-block">
                         <AuthLink to="favorite">Favorite ads</AuthLink>
-                        <AuthLink to="own">My ads</AuthLink>
+                        <AuthLink to="owner">My ads</AuthLink>
                     </AuthLinkContainer>
-          }
-</Category>
+                }
+            </Category>
 
            <AddPetBlock>
           <AddPet>Add pet</AddPet>

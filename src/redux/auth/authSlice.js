@@ -3,7 +3,6 @@ import { authApi } from './authOperations';
 
 const initialState = {
   user: { email: null, password: null, id: null },
-
   token: null,
   isLoggedIn: false,
   isFetchingCurrent: true,
@@ -16,6 +15,7 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
+        state.token = payload.data.token;
         state.user = payload.data.user;
         state.isLoggedIn = true;
       }
@@ -24,7 +24,7 @@ const authSlice = createSlice({
       authApi.endpoints.addUserInfo.matchFulfilled,
       (state, { payload }) => {
         state.user = payload.data.user;
-        // state.token = payload.token;
+        state.token = payload.data.token;
         state.isLoggedIn = true;
       }
     );
@@ -32,7 +32,7 @@ const authSlice = createSlice({
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
         state.user = payload.data.user;
-        state.token = payload.token;
+        state.token = payload.data.token;
         state.isLoggedIn = true;
       }
     );

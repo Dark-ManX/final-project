@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Container = styled.div`
   padding-top: 42px;
@@ -33,11 +33,13 @@ export const AuthLinkContainer = styled.div`
   display: flex;
 `;
 export const Category = styled.div`
-@media screen and (min-width: 1280px) {
-  display: flex;
-}
+
+  @media screen and (min-width: 1280px){
+    display: flex;
+  }
 `;
-export const AuthLink = styled(Link)`
+export const AuthLink = styled(NavLink)`
+
   text-align: center;
   padding: 10px 28px;
   margin-right: 12px;
@@ -60,6 +62,7 @@ export const AuthLink = styled(Link)`
   }
 
     &.active {
+
     color: #FFFFFF;
     background: #F59256;
   };

@@ -1,43 +1,46 @@
-import Modal from "components/Modal/Modal";
+import { response } from 'api';
+import Modal from 'components/Modal/Modal';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
-import { ReactComponent as AddIcon } from "icons/add.svg";
-import { ReactComponent as RemoveIcon } from "icons/remove.svg";
+import { ReactComponent as AddIcon } from 'icons/add.svg';
+import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 import { useState } from 'react';
-import { useSelector } from "react-redux";
-import { useAddFavoriteNoticesMutation, useDeleteFavoriteNoticesMutation } from "redux/notices/noticesApi";
+import { useSelector } from 'react-redux';
 import {
-    AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
-    CardImageContainer, CardInfoContainer, Category, NoticeCategoryItemStyled, Photo, RemoveFromFavoriteBtn, Title
-} from "./NoticeCategoryItem.styled";
+  AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
+  CardImageContainer, CardInfoContainer, Category, NoticeCategoryItemStyled, Photo, RemoveFromFavoriteBtn, Title
+} from './NoticeCategoryItem.styled';
 
 let category = '';
 let photo;
 
 export const NoticeCategoryItem = ({ notice }) => {
-
   const [showModal, setShowModal] = useState(false);
 
+  const token = useSelector(state => state.auth.token);
   const notices = useSelector(state => state.notices.items);
-  const userID = '637cc1e43fd413f680009302';
 
-  const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
-  const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
+  const { addToFavorite, removeFromFavorite } = response;
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1Y2l1czdAZ21haWwuY29tIiwiaWF0IjoxNjY5MTIwNDg0LCJleHAiOjE2NjkxNTY0ODR9.Mc57JFDG1jQFixUsHJeRnPkLKP7YQNy3GKTCe0nDAvI';
+  console.log(token);
 
-    switch (notice.category) {
-        case 'sell':
-            category = 'Sell';
-            break;
-        case 'lost-found':
-            category = 'Lost/found';
-            break;
-        case 'in good hands':
-            category = 'In good hands';
-            break;
-        default:
-            return;
-    };
+  // const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
+  // const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
+
+  const userID = '6374ac4a84c43b1851b51dda';
+
+  switch (notice.category) {
+    case 'sell':
+      category = 'Sell';
+      break;
+    case 'lost-found':
+      category = 'Lost/found';
+      break;
+    case 'in good hands':
+      category = 'In good hands';
+      break;
+    default:
+      return;
+  }
 
   if (notice.photo) {
     photo= notice.photo;
@@ -48,30 +51,31 @@ export const NoticeCategoryItem = ({ notice }) => {
       'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
   }
 
-    const handleRemoveFavoriteBtnClick = (id) => {
-        id = notice._id;
-        const existingNotice = notices.data.pets.find(notice => notice._id === id);
+  const handleRemoveFavoriteBtnClick = id => {
+    console.log(id)
+    id = notice._id;
+    const existingNotice = notices.data.pets.find(notice => notice._id === id);
 
-        if (existingNotice) {
-            console.log('remove from favorite: ', id);
-            removeFromFavoriteNotices({ id });
-        };
-    };
+    if (existingNotice) {
+      console.log('remove from favorite: ', id);
+      removeFromFavorite(id, token);
+    }
+  };
 
-    const handleAddFavoriteBtnClick = (id) => {
-        id = notice._id;
+  const handleAddFavoriteBtnClick = id => {
+    id = notice._id;
 
-        if (!token) {
-            alert('please login');
-            return;
-        };
+    if (!token) {
+      alert('please login');
+      return;
+    }
+    console.log('token', token)
+    console.log('add to favorite: ', id);
+    addToFavorite(id, token);
+  };
 
-        console.log('add to favorite: ', id);
-        addToFavoriteNotices({ id });
-    };
-
-    const handleOpenModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
     return (
         <NoticeCategoryItemStyled>
@@ -109,4 +113,3 @@ export const NoticeCategoryItem = ({ notice }) => {
         </NoticeCategoryItemStyled>
     );
 };
-

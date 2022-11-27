@@ -2,7 +2,7 @@ import { response } from 'api';
 import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loding/Loading';
-import Error from 'components/error/error';
+import Error from 'components/Error/error';
 import {
   Anchor,
   CardThumb,

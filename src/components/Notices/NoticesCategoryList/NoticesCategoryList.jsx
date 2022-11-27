@@ -6,21 +6,12 @@ import { Gallery } from "./NoticesCategoryList.styled";
 
 const NoticesCategoryList = () => {
 
-    const notices = useOutletContext()
-        console.log(notices);
-
-    // const getNotices = () => {
-    //     // if (notices === [])
-    // }
-
-    // const [notices, setNotices] = useState([])
-
-    // const { getNotices } = response;
+    const notices = useOutletContext();
+    console.log(notices)
 
     return (
         <Gallery>
-            {notices.map(notice =>
-             <NoticeCategoryItem key={notice._id} notice={notice} />
+            {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} />
          )}
         </Gallery>
     );
