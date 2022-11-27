@@ -64,7 +64,7 @@ const authSlice = createSlice({
       }
     );
     builder.addMatcher(
-      authApi.endpoints.currentUser.matchFulfilled,
+      authApi.endpoints.getUserInfo.matchFulfilled,
       (state, { payload }) => {
         state.user = payload.data.user;
         state.token = payload.token;
