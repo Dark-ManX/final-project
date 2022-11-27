@@ -19,9 +19,10 @@ export const ModalNotice = ({ notice, onClose}) => {
         category, comments, owner, 
     } = notice;
      
-    console.log(name);
-    console.log(owner)
-    const photoUrl = `https://team-api-blended2.herokuapp.com/${photo}`;
+    if (!photo) {
+        photo =
+            'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';  
+    };
 
     return (
         <>
@@ -33,7 +34,7 @@ export const ModalNotice = ({ notice, onClose}) => {
                 </CloseModal>
                 <Description>
                     <CardImageContainer>
-                        <Photo src={photoUrl} alt={name} />
+                        <Photo src={photo} alt={name} />
                         <Category>{category}</Category>
                     </CardImageContainer>
                     <InfoContainer>
