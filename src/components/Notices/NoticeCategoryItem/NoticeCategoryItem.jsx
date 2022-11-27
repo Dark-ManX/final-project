@@ -3,7 +3,7 @@ import Modal from 'components/Modal/Modal';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
 import { ReactComponent as AddIcon } from 'icons/add.svg';
 import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
@@ -13,18 +13,20 @@ import {
 let category = '';
 let photo;
 
-export const NoticeCategoryItem = ({ notice }) => {
+export const NoticeCategoryItem = ({ notice, favoriteList }) => {
+
   const [showModal, setShowModal] = useState(false);
+  const [favorite, setFavorite] = useState(null);
+  const [cardId, setCardId] = useState(null);
+
+  const { addToFavorite, removeFromFavorite } = response;
 
   const token = useSelector(state => state.auth.token);
   const notices = useSelector(state => state.notices.items);
 
-  const { addToFavorite, removeFromFavorite } = response;
+  console.log(token)
 
-  console.log(token);
-
-  // const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
-  // const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
+console.log(favoriteList);
 
   const userID = '6374ac4a84c43b1851b51dda';
 
@@ -54,7 +56,7 @@ export const NoticeCategoryItem = ({ notice }) => {
   const handleRemoveFavoriteBtnClick = id => {
     console.log(id)
     id = notice._id;
-    const existingNotice = notices.data.pets.find(notice => notice._id === id);
+    const existingNotice = favoriteList.map(({_id}) => _id === id);
 
     if (existingNotice) {
       console.log('remove from favorite: ', id);
@@ -64,6 +66,7 @@ export const NoticeCategoryItem = ({ notice }) => {
 
   const handleAddFavoriteBtnClick = id => {
     id = notice._id;
+    setCardId(id)
 
     if (!token) {
       alert('please login');
@@ -76,6 +79,9 @@ export const NoticeCategoryItem = ({ notice }) => {
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+  console.log(notice);
+
 
     return (
         <NoticeCategoryItemStyled>
@@ -108,7 +114,7 @@ export const NoticeCategoryItem = ({ notice }) => {
             </CardInfoContainer>
             <Button type="button" onClick={handleOpenModal}>Learn more</Button>
             {showModal && <Modal onClose={handleCloseModal}>
-                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick} />
+                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick}/>
             </Modal>}
         </NoticeCategoryItemStyled>
     );
