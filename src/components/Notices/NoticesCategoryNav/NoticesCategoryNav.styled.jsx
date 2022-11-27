@@ -18,7 +18,7 @@ export const LinkContainer = styled.div`
 
 export const Link = styled(NavLink)`
   text-align: center;
-  padding: 8px 28px;
+  padding: 10px 28px;
   margin-right: 12px;
   text-decoration: none;
 
@@ -32,6 +32,11 @@ export const Link = styled(NavLink)`
   line-height: 1.36;
   letter-spacing: 0.04em;
   color: #111111;
+
+    @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: calc(27 / 20);
+  }
 
   &.active {
     color: #FFFFFF;
