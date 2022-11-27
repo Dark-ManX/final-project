@@ -2,7 +2,7 @@ import { response } from 'api';
 import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import Error from '../../components/error/error';
 import {
   Anchor,
   CardThumb,
@@ -16,10 +16,10 @@ import {
   Title
 } from './OurFriendsPage.styled';
 
-const OurFriendsPage = () => { 
+const OurFriendsPage = () => {
 
     const { getFriends } = response;
-    
+
     const [arr, setArr] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false)
@@ -61,7 +61,7 @@ const OurFriendsPage = () => {
               <FriendsThumb>
 
                 {arr.map(({ _id, imageUrl, title, time, address, email, phone }) => (
-                  
+
                   <Container key={_id}>
                     <FriendTitle>{title}</FriendTitle>
 
@@ -71,7 +71,7 @@ const OurFriendsPage = () => {
                         </FirstThumb>
 
                         <SecondThumb>
-                                
+
                           <ul>
                             <Item >Time: <br />
                               <div className='time'>
@@ -80,19 +80,19 @@ const OurFriendsPage = () => {
                                 }
                               </div>
                             </Item>
-                            
+
                             <Item>Adress:<br />
                               {
                                 address ? (<span>{address}</span>) : (<span>----------</span>)
                               }
                             </Item>
-                            
+
                             <Item>Email:<br />
                               {
                                 email ? (<Anchor href={`mailto:${email}`}>{email}</Anchor>) : (<span>----------</span>)
                               }
                             </Item>
-                            
+
                             <Item>Phone:<br />
                               {
                                 phone ? (<Anchor href={`tel:${phone}`}>{phone}</Anchor>) : (<span>----------</span>)
@@ -105,7 +105,7 @@ const OurFriendsPage = () => {
                     </Container>
                   ))
                 }
-                
+
               </FriendsThumb>
             )}
 
