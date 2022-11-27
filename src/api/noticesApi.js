@@ -1,25 +1,22 @@
 import axios from 'axios';
 
-export const fetchNotices = async (url, query) => {
+export const fetchNotices = async (url, query, token) => {
   if (!query) {
     const { data } = await axios.get(`${url}/notices/sell`);
 
     const { notices } = data.data;
     return notices;
+  } else if (!token) {
+    const { data } = await axios.get(`${url}/notices/${query}`);
+    const { notices } = data.data;
+    return notices;
   }
-  const { data } = await axios.get(`${url}/notices/${query}`);
-  const { notices } = data.data;
-  return notices;
-};
-
-export const fetchOwnNotices = async (url, query, token) => {
-  const { data } = await axios.get(`${url}/${query}`, {
+  const { data } = await axios.get(`${url}/notices/find/${query}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },
   });
-  console.log('object', data);
-  const { pets } = data;
+  const { pets } = data.data;
   return pets;
 };
 
@@ -29,6 +26,31 @@ export const fetchSearch = async (url, query) => {
   const { news } = data.data;
   return news;
 };
+
+export const fetchAddFavorite = async (url, query, token) => {
+  const {data} = await axios({
+    method: 'patch',
+    url: `${url}/notices/addfavorite/${query}`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+
+  const {notices} = data.data;
+  return notices;
+};
+
+export const fetchRemoveFavorite = async ( url, query, token) => {
+  const {data} = await axios({
+    method: 'patch',
+    url: `${url}/deletefavorite/${query}`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },   
+  })
+
+  return data;
+}
 
 // export const fetchSellNotices = async () => {
 //     const {data} = await axios.get('/notices/sell');

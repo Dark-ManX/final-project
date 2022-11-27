@@ -34,78 +34,59 @@ const [showModal, setShowModal] = useState(false);
  
     const fetchNotices = async (req, key) => {
         try {
-            if (!key) {
-                const res = await getNotices(req);
-                console.log('first');
-                setNotices(res);
-                return;
-            }
-            console.log('second')
-            const res = await getOwn(req, key);
-            setNotices(res);
+            const res = await getNotices(req, key);
             
-            } catch (err) {
-                console.log(err.message);
-            }
+            setNotices(res);
+            return;
+        
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     const fetchSearch = async (req) => {
         try {
             const res = await findNotices(req);
-            console.log('res', res)
+            
             setNotices(res);
-            console.log('third');
+         
         } catch (err) {
             console.log(err.message);
         }
     }
         const handleSubmit = formInput => {
-            setInput(formInput);
-
+            setOwnQuery(null);
             setQuery(null);
-            setSearch(input);
+            setSearch(formInput);
             setCount(count + 1);
         }
     console.log(input)
 
-        // const handelSearchChange = e => {
-        // setInput(e.currentTarget.value.toLowerCase());
-        // };
-    
-    // console.log(input);
-
-    const handelSubmit = e => {
-
-    //     e.preventDefault();
-    //     if (input === '') {
-    //         alert('🦄 Boolshit!');
-    //         return;
-    //     }
-        setSearch(input);
-        setCount(count + 1);
-    };
 
     const handleClick = async (e) => {
+        try {
+            const { nodeName, pathname, parentNode } = e.target;
 
-        const { nodeName, pathname, parentNode } = e.target;
+            if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
+                setOwnQuery(null);
+                setCount(count + 1);
 
-        if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
-            setOwnQuery(null);
-            setCount(count + 1);
+                setQuery(pathname.split('/').at(-1));
+                console.log(query);
 
-            setQuery(pathname.split('/').at(-1));
-            console.log(query);
+                return;
+            } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
+                setQuery(null);
+                setOwnQuery(null);
+                setCount(count + 1);
 
-            return;
-        } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
-            setQuery(null);
-            setOwnQuery(null);
-            setCount(count + 1);
+                const path = (pathname.split('/').at(-1));
+                setOwnQuery(path);
 
-            const path = (pathname.split('/').at(-1));
-            setOwnQuery(`find/${path}`);
-
-            return;
+                return;
+            }
+        } catch (err) {
+            console.log(err.message);
         }
 
     }
@@ -120,16 +101,17 @@ const [showModal, setShowModal] = useState(false);
     useEffect(() => {
 
         if (!count || query) {
-            console.log('!count or query');
+            
             const result = fetchNotices(query);
             console.log(result);
         } else if (ownQuery) {
-            console.log('ownQuery');
+            
             fetchNotices(ownQuery, token);
-        } else if (count && !query && !ownQuery && search) {
-            console.log('find');
+        } else if (count && search) {
+
             fetchSearch(search);
-        }
+        };
+
 
         document.addEventListener('click', handleClick);
 

@@ -1,26 +1,14 @@
+import { response } from 'api';
+import Modal from 'components/Modal/Modal';
+import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
+import { ReactComponent as AddIcon } from 'icons/add.svg';
+import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  NoticeCategoryItemStyled,
-  CardInfoContainer,
-  Title,
-  Photo,
-  Category,
-  AddToFavoriteBtn,
-  RemoveFromFavoriteBtn,
-  CardDetailsContainer,
-  CardImageContainer,
-  CardDetailInfo,
-  Button,
+  AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
+  CardImageContainer, CardInfoContainer, Category, NoticeCategoryItemStyled, Photo, RemoveFromFavoriteBtn, Title
 } from './NoticeCategoryItem.styled';
-import { ReactComponent as AddIcon } from 'icons/add.svg';
-import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
-import Modal from 'components/Modal/Modal';
-import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
-import {
-  useAddFavoriteNoticesMutation,
-  useDeleteFavoriteNoticesMutation,
-} from 'redux/notices/noticesApi';
 
 let category = '';
 let photo;
@@ -31,8 +19,12 @@ export const NoticeCategoryItem = ({ notice }) => {
   const token = useSelector(state => state.auth.token);
   const notices = useSelector(state => state.notices.items);
 
-  const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
-  const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
+  const { addToFavorite, removeFromFavorite } = response;
+
+  console.log(token);
+
+  // const [addToFavoriteNotices] = useAddFavoriteNoticesMutation();
+  // const [removeFromFavoriteNotices] = useDeleteFavoriteNoticesMutation();
 
   const userID = '6374ac4a84c43b1851b51dda';
 
@@ -60,12 +52,13 @@ export const NoticeCategoryItem = ({ notice }) => {
   }
 
   const handleRemoveFavoriteBtnClick = id => {
+    console.log(id)
     id = notice._id;
     const existingNotice = notices.data.pets.find(notice => notice._id === id);
 
     if (existingNotice) {
       console.log('remove from favorite: ', id);
-      removeFromFavoriteNotices({ id });
+      removeFromFavorite(id, token);
     }
   };
 
@@ -76,9 +69,9 @@ export const NoticeCategoryItem = ({ notice }) => {
       alert('please login');
       return;
     }
-
+    console.log('token', token)
     console.log('add to favorite: ', id);
-    addToFavoriteNotices({ id });
+    addToFavorite(id, token);
   };
 
   const handleOpenModal = () => setShowModal(true);
