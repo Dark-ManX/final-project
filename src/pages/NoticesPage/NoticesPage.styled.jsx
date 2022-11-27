@@ -39,6 +39,7 @@ export const Category = styled.div`
   }
 `;
 export const AuthLink = styled(NavLink)`
+
   text-align: center;
   padding: 10px 28px;
   margin-right: 12px;
@@ -55,7 +56,13 @@ export const AuthLink = styled(NavLink)`
   letter-spacing: 0.04em;
   color: #111111;
 
-  &.active {
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: calc(27 / 20);
+  }
+
+    &.active {
+
     color: #FFFFFF;
     background: #F59256;
   };
