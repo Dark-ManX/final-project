@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 import { SearchForm } from "components/SearchForm/SearchForm";
 import { AuthLink, AuthLinkContainer, Category, Container, Nav, Title } from "./NoticesPage.styled";
 // import SearchForm from "components/Notices/SearchForm/SearchForm";
-import Modal from '../../components/Modal/Modal';
-import { ReactComponent as AddIcon } from '../../icons/addPet.svg';
 import {
     //   NavSection,
     AddPet,
