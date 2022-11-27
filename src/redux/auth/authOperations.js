@@ -106,8 +106,8 @@ export const authApi = createApi({
 
     // PATCH  changeUserPet: '/pets/:id',
     changeUserPet: builder.mutation({
-      query: (newPet, userPetId) => ({
-        url: `/pets/${userPetId}`,
+      query: newPet => ({
+        url: `/pets/${newPet.userPetId}`,
         method: 'PATCH',
         body: newPet,
       }),
@@ -123,15 +123,21 @@ export const authApi = createApi({
       invalidatesTags: [{ type: 'User' }],
     }),
 
-    //   GET getNotices: '/notices/one/owner'
+    //   GET getNotices: '/notices/one/{id}'
     getNotices: builder.query({
-      query: id => `/notices/one/${id}`,
+      query: id => ({
+        url: `/notices/one/${id}`,
+        method: 'GET',
+      }),
       providesTags: ['User'],
     }),
 
     //   GET getFavoriteNotices: '/notices/find/favorite'
     getFavoriteNotices: builder.query({
-      query: () => '/notices/find/favorite',
+      query: () => ({
+        url: '/notices/find/favorite',
+        method: 'GET',
+      }),
       providesTags: ['User'],
     }),
 
