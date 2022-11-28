@@ -20,6 +20,7 @@ const RegisterPage = () => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [page, setPage] = useState(0);
+
   const navigate = useNavigate();
 
   const isId = useSelector(state => state.auth.user.id);
@@ -66,6 +67,7 @@ const RegisterPage = () => {
     };
     await registerNewUser(newUser);
   };
+
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -131,7 +133,7 @@ const RegisterPage = () => {
             <FirstContainer>
               <Title>Registration</Title>
 
-              <Form>
+              <Form onClick={handleSubmit}>
                 <div>
                   <Input
                     type="email"
@@ -176,7 +178,7 @@ const RegisterPage = () => {
                 </EyeContainer>
                 <ul>
                   <li>
-                    <Button onClick={handleSubmit}>
+                    <Button type="submit">
                       {page === 0 || page < 1 ? 'Next' : 'Register'}
                     </Button>
                   </li>
@@ -202,7 +204,7 @@ const RegisterPage = () => {
             <Container>
               <Title>Registration</Title>
 
-              <Form>
+              <Form onSubmit={handlePatchSubmit}>
                 <Input
                   name="name"
                   type="text"

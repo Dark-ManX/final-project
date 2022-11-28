@@ -25,6 +25,7 @@ export const UserData = () => {
 
   const fetchUser = async (token) => {
     const res = await getUser(token);
+    console.log(res);
     setUser(res);
   };
 
