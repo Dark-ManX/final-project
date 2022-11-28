@@ -71,7 +71,6 @@ const [showModal, setShowModal] = useState(false);
                 setCount(count + 1);
 
                 setQuery(pathname.split('/').at(-1));
-                console.log(query);
 
                 return;
             } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
@@ -90,11 +89,13 @@ const [showModal, setShowModal] = useState(false);
 
     }
 
+    const handleFavoriteClick = () => {
+        setCount(count + 1);
+    }
+
     const toggleModal = evt => {
         setShowModal(!showModal);
     }
-
-    console.log(notices);
 
     useEffect(() => {
 
@@ -151,7 +152,7 @@ const [showModal, setShowModal] = useState(false);
       )}
             {!error
                 ? (<Suspense fallback={<Loading />}>
-                    <Outlet context={notices} />
+                    <Outlet context={{notices, handleFavoriteClick}} />
                 </Suspense>)
                 : <StyledErr>There is no information</StyledErr>
             }

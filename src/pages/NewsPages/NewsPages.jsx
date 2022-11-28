@@ -5,7 +5,7 @@ import { SearchForm } from "components/SearchForm/SearchForm";
 // import { fetchNewsSearch } from 'api/newsApi';
 import { response } from 'api';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import Error from 'components/Error/error';
 import MainContainer from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,

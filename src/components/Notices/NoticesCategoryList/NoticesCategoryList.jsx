@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 
 const NoticesCategoryList = () => {
 
-    const notices = useOutletContext();
+    const {notices, handleFavoriteClick} = useOutletContext();
 
-    console.log(notices)
+    console.log(notices);
 
-    const token = useSelector(state => state.auth.token);
+    // const token = useSelector(state => state.auth.token);
 
-    const { getNotices } = response;
+    // const { getNotices } = response;
 
     // const fetchFavorite = async (token) => {
     //     try {
@@ -25,17 +25,18 @@ const NoticesCategoryList = () => {
     //     }
     // }
 
-    console.log(notices);
-
     useEffect(() => {
   
     }, [])
 
     return (
-        <>     
-            <Gallery>
-                {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} favoriteList={notices} />)}
-            </Gallery >
+        <>
+            {notices != []
+                ? (<Gallery>
+                        {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} onClick={handleFavoriteClick}/>)}
+                    </Gallery >)
+                : <p>Інформації не знайдено</p>
+            }
         </>
     )
 };
