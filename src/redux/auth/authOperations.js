@@ -64,7 +64,7 @@ export const authApi = createApi({
 
     // PATCH avatars: '/avatars',
     updateAvatar: builder.mutation({
-      query: (body) => ({
+      query: body => ({
         url: '/avatars',
         method: 'PATCH',
         body,
@@ -94,10 +94,10 @@ export const authApi = createApi({
       providesTags: ['User'],
     }),
 
-    // POST  createUserPet: '/pets',
+    // POST  addUserPet: '/pets/add',
     createUserPets: builder.mutation({
       query: newPet => ({
-        url: '/pets',
+        url: '/pets/add',
         method: 'POST',
         body: newPet,
       }),
@@ -105,9 +105,9 @@ export const authApi = createApi({
     }),
 
     // PATCH  changeUserPet: '/pets/:id',
-    cnhangeUserPet: builder.mutation({
-      query: (newPet, userPetId) => ({
-        url: `/pets/${userPetId}`,
+    changeUserPet: builder.mutation({
+      query: newPet => ({
+        url: `/pets/${newPet.userPetId}`,
         method: 'PATCH',
         body: newPet,
       }),
@@ -123,22 +123,28 @@ export const authApi = createApi({
       invalidatesTags: [{ type: 'User' }],
     }),
 
-    //   GET getNotices: '/notices/one/owner'
+    //   GET getNotices: '/notices/one/{id}'
     getNotices: builder.query({
-      query: () => '/notices/one/owner',
+      query: id => ({
+        url: `/notices/one/${id}`,
+        method: 'GET',
+      }),
       providesTags: ['User'],
     }),
 
-    //   GET getFavoriteNotices: '/notices/one/favorite'
+    //   GET getFavoriteNotices: '/notices/find/favorite'
     getFavoriteNotices: builder.query({
-      query: () => '/notices/one/favorite',
+      query: () => ({
+        url: '/notices/find/favorite',
+        method: 'GET',
+      }),
       providesTags: ['User'],
     }),
 
     // PATCH  addNotice: '/notices/addfavorite/${noticeId}',
     addFavoriteNotice: builder.mutation({
-      query: (newNotice, noticeId) => ({
-        url: `/notices/addfavorite/${noticeId}`,
+      query: newNotice => ({
+        url: `/notices/addfavorite/${newNotice.id}`,
         method: 'PATCH',
         body: newNotice,
       }),

@@ -45,8 +45,8 @@ console.log(favoriteList);
   }
 
   if (notice.photo) {
-    photo= notice.photo;
-    // photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`
+    // photo= notice.photo;
+    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`
 
   } else {
     photo =

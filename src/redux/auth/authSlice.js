@@ -33,7 +33,10 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
+
         state.id = payload.id;
+        console.log(payload.token.token);
+        state.user = payload.data.user;
         state.token = payload.token.token;
         state.isLoggedIn = true;
       }
@@ -63,6 +66,22 @@ const authSlice = createSlice({
         state.user = payload;
 
         state.isFetchingCurrent = true;
+      }
+    );
+    builder.addMatcher(
+      authApi.endpoints.getUserInfo.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.data.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
+      }
+    );
+    builder.addMatcher(
+      authApi.endpoints.getUserPets.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.data.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
       }
     );
   },

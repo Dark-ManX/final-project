@@ -97,7 +97,7 @@ const RegisterPage = () => {
   const handlePatchSubmit = event => {
     event.preventDefault();
 
-    if (!/^[a-zA-Z0-9]{2,30}/g.test(name)) {
+    if (!/^[a-zA-Z]{2,30}/g.test(name)) {
       return Notiflix.Notify.info('Name may only include letters');
     }
     if (name === '') {
@@ -107,7 +107,7 @@ const RegisterPage = () => {
     if (city === '') {
       return Notiflix.Notify.failure('Please, enter your city and region ');
     }
-    if (!/^[a-zA-Z]+,[a-zA-Z]/g.test(city)) {
+    if (!/^(([a-zA-Z ](,)?)*)+$/g.test(city)) {
       return Notiflix.Notify.info(
         'Please, enter your city and region separated by comma and without spaces'
       );
@@ -115,9 +115,9 @@ const RegisterPage = () => {
     if (phone === '') {
       return Notiflix.Notify.failure('Please, enter your phone number');
     }
-    if (!/^\d{12}$/g.test(phone)) {
+    if (!/^[+0-9]{13}$/g.test(phone)) {
       return Notiflix.Notify.info(
-        'Your phone number must consist of 12 numbers'
+        'Your phone number must start with + and consist of 12 numbers'
       );
     }
     addUser();

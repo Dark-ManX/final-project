@@ -5,7 +5,7 @@ import { SearchForm } from "components/SearchForm/SearchForm";
 // import { fetchNewsSearch } from 'api/newsApi';
 import { response } from 'api';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import Error from '../../components/error/error';
 import MainContainer from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
@@ -17,20 +17,20 @@ import {
 
 
 const NewsPages = () => {
-  
+
 const [, setQueryNews] = useState('');
 const [resultQuery, setResultQuery] = useState([])
 const [searchParams, setSearchParams] = useSearchParams();
 const [error, setError] = useState(null);
 const [isLoading, setIsLoading] = useState(false);
-     
+
 
   useEffect(() => {
     const newsName = searchParams.get('q');
-      
+
     if (!newsName) {
       setIsLoading(true);
-      
+
             const getData = async () => {
                 try {
                     const data = await response.getNews();
@@ -43,7 +43,7 @@ const [isLoading, setIsLoading] = useState(false);
                     setIsLoading(false)
                 }
             };
-            getData();     
+            getData();
         return ;
     };
 
@@ -68,19 +68,19 @@ const [isLoading, setIsLoading] = useState(false);
         setQueryNews(searchParams.get('q'));
         setSearchParams({ q: formInput })
   }
-    
+
   return (
 
     <MainContainer>
 
         <NewsPageTitle>News</NewsPageTitle>
-        
+
         <SearchForm onSubmit={handleSubmit} />
-        
+
         {isLoading && <Loading />}
-        
+
         {error && <Error />}
-        
+
       <NewsSet>
         {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>
         (<NewsItem key={_id}>
