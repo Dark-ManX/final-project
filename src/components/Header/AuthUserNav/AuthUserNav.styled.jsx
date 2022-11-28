@@ -15,6 +15,8 @@ export const StyledWhiteLink = styled(Link)`
 `;
 
 export const StyledColoredLink = styled(Link)`
+  display: flex;
+  align-items: center;
   background-color: #f59256;
   color: white;
   font-weight: 500;

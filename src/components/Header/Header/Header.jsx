@@ -9,7 +9,7 @@ import { AuthUserContainer, Button, MobileMenu, StyledHeader } from './Header.st
 
 const Header = () => {
 
-  const user = useSelector(state => state.isLoggedIn)
+  const user = useSelector(state => state.auth.isLoggedIn)
   const [shown, setShown] = useState(false);
 
   const toggleUser = () => {

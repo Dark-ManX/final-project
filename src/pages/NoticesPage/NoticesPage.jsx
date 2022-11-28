@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
 import { SearchForm } from "components/SearchForm/SearchForm";
-import { AuthLink, AuthLinkContainer, Category, Container, Nav, Title } from "./NoticesPage.styled";
+import { AuthLink, AuthLinkContainer, Category, Container, Nav, Title, StyledErr } from "./NoticesPage.styled";
 // import SearchForm from "components/Notices/SearchForm/SearchForm";
 import {
     //   NavSection,
@@ -25,6 +25,7 @@ const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState(null)
     const [count, setCount] = useState(0);
     const [notices, setNotices] = useState([]);
+    const [error, setError] = useState(false);
 
     // const navigate = useNavigate();
 
@@ -35,24 +36,22 @@ const [showModal, setShowModal] = useState(false);
     const fetchNotices = async (req, key) => {
         try {
             const res = await getNotices(req, key);
-            
+            setError(false)
             setNotices(res);
-
-            return;
         
         } catch (err) {
-            console.log(err.message);
+            setError(true);
         }
     }
 
     const fetchSearch = async (req) => {
         try {
             const res = await findNotices(req);
-            
+            setError(false)
             setNotices(res);
          
         } catch (err) {
-            console.log(err.message);
+            setError(true);
         }
     }
         const handleSubmit = formInput => {
@@ -68,6 +67,7 @@ const [showModal, setShowModal] = useState(false);
 
             if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
                 setOwnQuery(null);
+                setSearch(null);
                 setCount(count + 1);
 
                 setQuery(pathname.split('/').at(-1));
@@ -76,6 +76,7 @@ const [showModal, setShowModal] = useState(false);
                 return;
             } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
                 setQuery(null);
+                setSearch(null)
                 setCount(count + 1);
 
                 const path = (pathname.split('/').at(-1));
@@ -84,7 +85,7 @@ const [showModal, setShowModal] = useState(false);
                 return;
             }
         } catch (err) {
-            console.log(err.message);
+            setError(true);
         }
 
     }
@@ -100,6 +101,7 @@ const [showModal, setShowModal] = useState(false);
         if (!count || query) {
             
             fetchNotices(query);
+        
         } else if (ownQuery) {
             
             fetchNotices(ownQuery, token);
@@ -147,9 +149,12 @@ const [showModal, setShowModal] = useState(false);
              {showModal && (
         <Modal onClose={toggleModal}><ModalAddNotice onClose={toggleModal}/> </Modal>
       )}
-            <Suspense fallback={<Loading/>}>
-                <Outlet context={notices} />
-            </Suspense>
+            {!error
+                ? (<Suspense fallback={<Loading />}>
+                    <Outlet context={notices} />
+                </Suspense>)
+                : <StyledErr>There is no information</StyledErr>
+            }
 
         </Container>
     );
