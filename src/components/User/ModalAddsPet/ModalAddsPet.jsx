@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Button from 'components/Common/Button/Button';
 import { Input } from 'components/Common/Input/Input';
 import { ReactComponent as Cross } from 'icons/cross.svg';
@@ -11,11 +12,13 @@ import {
   AddImageButton,
   PlusIcon,
   PetImage,
+  ModalAddPetContainer,
 } from './ModalAddsPet.styled';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {response} from 'api'
-import { fetchPetAdd } from 'api/petApi';
+import { response } from 'api';
+// import { fetchPetAdd } from './petApi';
+// import { useCreateUserPetsMutation } from 'redux/auth/authOperations';
 
 const MODAL_STATE = {
   IDLE: 'idle',
@@ -26,7 +29,10 @@ const MODAL_STATE = {
 const AddsPet = ({ onClose }) => {
   const token = useSelector(state => state.token);
 
-  const {addPet} = response;
+  // const [createUserPets] = useCreateUserPetsMutation();
+
+  const { addPet } = response;
+  console.log(addPet);
 
   const [modalState, setModalState] = useState(MODAL_STATE.IDLE);
 
@@ -65,12 +71,24 @@ const AddsPet = ({ onClose }) => {
     }
   };
 
-// <<<<<<< HEAD:src/components/User/ModalAddsPet/ModalAddsPet.jsx
-//   const handleSubmit = async () => {
-//     const res = await getAddsPet({name: petName, birth, breed}, token)
-//     console.log(res);
-//   }
-// =======
+  // const createNewPet = async () => {
+  //   const newPet = {
+  //     petName,
+  //     birth,
+  //     breed,
+  //     file,
+  //     info,
+  //   };
+  //   console.log(newPet);
+  // await createUserPets(newPet);
+  // };
+
+  // <<<<<<< HEAD:src/components/User/ModalAddsPet/ModalAddsPet.jsx
+  //   const handleSubmit = async () => {
+  //     const res = await getAddsPet({name: petName, petName, breed}, token)
+  //     console.log(res);
+  //   }
+  // =======
   const handleSubmit = e => {
     e.preventDefault();
     if (modalState === MODAL_STATE.IDLE) {
@@ -83,7 +101,7 @@ const AddsPet = ({ onClose }) => {
 
   useEffect(() => {
     if (modalState === MODAL_STATE.DONE) {
-      addPet({ name: petName, birth, breed, file, info }, token)
+      addPet({ name: petName, birth, breed, file, info }, token);
       onClose();
     }
   }, [modalState, petName, birth, breed, file, info, token, onClose]);
@@ -93,7 +111,7 @@ const AddsPet = ({ onClose }) => {
   };
 
   return (
-    <>
+    <ModalAddPetContainer>
       <CloseModal type="button" onClick={onClose}>
         <Cross width="20px" height="20px" />
       </CloseModal>
@@ -152,18 +170,18 @@ const AddsPet = ({ onClose }) => {
                   <PetImage src={URL.createObjectURL(file)} alt={petName} />
                 ) : null}
               </UploadImageContainer>
-            </AddFileInputContainer>
 
-            <Input
-              height="100px"
-              padding="12px 14px"
-              borderRadius="20px"
-              as="textarea"
-              name="info"
-              label="Comments"
-              placeholder="Type comments"
-              onChange={handleChange}
-            />
+              <Input
+                height="100px"
+                padding="12px 14px"
+                borderRadius="20px"
+                as="textarea"
+                name="info"
+                label="Comments"
+                placeholder="Type comments"
+                onChange={handleChange}
+              />
+            </AddFileInputContainer>
           </>
         ) : null}
 
@@ -174,8 +192,17 @@ const AddsPet = ({ onClose }) => {
         />
         <Button type="button" content="Cancel" variant="inverse" />
       </form>
-    </>
+    </ModalAddPetContainer>
   );
+};
+
+AddsPet.propTypes = {
+  petName: PropTypes.string.isRequired,
+  birth: PropTypes.string.isRequired,
+  breed: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired,
+  info: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AddsPet;

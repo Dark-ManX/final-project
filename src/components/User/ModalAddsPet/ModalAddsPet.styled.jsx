@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { ReactComponent as PlusSvgIcon } from 'icons/VectorAddPet.svg';
 
+export const ModalAddPetContainer = styled.div`
+  width: 250px;
+  overflow-y: auto;
+`;
+
 export const ModalName = styled.p`
   text-align: center;
   font-family: 'Manrope';
@@ -25,6 +30,12 @@ export const CloseModal = styled.button`
   cursor: pointer;
 `;
 
+export const AddFileInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
 export const UploadImageContainer = styled.div`
   display: flex;
   position: relative;
@@ -37,6 +48,7 @@ export const UploadImageContainer = styled.div`
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   margin-top: 8px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
 
@@ -62,10 +74,6 @@ export const AddImageButton = styled.button`
   height: 48px;
   cursor: pointer;
 `;
-export const AddFileInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 export const PlusIcon = styled(PlusSvgIcon)`
   width: 100%;
@@ -78,7 +86,15 @@ export const AddFileInput = styled.input`
   opacity: 0;
   z-index: 999;
 `;
-export const AddFileLabelInput = styled.label``;
+export const AddFileLabelInput = styled.label`
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  margin-bottom: 20px;
+`;
 
 export const PetImage = styled.img`
   width: inherit;
