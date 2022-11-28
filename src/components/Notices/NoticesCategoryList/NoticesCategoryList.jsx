@@ -32,13 +32,10 @@ const NoticesCategoryList = () => {
     }, [])
 
     return (
-        <>
-            {notices != []
-                ? (<Gallery>
-                        {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} favoriteList={notices} />)}
-                    </Gallery >)
-                : <p>Інформації не знайдено</p>
-            }
+        <>     
+            <Gallery>
+                {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} favoriteList={notices} />)}
+            </Gallery >
         </>
     )
 };
