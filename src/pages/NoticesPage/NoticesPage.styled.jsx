@@ -90,3 +90,8 @@ display:flex;
     display: flex;
   };
 `;
+
+export const StyledErr = styled.p`
+font-size: 26px;
+line-height: 1.5;
+`
