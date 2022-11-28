@@ -33,11 +33,7 @@ const NoticesCategoryList = () => {
         <>
             {notices != []
                 ? (<Gallery>
-<<<<<<< HEAD
                         {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} onClick={handleFavoriteClick}/>)}
-=======
-                        {notices.map(notice => <NoticeCategoryItem key={notice._id} notice={notice} favoriteList={notices} />)}
->>>>>>> parent of b0708b6 (change error import in news and friends)
                     </Gallery >)
                 : <p>Інформації не знайдено</p>
             }
