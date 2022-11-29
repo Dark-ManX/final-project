@@ -14,6 +14,7 @@ import {
   Section,
   BackBtn,
 } from './RegisterPage.styled';
+import Notiflix from 'notiflix';
 
 const Registration = () => {
   const location = useLocation();
@@ -48,11 +49,45 @@ const Registration = () => {
     // if (confirmedPassword !== formData.password) {
     //   return alert('Passwords do not match!');
     // }
+    if (formData.email === '' || !formData.email.includes('@')) {
+      return Notiflix.Notify.failure('Please, enter a valid email!');
+    }
+
+    if (formData.password === '' || formData.password.includes(' ')) {
+      return Notiflix.Notify.failure(
+        'Please, enter a valid password without spaces!'
+      );
+    }
+
+    if (!/^[a-zA-Z]{2,30}/g.test(formData.name)) {
+      return Notiflix.Notify.info('Name may only include letters');
+    }
+    if (formData.name === '') {
+      return Notiflix.Notify.failure('Please, enter your name');
+    }
+
+    if (formData.city === '') {
+      return Notiflix.Notify.failure('Please, enter your city and region ');
+    }
+    if (!/^(([a-zA-Z ](,)?)*)+$/g.test(formData.city)) {
+      return Notiflix.Notify.info(
+        'Please, enter your city and region separated by comma and without spaces'
+      );
+    }
+    if (formData.phone === '') {
+      return Notiflix.Notify.failure('Please, enter your phone number');
+    }
+    if (!/^[+0-9]{13}$/g.test(formData.phone)) {
+      return Notiflix.Notify.info(
+        'Your phone number must start with + and consist of 12 numbers'
+      );
+    }
+
     if (page < 1) {
       setPage(page + 1);
     } else if (page === 1) {
       registerNewUser(formData);
-      navigate(`/user`, { replace: true });
+      // navigate(`/user`, { replace: true });
     }
   };
 
