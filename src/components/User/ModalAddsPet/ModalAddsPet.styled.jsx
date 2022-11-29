@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ReactComponent as PlusSvgIcon } from 'icons/VectorAddPet.svg';
 
 export const ModalAddPetContainer = styled.div`
-  width: 250px;
-  overflow-y: auto;
+  /* width: 250px;
+  overflow-y: auto; */
 `;
 
 export const ModalName = styled.p`
@@ -12,7 +12,7 @@ export const ModalName = styled.p`
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  line-height: 33px;
+  line-height: 1.4;
   margin-bottom: 33px;
 `;
 
@@ -91,7 +91,7 @@ export const AddFileLabelInput = styled.label`
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  line-height: 22px;
+  line-height: 1.4;
   text-align: center;
   margin-bottom: 20px;
 `;
