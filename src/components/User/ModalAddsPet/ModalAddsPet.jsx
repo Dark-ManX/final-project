@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Common/Button/Button';
 import { Input } from 'components/Common/Input/Input';
 import { ReactComponent as Cross } from 'icons/cross.svg';
+import { useCreateUserPetsMutation } from 'redux/auth/authOperations';
 import {
   CloseModal,
   ModalName,
@@ -14,11 +16,6 @@ import {
   PetImage,
   ModalAddPetContainer,
 } from './ModalAddsPet.styled';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { response } from 'api';
-// import { fetchPetAdd } from './petApi';
-// import { useCreateUserPetsMutation } from 'redux/auth/authOperations';
 
 const MODAL_STATE = {
   IDLE: 'idle',
@@ -27,27 +24,22 @@ const MODAL_STATE = {
 };
 
 const AddsPet = ({ onClose }) => {
-  const token = useSelector(state => state.token);
-
-  // const [createUserPets] = useCreateUserPetsMutation();
-
-  const { addPet } = response;
-  console.log(addPet);
+  const [createPet] = useCreateUserPetsMutation();
 
   const [modalState, setModalState] = useState(MODAL_STATE.IDLE);
 
-  const [petName, setPetName] = useState('');
+  const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
   const [breed, setBreed] = useState('');
-  const [file, setFile] = useState(null);
-  const [info, setInfo] = useState([]);
+  const [photoPet, setphotoPet] = useState(null);
+  const [comments, setComments] = useState([]);
 
   const handleChange = e => {
     const { name, value } = e.target;
 
     switch (name) {
       case 'petName':
-        setPetName(value);
+        setName(value);
         break;
 
       case 'birth':
@@ -58,12 +50,12 @@ const AddsPet = ({ onClose }) => {
         setBreed(value);
         break;
 
-      case 'file':
-        setFile(value);
+      case 'photoPet':
+        setphotoPet(e.target.files[0]);
         break;
 
-      case 'info':
-        setInfo(value);
+      case 'comments':
+        setComments(value);
         break;
 
       default:
@@ -71,24 +63,13 @@ const AddsPet = ({ onClose }) => {
     }
   };
 
-  // const createNewPet = async () => {
-  //   const newPet = {
-  //     petName,
-  //     birth,
-  //     breed,
-  //     file,
-  //     info,
-  //   };
-  //   console.log(newPet);
-  // await createUserPets(newPet);
-  // };
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('birth', birth);
+  formData.append('breed', breed);
+  formData.append('photoPet', photoPet);
+  formData.append('comments', comments);
 
-  // <<<<<<< HEAD:src/components/User/ModalAddsPet/ModalAddsPet.jsx
-  //   const handleSubmit = async () => {
-  //     const res = await getAddsPet({name: petName, petName, breed}, token)
-  //     console.log(res);
-  //   }
-  // =======
   const handleSubmit = e => {
     e.preventDefault();
     if (modalState === MODAL_STATE.IDLE) {
@@ -97,17 +78,7 @@ const AddsPet = ({ onClose }) => {
     if (modalState === MODAL_STATE.UPLOAD_IMAGE) {
       return setModalState(MODAL_STATE.DONE);
     }
-  };
-
-  useEffect(() => {
-    if (modalState === MODAL_STATE.DONE) {
-      addPet({ name: petName, birth, breed, file, info }, token);
-      onClose();
-    }
-  }, [modalState, petName, birth, breed, file, info, token, onClose]);
-
-  const selectFile = e => {
-    setFile(e.target.files[0]);
+    createPet(formData);
   };
 
   return (
@@ -155,19 +126,20 @@ const AddsPet = ({ onClose }) => {
                 Add photo and some comments
               </AddFileLabelInput>
               <UploadImageContainer>
-                {!file ? (
+                {!photoPet ? (
                   <AddImageButton type="button">
                     <PlusIcon />
                     <AddFileInput
+                      multiple
                       id="uploadFile"
                       type="file"
-                      name="file"
-                      onChange={selectFile}
+                      name="photoPet"
+                      onChange={handleChange}
                     />
                   </AddImageButton>
                 ) : null}
-                {file ? (
-                  <PetImage src={URL.createObjectURL(file)} alt={petName} />
+                {photoPet ? (
+                  <PetImage src={URL.createObjectURL(photoPet)} alt={name} />
                 ) : null}
               </UploadImageContainer>
 
@@ -176,7 +148,7 @@ const AddsPet = ({ onClose }) => {
                 padding="12px 14px"
                 borderRadius="20px"
                 as="textarea"
-                name="info"
+                name="comments"
                 label="Comments"
                 placeholder="Type comments"
                 onChange={handleChange}
@@ -197,11 +169,11 @@ const AddsPet = ({ onClose }) => {
 };
 
 AddsPet.propTypes = {
-  petName: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   birth: PropTypes.string.isRequired,
   breed: PropTypes.string.isRequired,
-  file: PropTypes.string.isRequired,
-  info: PropTypes.string.isRequired,
+  photoPet: PropTypes.string.isRequired,
+  comments: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

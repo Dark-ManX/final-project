@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as PlusSvgIcon } from 'icons/VectorAddPet.svg';
 
 export const ModalAddPetContainer = styled.div`
-  /* width: 250px;
-  overflow-y: auto; */
+  /* width: 250px; */
 `;
 
 export const ModalName = styled.p`
