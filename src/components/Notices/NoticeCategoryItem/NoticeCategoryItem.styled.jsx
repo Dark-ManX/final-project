@@ -138,11 +138,15 @@ export const AddToFavoriteBtn = styled.button`
     &:focus {
         color: #F59256;
     }
+
+    &.remove {
+        color: rgba(17, 17, 17, 0.6);
+    }
 `;
 
-export const RemoveFromFavoriteBtn = styled(AddToFavoriteBtn)`
-    color: rgba(17, 17, 17, 0.6);
-`;
+// export const RemoveFromFavoriteBtn = styled(AddToFavoriteBtn)`
+//     color: rgba(17, 17, 17, 0.6);
+// `;
 
 export const CardDetailsContainer = styled.ul`
     list-style: none;

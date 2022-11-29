@@ -27,11 +27,12 @@ const [showModal, setShowModal] = useState(false);
     const [notices, setNotices] = useState([]);
     const [error, setError] = useState(false);
 
-    // const navigate = useNavigate();
-
     const { getNotices, findNotices } = response;
 
-    const token = useSelector((state) => state.auth.token);
+    const token = useSelector(state => state.auth.token);
+    const user = useSelector(state => state.auth.isLoggedIn);
+    console.log(token);
+
  
     const fetchNotices = async (req, key) => {
         try {
@@ -130,7 +131,7 @@ const [showModal, setShowModal] = useState(false);
             <Category>
                 <NoticesCategoriesNav />
 
-                {token &&
+                {user &&
                     <AuthLinkContainer className="own-block">
                         <AuthLink to="favorite">Favorite ads</AuthLink>
                         <AuthLink to="owner">My ads</AuthLink>

@@ -91,14 +91,16 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
             <CardImageContainer>
                 <Photo src={photo} alt={notice.comments} />
                 <Category>{category}</Category>
-                {!notice.favorite.includes(userId)
-                  ? (<AddToFavoriteBtn onClick={handleBtnClick}>
-                          <AddIcon width="24" height="22" />
-                      </AddToFavoriteBtn>)
-                  : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
-                          <RemoveIcon width="19.5" height="21" />
-                      </RemoveFromFavoriteBtn>)
-                }
+                <AddToFavoriteBtn onClick={handleBtnClick} className={notice.favorite?.includes(userId) && 'remove'}>
+                  {!notice.favorite?.includes(userId)
+                    ? <AddIcon width="24" height="22" />
+                    : <RemoveIcon width="19.5" height="21" />
+                  }
+                </AddToFavoriteBtn>
+                  {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
+                  //         <RemoveIcon width="19.5" height="21" />
+                  //     </RemoveFromFavoriteBtn>) */}
+                
             </CardImageContainer>
             <CardInfoContainer>
                 <Title>{notice.title}</Title>

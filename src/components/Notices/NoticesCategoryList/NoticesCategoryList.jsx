@@ -9,26 +9,6 @@ const NoticesCategoryList = () => {
 
     const {notices, handleFavoriteClick} = useOutletContext();
 
-    console.log(notices);
-
-    // const token = useSelector(state => state.auth.token);
-
-    // const { getNotices } = response;
-
-    // const fetchFavorite = async (token) => {
-    //     try {
-    //         const res = await getNotices('favorite', token);
-    //         setFavorite(res);
-        
-    //     } catch (err) {
-    //         console.log(err.message);
-    //     }
-    // }
-
-    useEffect(() => {
-  
-    }, [])
-
     return (
         <>
             {notices != []
