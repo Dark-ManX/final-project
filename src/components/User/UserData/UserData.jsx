@@ -79,21 +79,21 @@ export const UserData = () => {
     axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
     axios.defaults.headers.patch['content-type'] = 'multipart/form-data';
 
-    axios('https://team-api-blended2.herokuapp.com/avatars', {
-      method: 'PATCH',
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log('Success:', result);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    // axios('https://team-api-blended2.herokuapp.com/avatars', {
+    //   method: 'PATCH',
+    //   body: formData,
+    // })
+    //   .then(response => response.json())
+    //   .then(result => {
+    //     console.log('Success:', result);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //   });
   }
 
   useEffect(() => {
-    fetchUser(token)
+    // fetchUser(token)
   }, []);
 
   const { logo, name } = user;

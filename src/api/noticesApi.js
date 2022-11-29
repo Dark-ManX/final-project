@@ -11,7 +11,9 @@ export const fetchNotices = async (url, query, token) => {
     const { notices } = data.data;
     return notices;
   }
-  const { data } = await axios.get(`${url}/notices/find/${query}`, {
+  const { data } = await axios({
+    method: 'get',
+    url: `${url}/notices/find/${query}`,
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -28,29 +30,29 @@ export const fetchSearch = async (url, query) => {
 };
 
 export const fetchAddFavorite = async (url, query, token) => {
-  const {data} = await axios({
+  const { data } = await axios({
     method: 'patch',
     url: `${url}/notices/addfavorite/${query}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { notices } = data.data;
+  return notices;
+};
+
+export const fetchRemoveFavorite = async (url, query, token) => {
+  const { data } = await axios({
+    method: 'patch',
+    url: `${url}/notices/deletefavorite/${query}`,
     headers: {
       Authorization: `Bearer ` + token,
     },
   });
 
-  const {notices} = data.data;
-  return notices;
-};
-
-export const fetchRemoveFavorite = async ( url, query, token) => {
-  const {data} = await axios({
-    method: 'patch',
-    url: `${url}/deletefavorite/${query}`,
-    headers: {
-      Authorization: `Bearer ` + token,
-    },   
-  })
-
   return data;
-}
+};
 
 // export const fetchSellNotices = async () => {
 //     const {data} = await axios.get('/notices/sell');

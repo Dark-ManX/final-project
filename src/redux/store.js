@@ -19,7 +19,7 @@ import { noticesApi } from './notices/noticesApi';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'id', 'isLoggedIn'],
 };
 
 export const store = configureStore({
@@ -35,7 +35,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware).concat(noticesApi.middleware),
+    })
+      .concat(authApi.middleware)
+      .concat(noticesApi.middleware),
 
   devTools: process.env.NODE_ENV === 'development',
 });

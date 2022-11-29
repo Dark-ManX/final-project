@@ -13,22 +13,16 @@ import {
 let category = '';
 let photo;
 
-export const NoticeCategoryItem = ({ notice, favoriteList }) => {
+export const NoticeCategoryItem = ({ notice, onClick }) => {
 
   const [showModal, setShowModal] = useState(false);
-  const [favorite, setFavorite] = useState(null);
-  const [cardId, setCardId] = useState(null);
+  
+  const userId = useSelector(state => state.auth.id);
 
   const { addToFavorite, removeFromFavorite } = response;
 
   const token = useSelector(state => state.auth.token);
-  const notices = useSelector(state => state.notices.items);
-
-  console.log(token)
-
-console.log(favoriteList);
-
-  const userID = '6374ac4a84c43b1851b51dda';
+  // const notices = useSelector(state => state.notices.items)
 
   switch (notice.category) {
     case 'sell':
@@ -52,50 +46,61 @@ console.log(favoriteList);
     photo =
       'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
   }
+  console.log('notice', notice)
 
-  const handleRemoveFavoriteBtnClick = id => {
+  const handleBtnClick = async id => {
     console.log(id)
     id = notice._id;
-    const existingNotice = favoriteList.map(({_id}) => _id === id);
 
-    if (existingNotice) {
+    if (notice.favorite?.includes(userId)) {
       console.log('remove from favorite: ', id);
-      removeFromFavorite(id, token);
-    }
-  };
+      await removeFromFavorite(id, token);
 
-  const handleAddFavoriteBtnClick = id => {
-    id = notice._id;
-    setCardId(id)
+      onClick();
+      return;
 
-    if (!token) {
+    } else if (!token) {
       alert('please login');
       return;
     }
-    console.log('token', token)
+
     console.log('add to favorite: ', id);
-    addToFavorite(id, token);
-  };
+    await addToFavorite(id, token);
+    onClick();
+    }
+
+  // const handleAddFavoriteBtnClick = id => {
+    // id = notice._id;
+
+    // if (!token) {
+    //   alert('please login');
+    //   return;
+    // }
+    // console.log('token', token)
+    // console.log('add to favorite: ', id);
+    // addToFavorite(id, token);
+  // };
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
   console.log(notice);
 
-
     return (
         <NoticeCategoryItemStyled>
             <CardImageContainer>
                 <Photo src={photo} alt={notice.comments} />
                 <Category>{category}</Category>
-                {!notice.favorite.includes(userID) && <AddToFavoriteBtn onClick={handleAddFavoriteBtnClick}>
-                    <AddIcon width="24" height="22" />
+                <AddToFavoriteBtn onClick={handleBtnClick} className={notice.favorite?.includes(userId) && 'remove'}>
+                  {!notice.favorite?.includes(userId)
+                    ? <AddIcon width="24" height="22" />
+                    : <RemoveIcon width="19.5" height="21" />
+                  }
                 </AddToFavoriteBtn>
-                }
-                {notice.favorite.includes(userID) && <RemoveFromFavoriteBtn onClick={handleRemoveFavoriteBtnClick}>
-                    <RemoveIcon width="19.5" height="21" />
-                </RemoveFromFavoriteBtn>
-                }
+                  {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
+                  //         <RemoveIcon width="19.5" height="21" />
+                  //     </RemoveFromFavoriteBtn>) */}
+                
             </CardImageContainer>
             <CardInfoContainer>
                 <Title>{notice.title}</Title>
@@ -114,7 +119,7 @@ console.log(favoriteList);
             </CardInfoContainer>
             <Button type="button" onClick={handleOpenModal}>Learn more</Button>
             {showModal && <Modal onClose={handleCloseModal}>
-                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleAddFavoriteBtnClick} onRemoveFavoriteBtnClick={handleRemoveFavoriteBtnClick}/>
+                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleBtnClick} onRemoveFavoriteBtnClick={handleBtnClick}/>
             </Modal>}
         </NoticeCategoryItemStyled>
     );

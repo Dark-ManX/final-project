@@ -27,11 +27,12 @@ const [showModal, setShowModal] = useState(false);
     const [notices, setNotices] = useState([]);
     const [error, setError] = useState(false);
 
-    // const navigate = useNavigate();
-
     const { getNotices, findNotices } = response;
 
-    const token = useSelector((state) => state.auth.token);
+    const token = useSelector(state => state.auth.token);
+    const user = useSelector(state => state.auth.isLoggedIn);
+    console.log(token);
+
  
     const fetchNotices = async (req, key) => {
         try {
@@ -71,7 +72,6 @@ const [showModal, setShowModal] = useState(false);
                 setCount(count + 1);
 
                 setQuery(pathname.split('/').at(-1));
-                console.log(query);
 
                 return;
             } else if (nodeName === 'A' && parentNode.className.includes('own-block')) {
@@ -90,11 +90,13 @@ const [showModal, setShowModal] = useState(false);
 
     }
 
+    const handleFavoriteClick = () => {
+        setCount(count + 1);
+    }
+
     const toggleModal = evt => {
         setShowModal(!showModal);
     }
-
-    console.log(notices);
 
     useEffect(() => {
 
@@ -129,7 +131,7 @@ const [showModal, setShowModal] = useState(false);
             <Category>
                 <NoticesCategoriesNav />
 
-                {token &&
+                {user &&
                     <AuthLinkContainer className="own-block">
                         <AuthLink to="favorite">Favorite ads</AuthLink>
                         <AuthLink to="owner">My ads</AuthLink>
@@ -151,7 +153,7 @@ const [showModal, setShowModal] = useState(false);
       )}
             {!error
                 ? (<Suspense fallback={<Loading />}>
-                    <Outlet context={notices} />
+                    <Outlet context={{notices, handleFavoriteClick}} />
                 </Suspense>)
                 : <StyledErr>There is no information</StyledErr>
             }
