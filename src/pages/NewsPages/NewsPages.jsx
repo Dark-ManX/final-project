@@ -1,29 +1,30 @@
-import { useState, useEffect } from 'react'
-import {useSearchParams} from "react-router-dom";
-import EllipsisText from "react-ellipsis-text";
-import { SearchForm } from "components/SearchForm/SearchForm";
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import EllipsisText from 'react-ellipsis-text';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 // import { fetchNewsSearch } from 'api/newsApi';
 import { response } from 'api';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import error from 'components/error/error';
 import MainContainer from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
-  NewsSet, NewsItem,
-  NewsItemTitle, NewsItemContent,
-  NewsItemLink, NewsItemDate,
-  NewsItemRectangle, NewsItemInfo
-} from './NewsPages.styled'
-
+  NewsSet,
+  NewsItem,
+  NewsItemTitle,
+  NewsItemContent,
+  NewsItemLink,
+  NewsItemDate,
+  NewsItemRectangle,
+  NewsItemInfo,
+} from './NewsPages.styled';
 
 const NewsPages = () => {
-
-const [, setQueryNews] = useState('');
-const [resultQuery, setResultQuery] = useState([])
-const [searchParams, setSearchParams] = useSearchParams();
-const [error, setError] = useState(null);
-const [isLoading, setIsLoading] = useState(false);
-
+  const [, setQueryNews] = useState('');
+  const [resultQuery, setResultQuery] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const newsName = searchParams.get('q');
@@ -31,79 +32,76 @@ const [isLoading, setIsLoading] = useState(false);
     if (!newsName) {
       setIsLoading(true);
 
-            const getData = async () => {
-                try {
-                    const data = await response.getNews();
-                    setResultQuery(data);
-                }
-                catch (error) {
-                    setError(error.message)
-                    console.error(error.message);
-                } finally {
-                    setIsLoading(false)
-                }
-            };
-            getData();
-        return ;
-    };
+      const getData = async () => {
+        try {
+          const data = await response.getNews();
+          setResultQuery(data);
+        } catch (error) {
+          setError(error.message);
+          console.error(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      getData();
+      return;
+    }
 
     setIsLoading(true);
     const getData = async () => {
-        try {
-            const data = await response.getNews(newsName);
-            setResultQuery(data);
-        }
-        catch (error) {
-            setError(error.message);
-            console.error(error.message);
-            setSearchParams();
-        } finally {
-            setIsLoading(false)
-        }
-        };
-        getData();
-    }, [searchParams, setSearchParams, setResultQuery] );
+      try {
+        const data = await response.getNews(newsName);
+        setResultQuery(data);
+      } catch (error) {
+        setError(error.message);
+        console.error(error.message);
+        setSearchParams();
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, [searchParams, setSearchParams, setResultQuery]);
 
-    const handleSubmit = formInput => {
-        setQueryNews(searchParams.get('q'));
-        setSearchParams({ q: formInput })
-  }
+  const handleSubmit = formInput => {
+    setQueryNews(searchParams.get('q'));
+    setSearchParams({ q: formInput });
+  };
 
   return (
-
     <MainContainer>
+      <NewsPageTitle>News</NewsPageTitle>
 
-        <NewsPageTitle>News</NewsPageTitle>
+      <SearchForm onSubmit={handleSubmit} />
 
-        <SearchForm onSubmit={handleSubmit} />
+      {isLoading && <Loading />}
 
-        {isLoading && <Loading />}
-
-        {error && <Error />}
+      {error && <error />}
 
       <NewsSet>
-        {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>
-        (<NewsItem key={_id}>
-          <NewsItemRectangle/>
-          <NewsItemTitle>
-            <EllipsisText text={title} length={42} />
-          </NewsItemTitle>
+        {resultQuery.length !== 0 &&
+          resultQuery.map(({ _id, title, url, description, date }) => (
+            <NewsItem key={_id}>
+              <NewsItemRectangle />
+              <NewsItemTitle>
+                <EllipsisText text={title} length={42} />
+              </NewsItemTitle>
 
-          <NewsItemContent>
-            <EllipsisText text={description} length={231} />
-          </NewsItemContent>
+              <NewsItemContent>
+                <EllipsisText text={description} length={231} />
+              </NewsItemContent>
 
-          <NewsItemInfo>
-            <NewsItemDate>{date}</NewsItemDate>
-            <NewsItemLink href={url} target='_blank'>Read more</NewsItemLink>
-          </NewsItemInfo>
-        </NewsItem>)
-        )}
+              <NewsItemInfo>
+                <NewsItemDate>{date}</NewsItemDate>
+                <NewsItemLink href={url} target="_blank">
+                  Read more
+                </NewsItemLink>
+              </NewsItemInfo>
+            </NewsItem>
+          ))}
       </NewsSet>
-
     </MainContainer>
-  )
-
+  );
 };
 
 export default NewsPages;
