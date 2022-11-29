@@ -43,13 +43,13 @@ const AuthForm = ({ formData, setFormData }) => {
       <EyeContainer>
         <Input
           type={showPassword ? 'text' : 'password'}
-          onChange={e => {
-            setFormData({
-              ...formData,
-              confirmedPassword: e.target.value,
-            });
-          }}
-          value={formData.confirmedPassword}
+          // onChange={e => {
+          //   setFormData({
+          //     ...formData,
+          //     confirmedPassword: e.target.value,
+          //   });
+          // }}
+          // value={formData.confirmedPassword}
           placeholder="Confirm password"
           required
         />

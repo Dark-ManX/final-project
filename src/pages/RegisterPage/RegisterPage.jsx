@@ -23,7 +23,7 @@ const Registration = () => {
     name: 'Name',
     city: 'City, region',
     phone: '+380950786574',
-    confirmedPassword: '',
+    // confirmedPassword: '',
   });
 
   const [page, setPage] = useState(0);
