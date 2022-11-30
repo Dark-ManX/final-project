@@ -169,7 +169,7 @@ const RegisterPage = () => {
               : (null)
             }
 
-            <Button type='button' className={page ? 'back' : ''} disabled={password && confirmedPassword !== password} onClick={!page
+            <Button type='button' className={page ? 'back' : ''} disabled={!email || !password || confirmedPassword !== password} onClick={!page
               ? (() => setPage(page + 1))
               : (() => setPage(page - 1))}>
               {!page ? 'Next' : 'Back'}
