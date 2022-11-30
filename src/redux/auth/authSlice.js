@@ -15,20 +15,20 @@ const authSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
-        state.user = payload.data.user;
         state.id = payload.data.id;
-        state.isLoggedIn = false;
-      }
-    );
-    builder.addMatcher(
-      authApi.endpoints.addUserInfo.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.data.user;
-        state.user = payload.data.id;
-        state.token = payload.data.user.token;
+        state.token = payload.data.token;
         state.isLoggedIn = true;
       }
     );
+    // builder.addMatcher(
+    //   authApi.endpoints.addUserInfo.matchFulfilled,
+    //   (state, { payload }) => {
+    //     state.user = payload.data.user;
+    //     state.user = payload.data.id;
+    //     state.token = payload.data.user.token;
+    //     state.isLoggedIn = true;
+    //   }
+    // );
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {

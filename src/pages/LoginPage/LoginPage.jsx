@@ -41,12 +41,12 @@ const LoginPage = () => {
     }
   };
 
-  const loginNewUser = () => {
+  const loginNewUser = async () => {
     const newUser = {
       email,
       password,
     };
-    loginUser(newUser);
+    await loginUser(newUser);
     navigate('/user', { replace: true });
   };
 

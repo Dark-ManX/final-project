@@ -14,17 +14,17 @@ import {
 } from './UserDataItem.styled';
 
 export const UserDataItem = ({ user }) => {
+  const { name, email, birthday, phone, city } = user;
+
   const [updateUser, setUpdateUser] = useState(false);
-  const [nameUser, setNameUser] = useState('');
-  const [emailUser, setEmailUser] = useState('');
-  const [birthdayUser, setBirthdayUser] = useState('');
-  const [phoneUser, setPhoneUser] = useState('');
-  const [cityUser, setCityUser] = useState('');
+  const [nameUser, setNameUser] = useState(name);
+  const [emailUser, setEmailUser] = useState(email);
+  const [birthdayUser, setBirthdayUser] = useState(birthday);
+  const [phoneUser, setPhoneUser] = useState(phone);
+  const [cityUser, setCityUser] = useState(city);
   const [userInfo, setUserInfo] = useState({});
   // const [updateInfoUser] = useUpdateUserInfoMutation();
   // console.log(updateInfoUser);
-
-  const { name, email, birthday, phone, city } = user;
 
   const handleUpdateUser = evt => {
     console.log(evt.target);

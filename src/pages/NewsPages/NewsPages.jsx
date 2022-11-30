@@ -6,7 +6,7 @@ import { SearchForm } from "components/SearchForm/SearchForm";
 import { response } from 'api';
 import Loading from 'components/Loading/Loading';
 import Error from 'components/Error/Error';
-import MainContainer from 'components/commonStyles/Container.styled';
+import {MainContainer} from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
   NewsSet, NewsItem,
@@ -73,13 +73,13 @@ const [isLoading, setIsLoading] = useState(false);
 
     <MainContainer>
 
-        <NewsPageTitle>News</NewsPageTitle>
+      <NewsPageTitle>News</NewsPageTitle>
 
-        <SearchForm onSubmit={handleSubmit} />
+      <SearchForm onSubmit={handleSubmit} />
 
-        {isLoading && <Loading />}
+      {isLoading && <Loading />}
 
-        {error && <Error />}
+      {error && <Error />}
 
       <NewsSet>
         {resultQuery.length !== 0 && resultQuery.map(({_id, title, url, description, date }) =>

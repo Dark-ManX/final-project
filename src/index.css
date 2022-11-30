@@ -43,10 +43,3 @@ li {
 a {
   text-decoration: none;
 }
-
-/* .headerMenu {
-  visibility: hidden;
-  height: 100vh;
-  transform: translate(100%, 0);
-  transition: transform 250ms linear;
-} */

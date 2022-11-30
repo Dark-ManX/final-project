@@ -6,6 +6,7 @@ export const fetchUser = async (url, token) => {
     url: `${url}/user`,
     headers: {
       Authorization: `Bearer ${token}`,
+      'content-type': 'multipart/form-data',
     },
   });
 

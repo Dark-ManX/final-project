@@ -54,12 +54,12 @@ const App = () => {
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
         <Route path="register" element={<AsyncRegisterPage />} />
-        <Route
-          path="login"
-          element={
-            isLoggedIn ? <Navigate replace to="/user" /> : <AsyncLoginPage />
-          }
-        />
+        <Route path="login" element={<AsyncLoginPage/>} />
+           {/* element={
+          //   isLoggedIn ? <Navigate replace to="/user" /> :
+          //     <AsyncLoginPage />
+          // }
+        // /> */}
         <Route path="user" element={<AsyncUserPage />} />
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />

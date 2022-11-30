@@ -9,7 +9,6 @@ import editPhoto from 'icons/editPhoto.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 export const UserData = () => {
@@ -18,16 +17,18 @@ export const UserData = () => {
   const getUserInfo = useGetUserInfoQuery();
   const [updateAvatar] = useUpdateAvatarMutation();
 
-  const token = useSelector(state => state.auth.token)
-  console.log(token)
+  const { getUser } = response;
 
-  const {getUser} = response;
+  const token = useSelector(state => state.auth.token);
+  console.log(token);
 
   const fetchUser = async (token) => {
     const res = await getUser(token);
     console.log(res);
     setUser(res);
   };
+
+  console.log(user);
 
   const inputRef = useRef(null);
 
@@ -73,11 +74,11 @@ export const UserData = () => {
 
     formData.append('File', selectedFile);
 
-    const AUTH_TOKEN = 'Bearer ';
+    // const AUTH_TOKEN = 'Bearer ';
 
-    axios.defaults.baseURL = ROUTES.BASE_URL;
-    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-    axios.defaults.headers.patch['content-type'] = 'multipart/form-data';
+    // axios.defaults.baseURL = ROUTES.BASE_URL;
+    // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+    // axios.defaults.headers.patch['content-type'] = 'multipart/form-data';
 
     // axios('https://team-api-blended2.herokuapp.com/avatars', {
     //   method: 'PATCH',
@@ -93,7 +94,7 @@ export const UserData = () => {
   }
 
   useEffect(() => {
-    // fetchUser(token)
+    fetchUser(token);
   }, []);
 
   const { logo, name } = user;

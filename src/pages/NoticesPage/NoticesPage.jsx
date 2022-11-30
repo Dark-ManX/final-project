@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
 import { SearchForm } from "components/SearchForm/SearchForm";
+import { MainContainer } from "components/commonStyles/Container.styled";
 import { AuthLink, AuthLinkContainer, Category, Container, Nav, Title, StyledErr } from "./NoticesPage.styled";
 // import SearchForm from "components/Notices/SearchForm/SearchForm";
 import {
@@ -122,43 +123,45 @@ const [showModal, setShowModal] = useState(false);
 
     return (
 
-        <Container>
-            <Title>Find your favorite pet</Title>
+        <MainContainer>
+            <Container>
+                <Title>Find your favorite pet</Title>
 
-            <SearchForm onSubmit={handleSubmit}/>
-            <Nav>
-             
-            <Category>
-                <NoticesCategoriesNav />
+                <SearchForm onSubmit={handleSubmit}/>
+                <Nav>
+                
+                <Category>
+                    <NoticesCategoriesNav />
 
-                {user &&
-                    <AuthLinkContainer className="own-block">
-                        <AuthLink to="favorite">Favorite ads</AuthLink>
-                        <AuthLink to="owner">My ads</AuthLink>
-                    </AuthLinkContainer>
+                    {user &&
+                        <AuthLinkContainer className="own-block">
+                            <AuthLink to="favorite">Favorite ads</AuthLink>
+                            <AuthLink to="owner">My ads</AuthLink>
+                        </AuthLinkContainer>
+                    }
+                </Category>
+
+            <AddPetBlock>
+            <AddPet>Add pet</AddPet>
+            <LinkAddPet onClick={toggleModal}>
+                <Icon>
+                <AddIcon width="100%" height="100%" />
+                </Icon>
+            </LinkAddPet>
+            </AddPetBlock>
+                </Nav>
+                {showModal && (
+            <Modal onClose={toggleModal}><ModalAddNotice onClose={toggleModal}/> </Modal>
+        )}
+                {!error
+                    ? (<Suspense fallback={<Loading />}>
+                        <Outlet context={{notices, handleFavoriteClick}} />
+                    </Suspense>)
+                    : <StyledErr>There is no information</StyledErr>
                 }
-            </Category>
 
-           <AddPetBlock>
-          <AddPet>Add pet</AddPet>
-          <LinkAddPet onClick={toggleModal}>
-            <Icon>
-              <AddIcon width="100%" height="100%" />
-            </Icon>
-          </LinkAddPet>
-        </AddPetBlock>
-            </Nav>
-             {showModal && (
-        <Modal onClose={toggleModal}><ModalAddNotice onClose={toggleModal}/> </Modal>
-      )}
-            {!error
-                ? (<Suspense fallback={<Loading />}>
-                    <Outlet context={{notices, handleFavoriteClick}} />
-                </Suspense>)
-                : <StyledErr>There is no information</StyledErr>
-            }
-
-        </Container>
+            </Container>
+        </MainContainer>
     );
 };
 

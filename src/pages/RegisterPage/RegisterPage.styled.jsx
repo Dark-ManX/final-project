@@ -1,61 +1,50 @@
 import styled from 'styled-components';
-import Waves from '../../img/Waves.png';
-import wavesPhone from '../../img/wavesPhone.png';
-import wavesTablet from '../../img/wavesTablet.png';
+import Waves from 'img/Waves.png';
+import wavesPhone from 'img/wavesPhone.png';
+import wavesTablet from 'img/wavesTablet.png';
+import { MainContainer } from 'components/commonStyles/Container.styled';
+import { Link } from 'react-router-dom';
 
-export const Section = styled.section`
-  @media screen and (min-width: 768px) {
-    position: relative;
-  }
-`;
+// export const Section = styled.section`
+//   @media screen and (min-width: 768px) {
+//     position: relative;
+//   }
+// `;
 export const ImageContainer = styled.div`
-  background-position: bottom;
-  position: absolute;
-  top: 100px;
-  left: 0px;
+  position: relative;
+  text-align: center;
+  background-position: bottom left;
+  margin: 0 auto;
   background-image: url(${wavesPhone});
   background-repeat: no-repeat;
   background-size: contain;
-  width: 100vw;
-  min-height: 100vh;
+  max-width: 320px;
+  height: 952px;
+  padding-bottom: 103px;
 
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    margin: 0 auto;
-    position: absolute;
-    top: 100px;
-  }
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
+  @media screen and (min-width: 768px) {
     background-position: bottom;
-    position: absolute;
-    top: 400px;
-    left: -20px;
     background-image: url(${wavesTablet});
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100vw;
-    min-height: 100vh;
+    max-width: 768px;
   }
 
   @media screen and (min-width: 1280px) {
-    background-position: bottom;
-    position: absolute;
-    top: 20px;
-    left: -152px;
     background-image: url(${Waves});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100vw;
-    min-height: 100vh;
+    max-width: 1280px;
+    height: 700px;
   }
 `;
 
 export const FirstContainer = styled.div`
-  margin-top: 30px;
+  padding: 42px 0 103px;
+  position: relative;
 
-  @media screen and (min-width: 480px) and (max-width: 767px) {
+  /* @media screen and (min-width: 480px) and (max-width: 767px) {
     margin: 0 auto;
     width: 480px;
-  }
+  } */
   @media screen and (min-width: 768px) {
     top: -300px;
     left: 100px;
@@ -73,90 +62,32 @@ export const FirstContainer = styled.div`
     height: 541px;
   }
 `;
-export const Container = styled.div`
-  margin-top: 30px;
-
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    width: 480px;
-    margin: 0 auto;
-  }
-
-  @media screen and (min-width: 768px) {
-    top: -300px;
-    left: 110px;
-    position: absolute;
-    width: 608px;
-    height: 605px;
-    background: #ffffff;
-    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
-    border-radius: 40px;
-  }
-  @media screen and (min-width: 1280px) {
-    top: 20px;
-    left: 450px;
-    width: 618px;
-    height: 605px;
-  }
-`;
 
 export const Title = styled.h2`
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
-  line-height: 33px;
+  line-height: calc(33 / 24);
   align-items: center;
   text-align: center;
   letter-spacing: 0.04em;
   color: #111111;
-  margin-bottom: 40px;
 
   @media screen and (min-width: 480px) and (max-width: 767px) {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
-    padding-top: 60px;
     font-weight: 500;
     font-size: 36px;
-    line-height: 49px;
+    line-height: calc(49 / 36);
   }
 `;
-// export const Input = styled.input`
-//   width: 280px;
-//   height: 40px;
-//   background: #fdf7f2;
-//   border: 1px solid rgba(245, 146, 86, 0.5);
-//   border-radius: 40px;
-//   font-family: 'Manrope';
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 14px;
-//   line-height: 19px;
-//   align-items: center;
-//   letter-spacing: 0.04em;
-//   color: rgba(17, 17, 17, 0.6);
-//   padding-left: 14px;
-//   font-weight: 500;
-//   margin-bottom: 16px;
-//   // &:invalid {
-//   //   border: 1px dashed red;
-//   // }
-//   @media screen and (min-width: 768px) {
-//     width: 448px;
-//     height: 52px;
-//     font-size: 18px;
-//     line-height: 25px;
-//     padding-left: 32px;
-//   }
-//   @media screen and (min-width: 1280px) {
-//     width: 426px;
-//     height: 52px;
-//   }
-// `;
 
 export const Form = styled.form`
+margin-top: 40px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -169,15 +100,27 @@ export const Button = styled.button`
   border-radius: 40px;
   border: none;
   font-family: 'Manrope';
-  font-style: normal;
+  font-style: 500;
   align-items: center;
   letter-spacing: 0.04em;
   color: #ffffff;
-  margin-bottom: 30px;
-  margin-top: 24px;
+  margin-top: 40px;
   background-color: #f59256;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: calc(27 / 20);
+
+  &:disabled {
+    background-color: #c2c2c2;
+    color: #616161;
+  }
+
+  &.back {
+  margin-top: 16px;
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #f59256;
+  color: #000000;
+  }
 
   @media screen and (min-width: 768px) {
     line-height: 27px;
@@ -189,7 +132,6 @@ export const Button = styled.button`
   @media screen and (min-width: 1280px) {
     width: 458px;
     height: 48px;
-    margin-bottom: 20px;
   }
 `;
 
@@ -203,7 +145,7 @@ export const P = styled.p`
   text-align: center;
   letter-spacing: 0.04em;
   color: rgba(17, 17, 17, 0.6);
-  margin-top: 10px;
+  margin-top: 40px;
 `;
 export const Span = styled.span`
   color: rgba(48, 145, 235, 1);
@@ -261,63 +203,51 @@ export const BackBtn = styled.button`
   }
 `;
 
-export const Input = styled.input`
-  width: 280px;
-  height: 40px;
-  background: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  align-items: center;
-  letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
-  padding-left: 14px;
-  font-weight: 500;
-  margin-bottom: 16px;
 
-  // &:invalid {
-  //   border: 1px solid red;
-  // }
-  @media screen and (min-width: 768px) {
-    width: 448px;
-    height: 52px;
-    font-size: 18px;
-    line-height: 25px;
-    padding-left: 32px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 426px;
-    height: 52px;
-  }
-`;
 export const InvalidInput = styled.input`
   background-color: #ffdddd;
 `;
 export const Eye = styled.img``;
 
 //For password eye symbol
-export const EyeSymbol = styled.span`
-  position: absolute;
-  background: #fdf7f2;
-  cursor: pointer;
-  align-self: center;
-  top: 12px;
-  right: 20px;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    background: #fdf7f2;
-    cursor: pointer;
-    top: 20px;
-    right: 20px;
-    align-self: center;
-  }
-`;
 
 export const EyeContainer = styled.div`
   position: relative;
 `;
 
+export const RegisterContainer = styled(MainContainer)`
+background-color: transparent;
+
+@media screen and (min-width: 768px) {
+  padding-top: 169px;
+}
+
+@media screen and (min-width: 1280px) {
+  padding-top: 46px;
+}
+`;
+
+export const Container = styled.div`
+padding-top: 60px;
+
+@media screen and (min-width: 768px) {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 608px;
+  background-color: white;
+  border-radius: 40px;
+  padding: 60px 80px 40px;
+}
+
+@media screen and (min-width: 1280px) {
+  top: 46px;
+  width: 618px;
+  padding-bottom: 60px;
+}
+`;
+
+export const StyledLink = styled(Link)`
+text-decoration-line: underline;
+`

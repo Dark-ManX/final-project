@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
-margin-top: 16px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -10,7 +9,6 @@ margin-top: 16px;
   
   @media screen and (min-width: 1280px) {
   column-gap: 80px;
-  margin-top: 20px;
   }
 `;
 
@@ -46,7 +44,7 @@ align-items: center;
 @media screen and (max-width: 767px) {
 transform: scaleY(0);
 opacity: 0;
-height: 100vh;
+height: 543px;
 transform-origin: top;
 transition: transform 250ms linear, opacity 250ms linear;
 
@@ -63,14 +61,12 @@ position: relative;
 overflow: visible;
 height: auto;
 width: 768px;
-
 }
 
 @media screen and (min-width: 1280px) {
 position: relative;
 flex-direction: row;
 justify-content: flex-start;
-padding: 20px 0;
 height: auto;
 width: 1280px;
 }

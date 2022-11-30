@@ -1,24 +1,39 @@
+import FirstEl from 'components/Auth/RegisterFormEl/FirstEl';
+import SecondEl from 'components/Auth/RegisterFormEl/SecondEl';
+import { MainContainer } from 'components/commonStyles/Container.styled';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import {
   useAddUserInfoMutation, useRegisterUserMutation
 } from 'redux/auth/authOperations';
-import {
-  BackBtn, Button, Container, EyeContainer,
-  EyeSymbol, FirstContainer, Form, ImageContainer, Input, P, Section, Span, Title
-} from './RegisterPage.styled';
+import { FirstContainer, ImageContainer, Form, Input, Section, Title, Button, BackBtn, P, RegisterContainer, Container, StyledLink } from './RegisterPage.styled';
 
 const RegisterPage = () => {
   const location = useLocation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  // const initialState = {
+  //   email: null,
+  //   password: null,
+  //   name: null,
+  //   city: null,
+  //   phone: null,
+  // } 
+
+  // const { email, password, name, city, phone } = initialState;
+
+  // const [user, setUser] = useState(initialState);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [city, setCity] = useState('');
+    const [phone, setPhone] = useState('');
+
+  const [createdUser, setCreatedUser] = useState(null);
+
   const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
   const [page, setPage] = useState(0);
 
   const navigate = useNavigate();
@@ -26,48 +41,68 @@ const RegisterPage = () => {
   const isId = useSelector(state => state.auth.user.id);
 
   const [registerNewUser] = useRegisterUserMutation();
-  const [addUserInfo] = useAddUserInfoMutation();
 
   // To Hide/Show password
-  const [showPassword, setshowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   // To Hide/Show confirm password
-  const [showRePassword, setshowRePassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleTypePassword = type => {
+    setShowPassword(type);
+  }
+
+  const handleTypeConfirm = type => {
+    setShowConfirmPassword(type)
+  }
 
   const handleChange = event => {
-    const { name, value } = event.currentTarget;
+    const { name, value } = event.target;
 
     switch (name) {
       case 'confirmedPassword':
         setConfirmedPassword(value);
+        console.log(confirmedPassword);
         break;
+      
       case 'email':
         setEmail(value);
+        console.log(email);
         break;
+      
       case 'password':
         setPassword(value);
+        console.log(password)
         break;
+      
       case 'name':
         setName(value);
+        console.log(name);
         break;
+      
       case 'city':
         setCity(value);
+        console.log(city)
         break;
+      
       case 'phone':
         setPhone(value);
+        console.log(phone)
         break;
+      
       default:
         break;
     }
   };
 
-  const createUser = async () => {
-    const newUser = {
-      email,
-      password,
-    };
-    await registerNewUser(newUser);
-  };
-
+  const user = {
+    email,
+    password,
+    name,
+    city,
+    phone,
+  }
+  console.log('object', user);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -85,17 +120,6 @@ const RegisterPage = () => {
     if (confirmedPassword !== password || confirmedPassword === '') {
       return Notiflix.Notify.failure('Passwords do not match!');
     }
-
-    setPage(page + 1);
-    createUser();
-  };
-  const addUser = async () => {
-    const addInfo = { isId, name, city, phone };
-
-    await addUserInfo(addInfo);
-  };
-  const handlePatchSubmit = event => {
-    event.preventDefault();
 
     if (!/^[a-zA-Z]{2,30}/g.test(name)) {
       return Notiflix.Notify.info('Name may only include letters');
@@ -120,139 +144,43 @@ const RegisterPage = () => {
         'Your phone number must start with + and consist of 12 numbers'
       );
     }
-    addUser();
-
+    await registerNewUser(user);
     navigate('/user', { replace: true });
   };
 
+  console.log(page);
+
   return (
-    <>
-      <Section>
-        <ImageContainer>
-          {page === 0 && (
-            <FirstContainer>
-              <Title>Registration</Title>
 
-              <Form onClick={handleSubmit}>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    required
-                    onChange={handleChange}
-                    value={email}
-                    placeholder="Email"
-                  />
-                </div>
-                <EyeContainer>
-                  <Input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    onChange={handleChange}
-                    value={password}
-                    placeholder="Password"
-                    pattern="[^\s]"
-                    minlength="7"
-                    maxlength="32"
-                    required
-                  />
-                  <EyeSymbol
-                    onClick={() => setshowPassword(prevState => !prevState)}
-                  >
-                    {showPassword ? <BsEye /> : <BsEyeSlash />}
-                  </EyeSymbol>
-                </EyeContainer>
-                <EyeContainer>
-                  <Input
-                    type={showRePassword ? 'text' : 'password'}
-                    name="confirmedPassword"
-                    placeholder="Confirm password"
-                    onChange={handleChange}
-                    value={confirmedPassword}
-                  />
-                  <EyeSymbol
-                    onClick={() => setshowRePassword(prevState => !prevState)}
-                  >
-                    {showRePassword ? <BsEye /> : <BsEyeSlash />}
-                  </EyeSymbol>
-                </EyeContainer>
-                <ul>
-                  <li>
-                    <Button type="submit">
-                      {page === 0 || page < 1 ? 'Next' : 'Register'}
-                    </Button>
-                  </li>
+      <ImageContainer>
+      <RegisterContainer>
+        
+        <Container>
+          <Title>Registration</Title>
 
-                  {page > 0 && (
-                    <li>
-                      <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
-                    </li>
-                  )}
-                  <li>
-                    <P>
-                      Already have an account?
-                      <Link to={`/login`} state={{ from: location }}>
-                        <Span>Login </Span>
-                      </Link>
-                    </P>
-                  </li>
-                </ul>
-              </Form>
-            </FirstContainer>
-          )}
-          {page > 0 && (
-            <Container>
-              <Title>Registration</Title>
+          <Form onSubmit={handleSubmit}>
+            {!page
+              ? (<FirstEl data={showPassword} confirmData={showConfirmPassword} handleData={handleTypePassword} handleConfirmData={handleTypeConfirm} provideChange={handleChange} />)
+              : (<SecondEl provideChange={handleChange} />)
+            }
 
-              <Form onSubmit={handlePatchSubmit}>
-                <Input
-                  name="name"
-                  type="text"
-                  onChange={handleChange}
-                  value={name}
-                  placeholder="Name"
-                />
-                <Input
-                  name="city"
-                  type="text"
-                  onChange={handleChange}
-                  value={city}
-                  placeholder="City, region"
-                />
-                <Input
-                  name="phone"
-                  type="tel"
-                  onChange={handleChange}
-                  value={phone}
-                  placeholder="Mobile phone"
-                />
-                <ul>
-                  <li>
-                    <Button onClick={handlePatchSubmit}>
-                      {page === 0 || page < 1 ? 'Next' : 'Register'}
-                    </Button>
-                  </li>
-                  {page > 0 && (
-                    <li>
-                      <BackBtn onClick={() => setPage(page - 1)}>Back</BackBtn>
-                    </li>
-                  )}
-                  <li>
-                    <P>
-                      Already have an account?
-                      <Link to={`/login`} state={{ from: location }}>
-                        <Span>Login </Span>
-                      </Link>
-                    </P>
-                  </li>
-                </ul>
-              </Form>
-            </Container>
-          )}
-        </ImageContainer>
-      </Section>
-    </>
-  );
+            {page
+              ? (<Button type='submit' disabled={!name || !city || !phone}>Register</Button>)
+              : (null)
+            }
+
+            <Button type='button' className={page ? 'back' : ''} disabled={password && confirmedPassword !== password} onClick={!page
+              ? (() => setPage(page + 1))
+              : (() => setPage(page - 1))}>
+              {!page ? 'Next' : 'Back'}
+            </Button>
+          </Form>
+          
+          <P>Already have an account? <StyledLink to='/login' state={{ from: location }}>Login</StyledLink></P>
+        </Container>
+      </RegisterContainer>
+    </ImageContainer>
+  )
 };
 
 export default RegisterPage;
