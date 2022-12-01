@@ -40,10 +40,18 @@ export const UserData = () => {
     fetchUser(token);
   }, []);
 
+  const avatarUser = () => {
+    if (logo) {
+      return `${ROUTES.BASE_URL}/${logo}`;
+    } else {
+      return editPhoto;
+    }
+  };
+
   return (
     <UserInfo>
       <Avatar>
-        <ImgUser src={`${ROUTES.BASE_URL}/${logo}`} alt={user.name} />
+        <ImgUser src={avatarUser()} alt={user.name} />
         <label>
           <input
             type="file"
