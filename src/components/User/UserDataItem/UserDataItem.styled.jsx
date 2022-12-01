@@ -103,6 +103,12 @@ export const InputUpdate = styled.input`
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
     padding: 4px 4px 4px 18px;
+    font-size: 15px;
+    line-height: 0;
+  }
+
+  &:focus-visible {
+    border: 1px solid transparent;
   }
 `;
 
