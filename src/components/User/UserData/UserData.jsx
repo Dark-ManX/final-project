@@ -39,11 +39,10 @@ export const UserData = () => {
 
     const formData = new FormData();
 
-    formData.append('image', evt.target.files[0]);
+    formData.append('avatar', evt.target.files[0]);
 
     const { data } = await updateAvatar(formData);
-    console.log(data);
-    // setLogo(data);
+    setLogo(data.avatarURL);
   };
 
   useEffect(() => {
