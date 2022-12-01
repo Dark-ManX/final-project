@@ -51,41 +51,6 @@ export const UserDataItem = () => {
     fetchUser(token);
   }, []);
 
-  // const nameRef = useRef(nameUser);
-  // const emailRef = useRef(emailUser);
-  // const birthdayRef = useRef(birthdayUser);
-  // const phoneRef = useRef(phoneUser);
-  // const cityRef = useRef(cityUser);
-
-  // console.log(useRef(nameUser));
-  // console.log(useRef(emailUser));
-  // console.log(useRef(birthdayUser));
-  // console.log(useRef(phoneUser));
-  // console.log(useRef(cityUser));
-
-  // function isFieldChanged() {
-  //   const changed =
-  //     nameRef.current !== name ||
-  //     emailRef.current !== email ||
-  //     birthdayRef.current !== birthday ||
-  //     phoneRef.current !== phone ||
-  //     cityRef.current !== city;
-
-  //   if (changed) {
-  //     nameRef.current = name;
-  //     emailRef.current = email;
-  //     birthdayRef.current = birthday;
-  //     phoneRef.current = phone;
-  //     cityRef.current = city;
-  //   }
-
-  //   return changed;
-  // }
-
-  // const handleUpdateUser = async (dataUser) => {
-  //   await updateInfoUser(dataUser);
-  // };
-
   const handleChangeValue = evt => {
     const { name, value } = evt.currentTarget;
     console.log(name, value);
@@ -117,16 +82,7 @@ export const UserDataItem = () => {
   };
 
   const handleSubmit = async evt => {
-    // evt.preventDefault();
-
-    // const input = evt.target.parentNode.querySelector('input');
-    // console.log(input.value);
-    // console.log(input.name);
-    console.log('click');
-
     setUpdateUser(!updateUser);
-    // input.focus();
-    // console.log(updateUser);
 
     const updateUserValue = {
       name: nameUser,
@@ -136,18 +92,7 @@ export const UserDataItem = () => {
       city: cityUser,
     };
 
-    // if (isFieldChanged()) {
-    //   const obj = {};
-    //   obj[input.name] = input.value;
-    //   console.log(obj);
-    //   updateInfoUser(obj);
-    // }
-
     updateInfoUser(updateUserValue);
-    // setUserInfo(updateUserValue);
-    // setUpdateUser(!updateUser);
-
-    console.log(updateUserValue);
   };
 
   return (
