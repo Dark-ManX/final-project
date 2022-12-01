@@ -107,6 +107,7 @@ export const UserDataItem = () => {
           disabled={updateUser}
           onChange={handleChangeValue}
           onSubmit={handleSubmit}
+          autoComplete="off"
         />
         <UserInfoBtn type="button" onClick={handleSubmit}>
           {!updateUser ? (
@@ -126,6 +127,7 @@ export const UserDataItem = () => {
           disabled={updateUser}
           onChange={handleChangeValue}
           onSubmit={handleSubmit}
+          autoComplete="off"
         />
         <UserInfoBtn type="button" onClick={handleSubmit}>
           {!updateUser ? (
@@ -145,6 +147,7 @@ export const UserDataItem = () => {
           disabled={updateUser}
           onChange={handleChangeValue}
           onSubmit={handleSubmit}
+          autoComplete="off"
         />
         <UserInfoBtn type="button" onClick={handleSubmit}>
           {!updateUser ? (
@@ -164,6 +167,7 @@ export const UserDataItem = () => {
           disabled={updateUser}
           onChange={handleChangeValue}
           onSubmit={handleSubmit}
+          autoComplete="off"
         />
         <UserInfoBtn type="button" onClick={handleSubmit}>
           {!updateUser ? (
@@ -183,6 +187,7 @@ export const UserDataItem = () => {
           disabled={updateUser}
           onChange={handleChangeValue}
           onSubmit={handleSubmit}
+          autoComplete="off"
         />
         <UserInfoBtn type="button" onClick={handleSubmit}>
           {!updateUser ? (
