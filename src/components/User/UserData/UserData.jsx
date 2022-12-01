@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
-import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
-import { useSelector } from 'react-redux';
+
+import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
 export const UserData = () => {
   const [user, setUser] = useState([]);
