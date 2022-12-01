@@ -26,7 +26,7 @@ export const Avatar = styled.div`
 export const ImgUser = styled.img`
   width: 233px;
   height: 233px;
-  margin: 20px 24px 12px 23px;
+  margin: 20px 23px 12px;
   border-radius: 50%;
 
   @media screen and (min-width: 768px) {

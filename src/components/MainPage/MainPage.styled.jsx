@@ -13,6 +13,10 @@ export const MainPageSection = styled.div`
   @media screen and (min-width: 768px) {
     padding-top: 92px;
   }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 45px;
+  }
 `;
 
 export const MainHeader = styled.p`
@@ -48,13 +52,13 @@ export const ImageContainer = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
-    position: absolute;
-    left: -120px;
-    width: 100vw;
+    /* position: absolute; */
+    /* left: -120px; */
+    width: 1280px;
     height: 655px;
     background-image: url(${desktopBack}), url(${desktopBack2}), url(${heart});
     background-size: 1120px 410px, 585px 410px, 92px 89px;
-    background-position: left bottom, right bottom, 715px 0;
+    background-position: left bottom, right bottom, 715px 50px;
   }
 `;
 
@@ -90,7 +94,7 @@ export const Header = styled.h1`
   }
 
   @media screen and (min-width: 1280px) {
-    left: -100px;
+    top: 92px;
     display: block;
     max-width: 588px;
   }

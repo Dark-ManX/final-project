@@ -83,8 +83,8 @@ export const UserDataItem = ({ user }) => {
 
   return (
     <UserInfoList>
-      {}
-      <UserInfoItem>
+      
+      {/* <UserInfoItem>
         <UserInfoText>Name:</UserInfoText>
         {!updateUser ? (
           <>
@@ -216,7 +216,7 @@ export const UserDataItem = ({ user }) => {
             </UserInfoBtn>
           </>
         )}
-      </UserInfoItem>
+      </UserInfoItem> */}
     </UserInfoList>
   );
 };

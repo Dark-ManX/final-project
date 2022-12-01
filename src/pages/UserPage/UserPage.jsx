@@ -3,6 +3,7 @@ import { UserData } from 'components/User/UserData/UserData';
 import { Logout } from 'components/User/Logout/Logout';
 import { PetsData } from 'components/User/PetsData/PetsData';
 import { response } from 'api';
+import { MainContainer } from 'components/commonStyles/Container.styled';
 import {
   Container,
   ContainerUser,
@@ -23,18 +24,22 @@ const UserPage = () => {
   // }, [])
 
   return (
-    <ContainerInfo>
-      <AboutUser>
-        <Title>My information:</Title>
-        <Container>
-          <ContainerUser>
-            <UserData />
-            <Logout />
-          </ContainerUser>
-        </Container>
-      </AboutUser>
-      <PetsData />
-    </ContainerInfo>
+    <MainContainer>
+
+      <ContainerInfo>
+        <AboutUser>
+          <Title>My information:</Title>
+          <Container>
+            <ContainerUser>
+              <UserData />
+              <Logout />
+            </ContainerUser>
+          </Container>
+        </AboutUser>
+        <PetsData />
+      </ContainerInfo>
+      
+    </MainContainer>
   );
 };
 

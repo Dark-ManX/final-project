@@ -10,13 +10,15 @@ import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
 import { useSelector } from 'react-redux';
+import defaultImg from 'img/defaultImg.jpg';
+import edit from 'icons/edit.svg';
 
 export const UserData = () => {
   const [file, setFile] = useState({});
   const [user, setUser] = useState([]);
   const getUserInfo = useGetUserInfoQuery();
-  const [updateAvatar] = useUpdateAvatarMutation();
-
+  // const [updateAvatar] = useUpdateAvatarMutation();
+console.log(user)
   const { getUser } = response;
 
   const token = useSelector(state => state.auth.token);
@@ -30,7 +32,7 @@ export const UserData = () => {
 
   console.log(user);
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
   // const handleUploadClick = event => {
   //   const click = inputRef.current?.click();
@@ -92,28 +94,45 @@ export const UserData = () => {
     //     console.error('Error:', error);
     //   });
   }
+  const { logo, name, email, birth, phone, city } = user;
 
   useEffect(() => {
     fetchUser(token);
   }, []);
 
-  const { logo, name } = user;
   return (
     <UserInfo>
       <Avatar>
-        <ImgUser src={`${ROUTES.BASE_URL}/${logo}`} alt={name} />
+        <ImgUser src={logo ? logo : defaultImg} alt={name} />
         <form encType="multipart/form-data" onSubmit={handleSubmit}>
-          <input
+          <label>
+            <input
             type="file"
-            ref={inputRef}
+            // ref={inputRef}
             multiple
             onChange={handleChange}
             style={{ display: 'none' }}
-          />
-          <EditPhotoBtn onClick={() => inputRef.current?.click()}>
+            />
+            <EditPhotoBtn >
             <img src={editPhoto} alt="addPet" />
             Edit photo
-          </EditPhotoBtn>
+            </EditPhotoBtn>
+          </label>
+          <label>
+            <p>Name</p>
+            <input type="text" name='name' value={name} disabled={true}/><button onClick={handleChange}><img src={edit} alt="edit information about user" /></button></label>
+          <label htmlFor="">
+            <p>Email</p>
+            <input type="text" name='email' value={email} disabled={true} /><button onClick={handleChange}><img src={edit} alt="edit information about user" /></button></label>
+          <label htmlFor="">
+            <p>Birthday</p>
+            <input type="text" name='birthday' value={birth} disabled={true}/><button onClick={handleChange}><img src={edit} alt="edit information about user" /></button></label>
+          <label htmlFor="">
+            <p>Phone</p>
+            <input type="text" name='phone' value={phone} disabled={true}/><button onClick={handleChange}><img src={edit} alt="edit information about user" /></button></label>
+          <label htmlFor="">
+            <p>City</p>
+            <input type="text" name='city' value={city} disabled={true}/><button onClick={handleChange}><img src={edit} alt="edit information about user" /></button></label>
         </form>
       </Avatar>
       <UserDataItem user={user} />
