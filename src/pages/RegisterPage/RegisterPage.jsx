@@ -123,43 +123,43 @@ const RegisterPage = () => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (email === '' || !email.includes('@')) {
-      return Notiflix.Notify.failure('Please, enter a valid email!');
-    }
+    // if (email === '' || !email.includes('@')) {
+    //   return Notiflix.Notify.failure('Please, enter a valid email!');
+    // }
 
-    if (password === '' || password.includes(' ')) {
-      return Notiflix.Notify.failure(
-        'Please, enter a valid password without spaces!'
-      );
-    }
+    // if (password === '' || password.includes(' ')) {
+    //   return Notiflix.Notify.failure(
+    //     'Please, enter a valid password without spaces!'
+    //   );
+    // }
 
-    if (confirmedPassword !== password || confirmedPassword === '') {
-      return Notiflix.Notify.failure('Passwords do not match!');
-    }
+    // if (confirmedPassword !== password || confirmedPassword === '') {
+    //   return Notiflix.Notify.failure('Passwords do not match!');
+    // }
 
-    if (!/^[a-zA-Z]{2,30}/g.test(name)) {
-      return Notiflix.Notify.info('Name may only include letters');
-    }
-    if (name === '') {
-      return Notiflix.Notify.failure('Please, enter your name');
-    }
+    // if (!/^[a-zA-Z]{2,30}/g.test(name)) {
+    //   return Notiflix.Notify.info('Name may only include letters');
+    // }
+    // if (name === '') {
+    //   return Notiflix.Notify.failure('Please, enter your name');
+    // }
 
-    if (city === '') {
-      return Notiflix.Notify.failure('Please, enter your city and region ');
-    }
-    if (!/^(([a-zA-Z ](,)?)*)+$/g.test(city)) {
-      return Notiflix.Notify.info(
-        'Please, enter your city and region separated by comma and without spaces'
-      );
-    }
-    if (phone === '') {
-      return Notiflix.Notify.failure('Please, enter your phone number');
-    }
-    if (!/^[+0-9]{13}$/g.test(phone)) {
-      return Notiflix.Notify.info(
-        'Your phone number must start with + and consist of 12 numbers'
-      );
-    }
+    // if (city === '') {
+    //   return Notiflix.Notify.failure('Please, enter your city and region ');
+    // }
+    // if (!/^(([a-zA-Z ](,)?)*)+$/g.test(city)) {
+    //   return Notiflix.Notify.info(
+    //     'Please, enter your city and region separated by comma and without spaces'
+    //   );
+    // }
+    // if (phone === '') {
+    //   return Notiflix.Notify.failure('Please, enter your phone number');
+    // }
+    // if (!/^[+0-9]{13}$/g.test(phone)) {
+    //   return Notiflix.Notify.info(
+    //     'Your phone number must start with + and consist of 12 numbers'
+    //   );
+    // }
     await registerNewUser(user);
     navigate('/user', { replace: true });
   };
