@@ -34,7 +34,7 @@ export const ImgUser = styled.img`
   }
 `;
 
-export const EditPhotoBtn = styled.button`
+export const EditPhotoBtn = styled.p`
   font-weight: 400;
   font-size: 12px;
   line-height: 22px;

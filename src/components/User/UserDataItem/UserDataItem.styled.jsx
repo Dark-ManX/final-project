@@ -49,7 +49,7 @@ export const UserInfoData = styled.p`
   }
 `;
 
-export const UserInfoText = styled.p`
+export const UserInfoText = styled.label`
   order: 1;
   flex: 0 0 auto;
   width: 82px;
@@ -67,16 +67,14 @@ export const UserInfoText = styled.p`
 `;
 
 export const FormUpdate = styled.form`
-  order: 2;
-  width: 150px;
+  /* order: 2;
+  width: 150px; */
 `;
 export const InputUpdate = styled.input`
-  width: 137px;
+  order: 2;
+  width: 150px;
 
-  background: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  padding: 4px 4px 4px 18px;
+  /* width: 137px; */
 
   font-weight: 400;
   font-size: 12px;
@@ -84,7 +82,34 @@ export const InputUpdate = styled.input`
   align-items: center;
   letter-spacing: 0.04em;
 
+  border: none;
+  background-color: transparent;
+
   color: #111111;
+
+  @media screen and (min-width: 768px) {
+    width: 228px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 240px;
+  }
+
+  &:focus {
+    background: #fdf7f2;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    padding: 4px 4px 4px 18px;
+    font-size: 15px;
+    line-height: 0;
+  }
+
+  &:focus-visible {
+    border: 1px solid transparent;
+  }
 `;
 
 export const UserInfoBtn = styled.button`
