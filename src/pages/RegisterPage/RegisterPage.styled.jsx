@@ -87,7 +87,7 @@ export const Title = styled.h2`
 `;
 
 export const Form = styled.form`
-margin-top: 40px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -115,11 +115,11 @@ export const Button = styled.button`
   }
 
   &.back {
-  margin-top: 16px;
-  color: #000000;
-  background: #ffffff;
-  border: 1px solid #f59256;
-  color: #000000;
+    margin-top: 16px;
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #f59256;
+    color: #000000;
   }
 
   @media screen and (min-width: 768px) {
@@ -203,11 +203,9 @@ export const BackBtn = styled.button`
   }
 `;
 
-
 export const InvalidInput = styled.input`
   background-color: #ffdddd;
 `;
-export const Eye = styled.img``;
 
 //For password eye symbol
 
@@ -216,38 +214,38 @@ export const EyeContainer = styled.div`
 `;
 
 export const RegisterContainer = styled(MainContainer)`
-background-color: transparent;
+  background-color: transparent;
 
-@media screen and (min-width: 768px) {
-  padding-top: 169px;
-}
+  @media screen and (min-width: 768px) {
+    padding-top: 169px;
+  }
 
-@media screen and (min-width: 1280px) {
-  padding-top: 46px;
-}
+  @media screen and (min-width: 1280px) {
+    padding-top: 46px;
+  }
 `;
 
 export const Container = styled.div`
-padding-top: 60px;
+  padding-top: 60px;
 
-@media screen and (min-width: 768px) {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 608px;
-  background-color: white;
-  border-radius: 40px;
-  padding: 60px 80px 40px;
-}
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 608px;
+    background-color: white;
+    border-radius: 40px;
+    padding: 60px 80px 40px;
+  }
 
-@media screen and (min-width: 1280px) {
-  top: 46px;
-  width: 618px;
-  padding-bottom: 60px;
-}
+  @media screen and (min-width: 1280px) {
+    top: 46px;
+    width: 618px;
+    padding-bottom: 60px;
+  }
 `;
 
 export const StyledLink = styled(Link)`
-text-decoration-line: underline;
-`
+  text-decoration-line: underline;
+`;

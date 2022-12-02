@@ -49,7 +49,7 @@ export const ImageContainer = styled.div`
 
   @media screen and (min-width: 1280px) {
     position: absolute;
-    left: -120px;
+    left: -20px;
     width: 100vw;
     height: 655px;
     background-image: url(${desktopBack}), url(${desktopBack2}), url(${heart});
