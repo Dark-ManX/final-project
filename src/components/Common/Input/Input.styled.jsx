@@ -20,7 +20,7 @@ export const Input = styled.input`
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 19px;
+    line-height: 1.4;
     color: rgba(27, 27, 27, 0.6);
   }
 `;
@@ -28,6 +28,6 @@ export const Label = styled.label`
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 18px;
+  line-height: 1.5;
 `;
