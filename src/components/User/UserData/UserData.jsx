@@ -1,15 +1,15 @@
+import { response } from 'api';
+import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
+import editPhoto from 'icons/editPhoto.svg';
 import PropTypes from 'prop-types';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   useGetUserInfoQuery,
   useUpdateAvatarMutation,
 } from 'redux/auth/authOperations';
-import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
-import editPhoto from 'icons/editPhoto.svg';
-import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 import { ROUTES } from 'routes/routes';
-import { response } from 'api';
-import { useSelector } from 'react-redux';
+import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
 export const UserData = () => {
   const [file, setFile] = useState({});
@@ -22,7 +22,7 @@ export const UserData = () => {
   const token = useSelector(state => state.auth.token);
   console.log(token);
 
-  const fetchUser = async (token) => {
+  const fetchUser = async token => {
     const res = await getUser(token);
     console.log(res);
     setUser(res);
@@ -91,7 +91,7 @@ export const UserData = () => {
     //   .catch(error => {
     //     console.error('Error:', error);
     //   });
-  }
+  };
 
   useEffect(() => {
     fetchUser(token);

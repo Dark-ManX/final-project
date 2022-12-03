@@ -6,17 +6,24 @@ import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  AddToFavoriteBtn, Button, CardDetailInfo, CardDetailsContainer,
-  CardImageContainer, CardInfoContainer, Category, NoticeCategoryItemStyled, Photo, RemoveFromFavoriteBtn, Title
+  AddToFavoriteBtn,
+  Button,
+  CardDetailInfo,
+  CardDetailsContainer,
+  CardImageContainer,
+  CardInfoContainer,
+  Category,
+  NoticeCategoryItemStyled,
+  Photo,
+  Title,
 } from './NoticeCategoryItem.styled';
 
 let category = '';
 let photo;
 
 export const NoticeCategoryItem = ({ notice, onClick }) => {
-
   const [showModal, setShowModal] = useState(false);
-  
+
   const userId = useSelector(state => state.auth.id);
 
   const { addToFavorite, removeFromFavorite } = response;
@@ -40,16 +47,15 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
 
   if (notice.photo) {
     // photo= notice.photo;
-    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`
-
+    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
   } else {
     photo =
       'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
   }
-  console.log('notice', notice)
+  console.log('notice', notice);
 
   const handleBtnClick = async id => {
-    console.log(id)
+    console.log(id);
     id = notice._id;
 
     if (notice.favorite?.includes(userId)) {
@@ -58,7 +64,6 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
 
       onClick();
       return;
-
     } else if (!token) {
       alert('please login');
       return;
@@ -67,18 +72,18 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
     console.log('add to favorite: ', id);
     await addToFavorite(id, token);
     onClick();
-    }
+  };
 
   // const handleAddFavoriteBtnClick = id => {
-    // id = notice._id;
+  // id = notice._id;
 
-    // if (!token) {
-    //   alert('please login');
-    //   return;
-    // }
-    // console.log('token', token)
-    // console.log('add to favorite: ', id);
-    // addToFavorite(id, token);
+  // if (!token) {
+  //   alert('please login');
+  //   return;
+  // }
+  // console.log('token', token)
+  // console.log('add to favorite: ', id);
+  // addToFavorite(id, token);
   // };
 
   const handleOpenModal = () => setShowModal(true);
@@ -86,41 +91,53 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
 
   console.log(notice);
 
-    return (
-        <NoticeCategoryItemStyled>
-            <CardImageContainer>
-                <Photo src={photo} alt={notice.comments} />
-                <Category>{category}</Category>
-                <AddToFavoriteBtn onClick={handleBtnClick} className={notice.favorite?.includes(userId) && 'remove'}>
-                  {!notice.favorite?.includes(userId)
-                    ? <AddIcon width="24" height="22" />
-                    : <RemoveIcon width="19.5" height="21" />
-                  }
-                </AddToFavoriteBtn>
-                  {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
+  return (
+    <NoticeCategoryItemStyled>
+      <CardImageContainer>
+        <Photo src={photo} alt={notice.comments} />
+        <Category>{category}</Category>
+        <AddToFavoriteBtn
+          onClick={handleBtnClick}
+          className={notice.favorite?.includes(userId) && 'remove'}
+        >
+          {!notice.favorite?.includes(userId) ? (
+            <AddIcon width="24" height="22" />
+          ) : (
+            <RemoveIcon width="19.5" height="21" />
+          )}
+        </AddToFavoriteBtn>
+        {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
                   //         <RemoveIcon width="19.5" height="21" />
                   //     </RemoveFromFavoriteBtn>) */}
-                
-            </CardImageContainer>
-            <CardInfoContainer>
-                <Title>{notice.title}</Title>
-                <CardDetailsContainer>
-                    <li>
-                        <CardDetailInfo>Breed:</CardDetailInfo>
-                        <CardDetailInfo>Place:</CardDetailInfo>
-                        <CardDetailInfo>Age:</CardDetailInfo>
-                    </li>
-                    <li>
-                        <CardDetailInfo>{notice.breed}</CardDetailInfo>
-                        <CardDetailInfo>{notice.place}</CardDetailInfo>
-                        <CardDetailInfo>{notice.age}</CardDetailInfo>
-                    </li>
-                </CardDetailsContainer>
-            </CardInfoContainer>
-            <Button type="button" onClick={handleOpenModal}>Learn more</Button>
-            {showModal && <Modal onClose={handleCloseModal}>
-                <ModalNotice notice={notice} onClose={handleCloseModal} onAddFavoriteBtnClick={handleBtnClick} onRemoveFavoriteBtnClick={handleBtnClick}/>
-            </Modal>}
-        </NoticeCategoryItemStyled>
-    );
+      </CardImageContainer>
+      <CardInfoContainer>
+        <Title>{notice.title}</Title>
+        <CardDetailsContainer>
+          <li>
+            <CardDetailInfo>Breed:</CardDetailInfo>
+            <CardDetailInfo>Place:</CardDetailInfo>
+            <CardDetailInfo>Age:</CardDetailInfo>
+          </li>
+          <li>
+            <CardDetailInfo>{notice.breed}</CardDetailInfo>
+            <CardDetailInfo>{notice.place}</CardDetailInfo>
+            <CardDetailInfo>{notice.age}</CardDetailInfo>
+          </li>
+        </CardDetailsContainer>
+      </CardInfoContainer>
+      <Button type="button" onClick={handleOpenModal}>
+        Learn more
+      </Button>
+      {showModal && (
+        <Modal onClose={handleCloseModal}>
+          <ModalNotice
+            notice={notice}
+            onClose={handleCloseModal}
+            onAddFavoriteBtnClick={handleBtnClick}
+            onRemoveFavoriteBtnClick={handleBtnClick}
+          />
+        </Modal>
+      )}
+    </NoticeCategoryItemStyled>
+  );
 };
