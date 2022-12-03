@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { UserData } from 'components/User/UserData/UserData';
+import UserData from 'components/User/UserData/UserData';
 import { Logout } from 'components/User/Logout/Logout';
 import { PetsData } from 'components/User/PetsData/PetsData';
 import { response } from 'api';
@@ -14,18 +14,15 @@ import {
 import { useSelector } from 'react-redux';
 
 const UserPage = () => {
-
   // const token = useSelector(state => state.auth.token.token)
 
   // const {getUser} = response;
 
   // useEffect(() => {
-  
   // }, [])
 
   return (
     <MainContainer>
-
       <ContainerInfo>
         <AboutUser>
           <Title>My information:</Title>
@@ -38,7 +35,6 @@ const UserPage = () => {
         </AboutUser>
         <PetsData />
       </ContainerInfo>
-      
     </MainContainer>
   );
 };

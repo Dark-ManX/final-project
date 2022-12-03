@@ -31,26 +31,14 @@ const App = () => {
 
         <Route path="notices" element={<AsyncNoticesPage />}>
           <Route path=":path" element={<AsyncNoticesCategoryList />} />
-          {/* 
-          <Route path='sell' element={<AsyncSellNoticesPage />} />
-          <Route path='for-free' element={<NoticesCategoryList />} />
-          <Route path='lost-found' element={<AsyncLostFoundNoticesPage />} />
-          <Route path='favorite' element={<AsyncFavoriteNoticesPage />} />
-          <Route path='own' element={<AsyncOwnNoticesPage />} /> */}
         </Route>
 
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
         <Route path="register" element={<AsyncRegisterPage />} />
         <Route path="login" element={<AsyncLoginPage />} />
-        {/* element={
-          //   isLoggedIn ? <Navigate replace to="/user" /> :
-          //     <AsyncLoginPage />
-          // }
-        // /> */}
-        <Route path="user" element={<AsyncUserPage />} />
 
-        <Route path="friends" element={<AsyncOurFriendsPage />} />
+        <Route path="user" element={<AsyncUserPage />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

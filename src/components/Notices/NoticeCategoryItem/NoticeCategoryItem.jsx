@@ -15,20 +15,17 @@ import {
   Category,
   NoticeCategoryItemStyled,
   Photo,
-  RemoveFromFavoriteBtn,
   Title,
 } from './NoticeCategoryItem.styled';
 
 let category = '';
 let photo;
 
-
-export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
+const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
-  const user = useSelector(state => state.auth.isLoggedIn);
 
   const { addToFavorite, removeFromFavorite } = response;
 
@@ -46,13 +43,6 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
       return;
   }
 
-  if (notice.photo) {
-    // photo= notice.photo;
-    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
-  } else {
-    photo =
-      'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
-  }
   console.log('notice', notice);
 
   const handleBtnClick = async id => {
@@ -79,19 +69,19 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const handleCloseModal = () => setShowModal(false);
 
   console.log(notice);
+  const { photo, comments, favorite, title, breed, place, age } = notice;
 
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo} alt={notice.comments} />
+        <Photo src={photo} alt={comments} />
 
         <Category>{category}</Category>
-
 
         {loggedIn && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
-            className={notice.favorite?.includes(userId) && 'remove'}
+            className={favorite?.includes(userId) && 'remove'}
           >
             {!notice.favorite?.includes(userId) ? (
               <AddIcon width="24" height="22" />
@@ -100,11 +90,10 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
             )}
           </AddToFavoriteBtn>
         )}
-
       </CardImageContainer>
 
       <CardInfoContainer>
-        <Title>{notice.title}</Title>
+        <Title>{title}</Title>
 
         <CardDetailsContainer>
           <li>
@@ -114,9 +103,9 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
           </li>
 
           <li>
-            <CardDetailInfo>{notice.breed}</CardDetailInfo>
-            <CardDetailInfo>{notice.place}</CardDetailInfo>
-            <CardDetailInfo>{notice.age}</CardDetailInfo>
+            <CardDetailInfo>{breed}</CardDetailInfo>
+            <CardDetailInfo>{place}</CardDetailInfo>
+            <CardDetailInfo>{age}</CardDetailInfo>
           </li>
         </CardDetailsContainer>
       </CardInfoContainer>
@@ -138,3 +127,5 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
     </NoticeCategoryItemStyled>
   );
 };
+
+export default NoticeCategoryItem;

@@ -19,7 +19,7 @@ import {
   InputUpdate,
 } from './UserDataItem.styled';
 
-export const UserDataItem = () => {
+const UserDataItem = () => {
   const [updateUser, setUpdateUser] = useState(true);
   const [nameUser, setNameUser] = useState('');
   const [emailUser, setEmailUser] = useState('');
@@ -97,8 +97,7 @@ export const UserDataItem = () => {
 
   return (
     <UserInfoList>
-      
-      {/* <UserInfoItem>
+      <UserInfoItem>
         <UserInfoText>Name:</UserInfoText>
         <InputUpdate
           type="text"
@@ -183,10 +182,10 @@ export const UserDataItem = () => {
 
         {!updateUser ? (
           <>
-            <UserInfoData>{city}</UserInfoData>
+            {/* <UserInfoData>{city}</UserInfoData>
             <UserInfoBtn type="button" onClick={handleUpdateUser}>
               <img src={edit} alt="edit information about user" />
-            </UserInfoBtn>
+            </UserInfoBtn> */}
           </>
         ) : (
           <>
@@ -203,8 +202,8 @@ export const UserDataItem = () => {
             </UserInfoBtn>
           </>
         )}
-      </UserInfoItem> */}
-// =======
+      </UserInfoItem>
+      {/* // =======
    //     <InputUpdate
      //     type="text"
        //   name="cityUser"
@@ -222,10 +221,12 @@ export const UserDataItem = () => {
      //     )}
      //   </UserInfoBtn>
      // </UserInfoItem>
-// >>>>>>> main
+// >>>>>>> main */}
     </UserInfoList>
   );
 };
+
+export default UserDataItem;
 
 UserDataItem.propTypes = {
   name: PropTypes.string,

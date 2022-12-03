@@ -1,20 +1,14 @@
 import { response } from 'api';
-import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
+import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
-import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
-import editPhoto from 'icons/editPhoto.svg';
 import { ROUTES } from 'routes/routes';
-import { response } from 'api';
-import { useSelector } from 'react-redux';
-import defaultImg from 'img/defaultImg.jpg';
-import edit from 'icons/edit.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
-export const UserData = () => {
+const UserData = () => {
   const [user, setUser] = useState([]);
 
   const [logo, setLogo] = useState('');
@@ -45,25 +39,24 @@ export const UserData = () => {
     setIsFilePicked(true);
   };
 
-  const handleSubmit = evt => {
+  const handleChangeAvatar = async evt => {
+    const formData = new FormData();
+
+    formData.append('avatar', evt.target.files[0]);
+  };
+
+  const handleSubmit = async evt => {
     evt.preventDefault();
 
     console.log(selectedFile);
     console.log('Click');
 
-  const handleChangeAvatar = async evt => {
+    const { logo, name, email, birth, phone, city } = user;
 
-    const formData = new FormData();
-
-    formData.append('avatar', evt.target.files[0]);
-
-  }
-  const { logo, name, email, birth, phone, city } = user;
-
-    const {
-      data: { avatarURL },
-    } = await updateAvatar(formData);
-    setLogo(avatarURL);
+    // const {
+    //   data: { avatarURL },
+    // } = await updateAvatar(formData);
+    // setLogo(avatarURL);
   };
 
   useEffect(() => {
@@ -100,6 +93,8 @@ export const UserData = () => {
     </UserInfo>
   );
 };
+
+export default UserData;
 
 UserDataItem.propTypes = {
   name: PropTypes.string,
