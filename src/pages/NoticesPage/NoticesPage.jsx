@@ -1,33 +1,31 @@
 import { response } from 'api';
 import Loading from 'components/Common/Loading/Loading';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoryNav/NoticesCategoryNav';
+import PropTypes from 'prop-types';
 import { Suspense, useEffect, useState } from 'react';
 
-import { Outlet, useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
-import { SearchForm } from 'components/SearchForm/SearchForm';
+import { Outlet, useOutletContext } from 'react-router-dom';
 import { MainContainer } from 'components/commonStyles/Container.styled';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 import {
   AuthLink,
   AuthLinkContainer,
   Category,
   Container,
   Nav,
-  Title,
   StyledErr,
+  Title,
 } from './NoticesPage.styled';
-// import SearchForm from "components/Notices/SearchForm/SearchForm";
+import Modal from 'components/Modal/Modal';
+import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
+import { ReactComponent as AddIcon } from 'icons/addPet.svg';
 import {
-  //   NavSection,
   AddPet,
   AddPetBlock,
   Icon,
   LinkAddPet,
 } from './ButtonAddNotice.styled';
-import { ReactComponent as AddIcon } from 'icons/addPet.svg';
-import Modal from 'components/Modal/Modal';
-import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
 
 const NoticesPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +49,6 @@ const NoticesPage = () => {
       setNotices(res);
     } catch (err) {
       setError(true);
-
     }
   };
 
@@ -65,7 +62,7 @@ const NoticesPage = () => {
     }
   };
 
- const handleSubmit = formInput => {
+  const handleSubmit = formInput => {
     setOwnQuery(null);
     setQuery(null);
     setSearch(formInput);
@@ -91,7 +88,6 @@ const NoticesPage = () => {
         setQuery(null);
         setSearch(null);
         setCount(count + 1);
-
 
         const path = pathname.split('/').at(-1);
         setOwnQuery(path);
@@ -155,8 +151,7 @@ const NoticesPage = () => {
               </LinkAddPet>
             </AddPetBlock>
           )}
-
-      </Nav>
+        </Nav>
         {showModal && (
           <Modal onClose={toggleModal}>
             <ModalAddNotice onClose={toggleModal} />{' '}

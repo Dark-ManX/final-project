@@ -21,7 +21,7 @@ import {
 let category = '';
 let photo;
 
-export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
+const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
@@ -69,18 +69,19 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const handleCloseModal = () => setShowModal(false);
 
   console.log(notice);
+  const { photo, comments, favorite, title, breed, place, age } = notice;
 
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo} alt={notice.comments} />
+        <Photo src={photo} alt={comments} />
 
         <Category>{category}</Category>
 
         {loggedIn && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
-            className={notice.favorite?.includes(userId) && 'remove'}
+            className={favorite?.includes(userId) && 'remove'}
           >
             {!notice.favorite?.includes(userId) ? (
               <AddIcon width="24" height="22" />
@@ -92,7 +93,7 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
       </CardImageContainer>
 
       <CardInfoContainer>
-        <Title>{notice.title}</Title>
+        <Title>{title}</Title>
 
         <CardDetailsContainer>
           <li>
@@ -102,9 +103,9 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
           </li>
 
           <li>
-            <CardDetailInfo>{notice.breed}</CardDetailInfo>
-            <CardDetailInfo>{notice.place}</CardDetailInfo>
-            <CardDetailInfo>{notice.age}</CardDetailInfo>
+            <CardDetailInfo>{breed}</CardDetailInfo>
+            <CardDetailInfo>{place}</CardDetailInfo>
+            <CardDetailInfo>{age}</CardDetailInfo>
           </li>
         </CardDetailsContainer>
       </CardInfoContainer>
@@ -126,3 +127,5 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
     </NoticeCategoryItemStyled>
   );
 };
+
+export default NoticeCategoryItem;
