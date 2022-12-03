@@ -15,20 +15,17 @@ import {
   Category,
   NoticeCategoryItemStyled,
   Photo,
-  RemoveFromFavoriteBtn,
   Title,
 } from './NoticeCategoryItem.styled';
 
 let category = '';
 let photo;
 
-
 export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
-  const user = useSelector(state => state.auth.isLoggedIn);
 
   const { addToFavorite, removeFromFavorite } = response;
 
@@ -80,7 +77,6 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
         <Category>{category}</Category>
 
-
         {loggedIn && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
@@ -93,7 +89,6 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
             )}
           </AddToFavoriteBtn>
         )}
-
       </CardImageContainer>
 
       <CardInfoContainer>

@@ -6,14 +6,11 @@ import { Gallery } from './NoticesCategoryList.styled';
 import { useSelector } from 'react-redux';
 
 const NoticesCategoryList = () => {
-  const { notices, handleFavoriteClick } = useOutletContext();
-
   const { notices, handleFavoriteClick, isActual } = useOutletContext();
 
   return (
     <>
       {notices !== [] ? (
-
         <Gallery>
           {notices.map(notice => (
             <NoticeCategoryItem
