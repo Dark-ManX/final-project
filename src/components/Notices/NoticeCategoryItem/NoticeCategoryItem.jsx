@@ -15,21 +15,22 @@ import {
   Category,
   NoticeCategoryItemStyled,
   Photo,
+  RemoveFromFavoriteBtn,
   Title,
 } from './NoticeCategoryItem.styled';
 
 let category = '';
 let photo;
 
-export const NoticeCategoryItem = ({ notice, onClick }) => {
+
+export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
+  const token = useSelector(state => state.auth.token);
+  const user = useSelector(state => state.auth.isLoggedIn);
 
   const { addToFavorite, removeFromFavorite } = response;
-
-  const token = useSelector(state => state.auth.token);
-  // const notices = useSelector(state => state.notices.items)
 
   switch (notice.category) {
     case 'sell':
@@ -74,18 +75,6 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
     onClick();
   };
 
-  // const handleAddFavoriteBtnClick = id => {
-  // id = notice._id;
-
-  // if (!token) {
-  //   alert('please login');
-  //   return;
-  // }
-  // console.log('token', token)
-  // console.log('add to favorite: ', id);
-  // addToFavorite(id, token);
-  // };
-
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
@@ -95,29 +84,35 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
     <NoticeCategoryItemStyled>
       <CardImageContainer>
         <Photo src={photo} alt={notice.comments} />
+
         <Category>{category}</Category>
-        <AddToFavoriteBtn
-          onClick={handleBtnClick}
-          className={notice.favorite?.includes(userId) && 'remove'}
-        >
-          {!notice.favorite?.includes(userId) ? (
-            <AddIcon width="24" height="22" />
-          ) : (
-            <RemoveIcon width="19.5" height="21" />
-          )}
-        </AddToFavoriteBtn>
-        {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
-                  //         <RemoveIcon width="19.5" height="21" />
-                  //     </RemoveFromFavoriteBtn>) */}
+
+
+        {loggedIn && (
+          <AddToFavoriteBtn
+            onClick={handleBtnClick}
+            className={notice.favorite?.includes(userId) && 'remove'}
+          >
+            {!notice.favorite?.includes(userId) ? (
+              <AddIcon width="24" height="22" />
+            ) : (
+              <RemoveIcon width="19.5" height="21" />
+            )}
+          </AddToFavoriteBtn>
+        )}
+
       </CardImageContainer>
+
       <CardInfoContainer>
         <Title>{notice.title}</Title>
+
         <CardDetailsContainer>
           <li>
             <CardDetailInfo>Breed:</CardDetailInfo>
             <CardDetailInfo>Place:</CardDetailInfo>
             <CardDetailInfo>Age:</CardDetailInfo>
           </li>
+
           <li>
             <CardDetailInfo>{notice.breed}</CardDetailInfo>
             <CardDetailInfo>{notice.place}</CardDetailInfo>
@@ -125,9 +120,11 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
           </li>
         </CardDetailsContainer>
       </CardInfoContainer>
+
       <Button type="button" onClick={handleOpenModal}>
         Learn more
       </Button>
+
       {showModal && (
         <Modal onClose={handleCloseModal}>
           <ModalNotice

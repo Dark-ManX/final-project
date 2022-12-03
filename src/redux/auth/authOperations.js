@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://team-api-blended2.herokuapp.com',
+    baseUrl: 'https://team-api-server-outlight.onrender.com',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       // console.log(token);
@@ -15,6 +15,7 @@ export const authApi = createApi({
   }),
 
   tagTypes: ['User'],
+
   endpoints: builder => ({
     // POST register: '/register',
     registerUser: builder.mutation({
@@ -23,18 +24,7 @@ export const authApi = createApi({
         method: 'POST',
         body: formData,
       }),
-      invalidatesTags: [{ type: 'User' }],
-    }),
-
-    // PATCH register/{id}: '/register/id',
-    addUserInfo: builder.mutation({
-      query: addInfo => ({
-        url: `/register/${addInfo.isId}`,
-        method: 'PATCH',
-        body: addInfo,
-      }),
-
-      invalidatesTags: [{ type: 'User' }],
+      invalidatesTags: ['User'],
     }),
 
     // POST login: '/login',

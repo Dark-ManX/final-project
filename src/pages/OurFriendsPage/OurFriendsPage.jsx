@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // import { RotatingLines } from 'react-loader-spinner';
 import Loading from 'components/Loading/Loading';
 import Error from 'components/Error/Error';
+import { MainContainer } from 'components/commonStyles/Container.styled';
 import {
   Anchor,
   CardThumb,
@@ -40,7 +41,9 @@ const OurFriendsPage = () => {
   }, []);
 
   return (
-    <>
+
+    <MainContainer>
+
       <Title>Our friends</Title>
 
       {isLoading && <Loading />}
@@ -103,7 +106,8 @@ const OurFriendsPage = () => {
       )}
 
       {error && <Error />}
-    </>
+
+    </MainContainer>
   );
 };
 

@@ -25,8 +25,8 @@ export const fetchNotices = async (url, query, token) => {
 export const fetchSearch = async (url, query) => {
   const { data } = await axios.get(`${url}/notices/search/${query}`);
 
-  const { news } = data.data;
-  return news;
+  const { notices } = data.data;
+  return notices;
 };
 
 export const fetchAddFavorite = async (url, query, token) => {

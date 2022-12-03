@@ -2,41 +2,33 @@ import { response } from 'api';
 import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  useGetUserInfoQuery,
-  useUpdateAvatarMutation,
-} from 'redux/auth/authOperations';
+import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
+import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
+import editPhoto from 'icons/editPhoto.svg';
 import { ROUTES } from 'routes/routes';
+import { response } from 'api';
+import { useSelector } from 'react-redux';
+import defaultImg from 'img/defaultImg.jpg';
+import edit from 'icons/edit.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
 export const UserData = () => {
-  const [file, setFile] = useState({});
   const [user, setUser] = useState([]);
-  const getUserInfo = useGetUserInfoQuery();
+
+  const [logo, setLogo] = useState('');
   const [updateAvatar] = useUpdateAvatarMutation();
 
   const { getUser } = response;
 
   const token = useSelector(state => state.auth.token);
-  console.log(token);
 
   const fetchUser = async token => {
     const res = await getUser(token);
-    console.log(res);
     setUser(res);
+    setLogo(res.logo);
   };
-
-  console.log(user);
-
-  const inputRef = useRef(null);
-
-  // const handleUploadClick = event => {
-  //   const click = inputRef.current?.click();
-  //   return click;
-  //   // console.log(click);
-  // };
 
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -51,72 +43,60 @@ export const UserData = () => {
     console.log(typeof selectedFile);
     console.log(selectedFile);
     setIsFilePicked(true);
-
-    // const avatar = evt.target.files[0];
-
-    // console.log(evt.target.files[0]);
-    // handleSubmit();
-    // return avatar;
-    // console.log(file);
-    // handleFile(fileUploaded);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    // const url = 'http://localhost:3000/uploadFile';
-    // const url = `${ROUTES.BASE_URL}/auth/avatars`;
-    // console.log(url);
-    // console.log(avatar);
+
     console.log(selectedFile);
     console.log('Click');
 
+  const handleChangeAvatar = async evt => {
+
     const formData = new FormData();
 
-    formData.append('File', selectedFile);
+    formData.append('avatar', evt.target.files[0]);
 
-    // const AUTH_TOKEN = 'Bearer ';
+  }
+  const { logo, name, email, birth, phone, city } = user;
 
-    // axios.defaults.baseURL = ROUTES.BASE_URL;
-    // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-    // axios.defaults.headers.patch['content-type'] = 'multipart/form-data';
-
-    // axios('https://team-api-blended2.herokuapp.com/avatars', {
-    //   method: 'PATCH',
-    //   body: formData,
-    // })
-    //   .then(response => response.json())
-    //   .then(result => {
-    //     console.log('Success:', result);
-    //   })
-    //   .catch(error => {
-    //     console.error('Error:', error);
-    //   });
+    const {
+      data: { avatarURL },
+    } = await updateAvatar(formData);
+    setLogo(avatarURL);
   };
 
   useEffect(() => {
     fetchUser(token);
   }, []);
 
-  const { logo, name } = user;
+  const avatarUser = () => {
+    if (logo) {
+      return `${ROUTES.BASE_URL}/${logo}`;
+    } else {
+      return editPhoto;
+    }
+  };
+
   return (
     <UserInfo>
       <Avatar>
-        <ImgUser src={`${ROUTES.BASE_URL}/${logo}`} alt={name} />
-        <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <ImgUser src={avatarUser()} alt={user.name} />
+        <label>
           <input
             type="file"
-            ref={inputRef}
-            multiple
-            onChange={handleChange}
+            accept="image/png, image/gif, image/jpeg"
+            name="image"
+            onChange={handleChangeAvatar}
             style={{ display: 'none' }}
           />
-          <EditPhotoBtn onClick={() => inputRef.current?.click()}>
+          <EditPhotoBtn>
             <img src={editPhoto} alt="addPet" />
             Edit photo
           </EditPhotoBtn>
-        </form>
+        </label>
       </Avatar>
-      <UserDataItem user={user} />
+      <UserDataItem />
     </UserInfo>
   );
 };
