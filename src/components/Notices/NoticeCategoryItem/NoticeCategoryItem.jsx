@@ -46,13 +46,6 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
       return;
   }
 
-  if (notice.photo) {
-    // photo= notice.photo;
-    photo = `https://team-api-blended2.herokuapp.com/${notice.photo}`;
-  } else {
-    photo =
-      'https://t4.ftcdn.net/jpg/03/08/68/19/360_F_308681935_VSuCNvhuif2A8JknPiocgGR2Ag7D1ZqN.jpg';
-  }
   console.log('notice', notice);
 
   const handleBtnClick = async id => {
