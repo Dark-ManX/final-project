@@ -97,8 +97,8 @@ export const UserDataItem = () => {
 
   return (
     <UserInfoList>
-      {}
-      <UserInfoItem>
+      
+      {/* <UserInfoItem>
         <UserInfoText>Name:</UserInfoText>
         <InputUpdate
           type="text"
@@ -180,23 +180,49 @@ export const UserDataItem = () => {
 
       <UserInfoItem>
         <UserInfoText>City:</UserInfoText>
-        <InputUpdate
-          type="text"
-          name="cityUser"
-          value={cityUser}
-          disabled={updateUser}
-          onChange={handleChangeValue}
-          onSubmit={handleSubmit}
-          autoComplete="off"
-        />
-        <UserInfoBtn type="button" onClick={handleSubmit}>
-          {!updateUser ? (
-            <img src={done} alt="update information about user" />
-          ) : (
-            <img src={edit} alt="update information about user" />
-          )}
-        </UserInfoBtn>
-      </UserInfoItem>
+
+        {!updateUser ? (
+          <>
+            <UserInfoData>{city}</UserInfoData>
+            <UserInfoBtn type="button" onClick={handleUpdateUser}>
+              <img src={edit} alt="edit information about user" />
+            </UserInfoBtn>
+          </>
+        ) : (
+          <>
+            <FormUpdate onSubmit={handleSubmit}>
+              <InputUpdate
+                type="text"
+                name="cityUser"
+                value={cityUser}
+                onChange={handleChangeValue}
+              />
+            </FormUpdate>
+            <UserInfoBtn type="button" onClick={handleSubmit}>
+              <img src={done} alt="update information about user" />
+            </UserInfoBtn>
+          </>
+        )}
+      </UserInfoItem> */}
+// =======
+   //     <InputUpdate
+     //     type="text"
+       //   name="cityUser"
+         // value={cityUser}
+         // disabled={updateUser}
+         // onChange={handleChangeValue}
+         // onSubmit={handleSubmit}
+         // autoComplete="off"
+        // />
+    //    <UserInfoBtn type="button" onClick={handleSubmit}>
+    //      {!updateUser ? (
+    //        <img src={done} alt="update information about user" />
+    //      ) : (
+     //       <img src={edit} alt="update information about user" />
+     //     )}
+     //   </UserInfoBtn>
+     // </UserInfoItem>
+// >>>>>>> main
     </UserInfoList>
   );
 };

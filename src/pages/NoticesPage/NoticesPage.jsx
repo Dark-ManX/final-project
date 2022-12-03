@@ -2,6 +2,7 @@ import { response } from 'api';
 import Loading from 'components/Common/Loading/Loading';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoryNav/NoticesCategoryNav';
 import { Suspense, useEffect, useState } from 'react';
+
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
@@ -42,7 +43,6 @@ const NoticesPage = () => {
   const isActual = useOutletContext();
 
   const token = useSelector(state => state.auth.token);
-  console.log(isActual);
 
   const fetchNotices = async (req, key) => {
     try {
@@ -51,6 +51,7 @@ const NoticesPage = () => {
       setNotices(res);
     } catch (err) {
       setError(true);
+
     }
   };
 
@@ -63,7 +64,8 @@ const NoticesPage = () => {
       setError(true);
     }
   };
-  const handleSubmit = formInput => {
+
+ const handleSubmit = formInput => {
     setOwnQuery(null);
     setQuery(null);
     setSearch(formInput);
@@ -89,6 +91,7 @@ const NoticesPage = () => {
         setQuery(null);
         setSearch(null);
         setCount(count + 1);
+
 
         const path = pathname.split('/').at(-1);
         setOwnQuery(path);
@@ -152,7 +155,8 @@ const NoticesPage = () => {
               </LinkAddPet>
             </AddPetBlock>
           )}
-        </Nav>
+
+      </Nav>
         {showModal && (
           <Modal onClose={toggleModal}>
             <ModalAddNotice onClose={toggleModal} />{' '}

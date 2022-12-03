@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const UserInfoList = styled.ul`
-  margin: 38px 12px 44px 16px;
+  margin: 23px 12px 44px 16px;
 
   @media screen and (min-width: 768px) {
     width: 379px;

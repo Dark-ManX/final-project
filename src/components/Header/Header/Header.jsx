@@ -11,6 +11,7 @@ import {
   StyledHeader,
 } from './Header.styled';
 
+
 const Header = ({ state }) => {
   const [shown, setShown] = useState(false);
 
@@ -41,6 +42,7 @@ const Header = ({ state }) => {
           <Nav set={shown} />
 
           <AuthUserContainer>
+
             {!state ? <AuthNav /> : <UserNav />}
           </AuthUserContainer>
         </MobileMenu>

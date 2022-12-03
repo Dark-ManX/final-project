@@ -61,6 +61,7 @@ position: relative;
 overflow: visible;
 height: auto;
 width: 768px;
+left: 0;
 }
 
 @media screen and (min-width: 1280px) {
@@ -82,7 +83,7 @@ export const AuthUserContainer = styled.div`
 @media screen and (min-width: 768px) {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 25px;
   transform: translateY(-50%);
   justify-content: center;
 }
@@ -91,8 +92,7 @@ export const AuthUserContainer = styled.div`
   position: relative;
   display: flex;
   column-gap: 20px;
-  top: 0;
-  right: 16px;
+  right: 0;
   margin-left: auto;
   transform: translate(0);
 }

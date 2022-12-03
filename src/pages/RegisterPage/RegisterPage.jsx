@@ -6,9 +6,23 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import {
-  useAddUserInfoMutation, useRegisterUserMutation
+  useAddUserInfoMutation,
+  useRegisterUserMutation,
 } from 'redux/auth/authOperations';
-import { FirstContainer, ImageContainer, Form, Input, Section, Title, Button, BackBtn, P, RegisterContainer, Container, StyledLink } from './RegisterPage.styled';
+import {
+  FirstContainer,
+  ImageContainer,
+  Form,
+  Input,
+  Section,
+  Title,
+  Button,
+  BackBtn,
+  P,
+  RegisterContainer,
+  Container,
+  StyledLink,
+} from './RegisterPage.styled';
 
 const RegisterPage = () => {
   const location = useLocation();
@@ -19,19 +33,17 @@ const RegisterPage = () => {
   //   name: null,
   //   city: null,
   //   phone: null,
-  // } 
+  // }
 
   // const { email, password, name, city, phone } = initialState;
 
   // const [user, setUser] = useState(initialState);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [city, setCity] = useState('');
-    const [phone, setPhone] = useState('');
-
-  const [createdUser, setCreatedUser] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
 
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [page, setPage] = useState(0);
@@ -50,11 +62,11 @@ const RegisterPage = () => {
 
   const handleTypePassword = type => {
     setShowPassword(type);
-  }
+  };
 
   const handleTypeConfirm = type => {
-    setShowConfirmPassword(type)
-  }
+    setShowConfirmPassword(type);
+  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -64,32 +76,32 @@ const RegisterPage = () => {
         setConfirmedPassword(value);
         console.log(confirmedPassword);
         break;
-      
+
       case 'email':
         setEmail(value);
         console.log(email);
         break;
-      
+
       case 'password':
         setPassword(value);
-        console.log(password)
+        console.log(password);
         break;
-      
+
       case 'name':
         setName(value);
         console.log(name);
         break;
-      
+
       case 'city':
         setCity(value);
-        console.log(city)
+        console.log(city);
         break;
-      
+
       case 'phone':
         setPhone(value);
-        console.log(phone)
+        console.log(phone);
         break;
-      
+
       default:
         break;
     }
@@ -101,7 +113,7 @@ const RegisterPage = () => {
     name,
     city,
     phone,
-  }
+  };
   console.log('object', user);
 
   const handleSubmit = async event => {
@@ -151,36 +163,52 @@ const RegisterPage = () => {
   console.log(page);
 
   return (
-
-      <ImageContainer>
+    <ImageContainer>
       <RegisterContainer>
-        
         <Container>
           <Title>Registration</Title>
 
           <Form onSubmit={handleSubmit}>
-            {!page
-              ? (<FirstEl data={showPassword} confirmData={showConfirmPassword} handleData={handleTypePassword} handleConfirmData={handleTypeConfirm} provideChange={handleChange} />)
-              : (<SecondEl provideChange={handleChange} />)
-            }
+            {!page ? (
+              <FirstEl
+                data={showPassword}
+                confirmData={showConfirmPassword}
+                handleData={handleTypePassword}
+                handleConfirmData={handleTypeConfirm}
+                provideChange={handleChange}
+              />
+            ) : (
+              <SecondEl provideChange={handleChange} />
+            )}
 
-            {page
-              ? (<Button type='submit' disabled={!name || !city || !phone}>Register</Button>)
-              : (null)
-            }
+            {page ? (
+              <Button type="submit" disabled={!name || !city || !phone}>
+                Register
+              </Button>
+            ) : null}
 
-            <Button type='button' className={page ? 'back' : ''} disabled={!email || !password || confirmedPassword !== password} onClick={!page
-              ? (() => setPage(page + 1))
-              : (() => setPage(page - 1))}>
+            <Button
+              type="button"
+              className={page ? 'back' : ''}
+              disabled={!email || !password || confirmedPassword !== password}
+              onClick={
+                !page ? () => setPage(page + 1) : () => setPage(page - 1)
+              }
+            >
               {!page ? 'Next' : 'Back'}
             </Button>
           </Form>
-          
-          <P>Already have an account? <StyledLink to='/login' state={{ from: location }}>Login</StyledLink></P>
+
+          <P>
+            Already have an account?{' '}
+            <StyledLink to="/login" state={{ from: location }}>
+              Login
+            </StyledLink>
+          </P>
         </Container>
       </RegisterContainer>
     </ImageContainer>
-  )
+  );
 };
 
 export default RegisterPage;

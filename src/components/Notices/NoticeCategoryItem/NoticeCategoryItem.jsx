@@ -26,11 +26,10 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
+  const token = useSelector(state => state.auth.token);
+  const user = useSelector(state => state.auth.isLoggedIn);
 
   const { addToFavorite, removeFromFavorite } = response;
-
-  const token = useSelector(state => state.auth.token);
-  // const notices = useSelector(state => state.notices.items)
 
   switch (notice.category) {
     case 'sell':
@@ -75,18 +74,6 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
     onClick();
   };
 
-  // const handleAddFavoriteBtnClick = id => {
-  // id = notice._id;
-
-  // if (!token) {
-  //   alert('please login');
-  //   return;
-  // }
-  // console.log('token', token)
-  // console.log('add to favorite: ', id);
-  // addToFavorite(id, token);
-  // };
-
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
@@ -98,6 +85,7 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
         <Photo src={photo} alt={notice.comments} />
 
         <Category>{category}</Category>
+
 
         {loggedIn && (
           <AddToFavoriteBtn
@@ -111,9 +99,7 @@ export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
             )}
           </AddToFavoriteBtn>
         )}
-        {/* // : (<RemoveFromFavoriteBtn onClick={handleBtnClick}>
-                  //         <RemoveIcon width="19.5" height="21" />
-                  //     </RemoveFromFavoriteBtn>) */}
+
       </CardImageContainer>
 
       <CardInfoContainer>

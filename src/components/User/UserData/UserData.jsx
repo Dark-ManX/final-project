@@ -7,11 +7,18 @@ import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
-
+import { useSelector } from 'react-redux';
+import defaultImg from 'img/defaultImg.jpg';
+import edit from 'icons/edit.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
+
 
 export const UserData = () => {
   const [user, setUser] = useState([]);
+  // const getUserInfo = useGetUserInfoQuery();
+  // const [updateAvatar] = useUpdateAvatarMutation();
+  // console.log(user)
+
   const [logo, setLogo] = useState('');
   const [updateAvatar] = useUpdateAvatarMutation();
 
@@ -25,16 +32,45 @@ export const UserData = () => {
     setLogo(res.logo);
   };
 
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const handleChange = evt => {
+    if (!evt.target.files) {
+      return;
+    }
+
+    setSelectedFile(evt.target.files[0]);
+    console.log(evt.target.files[0]);
+    console.log(typeof selectedFile);
+    console.log(selectedFile);
+    setIsFilePicked(true);
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    // const url = 'http://localhost:3000/uploadFile';
+    // const url = `${ROUTES.BASE_URL}/auth/avatars`;
+    // console.log(url);
+    // console.log(avatar);
+    console.log(selectedFile);
+    console.log('Click');
+
   const handleChangeAvatar = async evt => {
+
     const formData = new FormData();
 
     formData.append('avatar', evt.target.files[0]);
+
+  }
+  const { logo, name, email, birth, phone, city } = user;
 
     const {
       data: { avatarURL },
     } = await updateAvatar(formData);
     setLogo(avatarURL);
   };
+
 
   useEffect(() => {
     fetchUser(token);
