@@ -22,7 +22,7 @@ import {
 let category = '';
 let photo;
 
-export const NoticeCategoryItem = ({ notice, onClick }) => {
+export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
@@ -86,7 +86,8 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
 
         <Category>{category}</Category>
 
-        {user && (
+
+        {loggedIn && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
             className={notice.favorite?.includes(userId) && 'remove'}
@@ -98,6 +99,7 @@ export const NoticeCategoryItem = ({ notice, onClick }) => {
             )}
           </AddToFavoriteBtn>
         )}
+
       </CardImageContainer>
 
       <CardInfoContainer>

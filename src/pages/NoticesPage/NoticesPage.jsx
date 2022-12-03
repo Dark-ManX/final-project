@@ -2,7 +2,8 @@ import { response } from 'api';
 import Loading from 'components/Common/Loading/Loading';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoryNav/NoticesCategoryNav';
 import { Suspense, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+
+import { Outlet, useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // import NoticesCategoryList from "components/Notices/NoticesCategoryList/NoticesCategoryList";
 import { SearchForm } from 'components/SearchForm/SearchForm';
@@ -39,9 +40,9 @@ const NoticesPage = () => {
 
   const { getNotices, findNotices } = response;
 
+  const isActual = useOutletContext();
+
   const token = useSelector(state => state.auth.token);
-  const user = useSelector(state => state.auth.isLoggedIn);
-  console.log(token);
 
   const fetchNotices = async (req, key) => {
     try {
@@ -50,6 +51,7 @@ const NoticesPage = () => {
       setNotices(res);
     } catch (err) {
       setError(true);
+
     }
   };
 
@@ -62,7 +64,8 @@ const NoticesPage = () => {
       setError(true);
     }
   };
-  const handleSubmit = formInput => {
+
+ const handleSubmit = formInput => {
     setOwnQuery(null);
     setQuery(null);
     setSearch(formInput);
@@ -88,6 +91,7 @@ const NoticesPage = () => {
         setQuery(null);
         setSearch(null);
         setCount(count + 1);
+
 
         const path = pathname.split('/').at(-1);
         setOwnQuery(path);
@@ -116,7 +120,6 @@ const NoticesPage = () => {
       fetchSearch(search);
     }
 
-    console.log(notices);
     document.addEventListener('click', handleClick);
 
     return () => {
@@ -134,7 +137,7 @@ const NoticesPage = () => {
           <Category>
             <NoticesCategoriesNav />
 
-            {user && (
+            {isActual && (
               <AuthLinkContainer className="own-block">
                 <AuthLink to="favorite">Favorite ads</AuthLink>
                 <AuthLink to="owner">My ads</AuthLink>
@@ -142,15 +145,18 @@ const NoticesPage = () => {
             )}
           </Category>
 
-          <AddPetBlock>
-            <AddPet>Add pet</AddPet>
-            <LinkAddPet onClick={toggleModal}>
-              <Icon>
-                <AddIcon width="100%" height="100%" />
-              </Icon>
-            </LinkAddPet>
-          </AddPetBlock>
-        </Nav>
+          {isActual && (
+            <AddPetBlock>
+              <AddPet>Add pet</AddPet>
+              <LinkAddPet onClick={toggleModal}>
+                <Icon>
+                  <AddIcon width="100%" height="100%" />
+                </Icon>
+              </LinkAddPet>
+            </AddPetBlock>
+          )}
+
+      </Nav>
         {showModal && (
           <Modal onClose={toggleModal}>
             <ModalAddNotice onClose={toggleModal} />{' '}
@@ -158,7 +164,7 @@ const NoticesPage = () => {
         )}
         {!error ? (
           <Suspense fallback={<Loading />}>
-            <Outlet context={{ notices, handleFavoriteClick }} />
+            <Outlet context={{ notices, handleFavoriteClick, isActual }} />
           </Suspense>
         ) : (
           <StyledErr>There is no information</StyledErr>
