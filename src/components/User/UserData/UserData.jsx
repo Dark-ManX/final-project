@@ -5,11 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
-import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
-import editPhoto from 'icons/editPhoto.svg';
 import { ROUTES } from 'routes/routes';
-import { response } from 'api';
-import { useSelector } from 'react-redux';
 import defaultImg from 'img/defaultImg.jpg';
 import edit from 'icons/edit.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
@@ -45,7 +41,7 @@ export const UserData = () => {
     setIsFilePicked(true);
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
 
     console.log(selectedFile);
@@ -60,9 +56,7 @@ export const UserData = () => {
   }
   const { logo, name, email, birth, phone, city } = user;
 
-    const {
-      data: { avatarURL },
-    } = await updateAvatar(formData);
+  const { data: { avatarURL }} = await updateAvatar(formData);
     setLogo(avatarURL);
   };
 

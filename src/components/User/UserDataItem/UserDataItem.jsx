@@ -96,9 +96,9 @@ export const UserDataItem = () => {
   };
 
   return (
-    <UserInfoList>
-      
-      {/* <UserInfoItem>
+    <UserInfoList />
+  )
+        /* <UserInfoItem>
         <UserInfoText>Name:</UserInfoText>
         <InputUpdate
           type="text"
@@ -203,28 +203,28 @@ export const UserDataItem = () => {
             </UserInfoBtn>
           </>
         )}
-      </UserInfoItem> */}
-// =======
-   //     <InputUpdate
-     //     type="text"
-       //   name="cityUser"
-         // value={cityUser}
-         // disabled={updateUser}
-         // onChange={handleChangeValue}
-         // onSubmit={handleSubmit}
-         // autoComplete="off"
-        // />
-    //    <UserInfoBtn type="button" onClick={handleSubmit}>
+      </UserInfoItem> */
+    /* <InputUpdate
+         type="text"
+         name="cityUser"
+         value={cityUser}
+         disabled={updateUser}
+         onChange={handleChangeValue}
+         onSubmit={handleSubmit}
+         autoComplete="off"
+        /> */
+    /* //    <UserInfoBtn type="button" onClick={handleSubmit}>
     //      {!updateUser ? (
-    //        <img src={done} alt="update information about user" />
-    //      ) : (
-     //       <img src={edit} alt="update information about user" />
-     //     )}
-     //   </UserInfoBtn>
-     // </UserInfoItem>
+           <img src={done} alt="update information about user" />
+         ) : (
+           <img src={edit} alt="update information about user" />
+         )}
+       </UserInfoBtn>
+     </UserInfoItem>
 // >>>>>>> main
     </UserInfoList>
   );
+}; */
 };
 
 UserDataItem.propTypes = {
