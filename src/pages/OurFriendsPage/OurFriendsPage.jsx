@@ -41,7 +41,9 @@ const OurFriendsPage = () => {
   }, []);
 
   return (
+
     <MainContainer>
+
       <Title>Our friends</Title>
 
       {isLoading && <Loading />}
@@ -104,6 +106,7 @@ const OurFriendsPage = () => {
       )}
 
       {error && <Error />}
+
     </MainContainer>
   );
 };

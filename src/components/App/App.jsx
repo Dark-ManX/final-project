@@ -1,26 +1,14 @@
-import { lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import SharedLayout from 'pages/SharedLayout/SharedLayout';
 import MainPage from 'components/MainPage/MainPage';
+import SharedLayout from 'pages/SharedLayout/SharedLayout';
+import { lazy } from 'react';
 import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
-// import NoticesCategoryList from 'components/Notices/NoticesCategoryList/NoticesCategoryList';
-
-// const AsyncMainPage = lazy(() => import('components/MainPage/MainPage'));
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
 const AsyncNoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
-
 const AsyncNoticesCategoryList = lazy(() =>
   import('components/Notices/NoticesCategoryList/NoticesCategoryList')
 );
-
-// const AsyncSellNoticesPage = lazy(() => import('pages/NoticesPage/SellNoticesPage'));
-// const AsyncLostFoundNoticesPage = lazy(() => import('pages/NoticesPage/LostFoundNoticesPage'));
-// const AsyncForFreeNoticesPage = lazy(() => import('pages/NoticesPage/ForFreeNoticesPage'));
-// const AsyncFavoriteNoticesPage = lazy(() => import('pages/NoticesPage/FavoriteNoticesPage'));
-// const AsyncOwnNoticesPage = lazy(() => import('pages/NoticesPage/OwnNoticesPage'));
-// const AsyncPrivateRoute = lazy(() => import('components/PrivateRoutes/PrivateRoutes'));
-// const AsyncNoticesSearch = lazy(() => import('components/NoticesSearch/NoticesSearch'));
 const AsyncRegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const AsyncLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
@@ -54,8 +42,8 @@ const App = () => {
         <Route path="friends" element={<AsyncOurFriendsPage />} />
 
         <Route path="register" element={<AsyncRegisterPage />} />
-        <Route path="login" element={<AsyncLoginPage/>} />
-           {/* element={
+        <Route path="login" element={<AsyncLoginPage />} />
+        {/* element={
           //   isLoggedIn ? <Navigate replace to="/user" /> :
           //     <AsyncLoginPage />
           // }

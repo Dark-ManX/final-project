@@ -1,7 +1,9 @@
+import { response } from 'api';
+import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
+import editPhoto from 'icons/editPhoto.svg';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 import { UserDataItem } from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
@@ -12,12 +14,8 @@ import defaultImg from 'img/defaultImg.jpg';
 import edit from 'icons/edit.svg';
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
-
 export const UserData = () => {
   const [user, setUser] = useState([]);
-  // const getUserInfo = useGetUserInfoQuery();
-  // const [updateAvatar] = useUpdateAvatarMutation();
-  // console.log(user)
 
   const [logo, setLogo] = useState('');
   const [updateAvatar] = useUpdateAvatarMutation();
@@ -49,10 +47,7 @@ export const UserData = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    // const url = 'http://localhost:3000/uploadFile';
-    // const url = `${ROUTES.BASE_URL}/auth/avatars`;
-    // console.log(url);
-    // console.log(avatar);
+
     console.log(selectedFile);
     console.log('Click');
 
@@ -70,7 +65,6 @@ export const UserData = () => {
     } = await updateAvatar(formData);
     setLogo(avatarURL);
   };
-
 
   useEffect(() => {
     fetchUser(token);

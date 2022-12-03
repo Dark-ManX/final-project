@@ -22,6 +22,7 @@ import {
 let category = '';
 let photo;
 
+
 export const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
