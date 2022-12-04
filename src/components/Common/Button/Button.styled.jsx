@@ -16,7 +16,7 @@ const style = css`
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  line-height: 22px;
+  line-height: 1.4;
   border-radius: 40px;
   background-color: transparent;
   cursor: pointer;
