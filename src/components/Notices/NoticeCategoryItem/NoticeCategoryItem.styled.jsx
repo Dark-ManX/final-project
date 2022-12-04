@@ -26,9 +26,9 @@ export const NoticeCategoryItemStyled = styled.li`
       margin-right: 0;
     }
 
-    &:nth-last-child(-n + 2) {
-      margin-bottom: 0;
-    }
+    // &:nth-last-child(-n + 2) {
+    //   margin-bottom: 0;
+    // }
   }
 
   @media screen and (min-width: 1280px) {
@@ -40,9 +40,9 @@ export const NoticeCategoryItemStyled = styled.li`
       margin-right: 0;
     }
 
-    &:nth-last-child(-n + 4) {
-      margin-bottom: 0;
-    }
+    // &:nth-last-child(-n + 4) {
+    //   margin-bottom: 0;
+    // }
   } ;
 `;
 

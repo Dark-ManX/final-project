@@ -1,4 +1,5 @@
 import { response } from 'api';
+import {ROUTES} from '../../../routes/routes'
 import Modal from 'components/Modal/Modal';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
 import { ReactComponent as AddIcon } from 'icons/add.svg';
@@ -20,7 +21,7 @@ import {
 } from './NoticeCategoryItem.styled';
 
 let category = '';
-let photo;
+
 
 const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,6 +29,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
 
+  const { BASE_URL } = ROUTES;
   const { addToFavorite, removeFromFavorite } = response;
 
   switch (notice.category) {
@@ -44,16 +46,14 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
       return;
   }
 
-  console.log('notice', notice);
+  const noticesFavr = notice.favorite?.includes(userId);
 
   const handleBtnClick = async id => {
-    console.log(id);
     id = notice._id;
 
-    if (notice.favorite?.includes(userId)) {
-      console.log('remove from favorite: ', id);
+    if (noticesFavr) {
       await removeFromFavorite(id, token);
-
+      alert('Notice remove from favorite');
       onClick();
       return;
     } else if (!token) {
@@ -61,8 +61,8 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
       return;
     }
 
-    console.log('add to favorite: ', id);
     await addToFavorite(id, token);
+    alert('Notice add to favorite');
     onClick();
   };
 
@@ -70,16 +70,17 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const handleCloseModal = () => setShowModal(false);
 
   console.log(notice);
-  const { photo, comments, favorite, title, breed, place, age } = notice;
+  const { photo, comments, favorite, title, breed, place, age, owner } = notice;
+  const idOwner = owner._id;
 
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo ? photo : defaultPet} alt={comments} />
+        <Photo src={photo ? `${BASE_URL}${photo}` : defaultPet} alt={comments} />
 
         <Category>{category}</Category>
 
-        {loggedIn && (
+        {loggedIn && idOwner && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
             className={favorite?.includes(userId) && 'remove'}
@@ -120,8 +121,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
           <ModalNotice
             notice={notice}
             onClose={handleCloseModal}
-            onAddFavoriteBtnClick={handleBtnClick}
-            onRemoveFavoriteBtnClick={handleBtnClick}
+            handleBtnClick={handleBtnClick}
           />
         </Modal>
       )}
