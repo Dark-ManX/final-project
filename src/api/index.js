@@ -11,7 +11,7 @@ import { fetchUser } from './userApi';
 
 class Fetch {
   constructor() {
-    this.BASE_URL = 'https://team-api-server-outlight.onrender.com';
+    this.BASE_URL = 'https://blende2.herokuapp.com/';
   }
 
   getFriends = async () => await fetchFriends(this.BASE_URL);

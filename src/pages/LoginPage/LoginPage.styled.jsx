@@ -31,7 +31,7 @@ export const ImageContainer = styled.div`
   }
   @media screen and (min-width: 1280px) {
     top: 20px;
-    left: -152px;
+    left: 0;
     background-image: url(${Waves});
   }
 `;
