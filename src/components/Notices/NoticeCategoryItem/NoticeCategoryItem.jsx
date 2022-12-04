@@ -5,6 +5,7 @@ import { ReactComponent as AddIcon } from 'icons/add.svg';
 import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import defaultPet from 'img/defaultPet.jpg';
 import {
   AddToFavoriteBtn,
   Button,
@@ -74,7 +75,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo} alt={comments} />
+        <Photo src={photo ? photo : defaultPet} alt={comments} />
 
         <Category>{category}</Category>
 
