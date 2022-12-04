@@ -54,6 +54,18 @@ export const fetchRemoveFavorite = async (url, query, token) => {
   return data;
 };
 
+export const fetchRemovePet = async (url, query, token) => {
+  const { data } = await axios({
+    method: 'delete',
+    url: `${url}/notices/delete/${query}`,
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  });
+
+  return data;
+};
+
 // export const fetchSellNotices = async () => {
 //     const {data} = await axios.get('/notices/sell');
 //     const { notices } = data.data;

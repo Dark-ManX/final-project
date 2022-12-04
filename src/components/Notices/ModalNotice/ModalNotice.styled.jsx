@@ -145,7 +145,7 @@ export const ButtonGroup = styled.div`
     }
 `
 
-export const ButtonAdd = styled.button`
+export const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,16 +156,24 @@ export const ButtonAdd = styled.button`
     border: 2px solid #F59256;
     border-radius: 40px;
     margin-right: 12px;
-   
-    
+    cursor: pointer;
     @media screen and (min-width: 768px){
         width: 160px;
-    }
-
+    };
+    &.remove{
+        color: #F59256;
+    };
+    &.trash{
+        color: rgba(17, 17, 17, 0.6);
+        &:hover,
+        &:focus {
+            color: #FF6101;
+        };
+    };
     &:hover,
     &:focus {
-        color: #F59256;
-    }
+        border: 2px solid #FF6101;
+    };
 
 `
 export const BtnAddName = styled.span`
@@ -191,11 +199,11 @@ export const ButtonCall = styled.a`
     margin-right: 12px;
     margin-bottom: 12px;
     color: #FFFFFF;
+    cursor: pointer;
 
-    &:disabled {
-        &:hover {
-        pointer-events: none;
-        }
+    &:hover,
+    &:focus {
+        background: #FF6101;
     }
     
     @media screen and (min-width: 768px){

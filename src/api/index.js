@@ -5,6 +5,7 @@ import {
   fetchSearch,
   fetchAddFavorite,
   fetchRemoveFavorite,
+  fetchRemovePet,
 } from './noticesApi';
 import { fetchPetAdd } from './petApi';
 import { fetchUser } from './userApi';
@@ -26,6 +27,9 @@ class Fetch {
 
   removeFromFavorite = async (query, token) =>
     await fetchRemoveFavorite(this.BASE_URL, query, token);
+  
+  removePet = async (query, token) =>
+    await fetchRemovePet(this.BASE_URL, query, token);
 
   findNotices = async query => await fetchSearch(this.BASE_URL, query);
 
