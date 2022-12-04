@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const Logout = () => {
   const [logoutUser] = useLogOutUserMutation();
   const navigate = useNavigate();
-  // console.log(logoutUser);
+
   return (
     <LogoutBtn
       type="button"
