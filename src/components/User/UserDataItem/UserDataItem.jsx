@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 import { response } from 'api';
 import edit from 'icons/edit.svg';
 import done from 'icons/done.svg';
-import {
-  useGetUserInfoQuery,
-  useUpdateUserInfoMutation,
-} from 'redux/auth/authOperations';
+import { useUpdateUserInfoMutation } from 'redux/auth/authOperations';
 import {
   UserInfoList,
   UserInfoItem,
@@ -179,49 +176,23 @@ const UserDataItem = () => {
 
       <UserInfoItem>
         <UserInfoText>City:</UserInfoText>
-
-        {!updateUser ? (
-          <>
-            {/* <UserInfoData>{city}</UserInfoData>
-            <UserInfoBtn type="button" onClick={handleUpdateUser}>
-              <img src={edit} alt="edit information about user" />
-            </UserInfoBtn> */}
-          </>
-        ) : (
-          <>
-            <FormUpdate onSubmit={handleSubmit}>
-              <InputUpdate
-                type="text"
-                name="cityUser"
-                value={cityUser}
-                onChange={handleChangeValue}
-              />
-            </FormUpdate>
-            <UserInfoBtn type="button" onClick={handleSubmit}>
-              <img src={done} alt="update information about user" />
-            </UserInfoBtn>
-          </>
-        )}
+        <InputUpdate
+          type="text"
+          name="cityUser"
+          value={cityUser}
+          disabled={updateUser}
+          onChange={handleChangeValue}
+          onSubmit={handleSubmit}
+          autoComplete="off"
+        />
+        <UserInfoBtn type="button" onClick={handleSubmit}>
+          {!updateUser ? (
+            <img src={done} alt="update information about user" />
+          ) : (
+            <img src={edit} alt="update information about user" />
+          )}
+        </UserInfoBtn>
       </UserInfoItem>
-      {/* // =======
-   //     <InputUpdate
-     //     type="text"
-       //   name="cityUser"
-         // value={cityUser}
-         // disabled={updateUser}
-         // onChange={handleChangeValue}
-         // onSubmit={handleSubmit}
-         // autoComplete="off"
-        // />
-    //    <UserInfoBtn type="button" onClick={handleSubmit}>
-    //      {!updateUser ? (
-    //        <img src={done} alt="update information about user" />
-    //      ) : (
-     //       <img src={edit} alt="update information about user" />
-     //     )}
-     //   </UserInfoBtn>
-     // </UserInfoItem>
-// >>>>>>> main */}
     </UserInfoList>
   );
 };
