@@ -14,7 +14,7 @@ import {
 
 
 
-export const ModalNotice = ({ notice, onClose, handleBtnClick}) => {
+export const ModalNotice = ({ notice, onClose, onClick, handleBtnClick}) => {
     const { BASE_URL } = ROUTES;
     const { removePet } = response;
     const userId = useSelector(state => state.auth.id);
@@ -33,6 +33,7 @@ export const ModalNotice = ({ notice, onClose, handleBtnClick}) => {
         console.log(id)
         await removePet(id, token);
         alert('Pet remote')
+        onClick();
     }
     
     return (
