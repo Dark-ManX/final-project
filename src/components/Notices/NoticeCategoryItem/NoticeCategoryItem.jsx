@@ -80,7 +80,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
         <Category>{category}</Category>
 
-        {loggedIn && idOwner && (
+        {userId !== idOwner && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
             className={favorite?.includes(userId) && 'remove'}
@@ -122,6 +122,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
             notice={notice}
             onClose={handleCloseModal}
             handleBtnClick={handleBtnClick}
+            onClick={onClick}
           />
         </Modal>
       )}
