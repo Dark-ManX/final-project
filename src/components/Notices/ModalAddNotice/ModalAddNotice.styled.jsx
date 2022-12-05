@@ -101,7 +101,11 @@ margin-bottom: 32px;
 }
 `;
 
-export const ButtonCategory = styled.button`
+export const InputCategory = styled.input`
+webkit-appearance: none;
+moz-appearance: none;
+appearance: none;
+position: absolute;
 // display: block;
 height: 35px;
 padding: 8px 25px;
@@ -113,6 +117,21 @@ cursor: pointer;
 &:not(:last-child) {
 margin-bottom: 12px;
 }
+
+// &:nth-child(1) {
+// width: 131px;
+// padding: 0px;
+// }
+
+// &:nth-child(2) {
+// width: 155px;
+// padding: 0px;
+// }
+
+// &:nth-child(3) {
+// width: 81px;
+// padding: 0px;
+// }
 
 font-family: 'Manrope';
 font-style: normal;
@@ -130,7 +149,8 @@ order: 0;
 flex-grow: 0;
 
 &:hover,
-&:focus {
+&:focus,
+&:checked {
     background-color: #F59256;
     color: #FFFFFF;
 } 
@@ -158,17 +178,29 @@ flex-direction: column;
 `;
 
 export const Label = styled.label`
+position: relative;
 font-family: 'Manrope';
 font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 26px;
+cursor: pointer;
 
 color: #111111;
 
-&:nth-child(-n + 3) {
 margin-bottom: 16px;
-}
+
+&:hover,
+&:focus,
+&:checked {
+    // background-color: #F59256;
+    // color: #FFFFFF;
+} 
+
+
+// &:nth-child(-n + 3) {
+// margin-bottom: 16px;
+// }
 
 @media screen and (min-width: 768px) {
 font-size: 24px;
@@ -176,9 +208,11 @@ line-height: 26px;
 
 color: #000000;
 
-&:nth-child(-n + 3) {
 margin-bottom: 28px;
-}
+
+// &:nth-child(-n + 3) {
+// margin-bottom: 28px;
+// }
 
 }
 `;
@@ -347,13 +381,39 @@ letter-spacing: 0.04em;
 }
 `;
 
+export const Fieldset = styled.fieldset`
+border: none;
+`;
+
+export const Legend = styled.legend`
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 26px;
+cursor: pointer;
+
+color: #111111;
+
+@media screen and (min-width: 768px) {
+font-size: 24px;
+line-height: 26px;
+
+color: #000000;
+`;
+
 export const ButtonsSexPetContainer = styled.div`
+// position: relative;
 display: flex;
 margin-top: 18px;
 margin-bottom: 50px;
 `;
 
-export const ButtonsSexPet = styled.button`
+export const InputSexPet = styled.input`
+webkit-appearance: none;
+moz-appearance: none;
+appearance: none;
+// position: absolute;
 flex-wrap: wrap;
 width: 40px;
 height: 40px;
@@ -399,6 +459,28 @@ width: 116px;
 height: 116px;
 background-color: #fdf7f2;
 border-radius: 20px;
+cursor: pointer;
+margin-bottom: 20px;
+
+position: absolute;
+inset: 0;
+opacity: 0;
+z-index: 999;
+
+@media screen and (min-width: 768px) {
+width: 140px;
+height: 140px;
+display: block;
+margin-top: 12px;
+}
+`;
+
+export const AddImageButton = styled.button`
+width: 116px;
+height: 116px;
+background-color: #fdf7f2;
+border-radius: 20px;
+border: none;
 
 margin-bottom: 20px;
 
@@ -408,4 +490,11 @@ height: 140px;
 display: block;
 margin-top: 12px;
 }
+`;
+
+export const PetImage = styled.img`
+width: 116px;
+height: 116px;
+object-fit: cover;
+object-position: center;
 `;
