@@ -19,7 +19,6 @@ export const ImageContainer = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   max-width: 320px;
-  height: 952px;
   padding-bottom: 103px;
 
   @media screen and (min-width: 768px) {
@@ -28,6 +27,7 @@ export const ImageContainer = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
     max-width: 768px;
+    height: 952px;
   }
 
   @media screen and (min-width: 1280px) {
