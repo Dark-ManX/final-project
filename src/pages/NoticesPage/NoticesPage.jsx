@@ -1,13 +1,21 @@
 import { response } from 'api';
 import Loading from 'components/Common/Loading/Loading';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoryNav/NoticesCategoryNav';
-import PropTypes from 'prop-types';
 import { Suspense, useEffect, useState } from 'react';
 
+import { MainContainer } from 'components/commonStyles/Container.styled';
+import Modal from 'components/Modal/Modal';
+import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
+import { SearchForm } from 'components/SearchForm/SearchForm';
+import { ReactComponent as AddIcon } from 'icons/addPet.svg';
 import { useSelector } from 'react-redux';
 import { Outlet, useOutletContext } from 'react-router-dom';
-import { MainContainer } from 'components/commonStyles/Container.styled';
-import { SearchForm } from 'components/SearchForm/SearchForm';
+import {
+  AddPet,
+  AddPetBlock,
+  Icon,
+  LinkAddPet,
+} from './ButtonAddNotice.styled';
 import {
   AuthLink,
   AuthLinkContainer,
@@ -17,15 +25,6 @@ import {
   StyledErr,
   Title,
 } from './NoticesPage.styled';
-import Modal from 'components/Modal/Modal';
-import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
-import { ReactComponent as AddIcon } from 'icons/addPet.svg';
-import {
-  AddPet,
-  AddPetBlock,
-  Icon,
-  LinkAddPet,
-} from './ButtonAddNotice.styled';
 
 const NoticesPage = () => {
   const [showModal, setShowModal] = useState(false);
