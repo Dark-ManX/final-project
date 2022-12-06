@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
+import defaultImg from '../../../img/defaultImg.jpg';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
 
@@ -41,10 +42,10 @@ const UserData = () => {
   }, []);
 
   const avatarUser = () => {
-    if (logo) {
-      return `${ROUTES.BASE_URL}/${logo}`;
+    if (logo.includes('https://s.gravatar.com')) {
+      return defaultImg;
     } else {
-      return editPhoto;
+      return `${ROUTES.BASE_URL}/${logo}`;
     }
   };
 
