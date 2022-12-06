@@ -19,7 +19,7 @@ const NoticesCategoryList = () => {
           ))}
         </Gallery>
       ) : (
-        <p>Інформації не знайдено</p>
+        <p>There's no information yet</p>
       )}
     </>
   );

@@ -21,9 +21,11 @@ const SharedLayout = () => {
     }
   };
 
+  console.log('token', token);
+
   useEffect(() => {
     fetchUser(token);
-  }, [token, isActual]);
+  }, [isActual, token]);
 
   return (
     <>

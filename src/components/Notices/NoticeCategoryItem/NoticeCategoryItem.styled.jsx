@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { ReactComponent as AddIcon } from 'icons/add.svg';
+import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 
 export const NoticeCategoryItemStyled = styled.li`
   max-width: 280px;
@@ -142,11 +144,11 @@ export const AddToFavoriteBtn = styled.button`
   &.remove {
     color: rgba(17, 17, 17, 0.6);
   }
-`;
 
-// export const RemoveFromFavoriteBtn = styled(AddToFavoriteBtn)`
-//     color: rgba(17, 17, 17, 0.6);
-// `;
+  & > svg {
+    pointer-events: none;
+  }
+`;
 
 export const CardDetailsContainer = styled.ul`
   list-style: none;

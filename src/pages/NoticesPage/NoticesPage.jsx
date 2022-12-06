@@ -9,7 +9,7 @@ import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import { ReactComponent as AddIcon } from 'icons/addPet.svg';
 import { useSelector } from 'react-redux';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
 import {
   AddPet,
   AddPetBlock,
@@ -34,6 +34,8 @@ const NoticesPage = () => {
   const [count, setCount] = useState(0);
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
 
   const { getNotices, findNotices } = response;
 
@@ -68,9 +70,14 @@ const NoticesPage = () => {
     setCount(count + 1);
   };
 
+  const handleFavoriteClick = () => {
+    setCount(count + 1);
+  };
+
   const handleClick = async e => {
     try {
       const { nodeName, pathname, parentNode } = e.target;
+      console.dir(e.target);
 
       if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
         setOwnQuery(null);
@@ -98,22 +105,20 @@ const NoticesPage = () => {
     }
   };
 
-  const handleFavoriteClick = () => {
-    setCount(count + 1);
-  };
-
   const toggleModal = evt => {
     setShowModal(!showModal);
   };
 
   useEffect(() => {
-    if (!count || query) {
+    if (!count && !query) {
+      navigate('/notices/sell');
       fetchNotices(query);
     } else if (ownQuery) {
       fetchNotices(ownQuery, token);
     } else if (count && search) {
       fetchSearch(search);
     }
+    fetchNotices(query);
 
     document.addEventListener('click', handleClick);
 

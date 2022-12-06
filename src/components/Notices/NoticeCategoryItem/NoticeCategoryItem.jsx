@@ -1,6 +1,7 @@
 import { response } from 'api';
-import {ROUTES} from '../../../routes/routes'
+import { ROUTES } from 'routes/routes';
 import Modal from 'components/Modal/Modal';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
 import { ReactComponent as AddIcon } from 'icons/add.svg';
 import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
@@ -21,7 +22,6 @@ import {
 } from './NoticeCategoryItem.styled';
 
 let category = '';
-
 
 const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
@@ -53,39 +53,41 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
     if (noticesFavr) {
       await removeFromFavorite(id, token);
-      alert('Notice remove from favorite');
+      Notify.success('Notice removed from favorite');
       onClick();
       return;
     } else if (!token) {
-      alert('please login');
+      Notify.warning('Please login');
       return;
     }
 
     await addToFavorite(id, token);
-    alert('Notice add to favorite');
+    Notify.success('Notice added to favorite');
     onClick();
   };
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  console.log(notice);
-  const { photo, comments, favorite, title, breed, place, age, owner } = notice;
+  const { photo, comments, title, breed, place, age, owner } = notice;
   const idOwner = owner._id;
 
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo ? `${BASE_URL}${photo}` : defaultPet} alt={comments} />
+        <Photo
+          src={photo ? `${BASE_URL}${photo}` : defaultPet}
+          alt={comments}
+        />
 
         <Category>{category}</Category>
 
         {userId !== idOwner && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
-            className={favorite?.includes(userId) && 'remove'}
+            className={noticesFavr && 'remove'}
           >
-            {!notice.favorite?.includes(userId) ? (
+            {!noticesFavr ? (
               <AddIcon width="24" height="22" />
             ) : (
               <RemoveIcon width="19.5" height="21" />

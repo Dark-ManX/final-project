@@ -11,7 +11,6 @@ import {
   StyledHeader,
 } from './Header.styled';
 
-
 const Header = ({ state }) => {
   const [shown, setShown] = useState(false);
 
@@ -26,6 +25,8 @@ const Header = ({ state }) => {
       setShown(false);
     }
   };
+
+  console.log(state);
 
   useEffect(() => {
     document.addEventListener('click', handleLinkClick);
@@ -42,7 +43,6 @@ const Header = ({ state }) => {
           <Nav set={shown} />
 
           <AuthUserContainer>
-
             {!state ? <AuthNav /> : <UserNav />}
           </AuthUserContainer>
         </MobileMenu>
