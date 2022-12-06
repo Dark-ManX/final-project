@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Gallery = styled.ul`
   list-style: none;
@@ -8,5 +8,10 @@ export const Gallery = styled.ul`
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
-  };
+  } ;
+`;
+
+export const Text = styled.p`
+  font-size: 26px;
+  line-height: 1.5;
 `;

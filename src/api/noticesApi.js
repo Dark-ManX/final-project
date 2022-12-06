@@ -3,12 +3,13 @@ import axios from 'axios';
 export const fetchNotices = async (url, query, token) => {
   if (!query) {
     const { data } = await axios.get(`${url}/notices/sell`);
-
     const { notices } = data.data;
+
     return notices;
   } else if (!token) {
     const { data } = await axios.get(`${url}/notices/${query}`);
     const { notices } = data.data;
+
     return notices;
   }
   const { data } = await axios({

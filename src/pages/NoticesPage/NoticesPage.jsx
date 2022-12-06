@@ -9,7 +9,7 @@ import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import { ReactComponent as AddIcon } from 'icons/addPet.svg';
 import { useSelector } from 'react-redux';
-import { Outlet, useOutletContext, useNavigate } from 'react-router-dom';
+import { Outlet, useOutletContext } from 'react-router-dom';
 import {
   AddPet,
   AddPetBlock,
@@ -35,33 +35,13 @@ const NoticesPage = () => {
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { getNotices, findNotices } = response;
+  const { getNotices } = response;
 
   const isActual = useOutletContext();
 
   const token = useSelector(state => state.auth.token);
-
-  const fetchNotices = async (req, key) => {
-    try {
-      const res = await getNotices(req, key);
-      setError(false);
-      setNotices(res);
-    } catch (err) {
-      setError(true);
-    }
-  };
-
-  const fetchSearch = async req => {
-    try {
-      const res = await findNotices(req);
-      setError(false);
-      setNotices(res);
-    } catch (err) {
-      setError(true);
-    }
-  };
 
   const handleSubmit = formInput => {
     setOwnQuery(null);
@@ -74,58 +54,71 @@ const NoticesPage = () => {
     setCount(count + 1);
   };
 
-  const handleClick = async e => {
-    try {
-      const { nodeName, pathname, parentNode } = e.target;
-      console.dir(e.target);
-
-      if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
-        setOwnQuery(null);
-        setSearch(null);
-        setCount(count + 1);
-
-        setQuery(pathname.split('/').at(-1));
-
-        return;
-      } else if (
-        nodeName === 'A' &&
-        parentNode.className.includes('own-block')
-      ) {
-        setQuery(null);
-        setSearch(null);
-        setCount(count + 1);
-
-        const path = pathname.split('/').at(-1);
-        setOwnQuery(path);
-
-        return;
-      }
-    } catch (err) {
-      setError(true);
-    }
-  };
-
   const toggleModal = evt => {
     setShowModal(!showModal);
   };
 
   useEffect(() => {
-    if (!count && !query) {
-      navigate('/notices/sell');
-      fetchNotices(query);
-    } else if (ownQuery) {
-      fetchNotices(ownQuery, token);
-    } else if (count && search) {
-      fetchSearch(search);
-    }
-    fetchNotices(query);
+    const fetchNotices = async (req, ownReq, search, key) => {
+      try {
+        if (search) {
+          const res = await getNotices(search);
+          setNotices(res);
+          setError(false);
+          return;
+        } else if (ownReq) {
+          const res = await getNotices(ownReq, key);
+          setError(false);
+          setNotices(res);
+          return;
+        }
+        const res = await getNotices(req);
+        setNotices(res);
+        setError(false);
+      } catch (err) {
+        setError(true);
+      }
+    };
+
+    const handleClick = async e => {
+      try {
+        const { nodeName, pathname, parentNode } = e.target;
+        console.dir(e.target);
+
+        if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
+          setOwnQuery(null);
+          setSearch(null);
+          setCount(count + 1);
+
+          setQuery(pathname.split('/').at(-1));
+
+          return;
+        } else if (
+          nodeName === 'A' &&
+          parentNode.className.includes('own-block')
+        ) {
+          setQuery(null);
+          setSearch(null);
+          setCount(count + 1);
+
+          const path = pathname.split('/').at(-1);
+          setOwnQuery(path);
+
+          return;
+        }
+      } catch (err) {
+        setError(true);
+      }
+    };
 
     document.addEventListener('click', handleClick);
+
+    fetchNotices(query, ownQuery, search, token);
 
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [count]);
+  }, [count, getNotices, ownQuery, query, search, token]);
 
   return (
     <MainContainer>
