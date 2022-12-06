@@ -67,14 +67,13 @@ export const UserInfoText = styled.label`
 `;
 
 export const FormUpdate = styled.form`
-  /* order: 2;
-  width: 150px; */
+  order: 2;
+  width: 150px;
 `;
+
 export const InputUpdate = styled.input`
   order: 2;
   width: 150px;
-
-  /* width: 137px; */
 
   font-weight: 400;
   font-size: 12px;
@@ -98,14 +97,12 @@ export const InputUpdate = styled.input`
     width: 240px;
   }
 
-  &:focus {
-    background: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    padding: 4px 4px 4px 18px;
-    font-size: 15px;
-    line-height: 0;
-  }
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  padding: 0 0 0 18px;
+  font-size: 15px;
+  line-height: 0;
 
   &:focus-visible {
     border: 1px solid transparent;

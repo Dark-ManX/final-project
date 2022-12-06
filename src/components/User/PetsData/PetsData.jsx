@@ -14,18 +14,18 @@ export const PetsData = () => {
   const [pets, setPets] = useState([]);
   const getUserPets = useGetUserPetsQuery();
 
-  const getPets = async () => {
-    const pets = await getUserPets;
-    return pets;
-  };
-
   useEffect(() => {
+    const getPets = async () => {
+      const pets = await getUserPets;
+      return pets;
+    };
+
     getPets()
       .then(({ data }) => {
         setPets(data.data.pets);
       })
       .catch(error => console.log(error.message));
-  }, [getPets]);
+  }, [getUserPets]);
 
   const handleBtnClick = () => setOpenModal(!openModal);
 
