@@ -37,7 +37,7 @@ const NoticesPage = () => {
 
   // const navigate = useNavigate();
 
-  const { getNotices } = response;
+  const { getNotices, findNotices } = response;
 
   const isActual = useOutletContext();
 
@@ -59,27 +59,6 @@ const NoticesPage = () => {
   };
 
   useEffect(() => {
-    const fetchNotices = async (req, ownReq, search, key) => {
-      try {
-        if (search) {
-          const res = await getNotices(search);
-          setNotices(res);
-          setError(false);
-          return;
-        } else if (ownReq) {
-          const res = await getNotices(ownReq, key);
-          setError(false);
-          setNotices(res);
-          return;
-        }
-        const res = await getNotices(req);
-        setNotices(res);
-        setError(false);
-      } catch (err) {
-        setError(true);
-      }
-    };
-
     const handleClick = async e => {
       try {
         const { nodeName, pathname, parentNode } = e.target;
@@ -88,7 +67,7 @@ const NoticesPage = () => {
         if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
           setOwnQuery(null);
           setSearch(null);
-          setCount(count + 1);
+          console.log('query');
 
           setQuery(pathname.split('/').at(-1));
 
@@ -99,7 +78,7 @@ const NoticesPage = () => {
         ) {
           setQuery(null);
           setSearch(null);
-          setCount(count + 1);
+          console.log('ownQuery');
 
           const path = pathname.split('/').at(-1);
           setOwnQuery(path);
@@ -111,14 +90,46 @@ const NoticesPage = () => {
       }
     };
 
-    document.addEventListener('click', handleClick);
+    const fetchNotices = async (req, ownReq, search, key) => {
+      try {
+        if (search) {
+          const res = await findNotices(search);
+          setNotices(res);
+          setError(false);
+          console.log('first');
+
+          return;
+        } else if (ownReq && key) {
+          const res = await getNotices(ownReq, key);
+          setNotices(res);
+          console.log(res);
+
+          setError(false);
+          console.log('second');
+
+          return;
+        }
+        console.log('navigate');
+        const res = await getNotices(req);
+        console.log(req);
+        setNotices(res);
+        setError(false);
+        console.log('last');
+      } catch (err) {
+        setError(true);
+      }
+    };
+
+    console.log(query);
 
     fetchNotices(query, ownQuery, search, token);
+
+    document.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [count, getNotices, ownQuery, query, search, token]);
+  }, [count, findNotices, getNotices, ownQuery, query, search, token]);
 
   return (
     <MainContainer>
@@ -149,6 +160,7 @@ const NoticesPage = () => {
             </AddPetBlock>
           )}
         </Nav>
+
         {showModal && (
           <Modal onClose={toggleModal}>
             <ModalAddNotice onClose={toggleModal} />{' '}

@@ -1,27 +1,18 @@
 import FirstEl from 'components/Auth/RegisterFormEl/FirstEl';
 import SecondEl from 'components/Auth/RegisterFormEl/SecondEl';
-import { MainContainer } from 'components/commonStyles/Container.styled';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRegisterUserMutation } from 'redux/auth/authOperations';
 import {
-  useAddUserInfoMutation,
-  useRegisterUserMutation,
-} from 'redux/auth/authOperations';
-import {
-  FirstContainer,
-  ImageContainer,
-  Form,
-  Input,
-  Section,
-  Title,
   Button,
-  BackBtn,
+  Container,
+  Form,
+  ImageContainer,
   P,
   RegisterContainer,
-  Container,
   StyledLink,
+  Title,
 } from './RegisterPage.styled';
 
 const RegisterPage = () => {
@@ -50,7 +41,7 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  const isId = useSelector(state => state.auth.user.id);
+  // const isId = useSelector(state => state.auth.user.id);
 
   const [registerNewUser] = useRegisterUserMutation();
 

@@ -23,21 +23,21 @@ const OurFriendsPage = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getAllFriends = async () => {
-    try {
-      setIsLoading(true);
-      const res = await getFriends();
-      setArr(res);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getAllFriends = async () => {
+      try {
+        setIsLoading(true);
+        const res = await getFriends();
+        setArr(res);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getAllFriends();
-  }, []);
+  }, [getFriends]);
 
   return (
     <MainContainer>

@@ -12,20 +12,20 @@ const SharedLayout = () => {
 
   const { getUser } = response;
 
-  const fetchUser = async token => {
-    try {
-      await getUser(token);
-      setIsActual(true);
-    } catch (err) {
-      setIsActual(false);
-    }
-  };
-
   console.log('token', token);
 
   useEffect(() => {
+    const fetchUser = async token => {
+      try {
+        await getUser(token);
+        setIsActual(true);
+      } catch (err) {
+        setIsActual(false);
+      }
+    };
+
     fetchUser(token);
-  }, [isActual, token]);
+  }, [getUser, isActual, token]);
 
   return (
     <>
