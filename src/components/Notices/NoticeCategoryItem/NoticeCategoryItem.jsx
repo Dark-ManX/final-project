@@ -23,13 +23,16 @@ import {
 
 let category = '';
 
-const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
+const NoticeCategoryItem = ({ notice, onClick }) => {
+  console.log('notices', notice);
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
 
   const { BASE_URL } = ROUTES;
+
+  console.log(BASE_URL);
   const { addToFavorite, removeFromFavorite } = response;
 
   switch (notice.category) {
@@ -75,10 +78,7 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo
-          src={photo ? `${BASE_URL}${photo}` : defaultPet}
-          alt={comments}
-        />
+        <Photo src={photo ? photo : defaultPet} alt={comments} />
 
         <Category>{category}</Category>
 
