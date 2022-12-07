@@ -20,12 +20,6 @@ const UserData = () => {
 
   const token = useSelector(state => state.auth.token);
 
-  const fetchUser = async token => {
-    const res = await getUser(token);
-    setUser(res);
-    setLogo(res.logo);
-  };
-
   const handleChangeAvatar = async evt => {
     const formData = new FormData();
 
@@ -38,8 +32,14 @@ const UserData = () => {
   };
 
   useEffect(() => {
+    const fetchUser = async token => {
+      const res = await getUser(token);
+      setUser(res);
+      setLogo(res.logo);
+    };
+
     fetchUser(token);
-  }, []);
+  }, [getUser, token]);
 
   const avatarUser = () => {
     if (logo.includes('https://s.gravatar.com')) {

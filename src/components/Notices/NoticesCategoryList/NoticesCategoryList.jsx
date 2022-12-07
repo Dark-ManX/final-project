@@ -1,13 +1,13 @@
 import NoticeCategoryItem from 'components/Notices/NoticeCategoryItem/NoticeCategoryItem';
 import { useOutletContext } from 'react-router-dom';
-import { Gallery } from './NoticesCategoryList.styled';
+import { Gallery, Text } from './NoticesCategoryList.styled';
 
 const NoticesCategoryList = () => {
   const { notices, handleFavoriteClick, isActual } = useOutletContext();
 
   return (
     <>
-      {notices !== [] ? (
+      {notices.length !== 0 ? (
         <Gallery>
           {notices.map(notice => (
             <NoticeCategoryItem
@@ -19,7 +19,7 @@ const NoticesCategoryList = () => {
           ))}
         </Gallery>
       ) : (
-        <p>There's no information yet</p>
+        <Text>There's no information yet</Text>
       )}
     </>
   );

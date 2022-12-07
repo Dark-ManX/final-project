@@ -1,13 +1,9 @@
-import {
-  StyledColoredLink, StyledWhiteLink
-} from './AuthUserNav.styled';
+import { StyledWhiteLink } from './AuthUserNav.styled';
 
 const AuthNav = () => {
   return (
-    
     <>
-      
-      <StyledColoredLink to={'/login'}>Login</StyledColoredLink>
+      <StyledWhiteLink to={'/login'}>Login</StyledWhiteLink>
       <StyledWhiteLink to={'/register'}>Registration</StyledWhiteLink>
     </>
   );

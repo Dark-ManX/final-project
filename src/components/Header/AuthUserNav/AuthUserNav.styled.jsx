@@ -11,7 +11,13 @@ export const StyledWhiteLink = styled(Link)`
   font-size: 14px;
   line-height: calc(19 / 14);
   letter-spacing: 0.04em;
+  transition: background-color 250ms linear;
 
+  &:hover,
+  &:focus {
+    background-color: #f59256;
+    color: white;
+  }
 `;
 
 export const StyledColoredLink = styled(Link)`
