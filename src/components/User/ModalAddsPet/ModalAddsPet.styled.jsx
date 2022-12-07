@@ -2,7 +2,13 @@ import styled from 'styled-components';
 import { ReactComponent as PlusSvgIcon } from 'icons/VectorAddPet.svg';
 
 export const ModalAddPetContainer = styled.div`
-  /* width: 250px; */
+  width: 280px;
+  padding: 40px 20px;
+  
+  @media screen and (min-width: 768px){
+        width: 608px;
+        padding: 40px 80px;
+    }
 `;
 
 export const ModalName = styled.p`
@@ -99,3 +105,15 @@ export const PetImage = styled.img`
   object-fit: cover;
   object-position: center;
 `;
+export const ButtonGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px){
+      padding-left: 32px;
+      padding-right: 32px;
+      flex-direction: unset;
+      justify-content: center;
+      align-items: baseline;     
+    }
+`

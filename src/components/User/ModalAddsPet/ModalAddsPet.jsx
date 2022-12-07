@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Button from 'components/Common/Button/Button';
 import { Input } from 'components/Common/Input/Input';
 import { ReactComponent as Cross } from 'icons/cross.svg';
@@ -15,6 +16,7 @@ import {
   PlusIcon,
   PetImage,
   ModalAddPetContainer,
+  ButtonGroup, 
 } from './ModalAddsPet.styled';
 
 const MODAL_STATE = {
@@ -75,9 +77,12 @@ const AddsPet = ({ onClose }) => {
       return setModalState(MODAL_STATE.UPLOAD_IMAGE);
     }
     if (modalState === MODAL_STATE.UPLOAD_IMAGE) {
-      return setModalState(MODAL_STATE.DONE);
+      setModalState(MODAL_STATE.DONE);
+      createPet(formData);
+      Notify.success('Pet add');
+      onClose();
+      return 
     }
-    createPet(formData);
   };
 
   return (
@@ -154,13 +159,15 @@ const AddsPet = ({ onClose }) => {
             />
           </>
         ) : null}
-
-        <Button
-          type="submit"
-          content={modalState === MODAL_STATE.UPLOAD_IMAGE ? 'Done' : 'Next'}
-          variant="primary"
-        />
-        <Button type="button" content="Cancel" variant="inverse" />
+        <ButtonGroup>
+          <Button
+            type="submit"
+            content={modalState === MODAL_STATE.UPLOAD_IMAGE ? 'Done' : 'Next'}
+            variant="primary"
+            mr='24px'
+          />
+          <Button type="button" onClick={onClose} content="Cancel" variant="inverse" />
+        </ButtonGroup>
       </form>
     </ModalAddPetContainer>
   );

@@ -1,13 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 664px;
+    width: 280px;
+    padding: 60px 20px 40px 20px;
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.4;
     color: #000000;
+    
+    @media screen and (min-width: 768px){
+        width: 704px;
+        padding: 32px 20px;
+    }
 `
 
 export const Description = styled.div`
