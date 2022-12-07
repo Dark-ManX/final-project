@@ -44,7 +44,6 @@ export const ROUTES = {
   },
   NOTICES: {
     //   GET
-    //   value one of (sell,for-free,lost-found)
     getNoticesByCategory: '/notices/:value',
     //   GET
     getNoticeById: '/notices/one/:id',

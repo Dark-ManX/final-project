@@ -139,7 +139,7 @@ const NoticesPage = () => {
           <Category>
             <NoticesCategoriesNav />
 
-            {isActual && (
+            {isActual && token && (
               <AuthLinkContainer className="own-block">
                 <AuthLink to="favorite">Favorite ads</AuthLink>
                 <AuthLink to="owner">My ads</AuthLink>
