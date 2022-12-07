@@ -9,21 +9,27 @@ export const StyledHeader = styled.header`
   z-index: 20;
   opacity: 0;
 
-  @keyframes headerAnimation {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  animation: bounceIn 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 450ms
-      forwards,
-    headerAnimation 150ms linear 450ms forwards;
-
   @media screen and (min-width: 1280px) {
     column-gap: 80px;
+  }
+
+  &.firstLoad {
+    @keyframes headerAnimation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    animation: bounceIn 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 450ms
+        forwards,
+      headerAnimation 150ms linear 450ms forwards;
+  }
+
+  &.notFirstLoad {
+    opacity: 1;
   }
 `;
 

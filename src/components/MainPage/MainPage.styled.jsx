@@ -32,7 +32,9 @@ export const ImageContainer = styled.div`
   display: flex;
   align-items: flex-end;
 
-  animation: zoomIn 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  &.firstLoad {
+    animation: zoomIn 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
 
   @media screen and (min-width: 768px) {
     width: 768px;
@@ -58,18 +60,21 @@ export const Image = styled.img`
   display: block;
   width: 100%;
   margin-top: 58px;
-  transform: translateX(140%);
 
-  @keyframes moveImg {
-    0% {
-      transform: translateX(140%);
+  &.firstImgLoad {
+    transform: translateX(140%);
+
+    @keyframes moveImg {
+      0% {
+        transform: translateX(140%);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
-    100% {
-      transform: translateX(0);
-    }
+
+    animation: moveImg 250ms cubic-bezier(0.215, 0.61, 0.355, 1) 1000ms forwards;
   }
-
-  animation: moveImg 250ms cubic-bezier(0.215, 0.61, 0.355, 1) 1000ms forwards;
 
   @media screen and (min-width: 768px) {
     width: 699px;
@@ -89,19 +94,22 @@ export const Header = styled.h1`
   line-height: calc(44 / 32);
   width: 280px;
   z-index: 1;
-  transform: translateX(-140%);
 
-  @keyframes moveHeader {
-    0% {
-      transform: translateX(-140%);
+  &.firstLoadHeader {
+    transform: translateX(-140%);
+
+    @keyframes moveHeader {
+      0% {
+        transform: translateX(-140%);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
-    100% {
-      transform: translateX(0);
-    }
+
+    animation: moveHeader 250ms cubic-bezier(0.215, 0.61, 0.355, 1) 1000ms
+      forwards;
   }
-
-  animation: moveHeader 250ms cubic-bezier(0.215, 0.61, 0.355, 1) 1000ms
-    forwards;
 
   @media screen and (min-width: 768px) {
     font-size: 68px;
