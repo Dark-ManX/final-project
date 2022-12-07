@@ -56,8 +56,6 @@ export const DeleteBtn = styled.button`
   cursor: pointer;
 
   @media screen and (min-width: 768px) {
-    /* top: 20px;
-    left: 640px; */
     top: 7%;
     left: 91%;
     padding: 10px;

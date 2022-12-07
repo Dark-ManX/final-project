@@ -35,8 +35,6 @@ const NoticesPage = () => {
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(false);
 
-  // const navigate = useNavigate();
-
   const { getNotices, findNotices } = response;
 
   const isActual = useOutletContext();

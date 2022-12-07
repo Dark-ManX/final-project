@@ -10,8 +10,6 @@ export const PetsList = ({ pets }) => {
   const baseUrl = ROUTES.BASE_URL;
   const [deleteUserPet] = useDeleteUserPetMutation();
 
-  // console.log(pets);
-
   return (
     <ul>
       {pets.map(({ _id, photoPet, name, birth, breed, comments }) => {

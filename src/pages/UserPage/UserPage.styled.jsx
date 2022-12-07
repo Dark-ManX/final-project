@@ -4,7 +4,6 @@ export const ContainerInfo = styled.div`
   margin-top: 61px;
 
   @media screen and (min-width: 768px) {
-    /* position: relative; */
     margin-top: 88px;
   }
   @media screen and (min-width: 1280px) {
@@ -23,7 +22,6 @@ export const AboutUser = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
-    /* height: 400px; */
     margin-top: 0;
   }
 `;
@@ -44,7 +42,6 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
   @media screen and (min-width: 768px) {
-    /* position: relative; */
   }
   @media screen and (min-width: 1280px) {
     display: flex;

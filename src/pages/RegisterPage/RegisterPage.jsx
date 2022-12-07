@@ -18,18 +18,6 @@ import {
 const RegisterPage = () => {
   const location = useLocation();
 
-  // const initialState = {
-  //   email: null,
-  //   password: null,
-  //   name: null,
-  //   city: null,
-  //   phone: null,
-  // }
-
-  // const { email, password, name, city, phone } = initialState;
-
-  // const [user, setUser] = useState(initialState);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -41,14 +29,10 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  // const isId = useSelector(state => state.auth.user.id);
-
   const [registerNewUser] = useRegisterUserMutation();
 
-  // To Hide/Show password
   const [showPassword, setShowPassword] = useState(false);
 
-  // To Hide/Show confirm password
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleTypePassword = type => {
