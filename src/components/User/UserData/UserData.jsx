@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
+import defaultImg from '../../../img/defaultImg.jpg';
 import { ROUTES } from 'routes/routes';
 import { response } from 'api';
 
@@ -19,12 +20,6 @@ const UserData = () => {
 
   const token = useSelector(state => state.auth.token);
 
-  const fetchUser = async token => {
-    const res = await getUser(token);
-    setUser(res);
-    setLogo(res.logo);
-  };
-
   const handleChangeAvatar = async evt => {
     const formData = new FormData();
 
@@ -37,14 +32,20 @@ const UserData = () => {
   };
 
   useEffect(() => {
+    const fetchUser = async token => {
+      const res = await getUser(token);
+      setUser(res);
+      setLogo(res.logo);
+    };
+
     fetchUser(token);
-  }, []);
+  }, [getUser, token]);
 
   const avatarUser = () => {
-    if (logo) {
-      return `${ROUTES.BASE_URL}/${logo}`;
+    if (logo.includes('https://s.gravatar.com')) {
+      return defaultImg;
     } else {
-      return editPhoto;
+      return `${ROUTES.BASE_URL}/${logo}`;
     }
   };
 

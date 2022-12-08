@@ -11,7 +11,7 @@ import {
   StyledHeader,
 } from './Header.styled';
 
-const Header = ({ state }) => {
+const Header = ({ state, load }) => {
   const [shown, setShown] = useState(false);
 
   const toggleUser = () => {
@@ -26,7 +26,7 @@ const Header = ({ state }) => {
     }
   };
 
-  console.log(state);
+  console.log(load);
 
   useEffect(() => {
     document.addEventListener('click', handleLinkClick);
@@ -36,7 +36,7 @@ const Header = ({ state }) => {
 
   return (
     <>
-      <StyledHeader>
+      <StyledHeader className={load === true ? 'firstLoad' : 'notFirstLoad'}>
         <Logo />
 
         <MobileMenu className={shown && 'shown'}>

@@ -8,33 +8,51 @@ import { response } from 'api';
 const SharedLayout = () => {
   const [isActual, setIsActual] = useState(false);
 
+  const firstLoadCheck = () => {
+    if (localStorage?.getItem('load')) {
+      const storageData = localStorage.getItem('load');
+      console.log('result', storageData);
+      return JSON.parse(storageData);
+    }
+    return true;
+  };
+
+  const [firstLoad, setFirstLoad] = useState(firstLoadCheck());
+
   const token = useSelector(state => state.auth.token);
 
   const { getUser } = response;
 
-  const fetchUser = async token => {
-    try {
-      await getUser(token);
-      setIsActual(true);
-    } catch (err) {
-      setIsActual(false);
-    }
-  };
-
-  console.log('token', token);
-
   useEffect(() => {
+    const fetchUser = async token => {
+      try {
+        await getUser(token);
+        setIsActual(true);
+      } catch (err) {
+        setIsActual(false);
+      }
+    };
+
+    const timedLoad = () => {
+      setTimeout(() => {
+        setFirstLoad(false);
+        localStorage.setItem('load', JSON.stringify(firstLoad));
+      }, 1250);
+    };
+
+    timedLoad();
+
     fetchUser(token);
-  }, [isActual, token]);
+  }, [firstLoad, getUser, isActual, token]);
 
   return (
     <>
       <MainContainer>
-        <Header state={isActual} />
+        <Header state={isActual} load={firstLoad} />
       </MainContainer>
 
       <Suspense>
-        <Outlet context={isActual} />
+        <Outlet context={{ isActual, firstLoad }} />
       </Suspense>
     </>
   );

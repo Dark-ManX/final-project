@@ -3,12 +3,13 @@ import axios from 'axios';
 export const fetchNotices = async (url, query, token) => {
   if (!query) {
     const { data } = await axios.get(`${url}/notices/sell`);
-
     const { notices } = data.data;
+
     return notices;
   } else if (!token) {
     const { data } = await axios.get(`${url}/notices/${query}`);
     const { notices } = data.data;
+
     return notices;
   }
   const { data } = await axios({
@@ -65,21 +66,3 @@ export const fetchRemovePet = async (url, query, token) => {
 
   return data;
 };
-
-// export const fetchSellNotices = async () => {
-//     const {data} = await axios.get('/notices/sell');
-//     const { notices } = data.data;
-//     return data.data.notices;
-// };
-
-// export const fetchForFreeNotices = async () => {
-//     const {data} = await axios.get('/notices/for-free');
-//     const {notices}
-//     return data.data.notices;
-// };
-
-// export const fetchLostFoundNotices = async () => {
-//     const {data} = await axios.get('/notices/lost-found');
-
-//     return data.data.notices;
-// };

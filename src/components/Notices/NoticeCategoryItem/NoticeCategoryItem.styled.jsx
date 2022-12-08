@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { ReactComponent as AddIcon } from 'icons/add.svg';
-import { ReactComponent as RemoveIcon } from 'icons/remove.svg';
 
 export const NoticeCategoryItemStyled = styled.li`
   max-width: 280px;
@@ -136,17 +134,12 @@ export const AddToFavoriteBtn = styled.button`
   border-radius: 50%;
   border: 1px solid transparent;
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: #f59256;
   }
 
   &.remove {
     color: rgba(17, 17, 17, 0.6);
-  }
-
-  & > svg {
-    pointer-events: none;
   }
 `;
 

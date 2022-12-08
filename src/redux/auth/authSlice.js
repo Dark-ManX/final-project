@@ -37,9 +37,9 @@ const authSlice = createSlice({
           phone: null,
           id: null,
         };
+        state.id = null;
         state.token = null;
-
-        state.isLoading = false;
+        state.isLoggedIn = false;
       }
     );
     builder.addMatcher(authApi.endpoints.currentUser.matchPending, state => {

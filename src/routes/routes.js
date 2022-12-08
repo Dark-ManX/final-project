@@ -1,5 +1,5 @@
 export const ROUTES = {
-  BASE_URL: 'https://blende2.herokuapp.com/',
+  BASE_URL: 'https://blende2.herokuapp.com',
   AUTH: {
     // POST
     create: '/register',
@@ -44,7 +44,6 @@ export const ROUTES = {
   },
   NOTICES: {
     //   GET
-    //   value one of (sell,for-free,lost-found)
     getNoticesByCategory: '/notices/:value',
     //   GET
     getNoticeById: '/notices/one/:id',

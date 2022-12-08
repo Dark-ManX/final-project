@@ -53,6 +53,6 @@ export const EditPhotoBtn = styled.p`
   }
 
   @media screen and (min-width: 768px) {
-    margin-left: 152px;
+    margin-left: 149px;
   }
 `;

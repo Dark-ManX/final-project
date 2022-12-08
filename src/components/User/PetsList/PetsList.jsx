@@ -16,7 +16,7 @@ export const PetsList = ({ pets }) => {
         return (
           <Item key={_id}>
             <Image
-              src={photoPet ? `${defaultPet}` : `${baseUrl}/${photoPet}`}
+              src={!photoPet ? `${defaultPet}` : `${baseUrl}/${photoPet}`}
               alt={name}
             />
             <DeleteBtn onClick={() => deleteUserPet(_id)}>
