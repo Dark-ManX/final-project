@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { response } from 'api';
-import {ROUTES} from '../../../routes/routes'
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { ReactComponent as AddIcon } from "icons/add.svg";
 import { ReactComponent as RemoveIcon } from "icons/remove.svg";
 import { GrClose } from 'react-icons/gr';
@@ -15,7 +15,7 @@ import {
 
 
 export const ModalNotice = ({ notice, onClose, onClick, handleBtnClick}) => {
-    const { BASE_URL } = ROUTES;
+    
     const { removePet } = response;
     const userId = useSelector(state => state.auth.id);
     const token = useSelector(state => state.auth.token);
@@ -32,7 +32,7 @@ export const ModalNotice = ({ notice, onClose, onClick, handleBtnClick}) => {
     const handleRemotePet = async (id) => {
         console.log(id)
         await removePet(id, token);
-        alert('Pet remote')
+        Notify.success('Pet remove');
         onClick();
     }
     
@@ -46,7 +46,7 @@ export const ModalNotice = ({ notice, onClose, onClick, handleBtnClick}) => {
                 </CloseModal>
                 <Description>
                     <CardImageContainer>
-                        <Photo src={`${BASE_URL}${photo}`} alt={name} />
+                        <Photo src={photo} alt={name} />
                         <Category>{category}</Category>
                     </CardImageContainer>
                     <InfoContainer>

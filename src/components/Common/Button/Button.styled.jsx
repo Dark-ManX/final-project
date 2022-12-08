@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 const style = css`
   display: flex;
   align-items: center;
-  display: flex;
   flex-direction: column;
   width: ${({ width }) => width ?? '100%'};
   height: ${({ height }) => height ?? 'initial'};

@@ -25,6 +25,6 @@ export const ModalBody = styled.div`
   transform: translate(-50%, -45vh);
   background-color: white;
   border-radius: 25px;
-  padding: 40px 20px 40px 20px;
+  // padding: 40px 20px 40px 20px;
   overflow: hidden;
 `;

@@ -1,5 +1,4 @@
 import { response } from 'api';
-import { ROUTES } from 'routes/routes';
 import Modal from 'components/Modal/Modal';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { ModalNotice } from 'components/Notices/ModalNotice/ModalNotice';
@@ -30,9 +29,6 @@ const NoticeCategoryItem = ({ notice, onClick }) => {
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
 
-  const { BASE_URL } = ROUTES;
-
-  console.log(BASE_URL);
   const { addToFavorite, removeFromFavorite } = response;
 
   switch (notice.category) {
@@ -78,7 +74,11 @@ const NoticeCategoryItem = ({ notice, onClick }) => {
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-        <Photo src={photo ? photo : defaultPet} alt={comments} />
+
+        <Photo
+          src={photo ? photo : defaultPet}
+          alt={comments}
+        />
 
         <Category>{category}</Category>
 
