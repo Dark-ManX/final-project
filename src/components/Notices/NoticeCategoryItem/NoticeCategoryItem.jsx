@@ -22,8 +22,7 @@ import {
 
 let category = '';
 
-const NoticeCategoryItem = ({ notice, onClick }) => {
-  console.log('notices', notice);
+const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const [showModal, setShowModal] = useState(false);
 
   const userId = useSelector(state => state.auth.id);
@@ -74,11 +73,7 @@ const NoticeCategoryItem = ({ notice, onClick }) => {
   return (
     <NoticeCategoryItemStyled>
       <CardImageContainer>
-
-        <Photo
-          src={photo ? photo : defaultPet}
-          alt={comments}
-        />
+        <Photo src={photo ? photo : defaultPet} alt={comments} />
 
         <Category>{category}</Category>
 
