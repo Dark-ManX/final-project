@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { response } from 'api';
 import Error from 'components/Error/Error';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import defaultImg from 'img/defaultImg.jpg';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
@@ -13,28 +13,30 @@ import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 const UserData = () => {
   const [error, setError] = useState(false);
   const [user, setUser] = useState([]);
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(null);
   const [updateAvatar] = useUpdateAvatarMutation();
-
-  console.log('user', avatar);
 
   const { getUser } = response;
 
   const token = useSelector(state => state.auth.token);
 
   const handleChangeAvatar = async evt => {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-    formData.append('avatar', evt.target.files[0]);
-    console.log(formData);
-    const {
-      data: { avatarURL },
-    } =
+      formData.append('avatar', evt.target.files[0]);
+      console.log(formData);
+      // const {
+      //   data: { avatarURL },
+      // } =
       // console.log('formData :>> ', formData);
       await updateAvatar(formData);
 
-    // console.log(avatarURL);
-    // setAvatar(avatarURL);
+      // console.log(avatarURL);
+      // setAvatar(avatarURL);
+    } catch (err) {
+      setAvatar(defaultImg);
+    }
   };
 
   useEffect(() => {
@@ -59,12 +61,13 @@ const UserData = () => {
   //   }
   // };
 
+  console.log(avatar);
   return (
     <UserInfo>
       {!error ? (
         <>
           <Avatar>
-            <ImgUser src={user.logo ? user.logo : defaultImg} alt={user.name} />
+            <ImgUser src={avatar ? avatar : user.logo} alt={user.name} />
             <label>
               <input
                 type="file"
