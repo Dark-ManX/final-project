@@ -1,5 +1,5 @@
 import { response } from 'api';
-import Error from 'components/Error/Error';
+import Error from 'components/Common/Error/Error';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import defaultImg from 'img/defaultImg.jpg';

@@ -4,7 +4,7 @@ import EllipsisText from 'react-ellipsis-text';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import { response } from 'api';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import Error from 'components/Common/Error/Error';
 import { MainContainer } from 'components/commonStyles/Container.styled';
 import {
   NewsPageTitle,
@@ -52,7 +52,7 @@ const NewsPages = () => {
         const data = await response.getNews(newsName);
         setResultQuery(data);
       } catch (error) {
-        setError(error.message);
+        setError(true);
         console.error(error.message);
         setSearchParams();
       } finally {

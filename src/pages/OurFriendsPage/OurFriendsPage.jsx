@@ -1,7 +1,7 @@
 import { response } from 'api';
 import { useEffect, useState } from 'react';
 import Loading from 'components/Loading/Loading';
-import Error from 'components/Error/Error';
+import Error from 'components/Common/Error/Error';
 import { MainContainer } from 'components/commonStyles/Container.styled';
 import {
   Anchor,
