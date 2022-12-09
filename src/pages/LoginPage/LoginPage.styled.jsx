@@ -31,8 +31,9 @@ export const ImageContainer = styled.div`
   }
   @media screen and (min-width: 1280px) {
     top: 20px;
-    left: 0;
+    height: 700px;
     background-image: url(${Waves});
+    margin: 0 auto;
   }
 `;
 export const Container = styled.div`
@@ -40,13 +41,9 @@ export const Container = styled.div`
 
   @media screen and (min-width: 480px) and (max-width: 767px) {
     width: 480px;
-    margin: 0 auto;
   }
 
   @media screen and (min-width: 768px) {
-    top: -300px;
-    left: 110px;
-    position: absolute;
     width: 608px;
     height: 517px;
     background: #ffffff;
@@ -54,8 +51,7 @@ export const Container = styled.div`
     border-radius: 40px;
   }
   @media screen and (min-width: 1280px) {
-    top: 20px;
-    left: 450px;
+    margin: 80px auto;
     width: 618px;
     height: 449px;
   }

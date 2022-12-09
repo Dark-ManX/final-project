@@ -74,50 +74,48 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <Section>
-        <ImageContainer>
-          <Container>
-            <Title>Login</Title>
-            <Form onSubmit={handleSubmit}>
+    <Section>
+      <ImageContainer>
+        <Container>
+          <Title>Login</Title>
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              required
+            />
+            <EyeContainer>
               <Input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                name="password"
+                placeholder="Password"
                 onChange={handleChange}
                 required
+                minlength="7"
+                maxlength="32"
               />
-              <EyeContainer>
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  required
-                  minlength="7"
-                  maxlength="32"
-                />
-                <EyeSymbol
-                  onClick={() => setshowPassword(prevState => !prevState)}
-                >
-                  {showPassword ? <BsEye /> : <BsEyeSlash />}
-                </EyeSymbol>
-              </EyeContainer>
+              <EyeSymbol
+                onClick={() => setshowPassword(prevState => !prevState)}
+              >
+                {showPassword ? <BsEye /> : <BsEyeSlash />}
+              </EyeSymbol>
+            </EyeContainer>
 
-              <Button type="submit">Login</Button>
-              <P>
-                Don`t have an account?`
-                <Link to={`/register`} state={{ from: location }}>
-                  <Span> Register</Span>
-                </Link>
-              </P>
-            </Form>
-          </Container>
-        </ImageContainer>
-      </Section>
-    </>
+            <Button type="submit">Login</Button>
+            <P>
+              Don`t have an account?`
+              <Link to={`/register`} state={{ from: location }}>
+                <Span> Register</Span>
+              </Link>
+            </P>
+          </Form>
+        </Container>
+      </ImageContainer>
+    </Section>
   );
 };
 
