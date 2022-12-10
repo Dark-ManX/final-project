@@ -19,10 +19,17 @@ import {
   Fieldset,
   Form,
   Input,
-  InputCategory,
+  InputCategoryContainer,
+  LabelCategoryLost,
+  LabelCategoryGoodHands,
+  LabelCategorySell,
+  InputLostCategory,
+  InputCategoryGoodHands,
+  InputCategorySell,
   InputFile,
   InputSexPet,
   Label,
+  LabelSexPet,
   Legend,
   P,
   PetImage,
@@ -34,16 +41,20 @@ import {
 import styled from 'styled-components';
 
 const MaleSvg = styled(Male)`
+margin-bottom: 14px;
   @media screen and (min-width: 768px) {
     width: 60px;
     height: 60px;
+    margin-bottom: 20px;
   }
 `;
 
 const FemaleSvg = styled(Female)`
+margin-bottom: 12px;
   @media screen and (min-width: 768px) {
     width: 60px;
     height: 60px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -66,11 +77,11 @@ const ModalAddNotice = ({ onClose }) => {
   const [comments, setComments] = useState('');
   const [sex, setSex] = useState('');
   const [location, setLocation] = useState('');
-  const [price, setPrice] = useState('0');
+  const [price, setPrice] = useState('');
   const [photoPet, setPhotoPet] = useState(null);
 
   const [page, setPage] = useState(true);
-
+  
   const [createNotice] = useCreateNoticeMutation();
 
   const handleChange = e => {
@@ -113,6 +124,7 @@ const ModalAddNotice = ({ onClose }) => {
   };
 
   const addNewNotice = e => {
+    e.preventDefault();
     if (title === '' || petName === '' || birth === '' || breed === '') {
       return Notiflix.Notify.failure('All fields must be filled');
     }
@@ -137,18 +149,20 @@ const ModalAddNotice = ({ onClose }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (location === '' || photoPet === '') {
+    if (location === '' || photoPet === null || comments === '') {
       return Notiflix.Notify.failure('All fields must be filled');
     }
     if (sex === '') {
       return Notiflix.Notify.failure('Please, choose sex');
     }
+
     createNotice(formData);
+    Notiflix.Notify.success('Ad has been successfully created');
+
     onClose();
   };
 
   return (
-    <>
       <Container>
         <CloseButton type="button" onClick={onClose}>
           <CloseCrossIcon />
@@ -157,60 +171,79 @@ const ModalAddNotice = ({ onClose }) => {
         <Title>Add pet</Title>
 
         {page ? (
-          <Form onSubmit={addNewNotice}>
-            <P>
+          <>
+          <P>
               Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
               amet, consectetur
             </P>
+          
+          <Form>
 
-            <ButtonsCategoryContainer>
-              <Label>
-                <InputCategory
+              <ButtonsCategoryContainer>
+                <InputCategoryContainer>
+                <InputLostCategory
+                  id="categoryLost"
                   name="category"
                   type="radio"
                   value="lost-found"
                   onChange={handleChange}
                   checked={category === 'lost-found'}
                 />
-                Lost-found
-              </Label>
-              <Label>
-                <InputCategory
+                {category === "lost-found" ?<LabelCategoryLost htmlFor='categoryLost' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
+                lost-found
+                </LabelCategoryLost> : <LabelCategoryLost htmlFor='categoryLost'>
+                lost-found
+                  </LabelCategoryLost>}
+                </InputCategoryContainer>
+                
+                <InputCategoryContainer>
+                <InputCategoryGoodHands
+                  id="categoryGoodHands"
                   name="category"
                   type="radio"
                   value="in-good-hands"
                   onChange={handleChange}
                   checked={category === 'in-good-hands'}
                 />
-                In good hands
-              </Label>
-              <Label>
-                <InputCategory
+                {category === "in-good-hands" ? <LabelCategoryGoodHands htmlFor='categoryGoodHands' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
+                  In good hands
+                </LabelCategoryGoodHands> : <LabelCategoryGoodHands htmlFor='categoryGoodHands'>
+                  In good hands
+                </LabelCategoryGoodHands>}
+                </InputCategoryContainer>
+
+                <InputCategoryContainer>
+                <InputCategorySell
+                  id="categorySell"
                   name="category"
                   type="radio"
                   value="sell"
                   onChange={handleChange}
                   checked={category === 'sell'}
                 />
-                Sell
-              </Label>
+                {category === "sell" ? <LabelCategorySell htmlFor='categorySell' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
+                  sell
+                </LabelCategorySell> : <LabelCategorySell htmlFor='categorySell'>
+                  sell
+                </LabelCategorySell>}
+                  </InputCategoryContainer>
             </ButtonsCategoryContainer>
 
             <Label>
               Tittle of ad
-              <Span>*</Span>
+              <Span>*</Span>:
               <Input
                 type="text"
                 name="title"
                 value={title}
-                placeholder="Type name pet"
+                placeholder="Type name"
                 onChange={handleChange}
                 required
               />
             </Label>
             <Label>
               Name pet
-              <Span>*</Span>
+              <Span>*</Span>:
               <Input
                 type="text"
                 name="petName"
@@ -222,7 +255,7 @@ const ModalAddNotice = ({ onClose }) => {
             </Label>
             <Label>
               Date of birth
-              <Span>*</Span>
+              <Span>*</Span>:
               <Input
                 type="text"
                 name="birth"
@@ -234,7 +267,7 @@ const ModalAddNotice = ({ onClose }) => {
             </Label>
             <Label>
               Breed
-              <Span>*</Span>
+              <Span>*</Span>:
               <Input
                 type="text"
                 name="breed"
@@ -253,7 +286,8 @@ const ModalAddNotice = ({ onClose }) => {
                 Cancel
               </ButtonsSubmitWhite>
             </ButtonsSubmitContainer>
-          </Form>
+            </Form>
+            </>
         ) : (
           <Form>
             <Fieldset>
@@ -261,20 +295,23 @@ const ModalAddNotice = ({ onClose }) => {
                 The sex<Span>*</Span>:
               </Legend>
               <ButtonsSexPetContainer>
-                <Label>
-                  <InputSexPet
+
+                  <LabelSexPet htmlFor='sexPetMale'>
+                    <InputSexPet
+                    id="sexPetMale"
                     name="sex"
                     type="radio"
                     value="male"
                     onChange={handleChange}
                     checked={sex === 'male'}
                   />
-                  <MaleSvg />
+                    <MaleSvg />
                   Male
-                </Label>
+                    </LabelSexPet>
 
-                <Label>
-                  <InputSexPet
+                    <LabelSexPet htmlFor='sexPetFemale'>
+                    <InputSexPet
+                    id="sexPetFemale"
                     name="sex"
                     type="radio"
                     value="female"
@@ -283,7 +320,8 @@ const ModalAddNotice = ({ onClose }) => {
                   />
                   <FemaleSvg />
                   Female
-                </Label>
+                  </LabelSexPet>
+                  
               </ButtonsSexPetContainer>
             </Fieldset>
 
@@ -293,26 +331,24 @@ const ModalAddNotice = ({ onClose }) => {
                 type="text"
                 name="location"
                 value={location}
-                placeholder="Type name pet"
+                placeholder="Type location"
                 onChange={handleChange}
                 required
               />
             </Label>
-            {category === 'sell' ? (
-              <>
+            {category === 'sell' && (
                 <Label>
                   Price<Span>*</Span>:
                   <Input
                     type="text"
                     name="price"
                     value={price}
-                    placeholder="Type date of birth"
+                    placeholder="Type price"
                     onChange={handleChange}
                     required
                   />
                 </Label>
-              </>
-            ) : null}
+            )}
 
             <Label htmlFor="uploadFile">
               Load the pet’s image<Span>*</Span>:
@@ -320,21 +356,22 @@ const ModalAddNotice = ({ onClose }) => {
                 <AddImageButton type="button">
                   <DefaultCross width="47.33" height="47.33" />
                   <InputFile
+                    multiple
                     id="uploadFile"
                     type="file"
                     name="photoPet"
-                    value={photoPet}
+                    // value={photoPet}
                     onChange={handleChange}
                     required
                   />
                 </AddImageButton>
               ) : null}
               {photoPet ? (
-                <PetImage src={URL.createObjectURL(photoPet)} alt={petName} />
+                  <PetImage src={URL.createObjectURL(photoPet)} alt={petName} />
               ) : null}
             </Label>
             <Label>
-              Comments<Span>*</Span>:
+              Comments<Span>*</Span>
               <Textarea
                 name="comments"
                 value={comments}
@@ -354,7 +391,6 @@ const ModalAddNotice = ({ onClose }) => {
           </Form>
         )}
       </Container>
-    </>
   );
 };
 
