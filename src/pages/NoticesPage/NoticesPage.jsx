@@ -13,14 +13,12 @@ import { Outlet, useOutletContext } from 'react-router-dom';
 import {
   AddPet,
   AddPetBlock,
-  Icon,
-  LinkAddPet,
-} from './ButtonAddNotice.styled';
-import {
   AuthLink,
   AuthLinkContainer,
   Category,
   Container,
+  Icon,
+  LinkAddPet,
   Nav,
   StyledErr,
   Title,

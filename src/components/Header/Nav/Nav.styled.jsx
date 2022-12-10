@@ -24,13 +24,13 @@ export const NavigationLink = styled(NavLink)`
   transition-property: color, text-decoration-line, transform;
   transition-duration: 250ms, 250ms, 250ms;
 
-    @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     font-weight: 500;
     font-size: 48px;
     line-height: calc(66 / 48);
   }
 
-    @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     font-size: 20px;
     line-height: calc(27 / 20);
   }
@@ -41,17 +41,16 @@ export const NavigationLink = styled(NavLink)`
     text-decoration-line: underline;
     transform: scale(1.1);
   }
-`
+`;
 export const Navigation = styled.nav`
   text-align: center;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     position: absolute;
-    background-color: #FDF7F2;
+    background-color: #fdf7f2;
     top: 25px;
-    right: -115px;
     width: 768px;
-    height: 0;
+    height: auto;
     padding-top: 108px;
     opacity: 0;
     pointer-events: none;
@@ -63,24 +62,28 @@ export const Navigation = styled.nav`
       transform: scaleY(1);
       opacity: 1;
       width: 768px;
-      height: 110vh;
+      height: 1121px;
       visibility: visible;
       pointer-events: auto;
+      overflow-y: hidden;
     }
   }
 
-    @media screen and (min-width: 1280px) {
-      position: static;
-      padding: 0;
-    }
-
-
-`
+  @media screen and (min-width: 1280px) {
+    position: static;
+    padding: 0;
+  }
+`;
 
 export const List = styled.ul`
+  position: relative;
+
+  /* body:has(&) {
+    overflow-y: hidden;
+  } */
 
   @media screen and (min-width: 1280px) {
     display: flex;
     column-gap: 80px;
-}
-`
+  }
+`;

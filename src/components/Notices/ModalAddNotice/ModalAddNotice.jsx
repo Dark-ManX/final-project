@@ -1,12 +1,7 @@
+import { ReactComponent as DefaultCross } from 'icons/default-cross.svg';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
 import { useCreateNoticeMutation } from 'redux/auth/authOperations';
-
-import { ReactComponent as CloseCross } from '../../../icons/cross.svg';
-import { ReactComponent as DefaultCross } from '../../../icons/default-cross.svg';
-import { ReactComponent as Female } from '../../../icons/female.svg';
-import { ReactComponent as Male } from '../../../icons/male.svg';
-
 import {
   AddImageButton,
   ButtonsCategoryContainer,
@@ -15,7 +10,9 @@ import {
   ButtonsSubmitContainer,
   ButtonsSubmitWhite,
   CloseButton,
+  CloseCrossIcon,
   Container,
+  FemaleSvg,
   Fieldset,
   Form,
   Input,
@@ -24,38 +21,14 @@ import {
   InputSexPet,
   Label,
   Legend,
+  MaleSvg,
   P,
   PetImage,
+  RadioLabel,
   Span,
   Textarea,
   Title,
 } from './ModalAddNotice.styled';
-
-import styled from 'styled-components';
-
-const MaleSvg = styled(Male)`
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
-`;
-
-const FemaleSvg = styled(Female)`
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
-`;
-
-const CloseCrossIcon = styled(CloseCross)`
-  width: 15px;
-  height: 15px;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-`;
 
 const ModalAddNotice = ({ onClose }) => {
   const [title, setTitle] = useState('');
@@ -164,7 +137,7 @@ const ModalAddNotice = ({ onClose }) => {
             </P>
 
             <ButtonsCategoryContainer>
-              <Label>
+              <RadioLabel>
                 <InputCategory
                   name="category"
                   type="radio"
@@ -173,8 +146,9 @@ const ModalAddNotice = ({ onClose }) => {
                   checked={category === 'lost-found'}
                 />
                 Lost-found
-              </Label>
-              <Label>
+              </RadioLabel>
+
+              <RadioLabel>
                 <InputCategory
                   name="category"
                   type="radio"
@@ -183,8 +157,9 @@ const ModalAddNotice = ({ onClose }) => {
                   checked={category === 'in-good-hands'}
                 />
                 In good hands
-              </Label>
-              <Label>
+              </RadioLabel>
+
+              <RadioLabel>
                 <InputCategory
                   name="category"
                   type="radio"
@@ -193,7 +168,7 @@ const ModalAddNotice = ({ onClose }) => {
                   checked={category === 'sell'}
                 />
                 Sell
-              </Label>
+              </RadioLabel>
             </ButtonsCategoryContainer>
 
             <Label>

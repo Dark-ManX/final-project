@@ -15,7 +15,7 @@ import {
 } from './LoginPage.styled';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
-import Notiflix from 'notiflix';
+import Notiflix, { Notify } from 'notiflix';
 
 const LoginPage = () => {
   const location = useLocation();
@@ -42,12 +42,22 @@ const LoginPage = () => {
   };
 
   const loginNewUser = async () => {
-    const newUser = {
-      email,
-      password,
-    };
-    await loginUser(newUser);
-    navigate('/user', { replace: true });
+    try {
+      const newUser = {
+        email,
+        password,
+      };
+      const res = await loginUser(newUser);
+      console.log(res);
+
+      if (res?.data) {
+        navigate('/user');
+      }
+      const { message } = res.error.data;
+      Notify.failure(message);
+    } catch (err) {
+      Notify.failure(err.message);
+    }
   };
 
   const handleSubmit = event => {
@@ -105,7 +115,9 @@ const LoginPage = () => {
               </EyeSymbol>
             </EyeContainer>
 
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={!email || !password}>
+              Login
+            </Button>
             <P>
               Don`t have an account?`
               <Link to={`/register`} state={{ from: location }}>

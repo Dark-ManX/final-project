@@ -43,6 +43,7 @@ const UserData = () => {
     const fetchUser = async token => {
       try {
         const res = await getUser(token);
+
         setUser(res);
       } catch (err) {
         setError(true);

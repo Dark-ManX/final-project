@@ -1,24 +1,28 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.li`
   padding: 12px 17px 12px 4px;
   border-radius: 20px;
   background-color: white;
   color: black;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 40px;
+
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
 `;
 
-export const FriendsThumb = styled.div`
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 12px;
+export const FriendsThumb = styled.ul`
+  margin: 40px 0 100px;
   font-weight: 500;
   font-size: 12px;
   line-height: calc(16 / 12);
 
   @media screen and (min-width: 768px) {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 32px;
   }

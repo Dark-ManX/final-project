@@ -133,6 +133,11 @@ export const Button = styled.button`
   font-size: 18px;
   line-height: 24px;
 
+  &:disabled {
+    background-color: #c2c2c2;
+    color: #616161;
+  }
+
   @media screen and (min-width: 768px) {
     line-height: 27px;
     font-weight: 500;

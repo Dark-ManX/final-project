@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { ReactComponent as CloseCross } from 'icons/cross.svg';
+import { ReactComponent as Female } from 'icons/female.svg';
+import { ReactComponent as Male } from 'icons/male.svg';
 
 export const Container = styled.div`
   overflow-y: auto;
@@ -6,7 +9,7 @@ export const Container = styled.div`
   width: 280px;
   display: block;
   margin: 0 auto;
-
+  padding: 40px 20px;
   background: #ffffff;
   border-radius: 20px;
 
@@ -99,37 +102,42 @@ export const ButtonsCategoryContainer = styled.div`
   }
 `;
 
-export const InputCategory = styled.input`
-  appearance: none;
-  position: absolute;
-  // display: block;
+export const InputCategory = styled.input.attrs({
+  type: 'radio',
+})`
+  /* position: relative;
+  top: 0;
+  left: 0; */
+  display: none;
+  /* position: absolute; */
+  /* display: block;
   height: 35px;
   padding: 8px 25px;
   border: 2px solid #f59256;
   border-radius: 40px;
-  background-color: transparent;
-  cursor: pointer;
+  background-color: transparent; */
+  /* cursor: pointer;
 
   &:not(:last-child) {
     margin-bottom: 12px;
   }
 
-  // &:nth-child(1) {
-  // width: 131px;
-  // padding: 0px;
-  // }
+  &:nth-child(1) {
+    width: 131px;
+    padding: 0px;
+  }
 
-  // &:nth-child(2) {
-  // width: 155px;
-  // padding: 0px;
-  // }
+  &:nth-child(2) {
+    width: 155px;
+    padding: 0px;
+  }
 
-  // &:nth-child(3) {
-  // width: 81px;
-  // padding: 0px;
-  // }
+  &:nth-child(3) {
+    width: 81px;
+    padding: 0px;
+  } */
 
-  font-family: 'Manrope';
+  /* font-family: 'Manrope';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -143,28 +151,29 @@ export const InputCategory = styled.input`
   flex: none;
   order: 0;
   flex-grow: 0;
+*/
 
-  &:hover,
+  /* &:hover,
   &:focus,
-  &:checked {
+  &:checked + label {
     background-color: #f59256;
     color: #ffffff;
-  }
+  } */
 
-  &:not(:last-child) {
+  /* &:not(:last-child) {
     margin-right: 8px;
-  }
+  } */
 
-  @media screen and (min-width: 768px) {
+  /* @media screen and (min-width: 768px) {
     font-size: 20px;
     line-height: 27px;
     height: 47px;
 
     &:not(:last-child) {
       margin-right: 12px;
-      margin-bottom: 16 px;
+      margin-bottom: 16px;
     }
-  }
+  } */
 `;
 
 export const Form = styled.form`
@@ -173,41 +182,44 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
+export const RadioLabel = styled.label`
+  display: block;
+  padding: 8px 25px;
+  border: 2px solid #f59256;
+  border-radius: 40px;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:has(input:checked) {
+    background-color: #f59256;
+    color: #ffffff;
+  }
+`;
+
 export const Label = styled.label`
   position: relative;
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  line-height: 26px;
+  line-height: calc(26 / 18);
   cursor: pointer;
 
   color: #111111;
 
-  margin-bottom: 16px;
-
-  &:hover,
-  &:focus,
-  &:checked {
-    // background-color: #F59256;
-    // color: #FFFFFF;
+  &:nth-child(-n + 3) {
+    margin-bottom: 16px;
   }
-
-  // &:nth-child(-n + 3) {
-  // margin-bottom: 16px;
-  // }
 
   @media screen and (min-width: 768px) {
     font-size: 24px;
     line-height: 26px;
-
     color: #000000;
-
     margin-bottom: 28px;
 
-    // &:nth-child(-n + 3) {
-    // margin-bottom: 28px;
-    // }
+    &:nth-child(-n + 3) {
+      margin-bottom: 28px;
+    }
   }
 `;
 
@@ -217,7 +229,6 @@ export const Span = styled.span`
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
-
   color: #f59256;
 
   @media screen and (min-width: 768px) {
@@ -486,4 +497,28 @@ export const PetImage = styled.img`
   height: 116px;
   object-fit: cover;
   object-position: center;
+`;
+
+export const MaleSvg = styled(Male)`
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+export const FemaleSvg = styled(Female)`
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+export const CloseCrossIcon = styled(CloseCross)`
+  width: 15px;
+  height: 15px;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
