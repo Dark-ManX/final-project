@@ -47,21 +47,25 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const noticesFavr = notice.favorite?.includes(userId);
 
   const handleBtnClick = async id => {
-    id = notice._id;
+    try {
+      id = notice._id;
 
-    if (noticesFavr) {
-      await removeFromFavorite(id, token);
-      Notify.success('Notice removed from favorite');
+      if (noticesFavr && loggedIn) {
+        await removeFromFavorite(id, token);
+        Notify.success('Notice removed from favorite');
+        onClick();
+        return;
+      } else if (!loggedIn) {
+        Notify.warning('Please login');
+        return;
+      }
+
+      await addToFavorite(id, token);
+      Notify.success('Notice added to favorite');
       onClick();
-      return;
-    } else if (!token) {
-      Notify.warning('Please login');
-      return;
+    } catch (err) {
+      Notify.failure(err.message);
     }
-
-    await addToFavorite(id, token);
-    Notify.success('Notice added to favorite');
-    onClick();
   };
 
   const handleOpenModal = () => setShowModal(true);
@@ -80,9 +84,9 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
         {userId !== idOwner && (
           <AddToFavoriteBtn
             onClick={handleBtnClick}
-            className={noticesFavr && 'remove'}
+            className={noticesFavr && loggedIn && 'remove'}
           >
-            {!noticesFavr ? (
+            {!noticesFavr || !loggedIn ? (
               <AddIcon width="24" height="22" />
             ) : (
               <RemoveIcon width="19.5" height="21" />

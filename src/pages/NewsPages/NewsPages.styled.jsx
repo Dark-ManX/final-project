@@ -31,10 +31,12 @@ export const NewsSet = styled.ul`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
+
 export const NewsItem = styled.li`
   display: flex;
   flex-direction: column;
 `;
+
 export const NewsItemRectangle = styled.span`
   display: block;
   margin-bottom: 4px;

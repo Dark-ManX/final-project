@@ -8,16 +8,7 @@ import { response } from 'api';
 const SharedLayout = () => {
   const [isActual, setIsActual] = useState(false);
 
-  const firstLoadCheck = () => {
-    if (localStorage?.getItem('load')) {
-      const storageData = localStorage.getItem('load');
-      console.log('result', storageData);
-      return JSON.parse(storageData);
-    }
-    return true;
-  };
-
-  const [firstLoad, setFirstLoad] = useState(firstLoadCheck());
+  const firstLoad = true;
 
   const token = useSelector(state => state.auth.token);
 
@@ -32,15 +23,6 @@ const SharedLayout = () => {
         setIsActual(false);
       }
     };
-
-    const timedLoad = () => {
-      setTimeout(() => {
-        setFirstLoad(false);
-        localStorage.setItem('load', JSON.stringify(firstLoad));
-      }, 1250);
-    };
-
-    timedLoad();
 
     fetchUser(token);
   }, [firstLoad, getUser, isActual, token]);

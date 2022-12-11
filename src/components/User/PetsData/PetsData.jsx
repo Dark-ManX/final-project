@@ -11,20 +11,25 @@ import { Container, AddBtn, ContainerTitle } from './PetsData.styled';
 
 export const PetsData = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [pets, setPets] = useState([]);
+  const [pet, setPet] = useState([]);
   const getUserPets = useGetUserPetsQuery();
 
   useEffect(() => {
     const getPets = async () => {
-      const pets = await getUserPets;
-      return pets;
+      try {
+        const { data } = await getUserPets;
+        const { pets } = data.data;
+        setPet(pets);
+      } catch (err) {
+        console.log(err.message);
+      }
     };
 
-    getPets()
-      .then(({ data }) => {
-        setPets(data.data.pets);
-      })
-      .catch(error => console.log(error.message));
+    getPets();
+    // .then(({ data }) => {
+    //   setPets(data.data.pets);
+    // })
+    // .catch(error => console.log(error.message));
   }, [getUserPets]);
 
   const handleBtnClick = () => setOpenModal(!openModal);
@@ -40,7 +45,7 @@ export const PetsData = () => {
           </AddBtn>
         </Title>
       </ContainerTitle>
-      <PetsList pets={pets} />
+      <PetsList pets={pet} />
       {openModal && (
         <Modal onClose={handleBtnClick}>
           <ModalAddsPet onClose={handleBtnClick} />

@@ -26,8 +26,6 @@ const Header = ({ state, load }) => {
     }
   };
 
-  console.log(load);
-
   useEffect(() => {
     document.addEventListener('click', handleLinkClick);
 

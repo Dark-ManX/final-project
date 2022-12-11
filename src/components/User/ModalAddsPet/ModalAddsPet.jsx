@@ -73,7 +73,7 @@ const AddsPet = ({ onClose }) => {
   formData.append('photoPet', photoPet);
   formData.append('comments', comments);
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     try {
       console.log(formData.name);
       e.preventDefault();
@@ -82,7 +82,7 @@ const AddsPet = ({ onClose }) => {
       }
       if (modalState === MODAL_STATE.UPLOAD_IMAGE) {
         setModalState(MODAL_STATE.DONE);
-        await createPet(formData);
+        createPet(formData);
         Notify.success('Pet added');
         onClose();
         return;
@@ -186,12 +186,12 @@ const AddsPet = ({ onClose }) => {
 };
 
 AddsPet.propTypes = {
-  name: PropTypes.string.isRequired,
-  birth: PropTypes.string.isRequired,
-  breed: PropTypes.string.isRequired,
-  photoPet: PropTypes.string.isRequired,
-  comments: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  birth: PropTypes.string,
+  breed: PropTypes.string,
+  photoPet: PropTypes.string,
+  comments: PropTypes.string,
+  onClose: PropTypes.func,
 };
 
 export default AddsPet;

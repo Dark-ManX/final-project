@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
-
 import remove from 'icons/remove.svg';
-import { ROUTES } from 'routes/routes';
+import defaultPet from 'img/defaultPet.jpg';
 import { useDeleteUserPetMutation } from 'redux/auth/authOperations';
-import defaultPet from '../../../img/defaultPet.jpg';
-import { Item, Text, Image, DeleteBtn, DeleteSvg } from './PetsList.styled';
+import { DeleteBtn, DeleteSvg, Image, Item, Text } from './PetsList.styled';
 
 export const PetsList = ({ pets }) => {
-  const baseUrl = ROUTES.BASE_URL;
   const [deleteUserPet] = useDeleteUserPetMutation();
 
   return (
@@ -15,10 +12,7 @@ export const PetsList = ({ pets }) => {
       {pets.map(({ _id, photoPet, name, birth, breed, comments }) => {
         return (
           <Item key={_id}>
-            <Image
-              src={!photoPet ? `${defaultPet}` : `${baseUrl}/${photoPet}`}
-              alt={name}
-            />
+            <Image src={!photoPet ? defaultPet : photoPet} alt={name} />
             <DeleteBtn onClick={() => deleteUserPet(_id)}>
               <DeleteSvg src={remove} alt="removePet" />
             </DeleteBtn>
