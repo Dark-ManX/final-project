@@ -27,7 +27,7 @@ class Fetch {
 
   removeFromFavorite = async (query, token) =>
     await fetchRemoveFavorite(this.BASE_URL, query, token);
-  
+
   removePet = async (query, token) =>
     await fetchRemovePet(this.BASE_URL, query, token);
 

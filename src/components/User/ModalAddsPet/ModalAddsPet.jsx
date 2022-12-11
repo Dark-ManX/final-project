@@ -16,7 +16,7 @@ import {
   PlusIcon,
   PetImage,
   ModalAddPetContainer,
-  ButtonGroup, 
+  ButtonGroup,
 } from './ModalAddsPet.styled';
 
 const MODAL_STATE = {
@@ -64,6 +64,8 @@ const AddsPet = ({ onClose }) => {
     }
   };
 
+  console.log(name);
+
   const formData = new FormData();
   formData.append('name', name);
   formData.append('birth', birth);
@@ -72,16 +74,21 @@ const AddsPet = ({ onClose }) => {
   formData.append('comments', comments);
 
   const handleSubmit = e => {
-    e.preventDefault();
-    if (modalState === MODAL_STATE.IDLE) {
-      return setModalState(MODAL_STATE.UPLOAD_IMAGE);
-    }
-    if (modalState === MODAL_STATE.UPLOAD_IMAGE) {
-      setModalState(MODAL_STATE.DONE);
-      createPet(formData);
-      Notify.success('Pet add');
-      onClose();
-      return 
+    try {
+      console.log(formData.name);
+      e.preventDefault();
+      if (modalState === MODAL_STATE.IDLE) {
+        return setModalState(MODAL_STATE.UPLOAD_IMAGE);
+      }
+      if (modalState === MODAL_STATE.UPLOAD_IMAGE) {
+        setModalState(MODAL_STATE.DONE);
+        createPet(formData);
+        Notify.success('Pet added');
+        onClose();
+        return;
+      }
+    } catch (err) {
+      Notify.failure(err.message);
     }
   };
 
@@ -164,9 +171,14 @@ const AddsPet = ({ onClose }) => {
             type="submit"
             content={modalState === MODAL_STATE.UPLOAD_IMAGE ? 'Done' : 'Next'}
             variant="primary"
-            mr='24px'
+            mr="24px"
           />
-          <Button type="button" onClick={onClose} content="Cancel" variant="inverse" />
+          <Button
+            type="button"
+            onClick={onClose}
+            content="Cancel"
+            variant="inverse"
+          />
         </ButtonGroup>
       </form>
     </ModalAddPetContainer>
@@ -174,12 +186,12 @@ const AddsPet = ({ onClose }) => {
 };
 
 AddsPet.propTypes = {
-  name: PropTypes.string.isRequired,
-  birth: PropTypes.string.isRequired,
-  breed: PropTypes.string.isRequired,
-  photoPet: PropTypes.string.isRequired,
-  comments: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  birth: PropTypes.string,
+  breed: PropTypes.string,
+  photoPet: PropTypes.string,
+  comments: PropTypes.string,
+  onClose: PropTypes.func,
 };
 
 export default AddsPet;

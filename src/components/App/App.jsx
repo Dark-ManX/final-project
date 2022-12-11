@@ -1,7 +1,6 @@
 import MainPage from 'components/MainPage/MainPage';
 import SharedLayout from 'pages/SharedLayout/SharedLayout';
 import { lazy } from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 const AsyncNewsPage = lazy(() => import('pages/NewsPages/NewsPages'));
@@ -18,10 +17,6 @@ const AsyncOurFriendsPage = lazy(() =>
 const NotFound = lazy(() => import('pages/NotFound'));
 
 const App = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-
-  console.log(isLoggedIn);
-
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>

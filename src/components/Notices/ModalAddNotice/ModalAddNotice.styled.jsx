@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { ReactComponent as CloseCross } from 'icons/cross.svg';
+import { ReactComponent as Female } from 'icons/female.svg';
+import { ReactComponent as Male } from 'icons/male.svg';
 
 export const Container = styled.div`
   overflow-y: auto;
@@ -112,19 +115,18 @@ display: flex;
 `;
 
 export const InputLostCategory = styled.input`
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   position: absolute;
 
   width: 131px;
+
   height: 35px;
   margin-bottom: 12px;
   padding: 8px 24px;
 
   border: 2px solid #f59256;
   border-radius: 40px;
-  background-color: transparent;
+  background-color: transparent; 
   cursor: pointer;
 
   &:hover,
@@ -174,8 +176,6 @@ export const LabelCategoryLost = styled.label`
 `;
 
 export const InputCategoryGoodHands = styled.input`
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   position: absolute;
 
@@ -186,6 +186,7 @@ export const InputCategoryGoodHands = styled.input`
   border-radius: 40px;
   background-color: transparent;
   cursor: pointer;
+
 
   &:hover,
   &:focus,
@@ -216,7 +217,6 @@ export const LabelCategoryGoodHands = styled.label`
 
   padding: 8px 24px;
 
-  // width: 155px;
   margin-right: 8px;
 
   &:hover,
@@ -235,8 +235,6 @@ export const LabelCategoryGoodHands = styled.label`
 `;
 
 export const InputCategorySell = styled.input`
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   position: absolute;
 
@@ -296,12 +294,26 @@ export const LabelCategorySell = styled.label`
   }
 `;
 
+export const RadioLabel = styled.label`
+  display: block;
+  padding: 8px 25px;
+  border: 2px solid #f59256;
+  border-radius: 40px;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:has(input:checked) {
+    background-color: #f59256;
+    color: #ffffff;
+  }
+`;
+
 export const Label = styled.label`
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  line-height: 26px;
+  line-height: calc(26 / 18);
   cursor: pointer;
 
   color: #111111;
@@ -311,9 +323,7 @@ export const Label = styled.label`
   @media screen and (min-width: 768px) {
     font-size: 24px;
     line-height: 26px;
-
     color: #000000;
-
     margin-bottom: 28px;
   }
 `;
@@ -324,7 +334,6 @@ export const Span = styled.span`
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
-
   color: #f59256;
 
   @media screen and (min-width: 768px) {
@@ -593,7 +602,6 @@ export const InputFile = styled.input`
   background-color: #fdf7f2;
   border-radius: 20px;
   cursor: pointer;
-  // margin-bottom: 20px;
   
   inset: 0;
   opacity: 0;
@@ -620,7 +628,7 @@ export const AddImageButton = styled.button`
   @media screen and (min-width: 768px) {
     width: 140px;
     height: 140px;
-    // display: block;
+    display: block;
     margin-top: 12px;
   }
 `;
@@ -638,5 +646,29 @@ export const PetImage = styled.img`
     display: flex;
     flex-direction: column;
     margin-top: 12px;
+  }
+`;
+
+export const MaleSvg = styled(Male)`
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+export const FemaleSvg = styled(Female)`
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+export const CloseCrossIcon = styled(CloseCross)`
+  width: 15px;
+  height: 15px;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
   }
 `;

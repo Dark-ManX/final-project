@@ -19,8 +19,8 @@ export const fetchNotices = async (url, query, token) => {
       authorization: `Bearer ${token}`,
     },
   });
-  const { pets } = data.data;
-  return pets;
+  const { notices } = data.data;
+  return notices;
 };
 
 export const fetchSearch = async (url, query) => {

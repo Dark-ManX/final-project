@@ -2,25 +2,22 @@ import { response } from 'api';
 import Loading from 'components/Common/Loading/Loading';
 import NoticesCategoriesNav from 'components/Notices/NoticesCategoryNav/NoticesCategoryNav';
 import { Suspense, useEffect, useState } from 'react';
-
 import { MainContainer } from 'components/commonStyles/Container.styled';
 import Modal from 'components/Modal/Modal';
 import ModalAddNotice from 'components/Notices/ModalAddNotice/ModalAddNotice';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import { ReactComponent as AddIcon } from 'icons/addPet.svg';
 import { useSelector } from 'react-redux';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import {
   AddPet,
   AddPetBlock,
-  Icon,
-  LinkAddPet,
-} from './ButtonAddNotice.styled';
-import {
   AuthLink,
   AuthLinkContainer,
   Category,
   Container,
+  Icon,
+  LinkAddPet,
   Nav,
   StyledErr,
   Title,
@@ -31,13 +28,15 @@ const NoticesPage = () => {
   const [query, setQuery] = useState(null);
   const [ownQuery, setOwnQuery] = useState(null);
   const [search, setSearch] = useState(null);
-  const [count, setCount] = useState(0);
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+
+  const { path } = useParams();
 
   const { getNotices, findNotices } = response;
 
-  const isActual = useOutletContext();
+  const { isActual } = useOutletContext();
 
   const token = useSelector(state => state.auth.token);
 
@@ -45,11 +44,10 @@ const NoticesPage = () => {
     setOwnQuery(null);
     setQuery(null);
     setSearch(formInput);
-    setCount(count + 1);
   };
 
   const handleFavoriteClick = () => {
-    setCount(count + 1);
+    setFavorite(!favorite);
   };
 
   const toggleModal = evt => {
@@ -57,15 +55,38 @@ const NoticesPage = () => {
   };
 
   useEffect(() => {
+    const pathChecker = path => {
+      switch (path) {
+        case 'lost-found':
+          setQuery('lost-found');
+          break;
+
+        case 'for-free':
+          setQuery('for-free');
+          break;
+
+        case 'favorite':
+          setOwnQuery('favorite');
+          break;
+
+        case 'owner':
+          setOwnQuery('owner');
+          break;
+
+        default:
+          setQuery('sell');
+      }
+    };
+
+    pathChecker(path);
+
     const handleClick = async e => {
       try {
         const { nodeName, pathname, parentNode } = e.target;
-        console.dir(e.target);
 
         if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
           setOwnQuery(null);
           setSearch(null);
-          console.log('query');
 
           setQuery(pathname.split('/').at(-1));
 
@@ -76,7 +97,6 @@ const NoticesPage = () => {
         ) {
           setQuery(null);
           setSearch(null);
-          console.log('ownQuery');
 
           const path = pathname.split('/').at(-1);
           setOwnQuery(path);
@@ -93,32 +113,20 @@ const NoticesPage = () => {
         if (search) {
           const res = await findNotices(search);
           setNotices(res);
-          setError(false);
-          console.log('first');
 
           return;
         } else if (ownReq && key) {
           const res = await getNotices(ownReq, key);
           setNotices(res);
-          console.log(res);
-
-          setError(false);
-          console.log('second');
 
           return;
         }
-        console.log('navigate');
         const res = await getNotices(req);
-        console.log(req);
         setNotices(res);
-        setError(false);
-        console.log('last');
       } catch (err) {
         setError(true);
       }
     };
-
-    console.log(query);
 
     fetchNotices(query, ownQuery, search, token);
 
@@ -127,7 +135,7 @@ const NoticesPage = () => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [count, findNotices, getNotices, ownQuery, query, search, token]);
+  }, [findNotices, getNotices, ownQuery, query, search, token, favorite, path]);
 
   return (
     <MainContainer>
@@ -139,7 +147,7 @@ const NoticesPage = () => {
           <Category>
             <NoticesCategoriesNav />
 
-            {isActual && token && (
+            {isActual && (
               <AuthLinkContainer className="own-block">
                 <AuthLink to="favorite">Favorite ads</AuthLink>
                 <AuthLink to="owner">My ads</AuthLink>

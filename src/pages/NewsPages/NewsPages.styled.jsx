@@ -20,6 +20,7 @@ export const NewsSet = styled.ul`
   display: grid;
   flex-wrap: wrap;
   row-gap: 40px;
+  margin-bottom: 100px;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -30,10 +31,12 @@ export const NewsSet = styled.ul`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
+
 export const NewsItem = styled.li`
   display: flex;
   flex-direction: column;
 `;
+
 export const NewsItemRectangle = styled.span`
   display: block;
   margin-bottom: 4px;

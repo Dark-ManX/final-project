@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
 export const NoticeCategoryItemStyled = styled.li`
-  max-width: 280px;
+  width: 280px;
   padding-bottom: 32px;
   background: #ffffff;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0px 0px 20px 20px;
 
   @media screen and (max-width: 767px) {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 32px;
+    margin: 0 auto;
 
     &:last-child {
       margin-bottom: 0;
@@ -18,7 +16,7 @@ export const NoticeCategoryItemStyled = styled.li`
   }
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    max-width: 336px;
+    width: 336px;
     margin-right: 32px;
     margin-bottom: 32px;
 
@@ -26,9 +24,9 @@ export const NoticeCategoryItemStyled = styled.li`
       margin-right: 0;
     }
 
-    // &:nth-last-child(-n + 2) {
-    //   margin-bottom: 0;
-    // }
+    &:nth-last-child(-n + 2) {
+      margin-bottom: 0;
+    }
   }
 
   @media screen and (min-width: 1280px) {
@@ -40,9 +38,9 @@ export const NoticeCategoryItemStyled = styled.li`
       margin-right: 0;
     }
 
-    // &:nth-last-child(-n + 4) {
-    //   margin-bottom: 0;
-    // }
+    &:nth-last-child(-n + 4) {
+      margin-bottom: 0;
+    }
   } ;
 `;
 
@@ -128,6 +126,7 @@ export const AddToFavoriteBtn = styled.button`
   width: 44px;
   height: 44px;
   padding: 0;
+  cursor: pointer;
 
   background: rgba(255, 255, 255, 0.6);
   color: rgba(255, 255, 255, 0.6);
@@ -182,6 +181,8 @@ export const Button = styled.button`
   width: 248px;
   height: 38px;
   outline: none;
+  cursor: pointer;
+  transition: color 250ms linear;
 
   background: #ffffff;
   border: 2px solid #f59256;

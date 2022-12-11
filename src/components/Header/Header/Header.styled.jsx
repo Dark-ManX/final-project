@@ -8,6 +8,11 @@ export const StyledHeader = styled.header`
   align-items: center;
   z-index: 20;
   opacity: 0;
+  margin-top: 16px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 24px;
+  }
 
   @media screen and (min-width: 1280px) {
     column-gap: 80px;

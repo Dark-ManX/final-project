@@ -1,12 +1,7 @@
+import { ReactComponent as DefaultCross } from 'icons/default-cross.svg';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
 import { useCreateNoticeMutation } from 'redux/auth/authOperations';
-
-import { ReactComponent as CloseCross } from '../../../icons/cross.svg';
-import { ReactComponent as DefaultCross } from '../../../icons/default-cross.svg';
-import { ReactComponent as Female } from '../../../icons/female.svg';
-import { ReactComponent as Male } from '../../../icons/male.svg';
-
 import {
   AddImageButton,
   ButtonsCategoryContainer,
@@ -15,7 +10,9 @@ import {
   ButtonsSubmitContainer,
   ButtonsSubmitWhite,
   CloseButton,
+  CloseCrossIcon,
   Container,
+  FemaleSvg,
   Fieldset,
   Form,
   Input,
@@ -31,8 +28,10 @@ import {
   Label,
   LabelSexPet,
   Legend,
+  MaleSvg,
   P,
   PetImage,
+  RadioLabel,
   Span,
   Textarea,
   Title,
@@ -183,12 +182,14 @@ const ModalAddNotice = ({ onClose }) => {
                 <InputCategoryContainer>
                 <InputLostCategory
                   id="categoryLost"
+
                   name="category"
                   type="radio"
                   value="lost-found"
                   onChange={handleChange}
                   checked={category === 'lost-found'}
                 />
+
                 {category === "lost-found" ?<LabelCategoryLost htmlFor='categoryLost' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
                 lost-found
                 </LabelCategoryLost> : <LabelCategoryLost htmlFor='categoryLost'>
@@ -205,6 +206,7 @@ const ModalAddNotice = ({ onClose }) => {
                   onChange={handleChange}
                   checked={category === 'in-good-hands'}
                 />
+                           
                 {category === "in-good-hands" ? <LabelCategoryGoodHands htmlFor='categoryGoodHands' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
                   In good hands
                 </LabelCategoryGoodHands> : <LabelCategoryGoodHands htmlFor='categoryGoodHands'>
@@ -221,12 +223,14 @@ const ModalAddNotice = ({ onClose }) => {
                   onChange={handleChange}
                   checked={category === 'sell'}
                 />
+
                 {category === "sell" ? <LabelCategorySell htmlFor='categorySell' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
                   sell
                 </LabelCategorySell> : <LabelCategorySell htmlFor='categorySell'>
                   sell
                 </LabelCategorySell>}
                   </InputCategoryContainer>
+
             </ButtonsCategoryContainer>
 
             <Label>
