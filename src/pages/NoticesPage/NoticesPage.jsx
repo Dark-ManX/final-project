@@ -128,8 +128,6 @@ const NoticesPage = () => {
       }
     };
 
-    console.log(query);
-
     fetchNotices(query, ownQuery, search, token);
 
     document.addEventListener('click', handleClick);
