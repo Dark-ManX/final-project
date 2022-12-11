@@ -90,7 +90,6 @@ const NoticesPage = () => {
     };
 
     pathChecker(path);
-    // console.log(path);
 
     const handleClick = async e => {
       try {
