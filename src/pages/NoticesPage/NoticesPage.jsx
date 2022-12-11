@@ -56,29 +56,41 @@ const NoticesPage = () => {
 
   useEffect(() => {
     const pathChecker = path => {
-      switch (path) {
-        case 'lost-found':
-          setQuery('lost-found');
-          break;
+      if (!query && !ownQuery) {
+        switch (path) {
+          case 'lost-found':
+            setQuery('lost-found');
+            setOwnQuery(null);
+            break;
 
-        case 'for-free':
-          setQuery('for-free');
-          break;
+          case 'for-free':
+            setQuery('for-free');
+            setOwnQuery(null);
+            break;
 
-        case 'favorite':
-          setOwnQuery('favorite');
-          break;
+          case 'sell':
+            setQuery('sell');
+            setOwnQuery(null);
+            break;
 
-        case 'owner':
-          setOwnQuery('owner');
-          break;
+          case 'favorite':
+            setOwnQuery('favorite');
+            setQuery(null);
+            break;
 
-        default:
-          setQuery('sell');
+          case 'owner':
+            setOwnQuery('owner');
+            setQuery(null);
+            break;
+
+          default:
+            return;
+        }
       }
     };
 
     pathChecker(path);
+    // console.log(path);
 
     const handleClick = async e => {
       try {
@@ -100,7 +112,6 @@ const NoticesPage = () => {
 
           const path = pathname.split('/').at(-1);
           setOwnQuery(path);
-
           return;
         }
       } catch (err) {
@@ -124,6 +135,7 @@ const NoticesPage = () => {
         const res = await getNotices(req);
         setNotices(res);
       } catch (err) {
+        console.log(err.message);
         setError(true);
       }
     };
@@ -135,7 +147,7 @@ const NoticesPage = () => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [findNotices, getNotices, ownQuery, query, search, token, favorite, path]);
+  }, [findNotices, getNotices, ownQuery, query, search, token, favorite]);
 
   return (
     <MainContainer>

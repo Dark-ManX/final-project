@@ -20,6 +20,7 @@ export const fetchNotices = async (url, query, token) => {
     },
   });
   const { notices } = data.data;
+
   return notices;
 };
 

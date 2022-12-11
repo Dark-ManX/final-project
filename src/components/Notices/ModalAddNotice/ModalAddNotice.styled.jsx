@@ -106,10 +106,10 @@ export const ButtonsCategoryContainer = styled.div`
 `;
 
 export const InputCategoryContainer = styled.div`
-position: relative;
-display: flex;
+  position: relative;
+  display: flex;
 
-&:first-child {
+  &:first-child {
     margin-bottom: 12px;
   }
 `;
@@ -126,19 +126,20 @@ export const InputLostCategory = styled.input`
 
   border: 2px solid #f59256;
   border-radius: 40px;
-  background-color: transparent; 
+  background-color: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus,
   &:checked {
-    background-color: #F59256;
+    background-color: #f59256;
   }
 
   @media screen and (min-width: 768px) {
     font-size: 20px;
     width: 162px;
     height: 47px;
+  }
 `;
 
 export const LabelCategoryLost = styled.label`
@@ -163,8 +164,8 @@ export const LabelCategoryLost = styled.label`
 
   &:hover,
   &:focus {
-    background-color: #F59256;
-    color: #FFFFFF;
+    background-color: #f59256;
+    color: #ffffff;
   }
 
   @media screen and (min-width: 768px) {
@@ -173,6 +174,7 @@ export const LabelCategoryLost = styled.label`
     height: 47px;
 
     color: #000000;
+  }
 `;
 
 export const InputCategoryGoodHands = styled.input`
@@ -187,11 +189,10 @@ export const InputCategoryGoodHands = styled.input`
   background-color: transparent;
   cursor: pointer;
 
-
   &:hover,
   &:focus,
   &:checked {
-    background-color: #F59256;
+    background-color: #f59256;
   }
 
   @media screen and (min-width: 768px) {
@@ -199,8 +200,8 @@ export const InputCategoryGoodHands = styled.input`
     line-height: 27px;
     width: 197px;
     height: 47px;
+  }
 `;
-
 
 export const LabelCategoryGoodHands = styled.label`
   position: relative;
@@ -221,7 +222,7 @@ export const LabelCategoryGoodHands = styled.label`
 
   &:hover,
   &:focus {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   @media screen and (min-width: 768px) {
@@ -251,7 +252,7 @@ export const InputCategorySell = styled.input`
   &:hover,
   &:focus,
   &:checked {
-    background-color: #F59256;
+    background-color: #f59256;
   }
 
   @media screen and (min-width: 768px) {
@@ -260,8 +261,8 @@ export const InputCategorySell = styled.input`
     width: 91px;
     height: 47px;
     margin-bottom: -12px;
+  }
 `;
-
 
 export const LabelCategorySell = styled.label`
   position: relative;
@@ -280,7 +281,7 @@ export const LabelCategorySell = styled.label`
 
   &:hover,
   &:focus {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   @media screen and (min-width: 768px) {
@@ -537,7 +538,7 @@ export const LabelSexPet = styled.label`
   color: #111111;
 
   &:first-child {
-  margin-right: 40px;
+    margin-right: 40px;
   }
 
   @media screen and (min-width: 768px) {
@@ -549,8 +550,8 @@ export const LabelSexPet = styled.label`
     margin-bottom: 40px;
 
     &:first-child {
-  margin-right: 80px;
-  }
+      margin-right: 80px;
+    }
   }
 `;
 
@@ -559,7 +560,7 @@ export const InputSexPet = styled.input`
   -moz-appearance: none;
   appearance: none;
   position: absolute;
-  
+
   flex-wrap: wrap;
   width: 40px;
   height: 40px;
@@ -569,10 +570,7 @@ export const InputSexPet = styled.input`
   padding: 0px;
   align-items: center;
 
-  
-
   @media screen and (min-width: 768px) {
-  
   }
 `;
 
@@ -602,7 +600,7 @@ export const InputFile = styled.input`
   background-color: #fdf7f2;
   border-radius: 20px;
   cursor: pointer;
-  
+
   inset: 0;
   opacity: 0;
   z-index: 999;
@@ -648,7 +646,7 @@ export const PetImage = styled.img`
     margin-top: 12px;
   }
 `;
-
+/* 
 export const MaleSvg = styled(Male)`
   @media screen and (min-width: 768px) {
     width: 60px;
@@ -660,6 +658,34 @@ export const FemaleSvg = styled(Female)`
   @media screen and (min-width: 768px) {
     width: 60px;
     height: 60px;
+  }
+`; */
+
+/* export const CloseCrossIcon = styled(CloseCross)`
+  width: 15px;
+  height: 15px;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+`; */
+
+export const MaleSvg = styled(Male)`
+  margin-bottom: 14px;
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+`;
+
+export const FemaleSvg = styled(Female)`
+  margin-bottom: 12px;
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
   }
 `;
 

@@ -17,55 +17,24 @@ import {
   Form,
   Input,
   InputCategoryContainer,
-  LabelCategoryLost,
-  LabelCategoryGoodHands,
-  LabelCategorySell,
-  InputLostCategory,
   InputCategoryGoodHands,
   InputCategorySell,
   InputFile,
+  InputLostCategory,
   InputSexPet,
   Label,
+  LabelCategoryGoodHands,
+  LabelCategoryLost,
+  LabelCategorySell,
   LabelSexPet,
   Legend,
   MaleSvg,
   P,
   PetImage,
-  RadioLabel,
   Span,
   Textarea,
   Title,
 } from './ModalAddNotice.styled';
-
-import styled from 'styled-components';
-
-const MaleSvg = styled(Male)`
-margin-bottom: 14px;
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-  }
-`;
-
-const FemaleSvg = styled(Female)`
-margin-bottom: 12px;
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-  }
-`;
-
-const CloseCrossIcon = styled(CloseCross)`
-  width: 15px;
-  height: 15px;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-`;
 
 const ModalAddNotice = ({ onClose }) => {
   const [title, setTitle] = useState('');
@@ -80,7 +49,7 @@ const ModalAddNotice = ({ onClose }) => {
   const [photoPet, setPhotoPet] = useState(null);
 
   const [page, setPage] = useState(true);
-  
+
   const [createNotice] = useCreateNoticeMutation();
 
   const handleChange = e => {
@@ -162,27 +131,25 @@ const ModalAddNotice = ({ onClose }) => {
   };
 
   return (
-      <Container>
-        <CloseButton type="button" onClick={onClose}>
-          <CloseCrossIcon />
-        </CloseButton>
+    <Container>
+      <CloseButton type="button" onClick={onClose}>
+        <CloseCrossIcon />
+      </CloseButton>
 
-        <Title>Add pet</Title>
+      <Title>Add pet</Title>
 
-        {page ? (
-          <>
+      {page ? (
+        <>
           <P>
-              Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-              amet, consectetur
-            </P>
-          
-          <Form>
+            Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
+            consectetur
+          </P>
 
-              <ButtonsCategoryContainer>
-                <InputCategoryContainer>
+          <Form>
+            <ButtonsCategoryContainer>
+              <InputCategoryContainer>
                 <InputLostCategory
                   id="categoryLost"
-
                   name="category"
                   type="radio"
                   value="lost-found"
@@ -190,14 +157,25 @@ const ModalAddNotice = ({ onClose }) => {
                   checked={category === 'lost-found'}
                 />
 
-                {category === "lost-found" ?<LabelCategoryLost htmlFor='categoryLost' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
-                lost-found
-                </LabelCategoryLost> : <LabelCategoryLost htmlFor='categoryLost'>
-                lost-found
-                  </LabelCategoryLost>}
-                </InputCategoryContainer>
-                
-                <InputCategoryContainer>
+                {category === 'lost-found' ? (
+                  <LabelCategoryLost
+                    htmlFor="categoryLost"
+                    style={{
+                      color: '#ffffff',
+                      backgroundColor: '#F59256',
+                      borderRadius: '40px',
+                    }}
+                  >
+                    lost-found
+                  </LabelCategoryLost>
+                ) : (
+                  <LabelCategoryLost htmlFor="categoryLost">
+                    lost-found
+                  </LabelCategoryLost>
+                )}
+              </InputCategoryContainer>
+
+              <InputCategoryContainer>
                 <InputCategoryGoodHands
                   id="categoryGoodHands"
                   name="category"
@@ -206,15 +184,26 @@ const ModalAddNotice = ({ onClose }) => {
                   onChange={handleChange}
                   checked={category === 'in-good-hands'}
                 />
-                           
-                {category === "in-good-hands" ? <LabelCategoryGoodHands htmlFor='categoryGoodHands' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
-                  In good hands
-                </LabelCategoryGoodHands> : <LabelCategoryGoodHands htmlFor='categoryGoodHands'>
-                  In good hands
-                </LabelCategoryGoodHands>}
-                </InputCategoryContainer>
 
-                <InputCategoryContainer>
+                {category === 'in-good-hands' ? (
+                  <LabelCategoryGoodHands
+                    htmlFor="categoryGoodHands"
+                    style={{
+                      color: '#ffffff',
+                      backgroundColor: '#F59256',
+                      borderRadius: '40px',
+                    }}
+                  >
+                    In good hands
+                  </LabelCategoryGoodHands>
+                ) : (
+                  <LabelCategoryGoodHands htmlFor="categoryGoodHands">
+                    In good hands
+                  </LabelCategoryGoodHands>
+                )}
+              </InputCategoryContainer>
+
+              <InputCategoryContainer>
                 <InputCategorySell
                   id="categorySell"
                   name="category"
@@ -224,13 +213,23 @@ const ModalAddNotice = ({ onClose }) => {
                   checked={category === 'sell'}
                 />
 
-                {category === "sell" ? <LabelCategorySell htmlFor='categorySell' style={{color: "#ffffff", backgroundColor: "#F59256", borderRadius: "40px"}}>
-                  sell
-                </LabelCategorySell> : <LabelCategorySell htmlFor='categorySell'>
-                  sell
-                </LabelCategorySell>}
-                  </InputCategoryContainer>
-
+                {category === 'sell' ? (
+                  <LabelCategorySell
+                    htmlFor="categorySell"
+                    style={{
+                      color: '#ffffff',
+                      backgroundColor: '#F59256',
+                      borderRadius: '40px',
+                    }}
+                  >
+                    sell
+                  </LabelCategorySell>
+                ) : (
+                  <LabelCategorySell htmlFor="categorySell">
+                    sell
+                  </LabelCategorySell>
+                )}
+              </InputCategoryContainer>
             </ButtonsCategoryContainer>
 
             <Label>
@@ -290,111 +289,109 @@ const ModalAddNotice = ({ onClose }) => {
                 Cancel
               </ButtonsSubmitWhite>
             </ButtonsSubmitContainer>
-            </Form>
-            </>
-        ) : (
-          <Form>
-            <Fieldset>
-              <Legend>
-                The sex<Span>*</Span>:
-              </Legend>
-              <ButtonsSexPetContainer>
+          </Form>
+        </>
+      ) : (
+        <Form>
+          <Fieldset>
+            <Legend>
+              The sex<Span>*</Span>:
+            </Legend>
+            <ButtonsSexPetContainer>
+              <LabelSexPet htmlFor="sexPetMale">
+                <InputSexPet
+                  id="sexPetMale"
+                  name="sex"
+                  type="radio"
+                  value="male"
+                  onChange={handleChange}
+                  checked={sex === 'male'}
+                />
+                <MaleSvg />
+                Male
+              </LabelSexPet>
 
-                  <LabelSexPet htmlFor='sexPetMale'>
-                    <InputSexPet
-                    id="sexPetMale"
-                    name="sex"
-                    type="radio"
-                    value="male"
-                    onChange={handleChange}
-                    checked={sex === 'male'}
-                  />
-                    <MaleSvg />
-                  Male
-                    </LabelSexPet>
+              <LabelSexPet htmlFor="sexPetFemale">
+                <InputSexPet
+                  id="sexPetFemale"
+                  name="sex"
+                  type="radio"
+                  value="female"
+                  onChange={handleChange}
+                  checked={sex === 'female'}
+                />
+                <FemaleSvg />
+                Female
+              </LabelSexPet>
+            </ButtonsSexPetContainer>
+          </Fieldset>
 
-                    <LabelSexPet htmlFor='sexPetFemale'>
-                    <InputSexPet
-                    id="sexPetFemale"
-                    name="sex"
-                    type="radio"
-                    value="female"
-                    onChange={handleChange}
-                    checked={sex === 'female'}
-                  />
-                  <FemaleSvg />
-                  Female
-                  </LabelSexPet>
-                  
-              </ButtonsSexPetContainer>
-            </Fieldset>
-
+          <Label>
+            Location<Span>*</Span>:
+            <Input
+              type="text"
+              name="location"
+              value={location}
+              placeholder="Type location"
+              onChange={handleChange}
+              required
+            />
+          </Label>
+          {category === 'sell' && (
             <Label>
-              Location<Span>*</Span>:
+              Price<Span>*</Span>:
               <Input
                 type="text"
-                name="location"
-                value={location}
-                placeholder="Type location"
+                name="price"
+                value={price}
+                placeholder="Type price"
                 onChange={handleChange}
                 required
               />
             </Label>
-            {category === 'sell' && (
-                <Label>
-                  Price<Span>*</Span>:
-                  <Input
-                    type="text"
-                    name="price"
-                    value={price}
-                    placeholder="Type price"
-                    onChange={handleChange}
-                    required
-                  />
-                </Label>
-            )}
+          )}
 
-            <Label htmlFor="uploadFile">
-              Load the pet’s image<Span>*</Span>:
-              {!photoPet ? (
-                <AddImageButton type="button">
-                  <DefaultCross width="47.33" height="47.33" />
-                  <InputFile
-                    multiple
-                    id="uploadFile"
-                    type="file"
-                    name="photoPet"
-                    // value={photoPet}
-                    onChange={handleChange}
-                    required
-                  />
-                </AddImageButton>
-              ) : null}
-              {photoPet ? (
-                  <PetImage src={URL.createObjectURL(photoPet)} alt={petName} />
-              ) : null}
-            </Label>
-            <Label>
-              Comments<Span>*</Span>
-              <Textarea
-                name="comments"
-                value={comments}
-                placeholder="Type comment"
-                onChange={handleChange}
-                required
-              ></Textarea>
-            </Label>
-            <ButtonsSubmitContainer>
-              <ButtonsSubmitColor type="submit" onClick={handleSubmit}>
-                Done
-              </ButtonsSubmitColor>
-              <ButtonsSubmitWhite type="button" onClick={() => setPage(true)}>
-                Back
-              </ButtonsSubmitWhite>
-            </ButtonsSubmitContainer>
-          </Form>
-        )}
-      </Container>
+          <Label htmlFor="uploadFile">
+            Load the pet’s image<Span>*</Span>:
+            {!photoPet ? (
+              <AddImageButton type="button">
+                <DefaultCross width="47.33" height="47.33" />
+                <InputFile
+                  multiple
+                  id="uploadFile"
+                  type="file"
+                  name="photoPet"
+                  // value={photoPet}
+                  onChange={handleChange}
+                  required
+                />
+              </AddImageButton>
+            ) : null}
+            {photoPet ? (
+              <PetImage src={URL.createObjectURL(photoPet)} alt={petName} />
+            ) : null}
+          </Label>
+          <Label>
+            Comments<Span>*</Span>
+            <Textarea
+              name="comments"
+              value={comments}
+              placeholder="Type comment"
+              onChange={handleChange}
+              required
+            ></Textarea>
+          </Label>
+          <ButtonsSubmitContainer>
+            <ButtonsSubmitColor type="submit" onClick={handleSubmit}>
+              Done
+            </ButtonsSubmitColor>
+            <ButtonsSubmitWhite type="button" onClick={() => setPage(true)}>
+              Back
+            </ButtonsSubmitWhite>
+          </ButtonsSubmitContainer>
+        </Form>
+      )}
+    </Container>
   );
 };
 
