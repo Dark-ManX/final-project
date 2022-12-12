@@ -34,9 +34,9 @@ const NoticesPage = () => {
 
   const { path } = useParams();
 
-  const { isActual } = useOutletContext();
-
   const { getNotices, findNotices } = response;
+
+  const { isActual } = useOutletContext();
 
   const token = useSelector(state => state.auth.token);
 
