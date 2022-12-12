@@ -26,7 +26,6 @@ import {
 const NoticesPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [query, setQuery] = useState(null);
-  const [ownQuery, setOwnQuery] = useState(null);
   const [search, setSearch] = useState(null);
   const [notices, setNotices] = useState([]);
   const [error, setError] = useState(false);
@@ -41,7 +40,6 @@ const NoticesPage = () => {
   const token = useSelector(state => state.auth.token);
 
   const handleSubmit = formInput => {
-    setOwnQuery(null);
     setQuery(null);
     setSearch(formInput);
   };
@@ -56,31 +54,26 @@ const NoticesPage = () => {
 
   useEffect(() => {
     const pathChecker = path => {
-      if (!query && !ownQuery) {
+      if (!query) {
         switch (path) {
           case 'lost-found':
             setQuery('lost-found');
-            setOwnQuery(null);
             break;
 
           case 'for-free':
             setQuery('for-free');
-            setOwnQuery(null);
             break;
 
           case 'sell':
             setQuery('sell');
-            setOwnQuery(null);
             break;
 
           case 'favorite':
-            setOwnQuery('favorite');
-            setQuery(null);
+            setQuery('/find/favorite');
             break;
 
           case 'owner':
-            setOwnQuery('owner');
-            setQuery(null);
+            setQuery('/find/owner');
             break;
 
           default:
@@ -96,7 +89,6 @@ const NoticesPage = () => {
         const { nodeName, pathname, parentNode } = e.target;
 
         if (nodeName === 'A' && parentNode.className.includes('nav-block')) {
-          setOwnQuery(null);
           setSearch(null);
 
           setQuery(pathname.split('/').at(-1));
@@ -106,11 +98,10 @@ const NoticesPage = () => {
           nodeName === 'A' &&
           parentNode.className.includes('own-block')
         ) {
-          setQuery(null);
           setSearch(null);
 
           const path = pathname.split('/').at(-1);
-          setOwnQuery(path);
+          setQuery(`find/${path}`);
           return;
         }
       } catch (err) {
@@ -118,15 +109,15 @@ const NoticesPage = () => {
       }
     };
 
-    const fetchNotices = async (req, ownReq, search, key) => {
+    const fetchNotices = async (req, search, key) => {
       try {
         if (search) {
           const res = await findNotices(search);
           setNotices(res);
 
           return;
-        } else if (ownReq && key) {
-          const res = await getNotices(ownReq, key);
+        } else if (req && key) {
+          const res = await getNotices(req, key);
           setNotices(res);
 
           return;
@@ -138,14 +129,14 @@ const NoticesPage = () => {
       }
     };
 
-    fetchNotices(query, ownQuery, search, token);
+    fetchNotices(query, search, token);
 
     document.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [findNotices, getNotices, ownQuery, query, search, token, favorite]);
+  }, [findNotices, getNotices, query, search, token, favorite]);
 
   return (
     <MainContainer>

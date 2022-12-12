@@ -53,8 +53,6 @@ const LoginPage = () => {
       if (res?.data) {
         navigate('/user');
       }
-      const { message } = res.error.data;
-      Notify.failure(message);
     } catch (err) {
       Notify.failure(err.message);
     }

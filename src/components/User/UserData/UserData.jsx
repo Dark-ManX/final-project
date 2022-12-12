@@ -25,15 +25,8 @@ const UserData = () => {
       const formData = new FormData();
 
       formData.append('avatar', evt.target.files[0]);
-      console.log(formData);
-      // const {
-      //   data: { avatarURL },
-      // } =
-      // console.log('formData :>> ', formData);
-      await updateAvatar(formData);
 
-      // console.log(avatarURL);
-      // setAvatar(avatarURL);
+      await updateAvatar(formData);
     } catch (err) {
       setAvatar(defaultImg);
     }
@@ -44,33 +37,22 @@ const UserData = () => {
       try {
         const res = await getUser(token);
         setAvatar(res.avatar);
-        console.log('avatar', res.logo);
 
         setUser(res);
       } catch (err) {
         setError(true);
       }
-      // setAvatar(res.logo);
     };
 
     fetchUser(token);
-  }, [getUser, token]);
+  }, [avatar, getUser, token, user]);
 
-  // const avatarUser = () => {
-  //   if (logo.includes('https://s.gravatar.com')) {
-  //     return defaultImg;
-  //   } else {
-  //     return `${ROUTES.BASE_URL}/${logo}`;
-  //   }
-  // };
-
-  console.log(avatar);
   return (
     <UserInfo>
       {!error ? (
         <>
           <Avatar>
-            <ImgUser src={avatar ? avatar : user.logo} alt={user.name} />
+            <ImgUser src={user.logo ? user.logo : defaultImg} alt={user.name} />
             <label>
               <input
                 type="file"

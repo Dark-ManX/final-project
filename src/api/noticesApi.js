@@ -14,7 +14,7 @@ export const fetchNotices = async (url, query, token) => {
   }
   const { data } = await axios({
     method: 'get',
-    url: `${url}/notices/find/${query}`,
+    url: `${url}/notices/${query}`,
     headers: {
       authorization: `Bearer ${token}`,
     },
