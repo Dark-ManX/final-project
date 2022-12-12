@@ -37,10 +37,6 @@ export const NoticeCategoryItemStyled = styled.li`
     &:nth-child(4n) {
       margin-right: 0;
     }
-
-    &:nth-last-child(-n + 4) {
-      margin-bottom: 0;
-    }
   } ;
 `;
 
@@ -80,16 +76,8 @@ export const Photo = styled.img`
   display: block;
   position: relative;
   margin-bottom: 20px;
-  width: 280px;
+  width: 100%;
   height: 288px;
-
-  @media screen and (min-width: 768px) {
-    width: 336px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 288px;
-  }
 `;
 
 export const Category = styled.p`

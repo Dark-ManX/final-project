@@ -70,8 +70,9 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+  console.log(notice);
 
-  const { photo, comments, title, breed, place, age, owner } = notice;
+  const { photo, comments, title, breed, location, birth, owner } = notice;
   const idOwner = owner._id;
 
   return (
@@ -107,8 +108,8 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
           <li>
             <CardDetailInfo>{breed}</CardDetailInfo>
-            <CardDetailInfo>{place}</CardDetailInfo>
-            <CardDetailInfo>{age}</CardDetailInfo>
+            <CardDetailInfo>{location}</CardDetailInfo>
+            <CardDetailInfo>{birth}</CardDetailInfo>
           </li>
         </CardDetailsContainer>
       </CardInfoContainer>
