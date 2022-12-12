@@ -134,7 +134,6 @@ const NoticesPage = () => {
         const res = await getNotices(req);
         setNotices(res);
       } catch (err) {
-        console.log(err.message);
         setError(true);
       }
     };
@@ -183,6 +182,7 @@ const NoticesPage = () => {
             <ModalAddNotice onClose={toggleModal} />{' '}
           </Modal>
         )}
+
         {!error ? (
           <Suspense fallback={<Loading />}>
             <Outlet context={{ notices, handleFavoriteClick, isActual }} />
