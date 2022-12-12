@@ -9,7 +9,8 @@ export const fetchUser = async (url, token) => {
       'content-type': 'multipart/form-data',
     },
   });
-
+  console.log(data);
   const { user } = data.data;
+  console.log(user);
   return user;
 };

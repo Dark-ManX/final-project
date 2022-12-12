@@ -20,12 +20,13 @@ const SharedLayout = () => {
         await getUser(token);
         setIsActual(true);
       } catch (err) {
+        console.log(err.message);
         setIsActual(false);
       }
     };
 
     fetchUser(token);
-  }, [firstLoad, getUser, isActual, token]);
+  }, [getUser, token]);
 
   return (
     <>
