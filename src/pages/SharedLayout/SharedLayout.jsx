@@ -17,10 +17,11 @@ const SharedLayout = () => {
   useEffect(() => {
     const fetchUser = async token => {
       try {
-        await getUser(token);
-        setIsActual(true);
+        const res = await getUser(token);
+        if (res) {
+          setIsActual(true);
+        }
       } catch (err) {
-        console.log(err.message);
         setIsActual(false);
       }
     };

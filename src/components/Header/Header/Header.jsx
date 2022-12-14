@@ -14,6 +14,8 @@ import {
 const Header = ({ state, load }) => {
   const [shown, setShown] = useState(false);
 
+  console.log(state);
+
   const toggleUser = () => {
     setShown(!shown);
   };

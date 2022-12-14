@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 export const fetchUser = async (url, token) => {
-  const { data } = await axios({
+  if (token === null) {
+    return;
+  }
+  const res = await axios({
     method: 'get',
     url: `${url}/user`,
     headers: {
@@ -9,8 +12,8 @@ export const fetchUser = async (url, token) => {
       'content-type': 'multipart/form-data',
     },
   });
-  console.log(data);
+
+  const { data } = res;
   const { user } = data.data;
-  console.log(user);
   return user;
 };

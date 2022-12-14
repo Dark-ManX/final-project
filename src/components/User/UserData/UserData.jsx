@@ -36,6 +36,7 @@ const UserData = () => {
     const fetchUser = async token => {
       try {
         const res = await getUser(token);
+        console.log(res.avatar);
         setAvatar(res.avatar);
 
         setUser(res);
@@ -45,7 +46,7 @@ const UserData = () => {
     };
 
     fetchUser(token);
-  }, [avatar, getUser, token, user]);
+  }, [getUser, token]);
 
   return (
     <UserInfo>

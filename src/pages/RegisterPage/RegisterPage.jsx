@@ -1,6 +1,6 @@
 import FirstEl from 'components/Auth/RegisterFormEl/FirstEl';
 import SecondEl from 'components/Auth/RegisterFormEl/SecondEl';
-import Notiflix from 'notiflix';
+import Notiflix, { Notify } from 'notiflix';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from 'redux/auth/authOperations';
@@ -91,6 +91,20 @@ const RegisterPage = () => {
   };
   console.log('object', user);
 
+  const registration = async data => {
+    try {
+      const res = await registerNewUser(data);
+
+      if (res?.data) {
+        navigate('/user', { replace: true });
+        return;
+      }
+      Notify.failure('Such email already exist');
+    } catch (err) {
+      Notify.failure(err.message);
+    }
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -131,8 +145,8 @@ const RegisterPage = () => {
         'Your phone number must start with + and consist of 12 numbers'
       );
     }
-    await registerNewUser(user);
-    navigate('/user', { replace: true });
+
+    registration(user);
   };
 
   console.log(page);
