@@ -295,20 +295,6 @@ export const LabelCategorySell = styled.label`
   }
 `;
 
-export const RadioLabel = styled.label`
-  display: block;
-  padding: 8px 25px;
-  border: 2px solid #f59256;
-  border-radius: 40px;
-  background-color: transparent;
-  cursor: pointer;
-
-  &:has(input:checked) {
-    background-color: #f59256;
-    color: #ffffff;
-  }
-`;
-
 export const Label = styled.label`
   font-family: 'Manrope';
   font-style: normal;
@@ -541,6 +527,10 @@ export const LabelSexPet = styled.label`
     margin-right: 40px;
   }
 
+  &.active {
+    color: #F59256;
+  }
+
   @media screen and (min-width: 768px) {
     font-size: 24px;
     line-height: 26px;
@@ -556,8 +546,6 @@ export const LabelSexPet = styled.label`
 `;
 
 export const InputSexPet = styled.input`
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   position: absolute;
 
@@ -567,10 +555,11 @@ export const InputSexPet = styled.input`
   border: none;
   cursor: pointer;
   background-color: transparent;
-  padding: 0px;
   align-items: center;
 
   @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -646,30 +635,6 @@ export const PetImage = styled.img`
     margin-top: 12px;
   }
 `;
-/* 
-export const MaleSvg = styled(Male)`
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
-`;
-
-export const FemaleSvg = styled(Female)`
-  @media screen and (min-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
-`; */
-
-/* export const CloseCrossIcon = styled(CloseCross)`
-  width: 15px;
-  height: 15px;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-`; */
 
 export const MaleSvg = styled(Male)`
   margin-bottom: 14px;
