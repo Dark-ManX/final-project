@@ -124,10 +124,14 @@ const ModalAddNotice = ({ onClose }) => {
       return Notiflix.Notify.failure('Please, choose sex');
     }
 
-    createNotice(formData);
-    Notiflix.Notify.success('Ad has been successfully created');
+    if (price === '') {
+      return setPrice('0');
+    }
 
+    createNotice(formData);
     onClose();
+
+    Notiflix.Notify.success('Ad has been successfully created');
   };
 
   return (
@@ -173,6 +177,7 @@ const ModalAddNotice = ({ onClose }) => {
                     lost-found
                   </LabelCategoryLost>
                 )}
+                
               </InputCategoryContainer>
 
               <InputCategoryContainer>
@@ -180,12 +185,12 @@ const ModalAddNotice = ({ onClose }) => {
                   id="categoryGoodHands"
                   name="category"
                   type="radio"
-                  value="in-good-hands"
+                  value="in good hands"
                   onChange={handleChange}
-                  checked={category === 'in-good-hands'}
+                  checked={category === "in good hands"}
                 />
 
-                {category === 'in-good-hands' ? (
+                {category === "in good hands" ? (
                   <LabelCategoryGoodHands
                     htmlFor="categoryGoodHands"
                     style={{
@@ -210,10 +215,10 @@ const ModalAddNotice = ({ onClose }) => {
                   type="radio"
                   value="sell"
                   onChange={handleChange}
-                  checked={category === 'sell'}
+                  checked={category === "sell"}
                 />
 
-                {category === 'sell' ? (
+                {category === "sell" ? (
                   <LabelCategorySell
                     htmlFor="categorySell"
                     style={{
@@ -298,7 +303,7 @@ const ModalAddNotice = ({ onClose }) => {
               The sex<Span>*</Span>:
             </Legend>
             <ButtonsSexPetContainer>
-              <LabelSexPet htmlFor="sexPetMale">
+              <LabelSexPet htmlFor="sexPetMale" className={sex === 'male' ? 'active' : ''}>
                 <InputSexPet
                   id="sexPetMale"
                   name="sex"
@@ -311,7 +316,7 @@ const ModalAddNotice = ({ onClose }) => {
                 Male
               </LabelSexPet>
 
-              <LabelSexPet htmlFor="sexPetFemale">
+              <LabelSexPet htmlFor="sexPetFemale" className={sex === 'female' ? 'active' : ''}>
                 <InputSexPet
                   id="sexPetFemale"
                   name="sex"
@@ -361,7 +366,6 @@ const ModalAddNotice = ({ onClose }) => {
                   id="uploadFile"
                   type="file"
                   name="photoPet"
-                  // value={photoPet}
                   onChange={handleChange}
                   required
                 />
