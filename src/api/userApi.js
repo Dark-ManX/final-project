@@ -4,7 +4,7 @@ export const fetchUser = async (url, token) => {
   if (token === null) {
     return;
   }
-  const res = await axios({
+  const { data } = await axios({
     method: 'get',
     url: `${url}/user`,
     headers: {
@@ -13,7 +13,6 @@ export const fetchUser = async (url, token) => {
     },
   });
 
-  const { data } = res;
   const { user } = data.data;
   return user;
 };

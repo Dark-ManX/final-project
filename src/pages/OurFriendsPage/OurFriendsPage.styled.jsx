@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.li`
-  padding: 12px 17px 12px 4px;
+  padding: 12px 4px 12px 4px;
   border-radius: 20px;
   background-color: white;
   color: black;
@@ -77,12 +77,35 @@ export const Image = styled.img`
 `;
 
 export const Item = styled.li`
+  position: relative;
   &:not(:last-child) {
     margin-bottom: 4px;
+  }
+
+  &:first-child:hover {
+    .time {
+      width: auto;
+      opacity: 1;
+      transform: opacity 250ms linear;
+    }
   }
 `;
 
 export const Anchor = styled.a`
   color: inherit;
   text-decoration: none;
+`;
+
+export const TimeContiner = styled.div`
+  width: 0;
+  height: auto;
+  padding: 12px;
+  z-index: 10;
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #f59256;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  opacity: 0;
 `;
