@@ -48,11 +48,15 @@ const CurrentWorkTime = ({ today, workSchedule }) => {
   }, [today, workSchedule]);
 
   return (
-    <span>
-      {workSchedule && workTime.from
-        ? `${workTime.from} - ${workTime.to}`
-        : '-------'}
-    </span>
+    <>
+      {workSchedule ? (
+        <span>
+          {workTime.from ? `${workTime.from} - ${workTime.to}` : 'Holiday'}
+        </span>
+      ) : (
+        <span>--------</span>
+      )}
+    </>
   );
 };
 

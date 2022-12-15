@@ -70,7 +70,6 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-  console.log(notice);
 
   const { photo, comments, title, breed, location, birth, owner } = notice;
   const idOwner = owner._id;

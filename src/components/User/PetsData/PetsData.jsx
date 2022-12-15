@@ -19,17 +19,15 @@ export const PetsData = () => {
       try {
         const { data } = await getUserPets;
         const { pets } = data.data;
+        console.log(pets);
         setPet(pets);
+        return;
       } catch (err) {
         console.log(err.message);
       }
     };
 
     getPets();
-    // .then(({ data }) => {
-    //   setPets(data.data.pets);
-    // })
-    // .catch(error => console.log(error.message));
   }, [getUserPets]);
 
   const handleBtnClick = () => setOpenModal(!openModal);

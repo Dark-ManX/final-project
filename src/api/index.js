@@ -8,11 +8,12 @@ import {
   fetchRemovePet,
 } from './noticesApi';
 import { fetchPetAdd } from './petApi';
-import { fetchUser } from './userApi';
+import { fetchUser, fetchNewAvatar } from './userApi';
 
 class Fetch {
   constructor() {
     this.BASE_URL = 'https://blende2.herokuapp.com';
+    this.IMG_URL = 'https://out-light.herokuapp.com';
   }
 
   getFriends = async () => await fetchFriends(this.BASE_URL);
@@ -36,6 +37,9 @@ class Fetch {
   addPet = async (pet, query) => await fetchPetAdd(this.BASE_URL, pet, query);
 
   getUser = async token => await fetchUser(this.BASE_URL, token);
+
+  updateAvatar = async (img, token) =>
+    await fetchNewAvatar(this.IMG_URL, img, token);
 }
 
 export const response = new Fetch();

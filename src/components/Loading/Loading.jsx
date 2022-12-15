@@ -1,6 +1,5 @@
-import wait from 'img/wait.jpg';
-import { Container } from './Loading.styled';
 import { RotatingLines } from 'react-loader-spinner';
+import { Container } from './Loading.styled';
 
 const Loading = () => {
   return (

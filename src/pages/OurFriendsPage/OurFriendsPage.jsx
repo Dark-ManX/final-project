@@ -72,7 +72,7 @@ const OurFriendsPage = () => {
 
                   <SecondThumb>
                     <ul>
-                      <Item>
+                      <Item className="timeEl">
                         Time: <br />
                         <CurrentWorkTime
                           today={currentShortDay}

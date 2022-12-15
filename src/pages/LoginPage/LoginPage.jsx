@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLoginUserMutation } from 'redux/auth/authOperations';
 import {
   Input,
@@ -21,7 +21,7 @@ const LoginPage = () => {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginUser] = useLoginUserMutation(); // To Hide/Show password
+  const [loginUser] = useLoginUserMutation();
   const [showPassword, setshowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -48,11 +48,13 @@ const LoginPage = () => {
         password,
       };
       const res = await loginUser(newUser);
-      console.log(res);
 
       if (res?.data) {
         navigate('/user');
+        return;
       }
+
+      Notify.failure();
     } catch (err) {
       Notify.failure(err.message);
     }
@@ -80,6 +82,8 @@ const LoginPage = () => {
     setEmail('');
     setPassword('');
   };
+
+  useEffect(() => {}, []);
 
   return (
     <Section>

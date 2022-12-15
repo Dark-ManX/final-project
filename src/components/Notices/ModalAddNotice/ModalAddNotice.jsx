@@ -1,5 +1,5 @@
 import { ReactComponent as DefaultCross } from 'icons/default-cross.svg';
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState } from 'react';
 import { useCreateNoticeMutation } from 'redux/auth/authOperations';
 import {
@@ -94,10 +94,10 @@ const ModalAddNotice = ({ onClose }) => {
   const addNewNotice = e => {
     e.preventDefault();
     if (title === '' || petName === '' || birth === '' || breed === '') {
-      return Notiflix.Notify.failure('All fields must be filled');
+      return Notify.failure('All fields must be filled');
     }
     if (category === '') {
-      return Notiflix.Notify.failure('Please, select a category');
+      return Notify.failure('Please, select a category');
     }
 
     setPage(false);
@@ -115,23 +115,30 @@ const ModalAddNotice = ({ onClose }) => {
   formData.append('comments', comments);
   formData.append('photoNotices', photoPet);
 
+  const createNewNotice = async data => {
+    try {
+      await createNotice(data);
+      Notify.success('Ad has been successfully created');
+    } catch (err) {
+      Notify.failure(err.message);
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     if (location === '' || photoPet === null || comments === '') {
-      return Notiflix.Notify.failure('All fields must be filled');
+      return Notify.failure('All fields must be filled');
     }
     if (sex === '') {
-      return Notiflix.Notify.failure('Please, choose sex');
+      return Notify.failure('Please, choose sex');
     }
 
     if (price === '') {
       return setPrice('0');
     }
 
-    createNotice(formData);
+    createNewNotice(formData);
     onClose();
-
-    Notiflix.Notify.success('Ad has been successfully created');
   };
 
   return (
@@ -177,7 +184,6 @@ const ModalAddNotice = ({ onClose }) => {
                     lost-found
                   </LabelCategoryLost>
                 )}
-                
               </InputCategoryContainer>
 
               <InputCategoryContainer>
@@ -187,10 +193,10 @@ const ModalAddNotice = ({ onClose }) => {
                   type="radio"
                   value="in good hands"
                   onChange={handleChange}
-                  checked={category === "in good hands"}
+                  checked={category === 'in good hands'}
                 />
 
-                {category === "in good hands" ? (
+                {category === 'in good hands' ? (
                   <LabelCategoryGoodHands
                     htmlFor="categoryGoodHands"
                     style={{
@@ -215,10 +221,10 @@ const ModalAddNotice = ({ onClose }) => {
                   type="radio"
                   value="sell"
                   onChange={handleChange}
-                  checked={category === "sell"}
+                  checked={category === 'sell'}
                 />
 
-                {category === "sell" ? (
+                {category === 'sell' ? (
                   <LabelCategorySell
                     htmlFor="categorySell"
                     style={{
@@ -303,7 +309,10 @@ const ModalAddNotice = ({ onClose }) => {
               The sex<Span>*</Span>:
             </Legend>
             <ButtonsSexPetContainer>
-              <LabelSexPet htmlFor="sexPetMale" className={sex === 'male' ? 'active' : ''}>
+              <LabelSexPet
+                htmlFor="sexPetMale"
+                className={sex === 'male' ? 'active' : ''}
+              >
                 <InputSexPet
                   id="sexPetMale"
                   name="sex"
@@ -316,7 +325,10 @@ const ModalAddNotice = ({ onClose }) => {
                 Male
               </LabelSexPet>
 
-              <LabelSexPet htmlFor="sexPetFemale" className={sex === 'female' ? 'active' : ''}>
+              <LabelSexPet
+                htmlFor="sexPetFemale"
+                className={sex === 'female' ? 'active' : ''}
+              >
                 <InputSexPet
                   id="sexPetFemale"
                   name="sex"

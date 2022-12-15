@@ -4,6 +4,7 @@ import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import defaultImg from 'img/defaultImg.jpg';
 import PropTypes from 'prop-types';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
@@ -14,19 +15,26 @@ const UserData = () => {
   const [error, setError] = useState(false);
   const [user, setUser] = useState([]);
   const [avatar, setAvatar] = useState(null);
-  const [updateAvatar] = useUpdateAvatarMutation();
 
-  const { getUser } = response;
+  const { getUser, updateAvatar } = response;
 
   const token = useSelector(state => state.auth.token);
+
+  const updatePhoto = async (img, token) => {
+    try {
+      await updateAvatar(img, token);
+      Notify.success('Photo updated');
+    } catch (err) {
+      Notify.failure(err.message);
+    }
+  };
 
   const handleChangeAvatar = async evt => {
     try {
       const formData = new FormData();
-
       formData.append('avatar', evt.target.files[0]);
 
-      await updateAvatar(formData);
+      updatePhoto(formData, token);
     } catch (err) {
       setAvatar(defaultImg);
     }
@@ -46,7 +54,7 @@ const UserData = () => {
     };
 
     fetchUser(token);
-  }, [getUser, token]);
+  }, [getUser, token, user]);
 
   return (
     <UserInfo>

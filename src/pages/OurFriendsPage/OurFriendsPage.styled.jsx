@@ -82,12 +82,10 @@ export const Item = styled.li`
     margin-bottom: 4px;
   }
 
-  &:first-child:hover {
-    .time {
-      width: auto;
-      opacity: 1;
-      transform: opacity 250ms linear;
-    }
+  &:hover > .time {
+    color: teal;
+    height: auto;
+    opacity: 1;
   }
 `;
 
@@ -97,8 +95,7 @@ export const Anchor = styled.a`
 `;
 
 export const TimeContiner = styled.div`
-  width: 0;
-  height: auto;
+  width: auto;
   padding: 12px;
   z-index: 10;
   position: absolute;
@@ -108,4 +105,6 @@ export const TimeContiner = styled.div`
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms linear;
 `;
