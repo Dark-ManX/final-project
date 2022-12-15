@@ -34,6 +34,7 @@ export const FriendsThumb = styled.ul`
 
 export const CardThumb = styled.div`
   display: flex;
+  justify-content: center;
   column-gap: 12px;
   margin-top: 12px;
   align-items: flex-start;

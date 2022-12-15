@@ -41,20 +41,19 @@ const LoginPage = () => {
     }
   };
 
-  const loginNewUser = async () => {
+  const newUser = {
+    email,
+    password,
+  };
+
+  const loginNewUser = async user => {
     try {
-      const newUser = {
-        email,
-        password,
-      };
-      const res = await loginUser(newUser);
+      const res = await loginUser(user);
 
       if (res?.data) {
         navigate('/user');
         return;
       }
-
-      Notify.failure();
     } catch (err) {
       Notify.failure(err.message);
     }
@@ -73,7 +72,7 @@ const LoginPage = () => {
       );
     }
 
-    loginNewUser();
+    loginNewUser(newUser);
 
     reset();
   };
@@ -82,8 +81,6 @@ const LoginPage = () => {
     setEmail('');
     setPassword('');
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Section>

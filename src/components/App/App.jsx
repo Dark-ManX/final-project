@@ -14,7 +14,7 @@ const AsyncUserPage = lazy(() => import('pages/UserPage/UserPage'));
 const AsyncOurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );
-const NotFound = lazy(() => import('pages/NotFound'));
+const AsyncNotFound = lazy(() => import('pages/NotFound/NotFound'));
 
 const App = () => {
   return (
@@ -34,9 +34,9 @@ const App = () => {
         <Route path="login" element={<AsyncLoginPage />} />
 
         <Route path="user" element={<AsyncUserPage />} />
-      </Route>
 
-      <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<AsyncNotFound />} />
+      </Route>
     </Routes>
   );
 };

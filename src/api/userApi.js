@@ -18,7 +18,7 @@ export const fetchUser = async (url, token) => {
 };
 
 export const fetchNewAvatar = async (url, img, token) => {
-  const { data } = await axios({
+  await axios({
     method: 'patch',
     url: `${url}/avatars`,
     data: img,
@@ -27,7 +27,8 @@ export const fetchNewAvatar = async (url, img, token) => {
       'content-type': 'multipart/form-data',
     },
   });
+};
 
-  const { avatarURL } = data.data;
-  return avatarURL;
+export const fetchLogOut = async (url, token) => {
+  await axios;
 };

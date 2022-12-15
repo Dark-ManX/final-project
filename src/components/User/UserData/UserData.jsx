@@ -3,11 +3,10 @@ import Error from 'components/Common/Error/Error';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import defaultImg from 'img/defaultImg.jpg';
-import PropTypes from 'prop-types';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
@@ -29,12 +28,10 @@ const UserData = () => {
     }
   };
 
-  const handleChangeAvatar = async evt => {
+  const handleChangeAvatar = evt => {
     try {
       const formData = new FormData();
       formData.append('avatar', evt.target.files[0]);
-
-      updatePhoto(formData, token);
     } catch (err) {
       setAvatar(defaultImg);
     }

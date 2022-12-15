@@ -12,6 +12,8 @@ const SharedLayout = () => {
 
   const token = useSelector(state => state.auth.token);
 
+  console.log(token);
+
   const { getUser } = response;
 
   useEffect(() => {

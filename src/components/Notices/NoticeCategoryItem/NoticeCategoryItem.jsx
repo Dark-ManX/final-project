@@ -28,6 +28,9 @@ const NoticeCategoryItem = ({ notice, onClick, loggedIn }) => {
   const userId = useSelector(state => state.auth.id);
   const token = useSelector(state => state.auth.token);
 
+  const date = Date.now();
+  console.log(date);
+
   const { addToFavorite, removeFromFavorite } = response;
 
   switch (notice.category) {
