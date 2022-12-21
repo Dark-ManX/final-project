@@ -7,6 +7,7 @@ import { response } from 'api';
 
 const SharedLayout = () => {
   const [isActual, setIsActual] = useState(false);
+  const [user, setUser] = useState(null);
 
   const firstLoad = true;
 
@@ -20,10 +21,13 @@ const SharedLayout = () => {
     const fetchUser = async token => {
       try {
         const res = await getUser(token);
+
         if (res) {
           setIsActual(true);
+          setUser(res);
         }
       } catch (err) {
+        console.log(err.message);
         setIsActual(false);
       }
     };
@@ -38,7 +42,7 @@ const SharedLayout = () => {
       </MainContainer>
 
       <Suspense>
-        <Outlet context={{ isActual, firstLoad }} />
+        <Outlet context={{ isActual, firstLoad, user }} />
       </Suspense>
     </>
   );

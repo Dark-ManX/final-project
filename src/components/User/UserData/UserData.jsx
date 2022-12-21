@@ -3,68 +3,83 @@ import Error from 'components/Common/Error/Error';
 import UserDataItem from 'components/User/UserDataItem/UserDataItem';
 import editPhoto from 'icons/editPhoto.svg';
 import defaultImg from 'img/defaultImg.jpg';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import { useUpdateAvatarMutation } from 'redux/auth/authOperations';
 
 import { Avatar, EditPhotoBtn, ImgUser, UserInfo } from './UserData.styled';
 
-const UserData = () => {
+const UserData = ({ data }) => {
   const [error, setError] = useState(false);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(data);
   const [avatar, setAvatar] = useState(null);
+
+  const navigate = useNavigate();
 
   const { getUser, updateAvatar } = response;
 
   const token = useSelector(state => state.auth.token);
 
-  const updatePhoto = async (img, token) => {
-    try {
-      await updateAvatar(img, token);
-      Notify.success('Photo updated');
-    } catch (err) {
-      Notify.failure(err.message);
-    }
-  };
+  const handlerAvatar = evt => {
+    const formData = new FormData();
 
-  const handleChangeAvatar = evt => {
-    try {
-      const formData = new FormData();
-      formData.append('avatar', evt.target.files[0]);
-    } catch (err) {
-      setAvatar(defaultImg);
-    }
+    formData.append('avatar', evt.target.files[0]);
+    setAvatar(formData);
   };
 
   useEffect(() => {
-    const fetchUser = async token => {
+    const userSetter = async (state, key) => {
       try {
-        const res = await getUser(token);
-
-        setAvatar(res.logo);
-
-        setUser(res);
+        if (!state) {
+          const res = await getUser(key);
+          setUser(res);
+          return;
+        }
+        setUser(state);
       } catch (err) {
-        setError(true);
+        console.log(err.message);
+        Notify.failure(err.message);
+        navigate('/login');
       }
     };
 
-    fetchUser(token);
-  }, [getUser, token, user]);
+    userSetter(data, token);
+
+    const avatarSetter = async (img, key) => {
+      try {
+        if (!img) {
+          return;
+        }
+        const res = await updateAvatar(img, key);
+        setUser({ ...user, logo: res });
+
+        return;
+      } catch (err) {
+        console.log(err.message);
+        Notify.failure(err.message);
+        navigate('/login');
+      }
+    };
+
+    avatarSetter(avatar, token);
+  }, [avatar, data, getUser, token, updateAvatar]);
 
   return (
     <UserInfo>
       {!error ? (
         <>
           <Avatar>
-            <ImgUser src={user.logo ? user.logo : defaultImg} alt={user.name} />
+            {console.log(user)}
+            <ImgUser src={user?.logo ? user.logo : defaultImg} alt="name" />
             <label>
               <input
                 type="file"
                 accept="image/png, image/gif, image/jpeg"
                 name="image"
-                onChange={handleChangeAvatar}
+                onChange={handlerAvatar}
                 style={{ display: 'none' }}
               />
               <EditPhotoBtn>
@@ -73,7 +88,7 @@ const UserData = () => {
               </EditPhotoBtn>
             </label>
           </Avatar>
-          <UserDataItem />
+          <UserDataItem info={user} />
         </>
       ) : (
         <Error />

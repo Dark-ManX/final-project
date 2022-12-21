@@ -9,8 +9,10 @@ import {
   ContainerInfo,
   AboutUser,
 } from './UserPage.styled';
+import { useOutletContext } from 'react-router-dom';
 
 const UserPage = () => {
+  const { user } = useOutletContext();
   return (
     <MainContainer>
       <ContainerInfo>
@@ -18,7 +20,7 @@ const UserPage = () => {
           <Title>My information:</Title>
           <Container>
             <ContainerUser>
-              <UserData />
+              <UserData data={user} />
               <Logout />
             </ContainerUser>
           </Container>

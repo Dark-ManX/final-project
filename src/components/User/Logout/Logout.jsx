@@ -11,11 +11,10 @@ export const Logout = () => {
 
   const handleLogOut = async () => {
     try {
+      localStorage.removeItem('token');
       const res = await logoutUser();
-      console.log(res);
       if (res) {
         navigate('/', { replace: true });
-        localStorage.removeItem('token');
       }
     } catch (err) {
       Notify.failure(err.message);

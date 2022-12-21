@@ -13,8 +13,6 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authApi } from './auth/authOperations';
 import authSlice from './auth/authSlice';
-import notices from './notices/notices';
-import { noticesApi } from './notices/noticesApi';
 
 const authPersistConfig = {
   key: 'auth',
@@ -26,8 +24,6 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authSlice),
     [authApi.reducerPath]: authApi.reducer,
-    notices,
-    [noticesApi.reducerPath]: noticesApi.reducer,
   },
 
   middleware: getDefaultMiddleware =>
@@ -35,9 +31,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(authApi.middleware)
-      .concat(noticesApi.middleware),
+    }).concat(authApi.middleware),
 
   devTools: process.env.NODE_ENV === 'development',
 });

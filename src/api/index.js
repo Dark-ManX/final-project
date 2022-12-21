@@ -39,7 +39,7 @@ class Fetch {
   getUser = async token => await fetchUser(this.BASE_URL, token);
 
   updateAvatar = async (img, token) =>
-    await fetchNewAvatar(this.IMG_URL, img, token);
+    await fetchNewAvatar(this.BASE_URL, img, token);
 }
 
 export const response = new Fetch();
